@@ -116,12 +116,7 @@
 		0984BDD322000D1900D80F23 /* NextAiwujin */ = {
 			isa = PBXGroup;
 			children = (
-				0984BE05220169C900D80F23 /* Main */,
-				0984BE06220169EE00D80F23 /* News */,
-				0984BE0722016A0B00D80F23 /* PicSay */,
-				0984BE0822016A3000D80F23 /* Forum */,
-				0984BE0922016A6C00D80F23 /* RadioStation */,
-				0984BE0A22016ABC00D80F23 /* MyCenter */,
+				0984BE0B220172B900D80F23 /* Classes */,
 				0984BDD422000D1900D80F23 /* AppDelegate.swift */,
 				0984BDDE22000D1A00D80F23 /* Assets.xcassets */,
 				0984BDE022000D1A00D80F23 /* LaunchScreen.storyboard */,
@@ -191,6 +186,19 @@
 			children = (
 			);
 			path = MyCenter;
+			sourceTree = "<group>";
+		};
+		0984BE0B220172B900D80F23 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				0984BE05220169C900D80F23 /* Main */,
+				0984BE06220169EE00D80F23 /* News */,
+				0984BE0722016A0B00D80F23 /* PicSay */,
+				0984BE0822016A3000D80F23 /* Forum */,
+				0984BE0922016A6C00D80F23 /* RadioStation */,
+				0984BE0A22016ABC00D80F23 /* MyCenter */,
+			);
+			path = Classes;
 			sourceTree = "<group>";
 		};
 		4885EAAA6C15F6FCE1DCF4FA /* Frameworks */ = {

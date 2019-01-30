@@ -1,0 +1,6 @@
+framework module Pods_NextAiwujinUITests {
+  umbrella header "Pods-NextAiwujinUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

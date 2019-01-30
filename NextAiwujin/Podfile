@@ -1,0 +1,31 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '11.0'
+
+target 'NextAiwujin' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for NextAiwujin
+pod "Alamofire"
+pod "AlamofireObjectMapper"
+pod "SwiftyJSON"
+pod "Kingfisher"
+pod "PullToRefreshKit"
+pod "Toast-Swift"
+pod "IQKeyboardManagerSwift"
+pod "SwifterSwift"
+pod "XLPagerTabStrip"
+pod "FSPagerView"
+pod "FontAwesome.swift"
+
+  target 'NextAiwujinTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'NextAiwujinUITests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end

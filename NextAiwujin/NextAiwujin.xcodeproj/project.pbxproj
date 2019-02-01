@@ -8,13 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		0984BDD522000D1900D80F23 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0984BDD422000D1900D80F23 /* AppDelegate.swift */; };
-		0984BDD722000D1900D80F23 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0984BDD622000D1900D80F23 /* MainViewController.swift */; };
 		0984BDDA22000D1900D80F23 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0984BDD822000D1900D80F23 /* Main.storyboard */; };
 		0984BDDD22000D1900D80F23 /* NextAiwujin.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0984BDDB22000D1900D80F23 /* NextAiwujin.xcdatamodeld */; };
 		0984BDDF22000D1A00D80F23 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0984BDDE22000D1A00D80F23 /* Assets.xcassets */; };
 		0984BDE222000D1A00D80F23 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0984BDE022000D1A00D80F23 /* LaunchScreen.storyboard */; };
 		0984BDED22000D1A00D80F23 /* NextAiwujinTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0984BDEC22000D1A00D80F23 /* NextAiwujinTests.swift */; };
 		0984BDF822000D1A00D80F23 /* NextAiwujinUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0984BDF722000D1A00D80F23 /* NextAiwujinUITests.swift */; };
+		09A4C5892201841D002740C3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A4C5882201841D002740C3 /* MainViewController.swift */; };
+		09D543B92201909600307713 /* RadioStation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09D543AF2201909500307713 /* RadioStation.storyboard */; };
+		09D543BA2201909600307713 /* Forum.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09D543B12201909600307713 /* Forum.storyboard */; };
+		09D543BB2201909600307713 /* News.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09D543B32201909600307713 /* News.storyboard */; };
+		09D543BC2201909600307713 /* PicSay.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09D543B52201909600307713 /* PicSay.storyboard */; };
+		09D543BD2201909600307713 /* MyCenter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09D543B72201909600307713 /* MyCenter.storyboard */; };
+		09D543BF2201D8DA00307713 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D543BE2201D8DA00307713 /* BaseViewController.swift */; };
+		09D543C12201DB5900307713 /* MyNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D543C02201DB5900307713 /* MyNavigationController.swift */; };
 		367025FDA53C3D2A86673174 /* Pods_NextAiwujinTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40CCCF09ECDCFFA26EFA5711 /* Pods_NextAiwujinTests.framework */; };
 		99FEEEBCD1A1247394077B12 /* Pods_NextAiwujin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B33AD14EB88232EDE19A1E07 /* Pods_NextAiwujin.framework */; };
 		C507D1C694EAF817843A979A /* Pods_NextAiwujinUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E96219EA5A5D08D3AC1E6AD1 /* Pods_NextAiwujinUITests.framework */; };
@@ -40,7 +47,6 @@
 /* Begin PBXFileReference section */
 		0984BDD122000D1900D80F23 /* NextAiwujin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NextAiwujin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0984BDD422000D1900D80F23 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0984BDD622000D1900D80F23 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		0984BDD922000D1900D80F23 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0984BDDC22000D1900D80F23 /* NextAiwujin.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NextAiwujin.xcdatamodel; sourceTree = "<group>"; };
 		0984BDDE22000D1A00D80F23 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -52,6 +58,14 @@
 		0984BDF322000D1A00D80F23 /* NextAiwujinUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NextAiwujinUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0984BDF722000D1A00D80F23 /* NextAiwujinUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextAiwujinUITests.swift; sourceTree = "<group>"; };
 		0984BDF922000D1A00D80F23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		09A4C5882201841D002740C3 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		09D543B02201909500307713 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/RadioStation.storyboard; sourceTree = "<group>"; };
+		09D543B22201909600307713 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Forum.storyboard; sourceTree = "<group>"; };
+		09D543B42201909600307713 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/News.storyboard; sourceTree = "<group>"; };
+		09D543B62201909600307713 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PicSay.storyboard; sourceTree = "<group>"; };
+		09D543B82201909600307713 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MyCenter.storyboard; sourceTree = "<group>"; };
+		09D543BE2201D8DA00307713 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		09D543C02201DB5900307713 /* MyNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNavigationController.swift; sourceTree = "<group>"; };
 		0C2843EBB4270A91F1D33ED6 /* Pods-NextAiwujinTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NextAiwujinTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NextAiwujinTests/Pods-NextAiwujinTests.release.xcconfig"; sourceTree = "<group>"; };
 		3A9F8D01B6DD2D4379260CEB /* Pods-NextAiwujin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NextAiwujin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NextAiwujin/Pods-NextAiwujin.debug.xcconfig"; sourceTree = "<group>"; };
 		40CCCF09ECDCFFA26EFA5711 /* Pods_NextAiwujinTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NextAiwujinTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -147,8 +161,10 @@
 		0984BE05220169C900D80F23 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				0984BDD622000D1900D80F23 /* MainViewController.swift */,
 				0984BDD822000D1900D80F23 /* Main.storyboard */,
+				09A4C5882201841D002740C3 /* MainViewController.swift */,
+				09D543BE2201D8DA00307713 /* BaseViewController.swift */,
+				09D543C02201DB5900307713 /* MyNavigationController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -156,6 +172,7 @@
 		0984BE06220169EE00D80F23 /* News */ = {
 			isa = PBXGroup;
 			children = (
+				09D543B32201909600307713 /* News.storyboard */,
 			);
 			path = News;
 			sourceTree = "<group>";
@@ -163,6 +180,7 @@
 		0984BE0722016A0B00D80F23 /* PicSay */ = {
 			isa = PBXGroup;
 			children = (
+				09D543B52201909600307713 /* PicSay.storyboard */,
 			);
 			path = PicSay;
 			sourceTree = "<group>";
@@ -170,6 +188,7 @@
 		0984BE0822016A3000D80F23 /* Forum */ = {
 			isa = PBXGroup;
 			children = (
+				09D543B12201909600307713 /* Forum.storyboard */,
 			);
 			path = Forum;
 			sourceTree = "<group>";
@@ -177,6 +196,7 @@
 		0984BE0922016A6C00D80F23 /* RadioStation */ = {
 			isa = PBXGroup;
 			children = (
+				09D543AF2201909500307713 /* RadioStation.storyboard */,
 			);
 			path = RadioStation;
 			sourceTree = "<group>";
@@ -184,6 +204,7 @@
 		0984BE0A22016ABC00D80F23 /* MyCenter */ = {
 			isa = PBXGroup;
 			children = (
+				09D543B72201909600307713 /* MyCenter.storyboard */,
 			);
 			path = MyCenter;
 			sourceTree = "<group>";
@@ -333,8 +354,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				0984BDE222000D1A00D80F23 /* LaunchScreen.storyboard in Resources */,
+				09D543BD2201909600307713 /* MyCenter.storyboard in Resources */,
+				09D543BB2201909600307713 /* News.storyboard in Resources */,
+				09D543BA2201909600307713 /* Forum.storyboard in Resources */,
 				0984BDDF22000D1A00D80F23 /* Assets.xcassets in Resources */,
 				0984BDDA22000D1900D80F23 /* Main.storyboard in Resources */,
+				09D543B92201909600307713 /* RadioStation.storyboard in Resources */,
+				09D543BC2201909600307713 /* PicSay.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,8 +498,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09A4C5892201841D002740C3 /* MainViewController.swift in Sources */,
+				09D543BF2201D8DA00307713 /* BaseViewController.swift in Sources */,
 				0984BDDD22000D1900D80F23 /* NextAiwujin.xcdatamodeld in Sources */,
-				0984BDD722000D1900D80F23 /* MainViewController.swift in Sources */,
+				09D543C12201DB5900307713 /* MyNavigationController.swift in Sources */,
 				0984BDD522000D1900D80F23 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -524,6 +552,46 @@
 				0984BDE122000D1A00D80F23 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		09D543AF2201909500307713 /* RadioStation.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				09D543B02201909500307713 /* Base */,
+			);
+			name = RadioStation.storyboard;
+			sourceTree = "<group>";
+		};
+		09D543B12201909600307713 /* Forum.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				09D543B22201909600307713 /* Base */,
+			);
+			name = Forum.storyboard;
+			sourceTree = "<group>";
+		};
+		09D543B32201909600307713 /* News.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				09D543B42201909600307713 /* Base */,
+			);
+			name = News.storyboard;
+			sourceTree = "<group>";
+		};
+		09D543B52201909600307713 /* PicSay.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				09D543B62201909600307713 /* Base */,
+			);
+			name = PicSay.storyboard;
+			sourceTree = "<group>";
+		};
+		09D543B72201909600307713 /* MyCenter.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				09D543B82201909600307713 /* Base */,
+			);
+			name = MyCenter.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

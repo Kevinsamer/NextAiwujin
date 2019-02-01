@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Pic Say View Controller-->
         <scene sceneID="w5Y-A9-t86">
             <objects>
-                <viewController id="VLM-Jl-trV" sceneMemberID="viewController">
+                <viewController id="VLM-Jl-trV" customClass="PicSayViewController" customModule="NextAiwujin" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Era-gS-uJl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--News View Controller-->
         <scene sceneID="Apw-aj-CD0">
             <objects>
-                <viewController id="RKk-Bi-1Lp" sceneMemberID="viewController">
+                <viewController id="RKk-Bi-1Lp" customClass="NewsViewController" customModule="NextAiwujin" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mLq-Ql-1jR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

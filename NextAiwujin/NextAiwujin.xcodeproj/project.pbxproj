@@ -22,6 +22,11 @@
 		09D543BD2201909600307713 /* MyCenter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09D543B72201909600307713 /* MyCenter.storyboard */; };
 		09D543BF2201D8DA00307713 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D543BE2201D8DA00307713 /* BaseViewController.swift */; };
 		09D543C12201DB5900307713 /* MyNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D543C02201DB5900307713 /* MyNavigationController.swift */; };
+		09D543C32203D89700307713 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D543C22203D89700307713 /* NewsViewController.swift */; };
+		09D543C52203D8B200307713 /* PicSayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D543C42203D8B200307713 /* PicSayViewController.swift */; };
+		09D543C72203D8C100307713 /* ForumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D543C62203D8C100307713 /* ForumViewController.swift */; };
+		09D543C92203D8D700307713 /* RadioStationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D543C82203D8D700307713 /* RadioStationViewController.swift */; };
+		09D543CB2203D8E400307713 /* MyCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D543CA2203D8E400307713 /* MyCenterViewController.swift */; };
 		367025FDA53C3D2A86673174 /* Pods_NextAiwujinTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40CCCF09ECDCFFA26EFA5711 /* Pods_NextAiwujinTests.framework */; };
 		99FEEEBCD1A1247394077B12 /* Pods_NextAiwujin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B33AD14EB88232EDE19A1E07 /* Pods_NextAiwujin.framework */; };
 		C507D1C694EAF817843A979A /* Pods_NextAiwujinUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E96219EA5A5D08D3AC1E6AD1 /* Pods_NextAiwujinUITests.framework */; };
@@ -66,6 +71,11 @@
 		09D543B82201909600307713 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MyCenter.storyboard; sourceTree = "<group>"; };
 		09D543BE2201D8DA00307713 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		09D543C02201DB5900307713 /* MyNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNavigationController.swift; sourceTree = "<group>"; };
+		09D543C22203D89700307713 /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
+		09D543C42203D8B200307713 /* PicSayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicSayViewController.swift; sourceTree = "<group>"; };
+		09D543C62203D8C100307713 /* ForumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumViewController.swift; sourceTree = "<group>"; };
+		09D543C82203D8D700307713 /* RadioStationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioStationViewController.swift; sourceTree = "<group>"; };
+		09D543CA2203D8E400307713 /* MyCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCenterViewController.swift; sourceTree = "<group>"; };
 		0C2843EBB4270A91F1D33ED6 /* Pods-NextAiwujinTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NextAiwujinTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NextAiwujinTests/Pods-NextAiwujinTests.release.xcconfig"; sourceTree = "<group>"; };
 		3A9F8D01B6DD2D4379260CEB /* Pods-NextAiwujin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NextAiwujin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NextAiwujin/Pods-NextAiwujin.debug.xcconfig"; sourceTree = "<group>"; };
 		40CCCF09ECDCFFA26EFA5711 /* Pods_NextAiwujinTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NextAiwujinTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -173,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				09D543B32201909600307713 /* News.storyboard */,
+				09D543C22203D89700307713 /* NewsViewController.swift */,
 			);
 			path = News;
 			sourceTree = "<group>";
@@ -181,6 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				09D543B52201909600307713 /* PicSay.storyboard */,
+				09D543C42203D8B200307713 /* PicSayViewController.swift */,
 			);
 			path = PicSay;
 			sourceTree = "<group>";
@@ -189,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				09D543B12201909600307713 /* Forum.storyboard */,
+				09D543C62203D8C100307713 /* ForumViewController.swift */,
 			);
 			path = Forum;
 			sourceTree = "<group>";
@@ -197,6 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				09D543AF2201909500307713 /* RadioStation.storyboard */,
+				09D543C82203D8D700307713 /* RadioStationViewController.swift */,
 			);
 			path = RadioStation;
 			sourceTree = "<group>";
@@ -205,6 +219,7 @@
 			isa = PBXGroup;
 			children = (
 				09D543B72201909600307713 /* MyCenter.storyboard */,
+				09D543CA2203D8E400307713 /* MyCenterViewController.swift */,
 			);
 			path = MyCenter;
 			sourceTree = "<group>";
@@ -500,7 +515,12 @@
 			files = (
 				09A4C5892201841D002740C3 /* MainViewController.swift in Sources */,
 				09D543BF2201D8DA00307713 /* BaseViewController.swift in Sources */,
+				09D543C52203D8B200307713 /* PicSayViewController.swift in Sources */,
+				09D543C92203D8D700307713 /* RadioStationViewController.swift in Sources */,
 				0984BDDD22000D1900D80F23 /* NextAiwujin.xcdatamodeld in Sources */,
+				09D543C72203D8C100307713 /* ForumViewController.swift in Sources */,
+				09D543C32203D89700307713 /* NewsViewController.swift in Sources */,
+				09D543CB2203D8E400307713 /* MyCenterViewController.swift in Sources */,
 				09D543C12201DB5900307713 /* MyNavigationController.swift in Sources */,
 				0984BDD522000D1900D80F23 /* AppDelegate.swift in Sources */,
 			);

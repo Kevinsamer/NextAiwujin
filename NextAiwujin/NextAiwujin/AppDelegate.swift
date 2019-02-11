@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,9 +18,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        //全局设置tabBarStyle
         UITabBar.appearance().tintColor = UIColor.red
+        UITabBar.appearance().backgroundColor = .white
+        UITabBar.appearance().clipsToBounds = true
+        
+        //全局设置navigationBarStyle
+        UINavigationBar.appearance().tintColor = .white
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black, NSAttributedString.Key.font : UIFont.systemFont(ofSize: 18)]
+        UINavigationBar.appearance().isTranslucent = false
+        UINavigationBar.appearance().shadowImage = UIImage()
+        UINavigationBar.appearance().setBackgroundImage(UIImage.init(color: UIColor.white, size: CGSize(width: finalScreenW, height: finalNavigationBarH)), for: UIBarMetrics.default)
+        //        UINavigationBar.appearance().topItem?.title = ""
+        UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffset(horizontal: -200, vertical: 0), for:UIBarMetrics.default)//设置偏移量来隐藏返回按钮文字,TODO：修改为基类中设置navigationController?.navigationBar.topItem?.title = ""
+        
+        
+        //设置状态栏style
+//        UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
+        //输入框适应键盘位置
+        IQKeyboardManager.shared.enable = true
+        
         return true
     }
+    
+    
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

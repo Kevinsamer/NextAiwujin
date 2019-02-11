@@ -29,7 +29,7 @@
         <!--新闻-->
         <scene sceneID="hyg-Tj-8c5">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Jwc-3g-eb1" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Jwc-3g-eb1" customClass="MyNavigationController" customModule="NextAiwujin" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="新闻" image="home_un_select" selectedImage="home_select" id="z1h-XR-1kJ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9Xe-WD-9I5">

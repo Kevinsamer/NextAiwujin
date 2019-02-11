@@ -15,6 +15,10 @@ class BaseViewController: UIViewController {
         setUI()
         // Do any additional setup after loading the view.
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle{
+        return .lightContent
+    }
 
 }
 

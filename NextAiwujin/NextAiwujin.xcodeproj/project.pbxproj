@@ -27,6 +27,11 @@
 		09D543C72203D8C100307713 /* ForumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D543C62203D8C100307713 /* ForumViewController.swift */; };
 		09D543C92203D8D700307713 /* RadioStationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D543C82203D8D700307713 /* RadioStationViewController.swift */; };
 		09D543CB2203D8E400307713 /* MyCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D543CA2203D8E400307713 /* MyCenterViewController.swift */; };
+		09D543CE2203E5B600307713 /* Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D543CD2203E5B600307713 /* Commons.swift */; };
+		09D543D02203E67400307713 /* YTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D543CF2203E67400307713 /* YTools.swift */; };
+		09D543D32203E6B800307713 /* UIDevice-extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D543D22203E6B800307713 /* UIDevice-extension.swift */; };
+		09D543D52203E93400307713 /* NetworkTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D543D42203E93400307713 /* NetworkTool.swift */; };
+		09D543D72204301700307713 /* UIBarButtonItem-extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D543D62204301700307713 /* UIBarButtonItem-extension.swift */; };
 		367025FDA53C3D2A86673174 /* Pods_NextAiwujinTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40CCCF09ECDCFFA26EFA5711 /* Pods_NextAiwujinTests.framework */; };
 		99FEEEBCD1A1247394077B12 /* Pods_NextAiwujin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B33AD14EB88232EDE19A1E07 /* Pods_NextAiwujin.framework */; };
 		C507D1C694EAF817843A979A /* Pods_NextAiwujinUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E96219EA5A5D08D3AC1E6AD1 /* Pods_NextAiwujinUITests.framework */; };
@@ -76,6 +81,11 @@
 		09D543C62203D8C100307713 /* ForumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForumViewController.swift; sourceTree = "<group>"; };
 		09D543C82203D8D700307713 /* RadioStationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioStationViewController.swift; sourceTree = "<group>"; };
 		09D543CA2203D8E400307713 /* MyCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCenterViewController.swift; sourceTree = "<group>"; };
+		09D543CD2203E5B600307713 /* Commons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commons.swift; sourceTree = "<group>"; };
+		09D543CF2203E67400307713 /* YTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YTools.swift; sourceTree = "<group>"; };
+		09D543D22203E6B800307713 /* UIDevice-extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice-extension.swift"; sourceTree = "<group>"; };
+		09D543D42203E93400307713 /* NetworkTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTool.swift; sourceTree = "<group>"; };
+		09D543D62204301700307713 /* UIBarButtonItem-extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem-extension.swift"; sourceTree = "<group>"; };
 		0C2843EBB4270A91F1D33ED6 /* Pods-NextAiwujinTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NextAiwujinTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NextAiwujinTests/Pods-NextAiwujinTests.release.xcconfig"; sourceTree = "<group>"; };
 		3A9F8D01B6DD2D4379260CEB /* Pods-NextAiwujin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NextAiwujin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NextAiwujin/Pods-NextAiwujin.debug.xcconfig"; sourceTree = "<group>"; };
 		40CCCF09ECDCFFA26EFA5711 /* Pods_NextAiwujinTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NextAiwujinTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -171,10 +181,11 @@
 		0984BE05220169C900D80F23 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				0984BDD822000D1900D80F23 /* Main.storyboard */,
-				09A4C5882201841D002740C3 /* MainViewController.swift */,
+				09D543D8221142DC00307713 /* Model */,
+				09D543D9221142E800307713 /* View */,
+				09D543DB2211432400307713 /* ViewModel */,
+				09D543DA2211431300307713 /* Controller */,
 				09D543BE2201D8DA00307713 /* BaseViewController.swift */,
-				09D543C02201DB5900307713 /* MyNavigationController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -182,8 +193,10 @@
 		0984BE06220169EE00D80F23 /* News */ = {
 			isa = PBXGroup;
 			children = (
-				09D543B32201909600307713 /* News.storyboard */,
-				09D543C22203D89700307713 /* NewsViewController.swift */,
+				09D543DF2211437B00307713 /* Model */,
+				09D543DE2211436E00307713 /* View */,
+				09D543DD2211436500307713 /* ViewModel */,
+				09D543DC2211435B00307713 /* Controller */,
 			);
 			path = News;
 			sourceTree = "<group>";
@@ -191,8 +204,10 @@
 		0984BE0722016A0B00D80F23 /* PicSay */ = {
 			isa = PBXGroup;
 			children = (
-				09D543B52201909600307713 /* PicSay.storyboard */,
-				09D543C42203D8B200307713 /* PicSayViewController.swift */,
+				09D543E32211468200307713 /* Model */,
+				09D543E22211467B00307713 /* View */,
+				09D543E12211467200307713 /* ViewModel */,
+				09D543E02211466300307713 /* Controller */,
 			);
 			path = PicSay;
 			sourceTree = "<group>";
@@ -200,8 +215,10 @@
 		0984BE0822016A3000D80F23 /* Forum */ = {
 			isa = PBXGroup;
 			children = (
-				09D543B12201909600307713 /* Forum.storyboard */,
-				09D543C62203D8C100307713 /* ForumViewController.swift */,
+				09D543E7221146B100307713 /* Model */,
+				09D543E6221146A800307713 /* View */,
+				09D543E52211469500307713 /* ViewModel */,
+				09D543E42211468C00307713 /* Controller */,
 			);
 			path = Forum;
 			sourceTree = "<group>";
@@ -209,8 +226,10 @@
 		0984BE0922016A6C00D80F23 /* RadioStation */ = {
 			isa = PBXGroup;
 			children = (
-				09D543AF2201909500307713 /* RadioStation.storyboard */,
-				09D543C82203D8D700307713 /* RadioStationViewController.swift */,
+				09D543EB221146C900307713 /* Model */,
+				09D543EA221146C400307713 /* View */,
+				09D543E9221146BE00307713 /* ViewModel */,
+				09D543E8221146B600307713 /* Controller */,
 			);
 			path = RadioStation;
 			sourceTree = "<group>";
@@ -218,8 +237,10 @@
 		0984BE0A22016ABC00D80F23 /* MyCenter */ = {
 			isa = PBXGroup;
 			children = (
-				09D543B72201909600307713 /* MyCenter.storyboard */,
-				09D543CA2203D8E400307713 /* MyCenterViewController.swift */,
+				09D543EF221146EB00307713 /* Model */,
+				09D543EE221146E400307713 /* View */,
+				09D543ED221146D800307713 /* ViewModel */,
+				09D543EC221146CE00307713 /* Controller */,
 			);
 			path = MyCenter;
 			sourceTree = "<group>";
@@ -227,6 +248,7 @@
 		0984BE0B220172B900D80F23 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				09D543CC2203E58800307713 /* Tools */,
 				0984BE05220169C900D80F23 /* Main */,
 				0984BE06220169EE00D80F23 /* News */,
 				0984BE0722016A0B00D80F23 /* PicSay */,
@@ -235,6 +257,207 @@
 				0984BE0A22016ABC00D80F23 /* MyCenter */,
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		09D543CC2203E58800307713 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				09D543D12203E69C00307713 /* Extensions */,
+				09D543CD2203E5B600307713 /* Commons.swift */,
+				09D543CF2203E67400307713 /* YTools.swift */,
+				09D543D42203E93400307713 /* NetworkTool.swift */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		09D543D12203E69C00307713 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				09D543D22203E6B800307713 /* UIDevice-extension.swift */,
+				09D543D62204301700307713 /* UIBarButtonItem-extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		09D543D8221142DC00307713 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		09D543D9221142E800307713 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		09D543DA2211431300307713 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				0984BDD822000D1900D80F23 /* Main.storyboard */,
+				09A4C5882201841D002740C3 /* MainViewController.swift */,
+				09D543C02201DB5900307713 /* MyNavigationController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		09D543DB2211432400307713 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		09D543DC2211435B00307713 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				09D543B32201909600307713 /* News.storyboard */,
+				09D543C22203D89700307713 /* NewsViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		09D543DD2211436500307713 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		09D543DE2211436E00307713 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		09D543DF2211437B00307713 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		09D543E02211466300307713 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				09D543B52201909600307713 /* PicSay.storyboard */,
+				09D543C42203D8B200307713 /* PicSayViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		09D543E12211467200307713 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		09D543E22211467B00307713 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		09D543E32211468200307713 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		09D543E42211468C00307713 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				09D543B12201909600307713 /* Forum.storyboard */,
+				09D543C62203D8C100307713 /* ForumViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		09D543E52211469500307713 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		09D543E6221146A800307713 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		09D543E7221146B100307713 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		09D543E8221146B600307713 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				09D543AF2201909500307713 /* RadioStation.storyboard */,
+				09D543C82203D8D700307713 /* RadioStationViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		09D543E9221146BE00307713 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		09D543EA221146C400307713 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		09D543EB221146C900307713 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		09D543EC221146CE00307713 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				09D543B72201909600307713 /* MyCenter.storyboard */,
+				09D543CA2203D8E400307713 /* MyCenterViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		09D543ED221146D800307713 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		09D543EE221146E400307713 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		09D543EF221146EB00307713 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		4885EAAA6C15F6FCE1DCF4FA /* Frameworks */ = {
@@ -515,13 +738,18 @@
 			files = (
 				09A4C5892201841D002740C3 /* MainViewController.swift in Sources */,
 				09D543BF2201D8DA00307713 /* BaseViewController.swift in Sources */,
+				09D543D52203E93400307713 /* NetworkTool.swift in Sources */,
 				09D543C52203D8B200307713 /* PicSayViewController.swift in Sources */,
 				09D543C92203D8D700307713 /* RadioStationViewController.swift in Sources */,
 				0984BDDD22000D1900D80F23 /* NextAiwujin.xcdatamodeld in Sources */,
 				09D543C72203D8C100307713 /* ForumViewController.swift in Sources */,
 				09D543C32203D89700307713 /* NewsViewController.swift in Sources */,
 				09D543CB2203D8E400307713 /* MyCenterViewController.swift in Sources */,
+				09D543D72204301700307713 /* UIBarButtonItem-extension.swift in Sources */,
 				09D543C12201DB5900307713 /* MyNavigationController.swift in Sources */,
+				09D543D32203E6B800307713 /* UIDevice-extension.swift in Sources */,
+				09D543D02203E67400307713 /* YTools.swift in Sources */,
+				09D543CE2203E5B600307713 /* Commons.swift in Sources */,
 				0984BDD522000D1900D80F23 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -29,7 +29,7 @@
         <!--电台-->
         <scene sceneID="oGv-xb-viu">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VbA-Bi-CPk" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VbA-Bi-CPk" customClass="MyNavigationController" customModule="NextAiwujin" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="电台" image="radio_un_select" selectedImage="radio_select" id="tji-nP-ibq"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6Rd-Hi-oBN">

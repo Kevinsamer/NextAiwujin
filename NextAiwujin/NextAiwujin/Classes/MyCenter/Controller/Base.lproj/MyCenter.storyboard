@@ -29,7 +29,7 @@
         <!--我的-->
         <scene sceneID="Oqg-aG-gGg">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QnN-uG-9p3" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QnN-uG-9p3" customClass="MyNavigationController" customModule="NextAiwujin" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="我的" image="me_un_select" selectedImage="me_select" id="0BS-NI-4dq"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="RmK-HY-fJb">

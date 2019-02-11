@@ -29,7 +29,7 @@
         <!--论坛-->
         <scene sceneID="MDB-ak-apS">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IwP-jD-LCM" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IwP-jD-LCM" customClass="MyNavigationController" customModule="NextAiwujin" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="论坛" image="bbs_un_select" selectedImage="bbs_select" id="lyq-fb-pyU"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="57U-H6-Yaz">

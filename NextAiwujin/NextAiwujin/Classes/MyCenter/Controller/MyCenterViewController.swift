@@ -15,16 +15,30 @@ class MyCenterViewController: BaseViewController {
 
         // Do any additional setup after loading the view.
     }
-    
 
-    /*
-    // MARK: - Navigation
+}
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+extension MyCenterViewController{
+    override func setUI() {
+        super.setUI()
+        //1.设置导航栏消失
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        ZZWWaveViewFunc()
+        
     }
-    */
-
+    
+    func ZZWWaveViewFunc()  {
+        let colors = [UIColor(hexString: "86d0f8")!.cgColor,UIColor(hexString: "ffffff")!.cgColor]
+        let sColors = [UIColor(hexString: "a6f0ff")!.cgColor,UIColor(hexString: "f0faff")!.cgColor]
+        
+        let waveView = ZZWWaveView.init(frame: CGRect(x: 0.0, y: 0.0, width: finalScreenW, height: 300.0))
+        self.view.addSubview(waveView)
+        waveView.waveViewType = .OvalType
+        waveView.colors = colors
+        waveView.sColors = sColors
+        waveView.percent = 0.4
+        waveView.startWave()
+        
+    }
 }

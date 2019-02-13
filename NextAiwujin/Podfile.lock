@@ -3,11 +3,13 @@ PODS:
   - AlamofireObjectMapper (5.2.0):
     - Alamofire (~> 4.7)
     - ObjectMapper (~> 3.4)
+  - AutoInsetter (1.4.1)
   - FontAwesome.swift (1.4.8)
   - FSPagerView (0.8.2)
   - IQKeyboardManagerSwift (6.2.0)
   - Kingfisher (5.1.0)
   - ObjectMapper (3.4.2)
+  - Pageboy (3.0.1)
   - PullToRefreshKit (0.8.8)
   - SwifterSwift (4.6.0):
     - SwifterSwift/AppKit (= 4.6.0)
@@ -27,6 +29,9 @@ PODS:
   - SwifterSwift/SwiftStdlib (4.6.0)
   - SwifterSwift/UIKit (4.6.0)
   - SwiftyJSON (4.2.0)
+  - Tabman (2.1.2):
+    - AutoInsetter (~> 1.4.1)
+    - Pageboy (~> 3.0.1)
   - Toast-Swift (4.0.1)
   - XLPagerTabStrip (8.1.1)
 
@@ -40,6 +45,7 @@ DEPENDENCIES:
   - PullToRefreshKit
   - SwifterSwift
   - SwiftyJSON
+  - Tabman
   - Toast-Swift
   - XLPagerTabStrip
 
@@ -47,31 +53,37 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - AlamofireObjectMapper
+    - AutoInsetter
     - FontAwesome.swift
     - FSPagerView
     - IQKeyboardManagerSwift
     - Kingfisher
     - ObjectMapper
+    - Pageboy
     - PullToRefreshKit
     - SwifterSwift
     - SwiftyJSON
+    - Tabman
     - Toast-Swift
     - XLPagerTabStrip
 
 SPEC CHECKSUMS:
   Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
   AlamofireObjectMapper: 92b6ce2423a9d159e686f6a1d514a009bf903ddc
+  AutoInsetter: d0eafc611d686f83f925ded729084cf916a39863
   FontAwesome.swift: fb8637bffb9a588c7e8c753c084565b27b20a39d
   FSPagerView: 816a18842306973cc7cc6df8a5332272f7815c30
   IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
   Kingfisher: fcec238063d17404fca89bf0a850583211c4cbf6
   ObjectMapper: 0d4402610f4e468903ae64629eec4784531e5c51
+  Pageboy: ec0170fd880ea6fa3589219edfd64b554443ff6e
   PullToRefreshKit: 7cc53e720e69f135cffa1a57784dfb534f0222ab
   SwifterSwift: 812ffec6f301922f5430e75be3f2939ea3a80024
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
+  Tabman: f819cc11e9f661f87b23c63dc24da7036cff1b8d
   Toast-Swift: e42a638589a2f95036b4bb7626cfbdde7daf0393
   XLPagerTabStrip: 63166e21c9844fa30f2d95d30f335e73be5caf22
 
-PODFILE CHECKSUM: 76b5f6703c0fda77a5cb9bacd9e9a1dee4d823f8
+PODFILE CHECKSUM: 59838386cbfb35cce1bd1fc18c3733adfe54de8b
 
 COCOAPODS: 1.5.3

@@ -23,7 +23,7 @@ class BaseViewController: UIViewController {
 }
 
 extension BaseViewController{
-    func setUI(){
+    @objc func setUI(){
         //1.设置背景色
         self.view.backgroundColor = .random
     }

@@ -30,7 +30,7 @@
         <scene sceneID="MDB-ak-apS">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IwP-jD-LCM" customClass="MyNavigationController" customModule="NextAiwujin" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="论坛" image="bbs_un_select" selectedImage="bbs_select" id="lyq-fb-pyU"/>
+                    <tabBarItem key="tabBarItem" tag="333" title="论坛" image="bbs_un_select" selectedImage="bbs_select" id="lyq-fb-pyU"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="57U-H6-Yaz">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>

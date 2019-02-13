@@ -8,18 +8,10 @@
 
 import UIKit
 //定义局部变量、常量
-private let titleLabelWidth:CGFloat = 50
 
 
 class MyNavigationController: UINavigationController {
     
-    lazy var titleLabel: UILabel = {
-        let label = UILabel(frame: CGRect(origin: .zero, size: CGSize(width: titleLabelWidth, height: finalNavigationBarH)))
-        label.text = "天气:*****"
-        //label.backgroundColor = #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1)
-        label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        return label
-    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +44,7 @@ extension MyNavigationController{
             vc.navigationController?.navigationBar.topItem?.title = ""
         }
         //2.设置左侧app_icon、爱武进label和右侧搜索icon
-        self.viewControllers.first?.navigationItem.leftBarButtonItems = [UIBarButtonItem.init(imageName: "navigation_app_icon", size: CGSize(width: 40, height: 40)), UIBarButtonItem.init(customView: titleLabel)]
+        self.viewControllers.first?.navigationItem.leftBarButtonItem = UIBarButtonItem.init(imageName: "navigation_app_icon", size: CGSize(width: 40, height: 40))
         
         self.viewControllers.first?.navigationItem.rightBarButtonItem = UIBarButtonItem.init(imageName: "navigation_search_icon", size: CGSize(width: 20, height: 20))
     }

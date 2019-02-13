@@ -15,6 +15,7 @@ pod "Toast-Swift"
 pod "IQKeyboardManagerSwift"
 pod "SwifterSwift"
 pod "XLPagerTabStrip"
+pod "Tabman"
 pod "FSPagerView"
 pod "FontAwesome.swift"
 

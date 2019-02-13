@@ -12,7 +12,7 @@ class MainViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.delegate = self
 //        let vc = UIViewController()
 //        vc.view.backgroundColor = .red
 //        addChild(vc)
@@ -32,14 +32,22 @@ class MainViewController: UITabBarController {
         addChild(childVC)
     }
 
-    /*
-    // MARK: - Navigation
+}
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+extension MainViewController:UITabBarControllerDelegate{
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        //首页tabbarItem添加tag
+        if viewController.tabBarItem.tag == 111 {
+//            print("新闻")
+        }else if viewController.tabBarItem.tag == 222{
+//            print("图说")
+        }else if viewController.tabBarItem.tag == 333{
+//            print("论坛")
+        }else if viewController.tabBarItem.tag == 444{
+//            print("电台")
+        }else if viewController.tabBarItem.tag == 555{
+//            print("我的")
+        }
+        return true
     }
-    */
-
 }

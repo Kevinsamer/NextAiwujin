@@ -30,7 +30,7 @@
         <scene sceneID="MP4-rT-ZqT">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VX1-CK-lpT" customClass="MyNavigationController" customModule="NextAiwujin" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="图说" image="Image_unselect" selectedImage="Image_select" id="uhZ-p7-jcf"/>
+                    <tabBarItem key="tabBarItem" tag="222" title="图说" image="Image_unselect" selectedImage="Image_select" id="uhZ-p7-jcf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wKo-za-8mz">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>

@@ -4,6 +4,7 @@ PODS:
     - Alamofire (~> 4.7)
     - ObjectMapper (~> 3.4)
   - AutoInsetter (1.4.1)
+  - ESTabBarController-swift (2.6.4)
   - FontAwesome.swift (1.4.8)
   - FSPagerView (0.8.2)
   - IQKeyboardManagerSwift (6.2.0)
@@ -38,6 +39,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - AlamofireObjectMapper
+  - ESTabBarController-swift
   - FontAwesome.swift
   - FSPagerView
   - IQKeyboardManagerSwift
@@ -54,6 +56,7 @@ SPEC REPOS:
     - Alamofire
     - AlamofireObjectMapper
     - AutoInsetter
+    - ESTabBarController-swift
     - FontAwesome.swift
     - FSPagerView
     - IQKeyboardManagerSwift
@@ -71,6 +74,7 @@ SPEC CHECKSUMS:
   Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
   AlamofireObjectMapper: 92b6ce2423a9d159e686f6a1d514a009bf903ddc
   AutoInsetter: d0eafc611d686f83f925ded729084cf916a39863
+  ESTabBarController-swift: 58cca4ab7de980657d99a02181c1ff310983e975
   FontAwesome.swift: fb8637bffb9a588c7e8c753c084565b27b20a39d
   FSPagerView: 816a18842306973cc7cc6df8a5332272f7815c30
   IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
@@ -84,6 +88,6 @@ SPEC CHECKSUMS:
   Toast-Swift: e42a638589a2f95036b4bb7626cfbdde7daf0393
   XLPagerTabStrip: 63166e21c9844fa30f2d95d30f335e73be5caf22
 
-PODFILE CHECKSUM: 59838386cbfb35cce1bd1fc18c3733adfe54de8b
+PODFILE CHECKSUM: 7bc835977bb60a0e95ec04882b46a93aec0b575d
 
 COCOAPODS: 1.5.3

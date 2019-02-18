@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="ThreePicsCell" customModule="NextAiwujin" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="300" height="100"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="300" height="100"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loading" translatesAutoresizingMaskIntoConstraints="NO" id="fwZ-zs-jB7">
+                        <rect key="frame" x="5" y="30" width="90" height="65"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="You-bX-dDX">
+                        <rect key="frame" x="5" y="5" width="290" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="7kI-gw-xna"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loading" translatesAutoresizingMaskIntoConstraints="NO" id="lbO-zE-buh">
+                        <rect key="frame" x="195" y="30" width="90" height="65"/>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loading" translatesAutoresizingMaskIntoConstraints="NO" id="nov-Pg-oyi">
+                        <rect key="frame" x="100" y="30" width="90" height="65"/>
+                    </imageView>
+                </subviews>
+            </view>
+            <color key="backgroundColor" red="0.45085787770000002" green="0.98829740290000001" blue="0.83763033149999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="nov-Pg-oyi" firstAttribute="top" secondItem="You-bX-dDX" secondAttribute="bottom" constant="5" id="4Xn-SO-LMM"/>
+                <constraint firstItem="lbO-zE-buh" firstAttribute="width" secondItem="fwZ-zs-jB7" secondAttribute="width" id="6OZ-xP-oVZ"/>
+                <constraint firstAttribute="bottom" secondItem="nov-Pg-oyi" secondAttribute="bottom" constant="5" id="FZF-p6-KSv"/>
+                <constraint firstItem="fwZ-zs-jB7" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="MyL-aS-76L"/>
+                <constraint firstItem="You-bX-dDX" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="X5x-LA-VE1"/>
+                <constraint firstItem="nov-Pg-oyi" firstAttribute="width" secondItem="fwZ-zs-jB7" secondAttribute="width" id="dIp-jl-ZBg"/>
+                <constraint firstItem="nov-Pg-oyi" firstAttribute="leading" secondItem="fwZ-zs-jB7" secondAttribute="trailing" constant="5" id="dKj-3L-GuR"/>
+                <constraint firstItem="lbO-zE-buh" firstAttribute="top" secondItem="You-bX-dDX" secondAttribute="bottom" constant="5" id="dPc-Kb-a4R"/>
+                <constraint firstAttribute="bottom" secondItem="lbO-zE-buh" secondAttribute="bottom" constant="5" id="hjz-b0-gKM"/>
+                <constraint firstAttribute="trailing" secondItem="You-bX-dDX" secondAttribute="trailing" constant="5" id="mGH-DO-gkg"/>
+                <constraint firstItem="lbO-zE-buh" firstAttribute="leading" secondItem="nov-Pg-oyi" secondAttribute="trailing" constant="5" id="mZA-sE-S3c"/>
+                <constraint firstItem="fwZ-zs-jB7" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" multiplier="0.3" id="viE-C9-mst"/>
+                <constraint firstItem="fwZ-zs-jB7" firstAttribute="top" secondItem="You-bX-dDX" secondAttribute="bottom" constant="5" id="wiP-3v-3qE"/>
+                <constraint firstAttribute="bottom" secondItem="fwZ-zs-jB7" secondAttribute="bottom" constant="5" id="xRh-sg-kdt"/>
+                <constraint firstItem="You-bX-dDX" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="y3p-nN-R4u"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="300" height="100"/>
+            <point key="canvasLocation" x="332.80000000000001" y="132.23388305847078"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="loading" width="245.75999450683594" height="173.52000427246094"/>
+    </resources>
+</document>

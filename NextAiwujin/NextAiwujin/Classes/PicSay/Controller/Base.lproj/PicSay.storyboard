@@ -26,11 +26,11 @@
             </objects>
             <point key="canvasLocation" x="2334" y="-1559"/>
         </scene>
-        <!--图说-->
+        <!--直播-->
         <scene sceneID="MP4-rT-ZqT">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VX1-CK-lpT" customClass="MyNavigationController" customModule="NextAiwujin" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" tag="222" title="图说" image="Image_unselect" selectedImage="Image_select" id="uhZ-p7-jcf"/>
+                    <tabBarItem key="tabBarItem" tag="222" title="直播" image="broadcast_tabIcon" selectedImage="broadcast_tabIcon_selected" id="uhZ-p7-jcf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wKo-za-8mz">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -47,7 +47,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Image_select" width="20" height="20"/>
-        <image name="Image_unselect" width="20" height="20"/>
+        <image name="broadcast_tabIcon" width="30" height="30"/>
+        <image name="broadcast_tabIcon_selected" width="30" height="30"/>
     </resources>
 </document>

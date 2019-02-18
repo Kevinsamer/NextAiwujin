@@ -30,7 +30,7 @@
         <scene sceneID="hyg-Tj-8c5">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Jwc-3g-eb1" customClass="MyNavigationController" customModule="NextAiwujin" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" tag="111" title="新闻" image="home_un_select" selectedImage="home_select" id="z1h-XR-1kJ"/>
+                    <tabBarItem key="tabBarItem" tag="111" title="新闻" image="newstabicon" selectedImage="newstabicon_selected" id="z1h-XR-1kJ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9Xe-WD-9I5">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -47,7 +47,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="home_select" width="20" height="20"/>
-        <image name="home_un_select" width="20" height="20"/>
+        <image name="newstabicon" width="30" height="30"/>
+        <image name="newstabicon_selected" width="30" height="30"/>
     </resources>
 </document>

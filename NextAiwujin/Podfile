@@ -18,6 +18,7 @@ pod "XLPagerTabStrip"
 pod "Tabman"
 pod "FSPagerView"
 pod "FontAwesome.swift"
+pod "ESTabBarController-swift"
 
   target 'NextAiwujinTests' do
     inherit! :search_paths

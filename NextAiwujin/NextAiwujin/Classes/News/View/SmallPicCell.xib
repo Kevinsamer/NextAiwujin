@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="SmallPicCell" customModule="NextAiwujin" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="300" height="70"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="300" height="70"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loading" translatesAutoresizingMaskIntoConstraints="NO" id="Lwt-YR-gSf">
+                        <rect key="frame" x="5" y="5" width="80" height="60"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="80" id="SrX-ix-cpG"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2019常州落户2019常州落户2019常州落户2019常州落户2019常州落户2019常州落户" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2fD-GP-emF">
+                        <rect key="frame" x="95" y="5" width="195" height="45"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <color key="backgroundColor" red="0.46202266219999999" green="0.83828371759999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="2fD-GP-emF" secondAttribute="bottom" constant="20" id="6xk-2q-26b"/>
+                <constraint firstAttribute="bottom" secondItem="Lwt-YR-gSf" secondAttribute="bottom" constant="5" id="FNf-qB-tyu"/>
+                <constraint firstItem="2fD-GP-emF" firstAttribute="leading" secondItem="Lwt-YR-gSf" secondAttribute="trailing" constant="10" id="M2S-1J-AF4"/>
+                <constraint firstItem="Lwt-YR-gSf" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="MaX-hc-QeZ"/>
+                <constraint firstItem="2fD-GP-emF" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="W8L-O6-51n"/>
+                <constraint firstItem="Lwt-YR-gSf" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="ZG6-0Q-scS"/>
+                <constraint firstAttribute="trailing" secondItem="2fD-GP-emF" secondAttribute="trailing" constant="10" id="qYk-Du-TT5"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="300" height="76"/>
+            <point key="canvasLocation" x="332.80000000000001" y="166.41679160419793"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="loading" width="245.75999450683594" height="173.52000427246094"/>
+    </resources>
+</document>

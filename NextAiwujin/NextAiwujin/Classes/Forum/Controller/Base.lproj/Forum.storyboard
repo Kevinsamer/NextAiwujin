@@ -26,11 +26,11 @@
             </objects>
             <point key="canvasLocation" x="2334" y="-782"/>
         </scene>
-        <!--论坛-->
+        <!--My Navigation Controller-->
         <scene sceneID="MDB-ak-apS">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IwP-jD-LCM" customClass="MyNavigationController" customModule="NextAiwujin" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" tag="333" title="论坛" image="bbs_un_select" selectedImage="bbs_select" id="lyq-fb-pyU"/>
+                    <tabBarItem key="tabBarItem" tag="333" title="" image="govericon" selectedImage="govericon_selected" id="lyq-fb-pyU"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="57U-H6-Yaz">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -47,7 +47,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="bbs_select" width="20" height="21"/>
-        <image name="bbs_un_select" width="20" height="21"/>
+        <image name="govericon" width="70" height="70"/>
+        <image name="govericon_selected" width="70" height="70"/>
     </resources>
 </document>

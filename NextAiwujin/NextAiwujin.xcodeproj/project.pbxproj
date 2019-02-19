@@ -42,6 +42,13 @@
 		09D544412214017900307713 /* SmallPicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09D5443F2214017900307713 /* SmallPicCell.xib */; };
 		09D544442214018C00307713 /* ThreePicsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D544422214018C00307713 /* ThreePicsCell.swift */; };
 		09D5444B221655AE00307713 /* ThreePicsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09D54449221655AE00307713 /* ThreePicsCell.xib */; };
+		09D54454221A649400307713 /* ExampleBackgroundContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D5444D221A649400307713 /* ExampleBackgroundContentView.swift */; };
+		09D54455221A649400307713 /* ExampleBouncesContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D5444E221A649400307713 /* ExampleBouncesContentView.swift */; };
+		09D54456221A649400307713 /* ExampleAnimateTipsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D5444F221A649400307713 /* ExampleAnimateTipsContentView.swift */; };
+		09D54457221A649400307713 /* ExampleBasicContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D54450221A649400307713 /* ExampleBasicContentView.swift */; };
+		09D54458221A649400307713 /* ExampleHighlightableContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D54451221A649400307713 /* ExampleHighlightableContentView.swift */; };
+		09D54459221A649400307713 /* ExampleTipsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D54452221A649400307713 /* ExampleTipsContentView.swift */; };
+		09D5445A221A649400307713 /* ExampleIrregularityContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D54453221A649400307713 /* ExampleIrregularityContentView.swift */; };
 		367025FDA53C3D2A86673174 /* Pods_NextAiwujinTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40CCCF09ECDCFFA26EFA5711 /* Pods_NextAiwujinTests.framework */; };
 		99FEEEBCD1A1247394077B12 /* Pods_NextAiwujin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B33AD14EB88232EDE19A1E07 /* Pods_NextAiwujin.framework */; };
 		C507D1C694EAF817843A979A /* Pods_NextAiwujinUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E96219EA5A5D08D3AC1E6AD1 /* Pods_NextAiwujinUITests.framework */; };
@@ -106,6 +113,13 @@
 		09D5443F2214017900307713 /* SmallPicCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SmallPicCell.xib; sourceTree = "<group>"; };
 		09D544422214018C00307713 /* ThreePicsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreePicsCell.swift; sourceTree = "<group>"; };
 		09D54449221655AE00307713 /* ThreePicsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThreePicsCell.xib; sourceTree = "<group>"; };
+		09D5444D221A649400307713 /* ExampleBackgroundContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleBackgroundContentView.swift; sourceTree = "<group>"; };
+		09D5444E221A649400307713 /* ExampleBouncesContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleBouncesContentView.swift; sourceTree = "<group>"; };
+		09D5444F221A649400307713 /* ExampleAnimateTipsContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleAnimateTipsContentView.swift; sourceTree = "<group>"; };
+		09D54450221A649400307713 /* ExampleBasicContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleBasicContentView.swift; sourceTree = "<group>"; };
+		09D54451221A649400307713 /* ExampleHighlightableContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleHighlightableContentView.swift; sourceTree = "<group>"; };
+		09D54452221A649400307713 /* ExampleTipsContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleTipsContentView.swift; sourceTree = "<group>"; };
+		09D54453221A649400307713 /* ExampleIrregularityContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleIrregularityContentView.swift; sourceTree = "<group>"; };
 		0C2843EBB4270A91F1D33ED6 /* Pods-NextAiwujinTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NextAiwujinTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NextAiwujinTests/Pods-NextAiwujinTests.release.xcconfig"; sourceTree = "<group>"; };
 		3A9F8D01B6DD2D4379260CEB /* Pods-NextAiwujin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NextAiwujin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NextAiwujin/Pods-NextAiwujin.debug.xcconfig"; sourceTree = "<group>"; };
 		40CCCF09ECDCFFA26EFA5711 /* Pods_NextAiwujinTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NextAiwujinTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -308,6 +322,7 @@
 		09D543D9221142E800307713 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				09D5444C221A649400307713 /* Content */,
 				09D543F222116E2D00307713 /* ZZWWaveView.swift */,
 			);
 			path = View;
@@ -496,6 +511,20 @@
 				09D544362213AF6800307713 /* TodayRecommendViewController.swift */,
 			);
 			path = ChildVCs;
+			sourceTree = "<group>";
+		};
+		09D5444C221A649400307713 /* Content */ = {
+			isa = PBXGroup;
+			children = (
+				09D5444D221A649400307713 /* ExampleBackgroundContentView.swift */,
+				09D5444E221A649400307713 /* ExampleBouncesContentView.swift */,
+				09D5444F221A649400307713 /* ExampleAnimateTipsContentView.swift */,
+				09D54450221A649400307713 /* ExampleBasicContentView.swift */,
+				09D54451221A649400307713 /* ExampleHighlightableContentView.swift */,
+				09D54452221A649400307713 /* ExampleTipsContentView.swift */,
+				09D54453221A649400307713 /* ExampleIrregularityContentView.swift */,
+			);
+			path = Content;
 			sourceTree = "<group>";
 		};
 		4885EAAA6C15F6FCE1DCF4FA /* Frameworks */ = {
@@ -785,15 +814,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09D5445A221A649400307713 /* ExampleIrregularityContentView.swift in Sources */,
 				09A4C5892201841D002740C3 /* MainViewController.swift in Sources */,
 				09D543BF2201D8DA00307713 /* BaseViewController.swift in Sources */,
 				09D543D52203E93400307713 /* NetworkTool.swift in Sources */,
 				09D543C52203D8B200307713 /* PicSayViewController.swift in Sources */,
 				09D543C92203D8D700307713 /* RadioStationViewController.swift in Sources */,
+				09D54459221A649400307713 /* ExampleTipsContentView.swift in Sources */,
 				09D543F322116E2D00307713 /* ZZWWaveView.swift in Sources */,
 				0984BDDD22000D1900D80F23 /* NextAiwujin.xcdatamodeld in Sources */,
+				09D54456221A649400307713 /* ExampleAnimateTipsContentView.swift in Sources */,
 				09D543C72203D8C100307713 /* ForumViewController.swift in Sources */,
 				09D543C32203D89700307713 /* NewsViewController.swift in Sources */,
+				09D54454221A649400307713 /* ExampleBackgroundContentView.swift in Sources */,
+				09D54458221A649400307713 /* ExampleHighlightableContentView.swift in Sources */,
 				09D5443C2214015A00307713 /* BigPicCell.swift in Sources */,
 				09D544392213F4B100307713 /* NewsCustomLayout.swift in Sources */,
 				09D544352213AE9A00307713 /* ChildViewController.swift in Sources */,
@@ -803,9 +837,11 @@
 				09D543D32203E6B800307713 /* UIDevice-extension.swift in Sources */,
 				09D544402214017900307713 /* SmallPicCell.swift in Sources */,
 				09D544442214018C00307713 /* ThreePicsCell.swift in Sources */,
+				09D54455221A649400307713 /* ExampleBouncesContentView.swift in Sources */,
 				09D543D02203E67400307713 /* YTools.swift in Sources */,
 				09D543CE2203E5B600307713 /* Commons.swift in Sources */,
 				0984BDD522000D1900D80F23 /* AppDelegate.swift in Sources */,
+				09D54457221A649400307713 /* ExampleBasicContentView.swift in Sources */,
 				09D544372213AF6800307713 /* TodayRecommendViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

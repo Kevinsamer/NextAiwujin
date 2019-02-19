@@ -16,7 +16,7 @@ private let bigPicCellID = "bigPicCellID"
 private let smallPicCellID = "smallPicCellID"
 private let threePicsCellID = "threePicsCellID"
 private let bannerCellID = "bannerCellID"
-private var banners:[UIImage] = [#imageLiteral(resourceName: "loading"),#imageLiteral(resourceName: "loading"),#imageLiteral(resourceName: "loading"),#imageLiteral(resourceName: "loading"),#imageLiteral(resourceName: "loading")]
+private var banners:[UIImage] = [#imageLiteral(resourceName: "loading"),#imageLiteral(resourceName: "loading"),#imageLiteral(resourceName: "loading"),#imageLiteral(resourceName: "loading"),#imageLiteral(resourceName: "loading"),#imageLiteral(resourceName: "loading"),#imageLiteral(resourceName: "loading"),#imageLiteral(resourceName: "loading")]
 class PicSayViewController: BaseViewController {
     
     //MARK: - 懒加载
@@ -57,13 +57,14 @@ class PicSayViewController: BaseViewController {
         //设置自动翻页事件间隔，默认值为0（不自动翻页）
         banner.automaticSlidingInterval = 3.0
         //设置页面之间的间隔距离
-        banner.interitemSpacing = 110.0
+        banner.interitemSpacing = 10.0
         //设置可以无限翻页，默认值为false，false时从尾部向前滚动到头部再继续循环滚动，true时可以无限滚动
         banner.isInfinite = true
         //设置转场的模式
-        banner.transformer = FSPagerViewTransformer(type: FSPagerViewTransformerType.linear)
+//        banner.transformer = FSPagerViewTransformer(type: FSPagerViewTransformerType.depth)
         //修改item大小
         banner.itemSize = CGSize(width: finalScreenW / 10 * 9, height: bannerH / 10 * 9)
+        
         return banner
     }()
     
@@ -90,6 +91,7 @@ class PicSayViewController: BaseViewController {
         //TODO:实现点击某个下标跳转到相应page的功能
         return pageControl
     }()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,8 +100,7 @@ class PicSayViewController: BaseViewController {
     }
 
 }
-
-//设置UI
+//MARK: - 设置UI
 extension PicSayViewController{
     override func setUI() {
         super.setUI()
@@ -110,11 +111,17 @@ extension PicSayViewController{
         //3.设置banner(添加在collectionView上)和pageControl
         newsCollectionView.addSubview(topBanner)
         newsCollectionView.addSubview(topBannerControl)
+        
     }
+    
+    override func initData() {
+        super.initData()
+        
+    }
+    
 }
-
-//实现UICollectionView的数据源协议和代理协议
-extension PicSayViewController:UICollectionViewDataSource,UICollectionViewDelegate{
+//MARK: - 实现UICollectionView的数据源协议和代理协议
+extension PicSayViewController:UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 10
     }
@@ -132,8 +139,14 @@ extension PicSayViewController:UICollectionViewDataSource,UICollectionViewDelega
             return threePicsCell
         }
     }
+    ///通过UICollectionViewDelegateFlowLayout中的sizeForItemAt修改item大小
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        <#code#>
+//    }
+    
+    
 }
-
+//MARK: - 设置banner的数据源协议和代理协议
 extension PicSayViewController:FSPagerViewDataSource,FSPagerViewDelegate{
     ///item数量
     func numberOfItems(in pagerView: FSPagerView) -> Int {
@@ -143,22 +156,48 @@ extension PicSayViewController:FSPagerViewDataSource,FSPagerViewDelegate{
     ///数据填充回调
     func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
         let cell = pagerView.dequeueReusableCell(withReuseIdentifier: bannerCellID, at: index)
+//        cell.imageView?.contentMode = .scaleAspectFit
         cell.imageView?.image = banners[index]
         cell.textLabel?.text = "Title\(index)"
+        cell.isHighlighted = false
+        cell.tag = index + 10000
+        cell.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(clickBannerCell(sender:))))
         return cell
     }
     
     ///取消点击高亮
-    func pagerView(_ pagerView: FSPagerView, shouldHighlightItemAt index: Int) -> Bool {
-        return false
+//    func pagerView(_ pagerView: FSPagerView, shouldHighlightItemAt index: Int) -> Bool {
+//        return false
+//    }
+    ///cell点击事件
+    func pagerView(_ pagerView: FSPagerView, didSelectItemAt index: Int) {
+        print(index)
+//        topBanner.cellForItem(at: index)?.isHighlighted = false
+//        topBanner.cellForItem(at: index)?.selectedBackgroundView?.backgroundColor = .clear
     }
     
-    func pagerView(_ pagerView: FSPagerView, didSelectItemAt index: Int) {
-        print("click\(index)")
+    func pagerView(_ pagerView: FSPagerView, didEndDisplaying cell: FSPagerViewCell, forItemAt index: Int) {
+        
     }
     
     //下标同步
     func pagerView(_ pagerView: FSPagerView, willDisplay cell: FSPagerViewCell, forItemAt index: Int) {
-        topBannerControl.currentPage = index - 1
+        var tempIndex = index - 1
+        if tempIndex == -1{
+            tempIndex = banners.count - 1
+        }
+        topBannerControl.currentPage = tempIndex
+//        print("willDisplay\(tempIndex)")
+    }
+    
+    
+}
+//MARK: - 点击事件绑定
+extension PicSayViewController{
+    ///bannerCell的s单击手势响应方法，为每个cell绑定tag，绑定规则为(index + 10000)，将获取的tag-10000则得到当前点击的cell的index，通过index来操作点击后的事件
+    @objc private func clickBannerCell(sender: UITapGestureRecognizer){
+        
+        print((sender.view?.tag)!)
+        
     }
 }

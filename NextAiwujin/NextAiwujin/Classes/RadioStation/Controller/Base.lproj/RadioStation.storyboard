@@ -26,11 +26,11 @@
             </objects>
             <point key="canvasLocation" x="2334" y="-107"/>
         </scene>
-        <!--电台-->
+        <!--商城-->
         <scene sceneID="oGv-xb-viu">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VbA-Bi-CPk" customClass="MyNavigationController" customModule="NextAiwujin" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" tag="444" title="电台" image="radio_un_select" selectedImage="radio_select" id="tji-nP-ibq"/>
+                    <tabBarItem key="tabBarItem" tag="444" title="商城" image="lifetabicon" selectedImage="lifetabicon_selected" id="tji-nP-ibq"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6Rd-Hi-oBN">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -47,7 +47,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="radio_select" width="20" height="20"/>
-        <image name="radio_un_select" width="20" height="20"/>
+        <image name="lifetabicon" width="30" height="30"/>
+        <image name="lifetabicon_selected" width="30" height="30"/>
     </resources>
 </document>

@@ -13,6 +13,7 @@
         <scene sceneID="pjh-Wt-FaT">
             <objects>
                 <tabBarController id="mIu-Gy-m7M" customClass="MainViewController" customModule="NextAiwujin" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="sjd-sX-4Ly"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="KdY-q3-Xjv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -21,7 +22,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TxO-tN-X6n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="118" y="-618"/>
+            <point key="canvasLocation" x="97" y="-609"/>
         </scene>
     </scenes>
 </document>

@@ -26,5 +26,11 @@ extension BaseViewController{
     @objc func setUI(){
         //1.设置背景色
         self.view.backgroundColor = .random
+        //2.初始化数据
+        initData()
+    }
+    
+    @objc func initData(){
+        
     }
 }

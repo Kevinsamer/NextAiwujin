@@ -21,8 +21,10 @@ class NewsViewController: TabmanViewController {
         //初始化控件
         let bar = TMBar.ButtonBar()
         //设置bar的属性
-        //去除底部指示条
-        bar.indicator.weight = .custom(value: 0)
+        bar.indicator.weight = TMLineBarIndicator.Weight.medium
+        bar.indicator.tintColor = UIColor.red
+        //将weight属性设置为0来去除底部指示条
+//        bar.indicator.weight = .custom(value: 0)
         //自定义文字属性
         bar.buttons.customize { (button) in
             button.tintColor = .black

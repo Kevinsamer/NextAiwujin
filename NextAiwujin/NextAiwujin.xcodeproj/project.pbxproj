@@ -331,10 +331,10 @@
 		09D543DA2211431300307713 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				09D543C02201DB5900307713 /* MyNavigationController.swift */,
 				09D543BE2201D8DA00307713 /* BaseViewController.swift */,
 				0984BDD822000D1900D80F23 /* Main.storyboard */,
 				09A4C5882201841D002740C3 /* MainViewController.swift */,
-				09D543C02201DB5900307713 /* MyNavigationController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";

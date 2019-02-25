@@ -64,19 +64,20 @@ class MainViewController: UITabBarController {
 
 }
 
+//MARK: - 实现UITabBarControllerDelegate的shouldSelect viewController方法，通过SB中向tabBarItem添加的tag来实现点击各个模块的监听
 extension MainViewController:UITabBarControllerDelegate{
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         //首页tabbarItem添加tag
         if viewController.tabBarItem.tag == 111 {
-            print("直播")
+//            print("直播")
         }else if viewController.tabBarItem.tag == 222{
-            print("新闻")
+//            print("新闻")
         }else if viewController.tabBarItem.tag == 333{
-            print("论坛")
+//            print("论坛")
         }else if viewController.tabBarItem.tag == 444{
-            print("商城")
+//            print("商城")
         }else if viewController.tabBarItem.tag == 555{
-            print("我的")
+//            print("我的")
         }
         return true
     }

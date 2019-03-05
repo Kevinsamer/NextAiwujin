@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -14,13 +13,23 @@
         <scene sceneID="Gqy-z1-Az3">
             <objects>
                 <viewController id="aps-VA-9Qw" customClass="RadioStationViewController" customModule="NextAiwujin" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="vjN-JS-ToR">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="loB-w1-dtW"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="17e-85-xEM"/>
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="cBo-7A-Ggg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections/>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="17e-85-xEM">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="message_light" id="8eO-o7-ZfG">
+                            <connections>
+                                <action selector="messageBtnClicked:" destination="aps-VA-9Qw" id="S7i-Kg-chv"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="mainTableView" destination="cBo-7A-Ggg" id="Abh-fv-kSd"/>
+                        <outlet property="messageBtn" destination="8eO-o7-ZfG" id="1wO-qZ-kJ7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sYH-IP-itz" sceneMemberID="firstResponder"/>
             </objects>
@@ -32,7 +41,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VbA-Bi-CPk" customClass="MyNavigationController" customModule="NextAiwujin" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" tag="444" title="商城" image="lifetabicon" selectedImage="lifetabicon_selected" id="tji-nP-ibq"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6Rd-Hi-oBN">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="6Rd-Hi-oBN">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -49,5 +58,6 @@
     <resources>
         <image name="lifetabicon" width="30" height="30"/>
         <image name="lifetabicon_selected" width="30" height="30"/>
+        <image name="message_light" width="30" height="30"/>
     </resources>
 </document>

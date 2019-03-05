@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 extension UIBarButtonItem {
-    convenience init(imageName:String, highLightedImageName:String = "", size:CGSize = CGSize.zero){
+    convenience init(imageName:String, highLightedImageName:String = "", size:CGSize = CGSize.zero, clickAbled:Bool){
         let btn = UIButton(type: UIButton.ButtonType.custom)
 //        btn.sizeToFit()
 //        btn.contentMode = .scaleAspectFit
@@ -29,8 +29,9 @@ extension UIBarButtonItem {
         }
         //在导航栏中添加UIButton时，如果需要改变UIButton的size，需要在UIButton外再添加一层UIView(frame=UIButton.frame)，
         let alphaView = UIView(frame: btn.frame)
-        alphaView.addSubview(btn)
         
+        alphaView.addSubview(btn)
+        btn.isUserInteractionEnabled = clickAbled
         self.init(customView: alphaView)
     }
 }

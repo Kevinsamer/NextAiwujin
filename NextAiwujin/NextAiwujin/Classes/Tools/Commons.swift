@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+//ps--tag设置记录：新闻页banner=index+10000，商城页banner=index+20000，商城页分类collectionView=301，商城页今日推荐collectionView=302
+
 let finalScreenW : CGFloat = UIScreen.main.bounds.width
 let finalScreenH : CGFloat = UIScreen.main.bounds.height
 

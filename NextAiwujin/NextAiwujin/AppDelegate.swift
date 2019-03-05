@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //全局设置navigationBarStyle
         UINavigationBar.appearance().tintColor = .white
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black, NSAttributedString.Key.font : UIFont.systemFont(ofSize: 18)]
+//        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black, NSAttributedString.Key.font : UIFont.systemFont(ofSize: 18)]
         UINavigationBar.appearance().isTranslucent = false
         UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().setBackgroundImage(UIImage.init(color: UIColor.white, size: CGSize(width: finalScreenW, height: finalNavigationBarH)), for: UIBarMetrics.default)
@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffset(horizontal: -200, vertical: 0), for:UIBarMetrics.default)//设置偏移量来隐藏返回按钮文字,TODO：修改为基类中设置navigationController?.navigationBar.topItem?.title = ""
         
         
-        //设置状态栏style
+//        设置状态栏style
 //        UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
         //输入框适应键盘位置
         IQKeyboardManager.shared.enable = true

@@ -1,7 +1,7 @@
 //
 //  PicSayViewController.swift
 //  NextAiwujin
-//  头条
+//  改为直播模块
 //  Created by DEV2018 on 2019/2/1.
 //  Copyright © 2019 DEV2018. All rights reserved.
 //
@@ -16,7 +16,7 @@ private let bigPicCellID = "bigPicCellID"
 private let smallPicCellID = "smallPicCellID"
 private let threePicsCellID = "threePicsCellID"
 private let bannerCellID = "bannerCellID"
-private var banners:[UIImage] = [#imageLiteral(resourceName: "loading"),#imageLiteral(resourceName: "loading"),#imageLiteral(resourceName: "loading"),#imageLiteral(resourceName: "loading"),#imageLiteral(resourceName: "loading"),#imageLiteral(resourceName: "loading"),#imageLiteral(resourceName: "loading"),#imageLiteral(resourceName: "loading")]
+private var banners:[UIImage] = [#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back")]
 class PicSayViewController: BaseViewController {
     
     //MARK: - 懒加载
@@ -105,7 +105,8 @@ extension PicSayViewController{
     override func setUI() {
         super.setUI()
         //1.设置导航栏
-        navigationItem.leftBarButtonItems = [UIBarButtonItem.init(imageName: "navigation_app_icon", size: CGSize(width: 40, height: 40)), UIBarButtonItem.init(customView: weatherLabel)]
+//        navigationItem.leftBarButtonItems = [UIBarButtonItem.init(imageName: "navigation_app_icon", size: CGSize(width: 40, height: 40), clickAbled: false), UIBarButtonItem.init(customView: weatherLabel)] //此为金坛台方案
+        navigationItem.title = "直播武进"
         //2.设置进入推荐数据展示空间UICollectionView
         self.view.addSubview(newsCollectionView)
         //3.设置banner(添加在collectionView上)和pageControl

@@ -19,6 +19,7 @@ pod "Tabman"
 pod "FSPagerView"
 pod "FontAwesome.swift"
 pod "ESTabBarController-swift"
+#pod "YNSearch"
 
   target 'NextAiwujinTests' do
     inherit! :search_paths

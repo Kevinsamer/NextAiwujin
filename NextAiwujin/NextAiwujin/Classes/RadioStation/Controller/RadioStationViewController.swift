@@ -9,6 +9,7 @@
 import UIKit
 import PullToRefreshKit
 import FSPagerView
+import Kingfisher
 //搜索框属性
 private let searchBarW:CGFloat = 100
 private let searchBarH:CGFloat = 100
@@ -17,7 +18,7 @@ private let tableCellID:String = "tableCellID"
 ///顶部图片和广告栏高度
 private let topBannerH:CGFloat = 200
 private let bannerCellID = "bannerCellID"
-private var banners:[UIImage] = []
+//private var banners:[UIImage] = []
 //分类标签view属性
 private let categoryViewH:CGFloat = 220
 private let categoryCellID:String = "categoryCellID"
@@ -26,10 +27,27 @@ private let headerViewH:CGFloat = 40
 ///今日推荐view高度
 private let recommendViewH:CGFloat = 200
 private let recommendCellID:String = "recommendCellID"
+///热门推荐行高
+private let hotCellH:CGFloat = finalScreenH / 6
+private let hotCellID:String = "hotCellID"
+//购物车按钮属性
+///购物车按钮的宽高
+private let cartBtnWH:CGFloat = 50
+///购物车按钮相对屏幕右边和tabbar的距离
+private let cartBtnOriginXY:CGFloat = 20
+
+private var banners:[BannerInfo] = [BannerInfo]()//banner数组
+private var recommends:[RecommendInfo] = [RecommendInfo]()//推荐商品数组
+private var hots:[HotInfo] = [HotInfo]()//热门商品数组
+private var channels:[ChannelInfo] = [ChannelInfo]()//分类数组
+private let channelsIcons:[UIImage] = [#imageLiteral(resourceName: "Porridge"),#imageLiteral(resourceName: "Cocktail"),#imageLiteral(resourceName: "Nut"),#imageLiteral(resourceName: "Lettuce"),#imageLiteral(resourceName: "三色堇"),#imageLiteral(resourceName: "Crab"),#imageLiteral(resourceName: "Sugar"),#imageLiteral(resourceName: "Thanksgiving"),#imageLiteral(resourceName: "Peas"),#imageLiteral(resourceName: "Cupcake")]
+
 
 class RadioStationViewController: BaseViewController {
+    private var shopViewModel:ShopViewModel = ShopViewModel()
+    
     ///导航栏的背景图片
-    var barImageView:UIView?
+    private var barImageView:UIView?
     ///主体tableView
     @IBOutlet var mainTableView: UITableView!
     ///右上角消息按钮
@@ -42,11 +60,19 @@ class RadioStationViewController: BaseViewController {
     
     lazy var cartButton: UIButton = {
         let btn = UIButton(type: UIButton.ButtonType.custom)
-        
-        btn.size = CGSize(width: 50, height: 50)
+        btn.frame = CGRect(x:finalScreenW - cartBtnOriginXY - cartBtnWH , y: UIDevice.current.isX() ? finalScreenH - finalTabBarH - IphonexHomeIndicatorH - cartBtnWH - cartBtnOriginXY : finalScreenH - finalTabBarH - cartBtnWH - cartBtnOriginXY, width: cartBtnWH, height: cartBtnWH)
+//        btn.frame = CGRect(x: 100, y: 300, width: 50, height: 50)
+//        btn.frame = CGRect(origin: CGPoint(x: UIDevice.current.isX() ? finalScreenH - finalTabBarH - IphonexHomeIndicatorH - 50 - 40 : finalScreenH - finalTabBarH - 50 - 40, y: finalScreenW - 40 - 50), size: CGSize(width: 50, height: 50))
+//        btn.size = CGSize(width: 50, height: 50)
         btn.setImageForAllStates(#imageLiteral(resourceName: "store_cart"))
         btn.layer.cornerRadius = 25
-        btn.backgroundColor = .blue
+        btn.backgroundColor = .white
+        btn.layer.shadowColor = UIColor.black.cgColor
+        btn.layer.shadowOpacity = 0.5
+        btn.layer.shadowRadius = 5.0
+        btn.layer.shadowOffset = CGSize(width: 0, height: 0)
+//        btn.addShadow()
+        btn.addTarget(self, action: #selector(showCart), for: .touchUpInside)
         return btn
     }()
     
@@ -60,7 +86,7 @@ class RadioStationViewController: BaseViewController {
         imageBG.backgroundColor = .white
         imageBG.addSubview(image)
         view.addSubview(imageBG)
-        view.backgroundColor = #colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 0.9607843137, green: 0.9607843137, blue: 0.9607843137, alpha: 1)
         return view
     }()
     ///最热商品header
@@ -71,7 +97,7 @@ class RadioStationViewController: BaseViewController {
         image.contentMode = UIView.ContentMode.scaleAspectFit
 //        image.backgroundColor = #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1)
         view.addSubview(image)
-        view.backgroundColor = #colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 0.9607843137, green: 0.9607843137, blue: 0.9607843137, alpha: 1)
         return view
     }()
     
@@ -100,6 +126,7 @@ class RadioStationViewController: BaseViewController {
         coll.backgroundColor = .white
         coll.contentInsetAdjustmentBehavior = .never
         coll.alwaysBounceVertical = false
+        coll.showsHorizontalScrollIndicator = false
 //        coll.backgroundColor = .blue
         return coll
     }()
@@ -185,7 +212,6 @@ class RadioStationViewController: BaseViewController {
         header.setText("数据刷新成功", mode: .refreshSuccess)
         header.setText("刷新中...", mode: .refreshing)
         header.setText("数据刷新失败，请检查网络设置", mode: .refreshFailure)
-//        header.imageView.image = UIImage(named: "down_arrow", in: Bundle.init(for: DefaultRefreshHeader.self), compatibleWith: nil)
         header.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1).lighten()
         header.imageRenderingWithTintColor = true
         header.durationWhenHide = 0.4
@@ -212,6 +238,9 @@ class RadioStationViewController: BaseViewController {
         bar.translatesAutoresizingMaskIntoConstraints = false
         bar.setImage(#imageLiteral(resourceName: "fdj_icon"), for: UISearchBar.Icon.search, state: UIControl.State.normal)
         bar.placeholder = "请输入商品名称，优惠内容"
+        bar.delegate = self
+        //添加单击手势识别
+        bar.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(clickSearchBar)))
         return bar
     }()
 
@@ -235,21 +264,62 @@ class RadioStationViewController: BaseViewController {
         //viewDidAppear方法内可以获取searchBar的高度
         //通过kvc获取到搜索框输入控件textField，然后获取到输入控件的提示label，修改搜索控件的圆角属性和提示label的字体
         let searchField = searchBar.value(forKey: "searchField") as! UITextField
+        searchField.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(clickSearchBar)))
         let placeHolderLabel = searchField.value(forKey: "placeholderLabel") as! UILabel
         searchField.layer.cornerRadius = searchField.frame.height / 2
         searchField.layer.masksToBounds = true
         placeHolderLabel.font = UIFont.systemFont(ofSize: 13)
         //将导航栏的透明度设置为0(需在viewDidAppear中设置)
-        barImageView?.alpha = 0.0
+        if self.mainTableView.contentOffset.y == 0{
+            barImageView?.alpha = 0.0
+        }
+        
     }
 
 }
 
 //MARK: - 设置UI
 extension RadioStationViewController{
+    //初始化数据
     override func initData() {
         super.initData()
-        banners = [#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back")]
+//        header.didBeginRefreshingState()
+        initHomeData()
+//        banners = [#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back")]
+    }
+    
+    private func initHomeData(){
+        banners.removeAll()
+        recommends.removeAll()
+        channels.removeAll()
+        hots.removeAll()
+        shopViewModel.requestHomeData {
+            
+            for banner in (self.shopViewModel.homeDataGroup?.banners)! {
+                banners.append(banner)
+            }
+            for recommend in (self.shopViewModel.homeDataGroup?.recommends)! {
+                recommends.append(recommend)
+            }
+            for hot in (self.shopViewModel.homeDataGroup?.hots)! {
+                hots.append(hot)
+            }
+            for channel in (self.shopViewModel.homeDataGroup?.channels)!{
+//                print(channel.name)
+                channels.append(channel)
+            }
+            
+            DispatchQueue.main.async(execute: {
+//                self.collections.reloadData()
+                self.topBannerControl.numberOfPages = banners.count
+                self.topBanner.reloadData()
+                self.categoryCollectionView.reloadData()
+                self.recommendCollectionView.reloadData()
+                self.mainTableView.reloadData()
+//                self.tipInfoView.frame = CGRect(x: 20, y: 20 + self.collections.collectionViewLayout.collectionViewContentSize.height, width: finalScreenW - 40, height: tipInfoViewH)
+                self.mainTableView.switchRefreshHeader(to: HeaderRefresherState.normal(.success, 0.3))
+            })
+        }
     }
     
     override func setUI() {
@@ -268,9 +338,10 @@ extension RadioStationViewController{
     
     private func setCartButton(){
         self.view.addSubview(cartButton)
-        let bottomCon = NSLayoutConstraint(item: cartButton, attribute: NSLayoutConstraint.Attribute.bottom, relatedBy: .equal, toItem: self.view, attribute: .bottom, multiplier: 1.0, constant: UIDevice.current.isX() ? -finalTabBarH - IphonexHomeIndicatorH - 40 : -finalTabBarH - 40)
-        let rightCon = NSLayoutConstraint(item: cartButton, attribute: .right, relatedBy: .equal, toItem: self.view, attribute: .right, multiplier: 1.0, constant: 40)
-        self.view.addConstraints([bottomCon, rightCon])
+        self.view.bringSubviewToFront(cartButton)
+//        let bottomCon = NSLayoutConstraint(item: cartButton, attribute: NSLayoutConstraint.Attribute.bottom, relatedBy: .equal, toItem: self.view, attribute: .bottom, multiplier: 1.0, constant: UIDevice.current.isX() ? -finalTabBarH - IphonexHomeIndicatorH - 40 : -finalTabBarH - 40)
+//        let rightCon = NSLayoutConstraint(item: cartButton, attribute: .right, relatedBy: .equal, toItem: self.view, attribute: .right, multiplier: 1.0, constant: 40)
+//        self.view.addConstraints([bottomCon, rightCon])
     }
     
     private func setNavigationBar(){
@@ -290,16 +361,20 @@ extension RadioStationViewController{
         self.mainTableView.delegate = self
         self.mainTableView.dataSource = self
         self.mainTableView.register(UITableViewCell.self, forCellReuseIdentifier: tableCellID)
+        self.mainTableView.register(UINib(nibName: "HotCell", bundle: nil), forCellReuseIdentifier: "hotCellID")
+        self.mainTableView.backgroundColor = #colorLiteral(red: 0.9607843137, green: 0.9607843137, blue: 0.9607843137, alpha: 1)
         //为SB设置的tableView设置底部内边距，使其不被底部tabbar遮盖
         self.mainTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: UIDevice.current.isX() ? (finalTabBarH + IphonexHomeIndicatorH) : finalTabBarH , right: 0)
         //设置下拉刷新和上拉加载
         self.mainTableView.configRefreshHeader(with: header, container: self) {
-            self.mainTableView.switchRefreshHeader(to: HeaderRefresherState.normal(.success, 0.3))
+            self.initData()
         }
         
         self.mainTableView.configRefreshFooter(with: footer, container: self) {
             self.mainTableView.switchRefreshFooter(to: FooterRefresherState.noMoreData)
         }
+        //进入页面初始化TableView时自动刷新一次
+        self.mainTableView.switchRefreshHeader(to: .refreshing)
 //        let topCon = NSLayoutConstraint(item: mainTableView, attribute: .top, relatedBy: .equal, toItem: self.view, attribute: .top, multiplier: 1.0, constant: (0))
 //        let leftCon = NSLayoutConstraint(item: mainTableView, attribute: .left, relatedBy: .equal, toItem: self.view, attribute: .left, multiplier: 1.0, constant: 0)
 //        let rightCon = NSLayoutConstraint(item: mainTableView, attribute: .right, relatedBy: .equal, toItem: self.view, attribute: .right, multiplier: 1.0, constant: 0)
@@ -338,6 +413,11 @@ extension RadioStationViewController{
 
 //MARK: - 实现UITableView的代理协议和数据源协议
 extension RadioStationViewController:UITableViewDelegate,UITableViewDataSource{
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        //tableView的sectionHeader遮住了添加在tableView上的子控件，通过改变sectionHeader的zPosition值来调整其在页面中的层级顺序
+        view.layer.zPosition = cartButton.layer.zPosition - 0.1
+    }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
@@ -382,18 +462,18 @@ extension RadioStationViewController:UITableViewDelegate,UITableViewDataSource{
         case 1:
             return 1
         case 2:
-            return 50
+            return hots.count
         default:
             return 0
         }
     }
     ///cell内容代理
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell:UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: tableCellID, for: indexPath)
+        var cell:UITableViewCell?
         
-        for childView in (cell?.subviews)!{
-            childView.removeFromSuperview()
-        }
+//        for childView in (cell?.subviews)!{
+//            childView.removeFromSuperview()
+//        }
 //        if cell == nil {
 //            cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: tableCellID)
 //        }else{
@@ -401,10 +481,11 @@ extension RadioStationViewController:UITableViewDelegate,UITableViewDataSource{
 //                cell?.subviews.last?.removeFromSuperview()
 //            }
 //        }
-        cell!.backgroundColor = UIColor.random.lighten(by: 0.3)
+        
         //总共分为3个section   第一个包含banner和分类，第二个是横向滑动的商品展示和header
         switch indexPath.section {
         case 0:
+            cell = tableView.dequeueReusableCell(withIdentifier: tableCellID, for: indexPath)
             switch indexPath.row {
             case 0:
                 cell?.addSubview(topBanner)
@@ -415,6 +496,7 @@ extension RadioStationViewController:UITableViewDelegate,UITableViewDataSource{
             default: break
             }
         case 1:
+            cell = tableView.dequeueReusableCell(withIdentifier: tableCellID, for: indexPath)
             switch indexPath.row {
             case 0:
                 cell?.addSubview(recommendCollectionView)
@@ -422,12 +504,30 @@ extension RadioStationViewController:UITableViewDelegate,UITableViewDataSource{
                 break
             }
         case 2:
+//            tableView.separatorStyle = .singleLine
+            cell = tableView.dequeueReusableCell(withIdentifier: "hotCellID", for: indexPath) as! HotCell
+            
+//            cell?.separatorInset = UIEdgeInsets(top: 0, left: 110, bottom: 0, right: 0)
+            cell!.selectionStyle = .none
+            (cell as! HotCell).goodsImageView.kf.setImage(with: URL(string: BASE_URL + hots[indexPath.row].img), placeholder: #imageLiteral(resourceName: "loading"))
+            (cell as! HotCell).goodsNameLabel.text = hots[indexPath.row].name
+            (cell as! HotCell).marketPriceLabel.attributedText = YTools.textAddMiddleLine(text: "￥\(hots[indexPath.row].market_price)")
+            (cell as! HotCell).sellPriceLabel.text = "￥\(hots[indexPath.row].sell_price)"
+            if indexPath.row == (tableView.numberOfRows(inSection: 2) - 1) {
+//                cell?.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: (cell?.bounds.size.width)!)
+//                tableView.separatorColor = .white
+//                cell?.backgroundColor = .red
+                (cell as! HotCell).bottomLine.isHidden = true
+            }else{
+//                tableView.separatorColor = .gray
+                (cell as! HotCell).bottomLine.isHidden = false
+            }
             break
         default:
             break
         }
         
-        
+//        cell?.backgroundColor = UIColor.random.lighten(by: 0.3)
         return cell!
     }
     ///行高代理
@@ -445,9 +545,28 @@ extension RadioStationViewController:UITableViewDelegate,UITableViewDataSource{
         case 1:
             return recommendViewH
         default:
-            return 50
+            return hotCellH
         }
         
+    }
+    
+    //开始滑动,隐藏购物车按钮
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        if scrollView.isMember(of: UITableView.self){
+            UIView.animate(withDuration: 0.5) {
+                self.cartButton.frame.origin.x += (cartBtnWH + cartBtnOriginXY + 20)
+            }
+            
+        }
+    }
+    
+    //结束滑动，显示购物车按钮
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if scrollView.isMember(of: UITableView.self){
+            UIView.animate(withDuration: 0.5, delay: 1, animations: {
+                self.cartButton.frame.origin.x -= (cartBtnWH + cartBtnOriginXY + 20)
+            }, completion: nil)
+        }
     }
     
     ///滑动事件代理
@@ -457,19 +576,19 @@ extension RadioStationViewController:UITableViewDelegate,UITableViewDataSource{
             let offsetY = scrollView.contentOffset.y
             
             //TODO:调整cartButton的y值，使其有固定于页面的效果
-            cartButton.frame.origin.y = offsetY
+            cartButton.frame.origin.y = offsetY + (UIDevice.current.isX() ? finalScreenH - finalTabBarH - IphonexHomeIndicatorH - cartBtnWH - cartBtnOriginXY : finalScreenH - finalTabBarH - cartBtnWH - cartBtnOriginXY)
             if offsetY < 0{
                 //当外边距小于0时，页面处于下拉状态，通过视图动画展示导航栏透明效果,同时将状态栏字体设为黑色，增强可阅读性
                 UIView.animate(withDuration: 0.2) {
                     self.navigationController?.navigationBar.alpha = 0
-                    UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
+//                    UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
                 }
             }else{
                 //当外边距大于0时，页面处于上拉状态，通过视图动画展示导航栏由透明复原的效果，动画执行结束后将状态栏恢复白色
                 UIView.animate(withDuration: 0.2, animations: {
                     self.navigationController?.navigationBar.alpha = 1
                 }) { (result) in
-                    UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
+//                    UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
                 }
             }
             ///定义页面外边距与页面滑动到顶部图片结束的比例
@@ -496,8 +615,8 @@ extension RadioStationViewController:FSPagerViewDelegate, FSPagerViewDataSource{
     func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
         let cell = pagerView.dequeueReusableCell(withReuseIdentifier: bannerCellID, at: index)
         //        cell.imageView?.contentMode = .scaleAspectFit
-        cell.imageView?.image = banners[index]
-        cell.textLabel?.text = "Title\(index)"
+        cell.imageView?.kf.setImage(with: URL(string: BASE_URL + banners[index].img))
+        cell.textLabel?.text = banners[index].name
         cell.isHighlighted = false
         cell.tag = index + 20000
         cell.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(clickBannerCell(sender:))))
@@ -537,6 +656,17 @@ extension RadioStationViewController{
         print((sender.view?.tag)!)
         
     }
+    
+    @objc private func showCart(){
+        print("showCart")
+    }
+    
+    @objc private func clickSearchBar(){
+//        print("searchBar")
+        let searchVC = SearchViewController()
+        let navi = MyNavigationController(rootViewController: searchVC)
+        self.present(navi, animated: false, completion: nil)
+    }
 }
 
 //MARK: - 实现分类collectionView代理协议和数据源协议,301是分类模块，302是今日推荐
@@ -544,9 +674,9 @@ extension RadioStationViewController:UICollectionViewDelegateFlowLayout, UIColle
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView.tag == 301{
-            return 8
+            return channels.count
         }else {
-            return 15
+            return recommends.count
         }
         
     }
@@ -555,11 +685,15 @@ extension RadioStationViewController:UICollectionViewDelegateFlowLayout, UIColle
         
         if collectionView.tag == 301{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "categoryCellID", for: indexPath) as! CategoryCell
-            cell.categoryName.text = "name\(indexPath.row)"
+            cell.categoryName.text = "\(channels[indexPath.row].name)"
+            cell.categoryPic.image = channelsIcons[indexPath.row]
             return cell
         }else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "recommendCellID", for: indexPath) as! RecommendCell
-            cell.goodsNameLabel.text = "name\(indexPath.row)namenamenamenamenamenamenamename"
+            cell.goodsNameLabel.text = recommends[indexPath.row].name
+            cell.goodsImageView.kf.setImage(with: URL(string: BASE_URL + recommends[indexPath.row].img), placeholder: UIImage(named: "loading"))
+            cell.marketPriceLabel.attributedText = YTools.textAddMiddleLine(text: "￥" + recommends[indexPath.row].market_price)
+            cell.sellPriceLabel.text = "￥" + recommends[indexPath.row].sell_price
             return cell
         }
     }
@@ -574,5 +708,20 @@ extension RadioStationViewController:UICollectionViewDelegateFlowLayout, UIColle
 //        print(page)
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView.tag == 301{
+//            self.show(UIViewController(), sender: self)
+            print(channels[indexPath.row].name)
+        }else{
+            
+        }
+    }
     
+    
+}
+//MARK: - 实现搜索框的代理协议
+extension RadioStationViewController:UISearchBarDelegate{
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        return false
+    }
 }

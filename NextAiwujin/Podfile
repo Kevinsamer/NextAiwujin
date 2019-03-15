@@ -19,7 +19,9 @@ pod "Tabman"
 pod "FSPagerView"
 pod "FontAwesome.swift"
 pod "ESTabBarController-swift"
-#pod "YNSearch"
+pod 'SwiftEventBus', :tag => '3.0.1', :git => 'https://github.com/cesarferreira/SwiftEventBus.git'
+pod 'SQLite.swift'
+#pod 'ETNavBarTransparent'
 
   target 'NextAiwujinTests' do
     inherit! :search_paths

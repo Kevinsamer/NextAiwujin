@@ -29,7 +29,7 @@ class MyNavigationController: UINavigationController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.topItem?.title = ""
+//        navigationController?.navigationBar.topItem?.title = ""
         //print(self.viewControllers.count)
         //YTools.setNavigationBarAndTabBar(navCT: (self.viewControllers.first?.navigationController)!, navItem: (self.viewControllers.first?.navigationItem)!)
     }

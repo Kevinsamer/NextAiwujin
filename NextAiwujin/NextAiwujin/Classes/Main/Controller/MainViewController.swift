@@ -8,11 +8,11 @@
 
 import UIKit
 //import ESTabBarController_swift
-
 class MainViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.delegate = self
 //        self.tabBar.shadowImage = UIImage(named: "transparent")
 //        self.tabBar.backgroundImage = UIImage(named: "background_dark")
@@ -56,9 +56,15 @@ class MainViewController: UITabBarController {
 //        v1.tabBarItem = ESTabBarItem.init(ExampleTipsBasicContentView(), title: "Home", image: UIImage(named: "home"), selectedImage: UIImage(named: "home_1"))
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
     
     func addChildrenController(_ name:String){
+        
         let childVC = UIStoryboard(name: name, bundle: nil).instantiateInitialViewController()!
+        
         addChild(childVC)
     }
 

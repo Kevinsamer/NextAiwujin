@@ -10,13 +10,14 @@ import UIKit
 import PullToRefreshKit
 import FSPagerView
 import Kingfisher
+
 //搜索框属性
 private let searchBarW:CGFloat = 100
 private let searchBarH:CGFloat = 100
 ///tableViewCell标识id
 private let tableCellID:String = "tableCellID"
 ///顶部图片和广告栏高度
-private let topBannerH:CGFloat = 200
+let topBannerH:CGFloat = 200
 private let bannerCellID = "bannerCellID"
 //private var banners:[UIImage] = []
 //分类标签view属性
@@ -45,9 +46,10 @@ private let channelsIcons:[UIImage] = [#imageLiteral(resourceName: "Porridge"),#
 
 class RadioStationViewController: BaseViewController {
     private var shopViewModel:ShopViewModel = ShopViewModel()
+    private var isBackFresh:Bool = false
     
     ///导航栏的背景图片
-    private var barImageView:UIView?
+    var barImageView:UIView?
     ///主体tableView
     @IBOutlet var mainTableView: UITableView!
     ///右上角消息按钮
@@ -225,7 +227,6 @@ class RadioStationViewController: BaseViewController {
         footer.setText("上拉加载更多", mode: .pullToRefresh)
         footer.setText("——— 我是有底线的 ———", mode: .noMoreData)
         footer.textLabel.font = UIFont.systemFont(ofSize: 10)
-//        footer.textLabel.sizeToFit()
         footer.setText("加载中...", mode: .refreshing)
         footer.setText("点击加载更多", mode: .tapToRefresh)
         footer.textLabel.textColor  = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1).lighten()
@@ -239,6 +240,12 @@ class RadioStationViewController: BaseViewController {
         bar.setImage(#imageLiteral(resourceName: "fdj_icon"), for: UISearchBar.Icon.search, state: UIControl.State.normal)
         bar.placeholder = "请输入商品名称，优惠内容"
         bar.delegate = self
+        let searchField = bar.value(forKey: "searchField") as! UITextField
+        searchField.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(clickSearchBar)))
+        let placeHolderLabel = searchField.value(forKey: "placeholderLabel") as! UILabel
+        searchField.layer.cornerRadius = 18
+        searchField.layer.masksToBounds = true
+        placeHolderLabel.font = UIFont.systemFont(ofSize: 13)
         //添加单击手势识别
         bar.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(clickSearchBar)))
         return bar
@@ -246,34 +253,68 @@ class RadioStationViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        barImageView = self.navigationController?.navigationBar.subviews.first?.subviews.first
         // Do any additional setup after loading the view.
     }
     
-    override func updateViewConstraints() {
-        super.updateViewConstraints()
-        //self.navigationController?.navigationBar.updateConstraints()
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
+        
+//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .topAttached, barMetrics: .default)
+        //        定义页面外边距与页面滑动到顶部图片结束的比例
+//        var delta =  (self.mainTableView.contentOffset.y) / (topBannerH - finalStatusBarH - finalNavigationBarH)
+//        ///通过取大值函数保证比例大于0，即只有上拉事件才会改变导航栏透明度
+//        //        delta = CGFloat.maximum(delta, 0)
+//        if delta < 0 { delta = 0 }
+//        if delta > 1 { delta = 1 }
+//        ///通过滑动比例改变导航栏背景的透明的，通过取小值函数保证比例不会大于1，即页面上拉超过顶部图片底部则停止改变导航栏透明度
+//        self.barImageView = self.navigationController?.navigationBar.subviews.first?.subviews.first
+//        //        self.navigationController?.navigationBar.alpha = delta
+//        self.barImageView?.alpha = delta
         super.viewWillAppear(animated)
+        searchBar.isHidden = false
+        if self.mainTableView.contentOffset.y < (topBannerH - finalStatusBarH - finalNavigationBarH) && isBackFresh {
+            self.mainTableView.switchRefreshHeader(to: .refreshing)
+            self.isBackFresh = false
+        }
+        //使用通知中心或者协议向本页面发送刷新标志位，只在二级页面返回的时候刷新，其他时候不刷新
+        
+//        self.navigationController?.navigationBar.setBackgroundImage(#imageLiteral(resourceName: "navi_bg"), for: UIBarPosition.topAttached, barMetrics: UIBarMetrics.default)
         
     }
+    
+    
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        searchBar.isHidden = true
+        self.navigationController?.navigationBar.setBackgroundImage(#imageLiteral(resourceName: "navi_bg"), for: UIBarPosition.topAttached, barMetrics: UIBarMetrics.default)
+        
+    }
+    
+    
     override func viewDidAppear(_ animated: Bool) {
+        
         super.viewDidAppear(animated)
         //viewDidAppear方法内可以获取searchBar的高度
         //通过kvc获取到搜索框输入控件textField，然后获取到输入控件的提示label，修改搜索控件的圆角属性和提示label的字体
-        let searchField = searchBar.value(forKey: "searchField") as! UITextField
-        searchField.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(clickSearchBar)))
-        let placeHolderLabel = searchField.value(forKey: "placeholderLabel") as! UILabel
-        searchField.layer.cornerRadius = searchField.frame.height / 2
-        searchField.layer.masksToBounds = true
-        placeHolderLabel.font = UIFont.systemFont(ofSize: 13)
+//        let searchField = searchBar.value(forKey: "searchField") as! UITextField
+//        searchField.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(clickSearchBar)))
+//        let placeHolderLabel = searchField.value(forKey: "placeholderLabel") as! UILabel
+//        searchField.layer.cornerRadius = searchField.frame.height / 2
+//        searchField.layer.masksToBounds = true
+//        placeHolderLabel.font = UIFont.systemFont(ofSize: 13)
         //将导航栏的透明度设置为0(需在viewDidAppear中设置)
-        if self.mainTableView.contentOffset.y == 0{
-            barImageView?.alpha = 0.0
-        }
+//        定义页面外边距与页面滑动到顶部图片结束的比例
         
+        var delta =  (mainTableView.contentOffset.y) / (topBannerH - finalStatusBarH - finalNavigationBarH)
+
+        ///通过取大值函数保证比例大于0，即只有上拉事件才会改变导航栏透明度
+        //        delta = CGFloat.maximum(delta, 0)
+        if delta < 0 { delta = 0 }
+        if delta > 1 { delta = 1 }
+        ///通过滑动比例改变导航栏背景的透明的，通过取小值函数保证比例不会大于1，即页面上拉超过顶部图片底部则停止改变导航栏透明度
+        self.barImageView?.alpha = delta
     }
 
 }
@@ -285,6 +326,7 @@ extension RadioStationViewController{
         super.initData()
 //        header.didBeginRefreshingState()
         initHomeData()
+        
 //        banners = [#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back")]
     }
     
@@ -347,7 +389,7 @@ extension RadioStationViewController{
     private func setNavigationBar(){
 //        self.navigationController?.delegate = self
         //navigationBar的第一个子控件就是背景View
-        barImageView = self.navigationController?.navigationBar.subviews.first
+//        barImageView = self.navigationController?.navigationBar.subviews.first
         //设置导航栏透明才能让SB设置的tableView的frame.x变为0，否者会自动设置内边距使得显示内容移位到导航栏下面
         self.navigationController?.navigationBar.isTranslucent = true
 
@@ -569,13 +611,15 @@ extension RadioStationViewController:UITableViewDelegate,UITableViewDataSource{
         }
     }
     
+    
+    
     ///滑动事件代理
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         ///通过监听滑动时scrollView页面外边距值来判断页面的滑动方向
         if scrollView.isMember(of: UITableView.self){
             let offsetY = scrollView.contentOffset.y
             
-            //TODO:调整cartButton的y值，使其有固定于页面的效果
+            
             cartButton.frame.origin.y = offsetY + (UIDevice.current.isX() ? finalScreenH - finalTabBarH - IphonexHomeIndicatorH - cartBtnWH - cartBtnOriginXY : finalScreenH - finalTabBarH - cartBtnWH - cartBtnOriginXY)
             if offsetY < 0{
                 //当外边距小于0时，页面处于下拉状态，通过视图动画展示导航栏透明效果,同时将状态栏字体设为黑色，增强可阅读性
@@ -593,10 +637,19 @@ extension RadioStationViewController:UITableViewDelegate,UITableViewDataSource{
             }
             ///定义页面外边距与页面滑动到顶部图片结束的比例
             var delta =  offsetY / (topBannerH - finalStatusBarH - finalNavigationBarH)
-            ///通过取大值函数保证比例大于0，即只有上拉事件才会改变导航栏透明度
+//            ///通过取大值函数保证比例大于0，即只有上拉事件才会改变导航栏透明度
             delta = CGFloat.maximum(delta, 0)
-            ///通过滑动比例改变导航栏背景的透明的，通过取小值函数保证比例不会大于1，即页面上拉超过顶部图片底部则停止改变导航栏透明度
+//            ///通过滑动比例改变导航栏背景的透明的，通过取小值函数保证比例不会大于1，即页面上拉超过顶部图片底部则停止改变导航栏透明度
             self.barImageView?.alpha = CGFloat.minimum(delta, 1)
+//            navBarBgAlpha = delta
+//            navBarTintColor = .white
+//            if scrollView.contentOffset.y > 200 {
+//                navBarBgAlpha = 1
+//                navBarTintColor = UIColor.white
+//            } else {
+//                navBarBgAlpha = 0
+//                navBarTintColor = .white
+//            }
             
         }
     }
@@ -663,6 +716,7 @@ extension RadioStationViewController{
     
     @objc private func clickSearchBar(){
 //        print("searchBar")
+        self.isBackFresh = false
         let searchVC = SearchViewController()
         let navi = MyNavigationController(rootViewController: searchVC)
         self.present(navi, animated: false, completion: nil)
@@ -710,8 +764,15 @@ extension RadioStationViewController:UICollectionViewDelegateFlowLayout, UIColle
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView.tag == 301{
-//            self.show(UIViewController(), sender: self)
-            print(channels[indexPath.row].name)
+            let vc = SearchResultController()
+            vc.category = channels[indexPath.row]
+//            vc.hidesBottomBarWhenPushed = true
+            //        self.present(vc, animated: false, completion: nil)
+            vc.shopHomeVC = self
+            vc.sendData = self
+            self.navigationController?.pushViewController(vc, animated: true)
+//            self.navigationController?.show(vc, sender: self)
+            
         }else{
             
         }
@@ -724,4 +785,13 @@ extension RadioStationViewController:UISearchBarDelegate{
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         return false
     }
+}
+
+//MARK: - 实现数据传递协议
+extension RadioStationViewController:SendDataProtocol{
+    func SendData(data: Any?) {
+        self.isBackFresh = data as! Bool
+    }
+    
+    
 }

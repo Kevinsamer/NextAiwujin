@@ -9,6 +9,7 @@
 import UIKit
 import Tabman
 import Pageboy
+//import ETNavBarTransparent
 //定义局部变量、常量
 private var viewControllers = [ChildViewController(), ChildViewController(), ChildViewController(), ChildViewController(), ChildViewController(), ChildViewController(), ChildViewController(), ChildViewController(), ChildViewController(), ChildViewController(), ChildViewController(), ChildViewController(), ChildViewController(), ChildViewController(), ChildViewController()]
 private var titles = ["武进新闻","生活连线","263行动","连线帮帮团","立波秀","天天向上","跟我出发","开门7+7","标榜汽车","嚼百趣","房产","汽车","旅游","健康","发展大会"]
@@ -60,6 +61,7 @@ class NewsViewController: TabmanViewController {
         super.viewDidLoad()
 //        self.view.addSubview(tempView)
         setUI()
+//        self.navBarBgAlpha = 0
     }
 
 }
@@ -123,6 +125,7 @@ extension NewsViewController:PageboyViewControllerDataSource, TMBarDataSource {
 //MARK: - 点击事件
 extension NewsViewController{
     @objc private func editButtonClicked(){
-    
+        let vc = BaseViewController()
+        self.navigationController?.show(vc, sender: self)
     }
 }

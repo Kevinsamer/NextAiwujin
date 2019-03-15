@@ -9,11 +9,25 @@
 import UIKit
 import CoreData
 import IQKeyboardManagerSwift
-
+var Areas:[Area] = [Area]()
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    static var appUser:AppUser?{
+        didSet{
+            
+        }
+    }
+
+    
+    ///判断是否为登录状态
+    static func isLogin() -> Bool{
+        if appUser?.id == -1 {
+            return false
+        }
+        return true
+    }
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {

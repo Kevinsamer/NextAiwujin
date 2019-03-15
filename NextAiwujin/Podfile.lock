@@ -12,6 +12,9 @@ PODS:
   - ObjectMapper (3.4.2)
   - Pageboy (3.0.1)
   - PullToRefreshKit (0.8.8)
+  - SQLite.swift (0.11.5):
+    - SQLite.swift/standard (= 0.11.5)
+  - SQLite.swift/standard (0.11.5)
   - SwifterSwift (4.6.0):
     - SwifterSwift/AppKit (= 4.6.0)
     - SwifterSwift/CoreGraphics (= 4.6.0)
@@ -29,6 +32,7 @@ PODS:
   - SwifterSwift/SpriteKit (4.6.0)
   - SwifterSwift/SwiftStdlib (4.6.0)
   - SwifterSwift/UIKit (4.6.0)
+  - SwiftEventBus (3.0.1)
   - SwiftyJSON (4.2.0)
   - Tabman (2.1.2):
     - AutoInsetter (~> 1.4.1)
@@ -45,7 +49,9 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift
   - Kingfisher
   - PullToRefreshKit
+  - SQLite.swift
   - SwifterSwift
+  - SwiftEventBus (from `https://github.com/cesarferreira/SwiftEventBus.git`, tag `3.0.1`)
   - SwiftyJSON
   - Tabman
   - Toast-Swift
@@ -64,11 +70,22 @@ SPEC REPOS:
     - ObjectMapper
     - Pageboy
     - PullToRefreshKit
+    - SQLite.swift
     - SwifterSwift
     - SwiftyJSON
     - Tabman
     - Toast-Swift
     - XLPagerTabStrip
+
+EXTERNAL SOURCES:
+  SwiftEventBus:
+    :git: https://github.com/cesarferreira/SwiftEventBus.git
+    :tag: 3.0.1
+
+CHECKOUT OPTIONS:
+  SwiftEventBus:
+    :git: https://github.com/cesarferreira/SwiftEventBus.git
+    :tag: 3.0.1
 
 SPEC CHECKSUMS:
   Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
@@ -82,12 +99,14 @@ SPEC CHECKSUMS:
   ObjectMapper: 0d4402610f4e468903ae64629eec4784531e5c51
   Pageboy: ec0170fd880ea6fa3589219edfd64b554443ff6e
   PullToRefreshKit: 7cc53e720e69f135cffa1a57784dfb534f0222ab
+  SQLite.swift: 6e5356850bb1791459f8c16d6ee9195b28714a2e
   SwifterSwift: 812ffec6f301922f5430e75be3f2939ea3a80024
+  SwiftEventBus: 87ccaeceff91b748775e37751ae3a81ec815b3d5
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
   Tabman: f819cc11e9f661f87b23c63dc24da7036cff1b8d
   Toast-Swift: e42a638589a2f95036b4bb7626cfbdde7daf0393
   XLPagerTabStrip: 63166e21c9844fa30f2d95d30f335e73be5caf22
 
-PODFILE CHECKSUM: 6b25d1c3ffce610a7da22c7545ecd970f7955337
+PODFILE CHECKSUM: 13020d1a854c4a527b75d9c1c43bae1e852ab06b
 
 COCOAPODS: 1.6.1

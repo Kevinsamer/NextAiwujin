@@ -30,11 +30,14 @@ class ZZWWaveView: UIView {
     
     var colors : [CGColor] = [UIColor(hexString: "ff9548")!.cgColor,UIColor(hexString: "f76ae0")!.cgColor]
     var sColors : [CGColor] = [UIColor(hexString: "ffa548")!.cgColor,UIColor(hexString: "f78ae0")!.cgColor]
-    
-    var waveAmplitude : CGFloat = 0.0     // 波纹振幅     默认:0
-    var waveCycle : CGFloat = 0.0// 波纹周期     默认:1.29 * M_PI /
-    var waveSpeed : CGFloat = 0.2/CGFloat.pi// 波纹速度     默认:0.2/M_PI
-    var waveGrowth : CGFloat = 1.00// 波纹上升速度  默认:1.00
+    /// 波纹振幅     默认:0
+    var waveAmplitude : CGFloat = 0.0
+    /// 波纹周期     默认:1.29 * M_PI /
+    var waveCycle : CGFloat = 0.0
+    /// 波纹速度     默认:0.2/M_PI
+    var waveSpeed : CGFloat = 0.2/CGFloat.pi
+    /// 波纹上升速度  默认:1.00
+    var waveGrowth : CGFloat = 1.00
     
     var waveDisplaylink : CADisplayLink?
     var firstWaveLayer : CAShapeLayer?//里层
@@ -42,13 +45,18 @@ class ZZWWaveView: UIView {
     var gradientLayer : CAGradientLayer?// 绘制渐变1
     var sGradientLayer : CAGradientLayer?// 绘制渐变2
     var textLayer : CATextLayer?
-    
-    var waterWaveWidth : CGFloat = 160.0// 宽度
-    var offsetX : CGFloat = 0.0// 波浪x位移
-    var currentWavePointY : CGFloat = 0.0// 当前波浪上升高度Y
-    var kExtraHeight : CGFloat = 0.0     // 保证水波波峰不被裁剪，增加部分额外的高度
-    var variable : CGFloat = 0.5/CGFloat.pi// 可变参数 更加真实 模拟波纹
-    var increase : Bool = false// 增减变化
+    /// 宽度
+    var waterWaveWidth : CGFloat = 160.0
+    /// 波浪x位移
+    var offsetX : CGFloat = 0.0
+    /// 当前波浪上升高度Y
+    var currentWavePointY : CGFloat = 0.0
+    /// 保证水波波峰不被裁剪，增加部分额外的高度
+    var kExtraHeight : CGFloat = 0.0
+    /// 可变参数 更加真实 模拟波纹
+    var variable : CGFloat = 0.5/CGFloat.pi
+    /// 增减变化
+    var increase : Bool = false
     
     var waveViewType :ZZWWaveViewType = .OvalType
     

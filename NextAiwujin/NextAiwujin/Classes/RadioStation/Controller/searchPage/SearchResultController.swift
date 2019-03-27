@@ -10,6 +10,7 @@ import UIKit
 import SwiftEventBus
 import Kingfisher
 import PullToRefreshKit
+import SnapKit
 
 private var collectionItemW = ( finalScreenW - 3 ) / 2
 private var collectionItemH:CGFloat = 230
@@ -34,7 +35,6 @@ class SearchResultController: BaseViewController {
             
         }
     }
-    var sendData:SendDataProtocol?
     private var currentPage = 1//当前页
     private var maxNumPerPage = 21//每页数据最多条数
     private var searchResultViewModel : SearchResultViewModel = SearchResultViewModel()
@@ -147,7 +147,7 @@ class SearchResultController: BaseViewController {
 //    let searchBar = UISearchBar(frame: CGRect(x: 60, y: 5, width: 100, height: 36))
     
     lazy var titleView: UIView = {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: finalScreenW - 100, height: 36))
+        let view = UIView(frame: CGRect(x: 0, y: -2, width: finalScreenW - 100, height: 36))
 //        view.backgroundColor = .black
         view.addSubview(searchBar)
         return view
@@ -260,10 +260,8 @@ class SearchResultController: BaseViewController {
         super.viewWillDisappear(animated)
         //navigationController?.setNavigationBarHidden(false, animated: false)
         SwiftEventBus.unregister(self)
-        self.searchBar.removeFromSuperview()
-        if let sendData = self.sendData {
-            sendData.SendData(data: true)
-        }
+//        self.searchBar.removeFromSuperview()
+        
 //        barImageView?.alpha = 0.0
         //离开本页面开启侧滑返回
 //        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
@@ -411,26 +409,14 @@ extension SearchResultController{
     }
     
     private func setSearchBar(){
-//        searchBar.translatesAutoresizingMaskIntoConstraints = false
-//        searchBar.setImage(#imageLiteral(resourceName: "fdj_icon"), for: UISearchBar.Icon.search, state: UIControl.State.normal)
-//        searchBar.placeholder = "请输入商品名称，优惠内容"
-//        searchBar.delegate = self
-//        searchBar.showsCancelButton = false
-//        let searchField = searchBar.value(forKey: "searchField") as! UITextField
-//        let placeHolderLabel = searchField.value(forKey: "placeholderLabel") as! UILabel
-//        searchField.layer.cornerRadius = 18
-//        searchField.layer.masksToBounds = true
-//        placeHolderLabel.font = UIFont.systemFont(ofSize: 13)
-        //设置搜索框的约束
 //        navigationController?.navigationBar.addSubview(searchBar)
-//        let leftCon = NSLayoutConstraint(item: searchBar, attribute: .left, relatedBy: .equal, toItem: navigationController?.navigationBar, attribute: .left, multiplier: 1.0, constant: 60)
+//        let leftCon = NSLayoutConstraint(item: searchBar, attribute: .left, relatedBy: .equal, toItem: navigationController?.navigationBar, attribute: .left, multiplier: 1.0, constant: 20)
 //        let rightCon = NSLayoutConstraint(item: searchBar, attribute: .right, relatedBy: .equal, toItem: navigationController?.navigationBar, attribute: .right, multiplier: 1.0, constant: -65)
 //        let topCon = NSLayoutConstraint(item: searchBar, attribute: .top, relatedBy: .equal, toItem: navigationController?.navigationBar, attribute: .top, multiplier: 1.0, constant: 5)
 //        let bottomCon = NSLayoutConstraint(item: searchBar, attribute: .bottom, relatedBy: .equal, toItem: navigationController?.navigationBar, attribute: .bottom, multiplier: 1.0, constant: -10)
 //        self.navigationController?.navigationBar.addConstraints([leftCon, rightCon, topCon, bottomCon])
-//        titleView.addSubview(searchBar)
         self.navigationItem.titleView = titleView
-//        print(searchBar.height)
+        
         
     }
 }
@@ -469,17 +455,27 @@ extension SearchResultController : UISearchBarDelegate {
 extension SearchResultController:UICollectionViewDelegate,UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let results = searchResults {
-            //TODO:点击商品跳转
-//            let vc = GoodDetailViewController(goodsID: results[indexPath.row].id)
-//            self.navigationBarLayer?.position.y = self.navBarY!
-//            //self.searchBarLayer?.position.y = self.searchBarY!
-//            self.navigationItem.hidesBackButton = false
-//            self.navigationItem.title = "搜索结果"
-//            self.navigationItem.rightBarButtonItem?.customView?.isHidden = false
-//            navigationController?.pushViewController(vc, animated: true)
+        if keys != ""  {
+            if let results = searchResults{
+                let vc = GoodDetailViewController(goodsID: results[indexPath.row].id)
+                //            self.navigationBarLayer?.position.y = self.navBarY!
+                //self.searchBarLayer?.position.y = self.searchBarY!
+                self.navigationItem.hidesBackButton = false
+                //            self.navigationItem.title = "搜索结果"
+                self.navigationItem.rightBarButtonItem?.customView?.isHidden = false
+                navigationController?.pushViewController(vc, animated: true)
+            }
+        }else{
+            if let results = categoryResults {
+                let vc = GoodDetailViewController(goodsID: results[indexPath.row].id)
+                //            self.navigationBarLayer?.position.y = self.navBarY!
+                //self.searchBarLayer?.position.y = self.searchBarY!
+                self.navigationItem.hidesBackButton = false
+                //            self.navigationItem.title = "搜索结果"
+                self.navigationItem.rightBarButtonItem?.customView?.isHidden = false
+                navigationController?.pushViewController(vc, animated: true)
+            }
         }
-        
     }
     
     //动画隐藏显示导航栏

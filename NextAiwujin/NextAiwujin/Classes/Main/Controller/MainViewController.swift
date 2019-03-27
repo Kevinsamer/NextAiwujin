@@ -73,6 +73,14 @@ class MainViewController: UITabBarController {
 //MARK: - 实现UITabBarControllerDelegate的shouldSelect viewController方法，通过SB中向tabBarItem添加的tag来实现点击各个模块的监听
 extension MainViewController:UITabBarControllerDelegate{
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        if viewController.tabBarItem.tag == 555{
+            if AppDelegate.appUser?.id == -1{
+                YTools.presentToLoginOrNextControl(vc: self, itemTag: viewController.tabBarItem.tag, completion: nil)
+                return false
+            }else{
+                return true
+            }
+        }
         //首页tabbarItem添加tag
         if viewController.tabBarItem.tag == 111 {
 //            print("直播")

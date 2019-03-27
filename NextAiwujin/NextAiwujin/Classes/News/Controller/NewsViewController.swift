@@ -69,7 +69,9 @@ class NewsViewController: TabmanViewController {
 extension NewsViewController{
      private func setUI() {
         //1.设置导航栏
-        
+        self.navigationController?.navigationBar.setBackgroundImage(#imageLiteral(resourceName: "navi_bg"), for: UIBarPosition.topAttached, barMetrics: UIBarMetrics.default)
+        self.navigationController?.navigationBar.tintColor = .white
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white, NSAttributedString.Key.font : UIFont.systemFont(ofSize: 18)]
         //2.设置顶部滑动换页控件
         setTMButtonBar()
     }

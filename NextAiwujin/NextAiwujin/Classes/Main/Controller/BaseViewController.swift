@@ -8,11 +8,12 @@
 
 import UIKit
 import SwifterSwift
+import EFNavigationBar
 class BaseViewController: UIViewController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
+        
         // Do any additional setup after loading the view.
     }
     
@@ -20,13 +21,21 @@ class BaseViewController: UIViewController {
         
         return .lightContent
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
 }
 
 extension BaseViewController{
     @objc func setUI(){
         //1.设置背景色
-        self.view.backgroundColor = .random
+        self.view.backgroundColor = .white
+        self.navigationController?.navigationBar.setBackgroundImage(#imageLiteral(resourceName: "navi_bg"), for: UIBarPosition.topAttached, barMetrics: UIBarMetrics.default)
+        navBarTintColor = .white
+        navBarTitleColor = .white
+//        navigationController?.navigationBar.tintColor = .yellow
         //2.初始化数据
         initData()
     }

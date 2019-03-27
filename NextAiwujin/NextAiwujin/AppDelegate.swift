@@ -9,10 +9,11 @@
 import UIKit
 import CoreData
 import IQKeyboardManagerSwift
+import EFNavigationBar
 var Areas:[Area] = [Area]()
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    private var mCenterViewModel:MycenterViewModel = MycenterViewModel()
     var window: UIWindow?
     static var appUser:AppUser?{
         didSet{
@@ -45,12 +46,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().setBackgroundImage(UIImage.init(color: UIColor.white, size: CGSize(width: finalScreenW, height: finalNavigationBarH)), for: UIBarMetrics.default)
         //        UINavigationBar.appearance().topItem?.title = ""
         UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffset(horizontal: -200, vertical: 0), for:UIBarMetrics.default)//设置偏移量来隐藏返回按钮文字,TODO：修改为基类中设置navigationController?.navigationBar.topItem?.title = ""
-        
+        EFNavigationBar.defaultTransition = EFTransitionMethod.linear
         
 //        设置状态栏style
 //        UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
         //输入框适应键盘位置
         IQKeyboardManager.shared.enable = true
+        Areas = MyAreaPickerView.getDataFromTxt()!
+        
+        //firstOpenUserInit
+        if AppUserCoreDataHelper.AppUserHelper.getAppUser() == nil {
+            AppUserCoreDataHelper.AppUserHelper.insertAppUser()
+        }
+        AppDelegate.appUser = AppUserCoreDataHelper.AppUserHelper.getAppUser()
+        //print(AppDelegate.appUser?.user_id)
+        //----------最后登录差值判断并补登录方法
+        if AppDelegate.appUser?.user_id != -1{
+            //未登录时的游客id为-1，如果不等于-1则已登录，每次进入app时都判断一下最后登录时间与当前时间的差值，如果相差大于2天则调用登录方法
+            //print(AppDelegate.appUser?.local_pd)
+            if YTools.calculateDifferenceBetweenTwoTimes(dateOne: YTools.stringToDate(str: (AppDelegate.appUser?.last_login)!), dateTwo: Date.now()) > 48 {
+                //如果时间差大于48h，再次登录
+                //1.benD记录了pass，自动再次登录
+                if let name = AppDelegate.appUser?.username{
+                    if let pass = AppDelegate.appUser?.local_pd{
+                        self.mCenterViewModel.requestLoginData(username: name, password: pass, finishCallback: {
+                            
+                        })
+                    }
+                }
+                //2.App退出登录
+//                if AppDelegate.appUser?.id != -1 {
+//
+//                    AppUserCoreDataHelper.AppUserHelper.delAppUser {
+//                        //self.navigationController?.popViewController(animated: true)
+//                        //self.navigationController?.popViewController(animated: true)?.tabBarController?.selectedIndex = 0
+//                    }
+//                    //发出退出登录的http请求
+//                    self.mCenterViewModel.requestLoginOut()
+//
+//                }
+                
+            }
+        }
         
         return true
     }
@@ -79,6 +116,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        if url.host == "safepay"{
+            AlipaySDK.defaultService().processOrder(withPaymentResult: url, standbyCallback: { (resultDic) in
+                //此处接收到返回数据后使用通知把值传到PayVC
+                //TODO:支付宝接入流程文档编写
+                //print("返回码\(resultDic)")
+                NotificationCenter.default.post(name: ALiPayResultNotificationName, object: self, userInfo: resultDic)
+            })
+        }
+        return true
     }
 
     // MARK: - Core Data stack

@@ -21,6 +21,15 @@ pod "FontAwesome.swift"
 pod "ESTabBarController-swift"
 pod 'SwiftEventBus', :tag => '3.0.1', :git => 'https://github.com/cesarferreira/SwiftEventBus.git'
 pod 'SQLite.swift'
+pod 'SnapKit'
+pod "Eureka"
+pod "ImageRow"
+pod "MaterialTapTargetPrompt-iOS"
+pod "CryptoSwift", "~>0.7.2"
+#zfb
+pod "AlipaySDK-iOS"
+pod 'EFNavigationBar'
+#pod 'KMNavigationBarTransition'
 #pod 'ETNavBarTransparent'
 
   target 'NextAiwujinTests' do

@@ -3,15 +3,23 @@ PODS:
   - AlamofireObjectMapper (5.2.0):
     - Alamofire (~> 4.7)
     - ObjectMapper (~> 3.4)
+  - AlipaySDK-iOS (15.5.9)
   - AutoInsetter (1.4.1)
+  - CryptoSwift (0.7.2)
+  - EFNavigationBar (0.1.2)
   - ESTabBarController-swift (2.6.4)
+  - Eureka (4.3.1)
   - FontAwesome.swift (1.4.8)
   - FSPagerView (0.8.2)
+  - ImageRow (3.2.0):
+    - Eureka (~> 4.3)
   - IQKeyboardManagerSwift (6.2.0)
   - Kingfisher (5.1.0)
+  - MaterialTapTargetPrompt-iOS (1.0.0)
   - ObjectMapper (3.4.2)
   - Pageboy (3.0.1)
   - PullToRefreshKit (0.8.8)
+  - SnapKit (4.2.0)
   - SQLite.swift (0.11.5):
     - SQLite.swift/standard (= 0.11.5)
   - SQLite.swift/standard (0.11.5)
@@ -43,12 +51,19 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - AlamofireObjectMapper
+  - AlipaySDK-iOS
+  - CryptoSwift (~> 0.7.2)
+  - EFNavigationBar
   - ESTabBarController-swift
+  - Eureka
   - FontAwesome.swift
   - FSPagerView
+  - ImageRow
   - IQKeyboardManagerSwift
   - Kingfisher
+  - MaterialTapTargetPrompt-iOS
   - PullToRefreshKit
+  - SnapKit
   - SQLite.swift
   - SwifterSwift
   - SwiftEventBus (from `https://github.com/cesarferreira/SwiftEventBus.git`, tag `3.0.1`)
@@ -61,15 +76,22 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - AlamofireObjectMapper
+    - AlipaySDK-iOS
     - AutoInsetter
+    - CryptoSwift
+    - EFNavigationBar
     - ESTabBarController-swift
+    - Eureka
     - FontAwesome.swift
     - FSPagerView
+    - ImageRow
     - IQKeyboardManagerSwift
     - Kingfisher
+    - MaterialTapTargetPrompt-iOS
     - ObjectMapper
     - Pageboy
     - PullToRefreshKit
+    - SnapKit
     - SQLite.swift
     - SwifterSwift
     - SwiftyJSON
@@ -90,15 +112,22 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
   AlamofireObjectMapper: 92b6ce2423a9d159e686f6a1d514a009bf903ddc
+  AlipaySDK-iOS: 1c5283b30977a24acecc0114662697f7dc78f618
   AutoInsetter: d0eafc611d686f83f925ded729084cf916a39863
+  CryptoSwift: cd2158be2bf639aabc63ec804707c7137c90157c
+  EFNavigationBar: 77c697591e195bed267c4545fd07d1592220a3f9
   ESTabBarController-swift: 58cca4ab7de980657d99a02181c1ff310983e975
+  Eureka: 28ea296f06710f6745266b71f17862048941a32d
   FontAwesome.swift: fb8637bffb9a588c7e8c753c084565b27b20a39d
   FSPagerView: 816a18842306973cc7cc6df8a5332272f7815c30
+  ImageRow: 03681b3ef8034b5a649440325f5d5ba7b22c1b0a
   IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
   Kingfisher: fcec238063d17404fca89bf0a850583211c4cbf6
+  MaterialTapTargetPrompt-iOS: 91499f8e8118324517076ce6315a2f016764ac00
   ObjectMapper: 0d4402610f4e468903ae64629eec4784531e5c51
   Pageboy: ec0170fd880ea6fa3589219edfd64b554443ff6e
   PullToRefreshKit: 7cc53e720e69f135cffa1a57784dfb534f0222ab
+  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SQLite.swift: 6e5356850bb1791459f8c16d6ee9195b28714a2e
   SwifterSwift: 812ffec6f301922f5430e75be3f2939ea3a80024
   SwiftEventBus: 87ccaeceff91b748775e37751ae3a81ec815b3d5
@@ -107,6 +136,6 @@ SPEC CHECKSUMS:
   Toast-Swift: e42a638589a2f95036b4bb7626cfbdde7daf0393
   XLPagerTabStrip: 63166e21c9844fa30f2d95d30f335e73be5caf22
 
-PODFILE CHECKSUM: 13020d1a854c4a527b75d9c1c43bae1e852ab06b
+PODFILE CHECKSUM: cf560c52db94e3b263accd66f78d6f51d6755950
 
 COCOAPODS: 1.6.1

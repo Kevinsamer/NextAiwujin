@@ -44,9 +44,9 @@ private var channels:[ChannelInfo] = [ChannelInfo]()//分类数组
 private let channelsIcons:[UIImage] = [#imageLiteral(resourceName: "Porridge"),#imageLiteral(resourceName: "Cocktail"),#imageLiteral(resourceName: "Nut"),#imageLiteral(resourceName: "Lettuce"),#imageLiteral(resourceName: "三色堇"),#imageLiteral(resourceName: "Crab"),#imageLiteral(resourceName: "Sugar"),#imageLiteral(resourceName: "Thanksgiving"),#imageLiteral(resourceName: "Peas"),#imageLiteral(resourceName: "Cupcake")]
 
 
-class RadioStationViewController: BaseViewController {
+class RadioStationViewController: BaseTrunclentViewController {
     private var shopViewModel:ShopViewModel = ShopViewModel()
-    private var isBackFresh:Bool = false
+//    private var isBackFresh:Bool = false
     
     ///导航栏的背景图片
     var barImageView:UIView?
@@ -129,7 +129,6 @@ class RadioStationViewController: BaseViewController {
         coll.contentInsetAdjustmentBehavior = .never
         coll.alwaysBounceVertical = false
         coll.showsHorizontalScrollIndicator = false
-//        coll.backgroundColor = .blue
         return coll
     }()
     
@@ -182,8 +181,8 @@ class RadioStationViewController: BaseViewController {
         //设置下标位置
         pageControl.contentHorizontalAlignment = .right
         //设置下标指示器图片（选中状态和普通状态）
-        //        pageControl.setImage(UIImage.init(named: "1"), for: .normal)
-        //        pageControl.setImage(UIImage.init(named: "2"), for: .selected)
+        //pageControl.setImage(UIImage.init(named: "1"), for: .normal)
+        //pageControl.setImage(UIImage.init(named: "2"), for: .selected)
         //绘制下标指示器的形状
         //pageControl.setPath(UIBezierPath.init(roundedRect: CGRect.init(x: 0, y: 0, width: 5, height: 5), cornerRadius: 4.0), for: .normal)
         //pageControl.setPath(UIBezierPath(ovalIn: CGRect(x: 0, y: 0, width: 5, height: 5)), for: .normal)
@@ -240,25 +239,27 @@ class RadioStationViewController: BaseViewController {
         bar.setImage(#imageLiteral(resourceName: "fdj_icon"), for: UISearchBar.Icon.search, state: UIControl.State.normal)
         bar.placeholder = "请输入商品名称，优惠内容"
         bar.delegate = self
+        
         let searchField = bar.value(forKey: "searchField") as! UITextField
         searchField.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(clickSearchBar)))
         let placeHolderLabel = searchField.value(forKey: "placeholderLabel") as! UILabel
         searchField.layer.cornerRadius = 18
         searchField.layer.masksToBounds = true
+        searchField.backgroundColor = .white
         placeHolderLabel.font = UIFont.systemFont(ofSize: 13)
         //添加单击手势识别
         bar.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(clickSearchBar)))
         return bar
     }()
 
+    //MARK: - 系统回调
     override func viewDidLoad() {
         super.viewDidLoad()
-        barImageView = self.navigationController?.navigationBar.subviews.first?.subviews.first
+        barImageView = self.navigationController?.navigationBar.subviews.first
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
 //        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .topAttached, barMetrics: .default)
         //        定义页面外边距与页面滑动到顶部图片结束的比例
 //        var delta =  (self.mainTableView.contentOffset.y) / (topBannerH - finalStatusBarH - finalNavigationBarH)
@@ -272,10 +273,10 @@ class RadioStationViewController: BaseViewController {
 //        self.barImageView?.alpha = delta
         super.viewWillAppear(animated)
         searchBar.isHidden = false
-        if self.mainTableView.contentOffset.y < (topBannerH - finalStatusBarH - finalNavigationBarH) && isBackFresh {
-            self.mainTableView.switchRefreshHeader(to: .refreshing)
-            self.isBackFresh = false
-        }
+//        if self.mainTableView.contentOffset.y < (topBannerH - finalStatusBarH - finalNavigationBarH) && isBackFresh {
+//            self.mainTableView.switchRefreshHeader(to: .refreshing)
+//            self.isBackFresh = false
+//        }
         //使用通知中心或者协议向本页面发送刷新标志位，只在二级页面返回的时候刷新，其他时候不刷新
         
 //        self.navigationController?.navigationBar.setBackgroundImage(#imageLiteral(resourceName: "navi_bg"), for: UIBarPosition.topAttached, barMetrics: UIBarMetrics.default)
@@ -296,26 +297,10 @@ class RadioStationViewController: BaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         
         super.viewDidAppear(animated)
-        //viewDidAppear方法内可以获取searchBar的高度
-        //通过kvc获取到搜索框输入控件textField，然后获取到输入控件的提示label，修改搜索控件的圆角属性和提示label的字体
-//        let searchField = searchBar.value(forKey: "searchField") as! UITextField
-//        searchField.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(clickSearchBar)))
-//        let placeHolderLabel = searchField.value(forKey: "placeholderLabel") as! UILabel
-//        searchField.layer.cornerRadius = searchField.frame.height / 2
-//        searchField.layer.masksToBounds = true
-//        placeHolderLabel.font = UIFont.systemFont(ofSize: 13)
-        //将导航栏的透明度设置为0(需在viewDidAppear中设置)
-//        定义页面外边距与页面滑动到顶部图片结束的比例
         
-        var delta =  (mainTableView.contentOffset.y) / (topBannerH - finalStatusBarH - finalNavigationBarH)
-
-        ///通过取大值函数保证比例大于0，即只有上拉事件才会改变导航栏透明度
-        //        delta = CGFloat.maximum(delta, 0)
-        if delta < 0 { delta = 0 }
-        if delta > 1 { delta = 1 }
-        ///通过滑动比例改变导航栏背景的透明的，通过取小值函数保证比例不会大于1，即页面上拉超过顶部图片底部则停止改变导航栏透明度
-        self.barImageView?.alpha = delta
     }
+    
+    
 
 }
 
@@ -365,8 +350,6 @@ extension RadioStationViewController{
     }
     
     override func setUI() {
-        super.setUI()
-        self.view.backgroundColor = .white
         //0.设置导航栏
         //self.navigationController?.setNavigationBarHidden(true, animated: false)
         setNavigationBar()
@@ -376,6 +359,9 @@ extension RadioStationViewController{
         setTabelView()
         //3.设置s购物车按钮
         setCartButton()
+        super.setUI()
+        self.view.backgroundColor = .white
+        
     }
     
     private func setCartButton(){
@@ -391,7 +377,11 @@ extension RadioStationViewController{
         //navigationBar的第一个子控件就是背景View
 //        barImageView = self.navigationController?.navigationBar.subviews.first
         //设置导航栏透明才能让SB设置的tableView的frame.x变为0，否者会自动设置内边距使得显示内容移位到导航栏下面
+        self.navBar.alpha = 0
         self.navigationController?.navigationBar.isTranslucent = true
+        self.navBarTintColor = .white
+        self.navBarTitleColor = .white
+        self.navigationController?.navigationBar.setBackgroundImage(#imageLiteral(resourceName: "navi_bg"), for: UIBarPosition.topAttached, barMetrics: UIBarMetrics.default)
 
     }
     
@@ -417,6 +407,7 @@ extension RadioStationViewController{
         }
         //进入页面初始化TableView时自动刷新一次
         self.mainTableView.switchRefreshHeader(to: .refreshing)
+//        self.mainTableView.addObserver(self, forKeyPath: "contentOffset", options: NSKeyValueObservingOptions.new, context: nil)
 //        let topCon = NSLayoutConstraint(item: mainTableView, attribute: .top, relatedBy: .equal, toItem: self.view, attribute: .top, multiplier: 1.0, constant: (0))
 //        let leftCon = NSLayoutConstraint(item: mainTableView, attribute: .left, relatedBy: .equal, toItem: self.view, attribute: .left, multiplier: 1.0, constant: 0)
 //        let rightCon = NSLayoutConstraint(item: mainTableView, attribute: .right, relatedBy: .equal, toItem: self.view, attribute: .right, multiplier: 1.0, constant: 0)
@@ -426,13 +417,20 @@ extension RadioStationViewController{
     
     private func setSearchBar(){
         //设置搜索框的约束
-        navigationController?.navigationBar.addSubview(searchBar)
-        let leftCon = NSLayoutConstraint(item: searchBar, attribute: .left, relatedBy: .equal, toItem: navigationController?.navigationBar, attribute: .left, multiplier: 1.0, constant: 20)
-        let rightCon = NSLayoutConstraint(item: searchBar, attribute: .right, relatedBy: .equal, toItem: navigationController?.navigationBar, attribute: .right, multiplier: 1.0, constant: -65)
-        let topCon = NSLayoutConstraint(item: searchBar, attribute: .top, relatedBy: .equal, toItem: navigationController?.navigationBar, attribute: .top, multiplier: 1.0, constant: 5)
-        let bottomCon = NSLayoutConstraint(item: searchBar, attribute: .bottom, relatedBy: .equal, toItem: navigationController?.navigationBar, attribute: .bottom, multiplier: 1.0, constant: -10)
-        self.navigationController?.navigationBar.addConstraints([leftCon, rightCon, topCon, bottomCon])
-        searchBar.alpha = 0.8
+        navBar.addSubview(searchBar)
+        let leftCon = NSLayoutConstraint(item: searchBar, attribute: .left, relatedBy: .equal, toItem: navBar, attribute: .left, multiplier: 1.0, constant: 20)
+        let rightCon = NSLayoutConstraint(item: searchBar, attribute: .right, relatedBy: .equal, toItem: navBar, attribute: .right, multiplier: 1.0, constant: -20)
+//        let topCon = NSLayoutConstraint(item: searchBar, attribute: .top, relatedBy: .equal, toItem: navBar, attribute: .top, multiplier: 1.0, constant: 5)
+        let bottomCon = NSLayoutConstraint(item: searchBar, attribute: .bottom, relatedBy: .equal, toItem: navBar, attribute: .bottom, multiplier: 1.0, constant: 2)
+        navBar.addConstraints([leftCon, rightCon, bottomCon])
+//        searchBar.alpha = 0.8
+        
+        for view in searchBar.subviews{
+            if view.isKind(of: UIView.self) && view.subviews.count > 0{
+                view.backgroundColor = .clear
+                view.subviews.item(at: 0)?.removeFromSuperview()
+            }
+        }
     }
     
     
@@ -455,6 +453,14 @@ extension RadioStationViewController{
 
 //MARK: - 实现UITableView的代理协议和数据源协议
 extension RadioStationViewController:UITableViewDelegate,UITableViewDataSource{
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 2{
+            let vc = GoodDetailViewController(goodsID: hots[indexPath.row].id)
+            vc.sendData = self
+            self.navigationController?.show(vc, sender: self)
+        }
+    }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         //tableView的sectionHeader遮住了添加在tableView上的子控件，通过改变sectionHeader的zPosition值来调整其在页面中的层级顺序
@@ -548,7 +554,8 @@ extension RadioStationViewController:UITableViewDelegate,UITableViewDataSource{
         case 2:
 //            tableView.separatorStyle = .singleLine
             cell = tableView.dequeueReusableCell(withIdentifier: "hotCellID", for: indexPath) as! HotCell
-            
+//            print(hots.count)
+//            print(indexPath.row)
 //            cell?.separatorInset = UIEdgeInsets(top: 0, left: 110, bottom: 0, right: 0)
             cell!.selectionStyle = .none
             (cell as! HotCell).goodsImageView.kf.setImage(with: URL(string: BASE_URL + hots[indexPath.row].img), placeholder: #imageLiteral(resourceName: "loading"))
@@ -619,18 +626,18 @@ extension RadioStationViewController:UITableViewDelegate,UITableViewDataSource{
         if scrollView.isMember(of: UITableView.self){
             let offsetY = scrollView.contentOffset.y
             
-            
+            self.navBar.frame.origin.y = offsetY
             cartButton.frame.origin.y = offsetY + (UIDevice.current.isX() ? finalScreenH - finalTabBarH - IphonexHomeIndicatorH - cartBtnWH - cartBtnOriginXY : finalScreenH - finalTabBarH - cartBtnWH - cartBtnOriginXY)
             if offsetY < 0{
                 //当外边距小于0时，页面处于下拉状态，通过视图动画展示导航栏透明效果,同时将状态栏字体设为黑色，增强可阅读性
                 UIView.animate(withDuration: 0.2) {
-                    self.navigationController?.navigationBar.alpha = 0
+                    self.navBar.alpha = 0
 //                    UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
                 }
             }else{
                 //当外边距大于0时，页面处于上拉状态，通过视图动画展示导航栏由透明复原的效果，动画执行结束后将状态栏恢复白色
                 UIView.animate(withDuration: 0.2, animations: {
-                    self.navigationController?.navigationBar.alpha = 1
+                    self.navBar.alpha = 1
                 }) { (result) in
 //                    UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
                 }
@@ -640,7 +647,9 @@ extension RadioStationViewController:UITableViewDelegate,UITableViewDataSource{
 //            ///通过取大值函数保证比例大于0，即只有上拉事件才会改变导航栏透明度
             delta = CGFloat.maximum(delta, 0)
 //            ///通过滑动比例改变导航栏背景的透明的，通过取小值函数保证比例不会大于1，即页面上拉超过顶部图片底部则停止改变导航栏透明度
-            self.barImageView?.alpha = CGFloat.minimum(delta, 1)
+            self.navBar.setBackgroundAlpha(alpha: CGFloat.minimum(delta, 1))
+            self.searchBar.alpha = CGFloat.maximum(delta, 0.8)
+//            self.barImageView?.alpha = CGFloat.minimum(delta, 1)
 //            navBarBgAlpha = delta
 //            navBarTintColor = .white
 //            if scrollView.contentOffset.y > 200 {
@@ -711,12 +720,17 @@ extension RadioStationViewController{
     }
     
     @objc private func showCart(){
-        print("showCart")
+        if AppDelegate.appUser?.id == -1{
+            YTools.presentToLoginOrNextControl(vc: self, itemTag: 666, completion: nil)
+        }else{
+            let vc = NextShopCartViewController()
+            self.navigationController?.show(vc, sender: self)
+        }
     }
     
     @objc private func clickSearchBar(){
 //        print("searchBar")
-        self.isBackFresh = false
+//        self.isBackFresh = false
         let searchVC = SearchViewController()
         let navi = MyNavigationController(rootViewController: searchVC)
         self.present(navi, animated: false, completion: nil)
@@ -769,11 +783,13 @@ extension RadioStationViewController:UICollectionViewDelegateFlowLayout, UIColle
 //            vc.hidesBottomBarWhenPushed = true
             //        self.present(vc, animated: false, completion: nil)
             vc.shopHomeVC = self
-            vc.sendData = self
             self.navigationController?.pushViewController(vc, animated: true)
 //            self.navigationController?.show(vc, sender: self)
             
         }else{
+            let vc = GoodDetailViewController(goodsID: recommends[indexPath.row].id)
+            vc.sendData = self
+            self.navigationController?.show(vc, sender: self)
             
         }
     }
@@ -790,7 +806,7 @@ extension RadioStationViewController:UISearchBarDelegate{
 //MARK: - 实现数据传递协议
 extension RadioStationViewController:SendDataProtocol{
     func SendData(data: Any?) {
-        self.isBackFresh = data as! Bool
+//        self.isBackFresh = data as! Bool
     }
     
     

@@ -107,6 +107,7 @@ extension PicSayViewController{
         //1.设置导航栏
 //        navigationItem.leftBarButtonItems = [UIBarButtonItem.init(imageName: "navigation_app_icon", size: CGSize(width: 40, height: 40), clickAbled: false), UIBarButtonItem.init(customView: weatherLabel)] //此为金坛台方案
         navigationItem.title = "直播武进"
+//        navigationController?.navigationBar.tintColor = .yellow
         //2.设置进入推荐数据展示空间UICollectionView
         self.view.addSubview(newsCollectionView)
         //3.设置banner(添加在collectionView上)和pageControl
@@ -142,7 +143,7 @@ extension PicSayViewController:UICollectionViewDataSource,UICollectionViewDelega
     }
     ///通过UICollectionViewDelegateFlowLayout中的sizeForItemAt修改item大小
 //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        <#code#>
+//
 //    }
     
     

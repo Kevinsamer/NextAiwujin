@@ -50,7 +50,7 @@ class SearchViewController:BaseViewController{
         searchField.layer.cornerRadius = 18
         searchField.layer.masksToBounds = true
         searchField.tintColor = .blue
-        placeHolderLabel.font = UIFont.systemFont(ofSize: 13)
+        placeHolderLabel.font = UIFont.systemFont(ofSize: 16)
         //添加单击手势识别
 //        bar.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(clickSearchBar)))
         return bar

@@ -16,6 +16,11 @@
 		090081332230E84500C0667A /* RecommendInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090081322230E84500C0667A /* RecommendInfo.swift */; };
 		090081352230E9C000C0667A /* HotInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090081342230E9C000C0667A /* HotInfo.swift */; };
 		090081372230EA6F00C0667A /* HomeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090081362230EA6F00C0667A /* HomeData.swift */; };
+		090726F62254574500439B5A /* AppConfigModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090726F52254574400439B5A /* AppConfigModel.swift */; };
+		090726F8225459A300439B5A /* AppConfigViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090726F7225459A300439B5A /* AppConfigViewModel.swift */; };
+		090726FB225ADFF300439B5A /* NewsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090726F9225ADFF300439B5A /* NewsViewCell.swift */; };
+		090726FC225ADFF300439B5A /* NewsViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 090726FA225ADFF300439B5A /* NewsViewCell.xib */; };
+		090726FE225B191900439B5A /* NewsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090726FD225B191900439B5A /* NewsDetailViewController.swift */; };
 		0907D9C52236311B00241176 /* SearchResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0907D9C42236311B00241176 /* SearchResultController.swift */; };
 		0907D9C72236336600241176 /* SearchResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0907D9C62236336600241176 /* SearchResultViewModel.swift */; };
 		0907D9CB2236341800241176 /* SearchResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0907D9CA2236341800241176 /* SearchResultModel.swift */; };
@@ -292,6 +297,11 @@
 		090081322230E84500C0667A /* RecommendInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendInfo.swift; sourceTree = "<group>"; };
 		090081342230E9C000C0667A /* HotInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotInfo.swift; sourceTree = "<group>"; };
 		090081362230EA6F00C0667A /* HomeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeData.swift; sourceTree = "<group>"; };
+		090726F52254574400439B5A /* AppConfigModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigModel.swift; sourceTree = "<group>"; };
+		090726F7225459A300439B5A /* AppConfigViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigViewModel.swift; sourceTree = "<group>"; };
+		090726F9225ADFF300439B5A /* NewsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewCell.swift; sourceTree = "<group>"; };
+		090726FA225ADFF300439B5A /* NewsViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsViewCell.xib; sourceTree = "<group>"; };
+		090726FD225B191900439B5A /* NewsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailViewController.swift; sourceTree = "<group>"; };
 		0907D9C42236311B00241176 /* SearchResultController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultController.swift; sourceTree = "<group>"; };
 		0907D9C62236336600241176 /* SearchResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewModel.swift; sourceTree = "<group>"; };
 		0907D9CA2236341800241176 /* SearchResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultModel.swift; sourceTree = "<group>"; };
@@ -1465,9 +1475,17 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
+		09A0A418224CA250001996DD /* WeChatShare */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = WeChatShare;
+			sourceTree = "<group>";
+		};
 		09D543CC2203E58800307713 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				09A0A418224CA250001996DD /* WeChatShare */,
 				090CF2C9223F75570062CEFA /* AliPay */,
 				090CF299223F6BC50062CEFA /* fontawesome.ttf */,
 				09D543D12203E69C00307713 /* Extensions */,
@@ -1505,6 +1523,7 @@
 			isa = PBXGroup;
 			children = (
 				0900812E2230E76700C0667A /* BaseModel.swift */,
+				090726F52254574400439B5A /* AppConfigModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1535,6 +1554,7 @@
 		09D543DB2211432400307713 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				090726F7225459A300439B5A /* AppConfigViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1566,6 +1586,8 @@
 				09D5443F2214017900307713 /* SmallPicCell.xib */,
 				09D544422214018C00307713 /* ThreePicsCell.swift */,
 				09D54449221655AE00307713 /* ThreePicsCell.xib */,
+				090726F9225ADFF300439B5A /* NewsViewCell.swift */,
+				090726FA225ADFF300439B5A /* NewsViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1750,6 +1772,7 @@
 			children = (
 				09D544342213AE9A00307713 /* ChildViewController.swift */,
 				09D544362213AF6800307713 /* TodayRecommendViewController.swift */,
+				090726FD225B191900439B5A /* NewsDetailViewController.swift */,
 			);
 			path = ChildVCs;
 			sourceTree = "<group>";
@@ -1909,6 +1932,7 @@
 				090CF2AE223F6C600062CEFA /* cart_addBtn_nomal@2x.png in Resources */,
 				090CF5AD223F8F3B0062CEFA /* MyOrderTableViewCell.xib in Resources */,
 				090CF2B1223F6C600062CEFA /* 40fe711f9b754b596159f3a6.jpg in Resources */,
+				090726FC225ADFF300439B5A /* NewsViewCell.xib in Resources */,
 				090CF2B5223F6C600062CEFA /* cart_cutBtn_highlight@2x.png in Resources */,
 				090CF5AF223F8F3B0062CEFA /* GoodsImageCollectionViewCell.xib in Resources */,
 				0907DA5C223639DE00241176 /* ListCell.xib in Resources */,
@@ -2051,6 +2075,7 @@
 				"${BUILT_PRODUCTS_DIR}/Pageboy/Pageboy.framework",
 				"${BUILT_PRODUCTS_DIR}/PullToRefreshKit/PullToRefreshKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
+				"${BUILT_PRODUCTS_DIR}/SkeletonView/SkeletonView.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftEventBus/SwiftEventBus.framework",
 				"${BUILT_PRODUCTS_DIR}/SwifterSwift/SwifterSwift.framework",
@@ -2080,6 +2105,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pageboy.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PullToRefreshKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkeletonView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftEventBus.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwifterSwift.framework",
@@ -2154,6 +2180,7 @@
 				0907DA332236389600241176 /* LocaleStore.swift in Sources */,
 				090CF27F223F69280062CEFA /* ShopCartViewModel.swift in Sources */,
 				090081372230EA6F00C0667A /* HomeData.swift in Sources */,
+				090726FB225ADFF300439B5A /* NewsViewCell.swift in Sources */,
 				0907DA3E2236389600241176 /* LocationPickerViewController.swift in Sources */,
 				090CF5E3223F8F550062CEFA /* MyEvaluationViewController.swift in Sources */,
 				090CF256223F34730062CEFA /* ProductSpec.swift in Sources */,
@@ -2217,6 +2244,7 @@
 				090CF24A223F33510062CEFA /* GoodsPriceModel.swift in Sources */,
 				0907DA402236389600241176 /* Location.swift in Sources */,
 				0907DA4D2236389600241176 /* ItemWithPhoto.swift in Sources */,
+				090726FE225B191900439B5A /* NewsDetailViewController.swift in Sources */,
 				090CF5E6223F8F550062CEFA /* MyRefundApplicationViewController.swift in Sources */,
 				090CF282223F69670062CEFA /* JoinCartModel.swift in Sources */,
 				0907DA68223B7FE100241176 /* CenterHomeCell.swift in Sources */,
@@ -2292,6 +2320,7 @@
 				090CF272223F46EA0062CEFA /* GoodDetailViewController.swift in Sources */,
 				090CF24C223F33A90062CEFA /* GoodsTypeModel.swift in Sources */,
 				090CF5E2223F8F550062CEFA /* MyScoreViewController.swift in Sources */,
+				090726F8225459A300439B5A /* AppConfigViewModel.swift in Sources */,
 				090CF5D4223F8F550062CEFA /* MyCollectionViewController.swift in Sources */,
 				090081332230E84500C0667A /* RecommendInfo.swift in Sources */,
 				090081352230E9C000C0667A /* HotInfo.swift in Sources */,
@@ -2300,6 +2329,7 @@
 				090CF32F223F75570062CEFA /* APOrderInfo.m in Sources */,
 				09D544402214017900307713 /* SmallPicCell.swift in Sources */,
 				0952A7B5223235C30061BBFA /* SearchViewController.swift in Sources */,
+				090726F62254574500439B5A /* AppConfigModel.swift in Sources */,
 				090CF5A9223F8F3B0062CEFA /* MyCenterCell.swift in Sources */,
 				0907DA372236389600241176 /* CurrencyCell.swift in Sources */,
 				090CF5DF223F8F550062CEFA /* ChangePasswordViewController.swift in Sources */,

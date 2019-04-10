@@ -11,6 +11,17 @@ import CoreData
 import IQKeyboardManagerSwift
 import EFNavigationBar
 var Areas:[Area] = [Area]()
+var globalAppConfig:AppConfigModel = AppConfigModel(jsonData: ""){
+    didSet{
+        //TODO:进入app时初始化新闻详细数据的数组newsArray，避免第一次进入页面时的卡顿
+//        for menu in globalAppConfig.CH1.menu {
+//            AppConfigViewModel.requestCH1Items(url: menu.File) { (news) in
+//                AppDelegate.newsArray?.append(news)
+//            }
+//        }
+        
+    }
+}
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     private var mCenterViewModel:MycenterViewModel = MycenterViewModel()
@@ -20,7 +31,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         }
     }
-
+    
+    
+    static var newsArray: [[CH1MenuItemModel]]? = []{
+        didSet{
+            
+        }
+    }
     
     ///判断是否为登录状态
     static func isLogin() -> Bool{
@@ -52,7 +69,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
         //输入框适应键盘位置
         IQKeyboardManager.shared.enable = true
+        //初始化地区信息
         Areas = MyAreaPickerView.getDataFromTxt()!
+        //异步初始化新闻数据信息
+        DispatchQueue.main.async {
+            AppConfigViewModel.requestAppConfig { (appConfig) in
+                globalAppConfig = appConfig
+            }
+        }
         
         //firstOpenUserInit
         if AppUserCoreDataHelper.AppUserHelper.getAppUser() == nil {

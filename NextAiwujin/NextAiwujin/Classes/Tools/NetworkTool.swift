@@ -9,6 +9,9 @@
 import Foundation
 import Alamofire
 
+///新闻数据接口
+let API_ConfigFile="http://www.wjyanghu.com/API/AppConfig_v2.html"
+
 ///测试服务器地址
 let BASE_URL = "http://192.168.108.223/"
 ///发布服务器地址

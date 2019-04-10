@@ -57,7 +57,7 @@ class DetailViewController: GoodDetailBaseViewController {
         activity.isHidden = true
         activity.style = .gray
         return activity
-        }()
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()

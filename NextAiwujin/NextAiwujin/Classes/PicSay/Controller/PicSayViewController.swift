@@ -19,6 +19,12 @@ private let bannerCellID = "bannerCellID"
 private var banners:[UIImage] = [#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back")]
 class PicSayViewController: BaseViewController {
     
+    var appConfigModel:AppConfigModel?{
+        didSet{
+            
+        }
+    }
+    
     //MARK: - 懒加载
     ///天气label
     lazy var weatherLabel: UILabel = {
@@ -118,7 +124,9 @@ extension PicSayViewController{
     
     override func initData() {
         super.initData()
-        
+        AppConfigViewModel.requestAppConfig { (config) in
+            self.appConfigModel = config
+        }
     }
     
 }

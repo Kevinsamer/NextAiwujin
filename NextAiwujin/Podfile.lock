@@ -19,6 +19,7 @@ PODS:
   - ObjectMapper (3.4.2)
   - Pageboy (3.0.1)
   - PullToRefreshKit (0.8.8)
+  - SkeletonView (1.4.1)
   - SnapKit (4.2.0)
   - SQLite.swift (0.11.5):
     - SQLite.swift/standard (= 0.11.5)
@@ -63,6 +64,7 @@ DEPENDENCIES:
   - Kingfisher
   - MaterialTapTargetPrompt-iOS
   - PullToRefreshKit
+  - SkeletonView
   - SnapKit
   - SQLite.swift
   - SwifterSwift
@@ -91,6 +93,7 @@ SPEC REPOS:
     - ObjectMapper
     - Pageboy
     - PullToRefreshKit
+    - SkeletonView
     - SnapKit
     - SQLite.swift
     - SwifterSwift
@@ -127,6 +130,7 @@ SPEC CHECKSUMS:
   ObjectMapper: 0d4402610f4e468903ae64629eec4784531e5c51
   Pageboy: ec0170fd880ea6fa3589219edfd64b554443ff6e
   PullToRefreshKit: 7cc53e720e69f135cffa1a57784dfb534f0222ab
+  SkeletonView: 60d6ce7edb0cb4c7758db33c74add50392b3c475
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SQLite.swift: 6e5356850bb1791459f8c16d6ee9195b28714a2e
   SwifterSwift: 812ffec6f301922f5430e75be3f2939ea3a80024
@@ -136,6 +140,6 @@ SPEC CHECKSUMS:
   Toast-Swift: e42a638589a2f95036b4bb7626cfbdde7daf0393
   XLPagerTabStrip: 63166e21c9844fa30f2d95d30f335e73be5caf22
 
-PODFILE CHECKSUM: cf560c52db94e3b263accd66f78d6f51d6755950
+PODFILE CHECKSUM: 84f550a5a3c6d2131bc542924b789fdb675f17e8
 
 COCOAPODS: 1.6.1

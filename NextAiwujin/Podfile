@@ -29,6 +29,7 @@ pod "CryptoSwift", "~>0.7.2"
 #zfb
 pod "AlipaySDK-iOS"
 pod 'EFNavigationBar'
+pod "SkeletonView"
 #pod 'KMNavigationBarTransition'
 #pod 'ETNavBarTransparent'
 

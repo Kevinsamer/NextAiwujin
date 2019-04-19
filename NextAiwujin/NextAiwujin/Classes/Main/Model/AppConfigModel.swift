@@ -223,7 +223,7 @@ class CH3Model{
         }
     }
 }
-
+///栏目model
 class CH3ProgramModel{
     var program_id:String = ""
     var program_name:String = ""
@@ -240,6 +240,44 @@ class CH3ProgramModel{
         last_Update = jsonData["last_Update"].stringValue
     }
 }
+
+///栏目往期视频model
+class CH3ProgramVideoModel{
+    ///标题带节目日期
+    var title:String = ""
+    ///该节目网站观看地址
+    var titleurl:String = ""
+    ///一级域名
+    var host:String = ""
+    ///文件夹名
+    var dir:String = ""
+    ///文件路径
+    var filepath:String = ""
+    ///视频路径
+    var videofile:String = ""
+    ///视频封面路径
+    var thumbnail:String = ""
+    ///发布时间
+    var newstime:String = ""
+    ///完整视频路径
+    var totalVideoPath:String = ""
+    ///完整封面路径
+    var totalImagePath:String = ""
+    
+    init(jsonData:JSON) {
+        title = jsonData["title"].stringValue
+        titleurl = jsonData["titleurl"].stringValue
+        host = jsonData["host"].stringValue
+        dir = jsonData["dir"].stringValue
+        filepath = jsonData["filepath"].stringValue
+        videofile = jsonData["videofile"].stringValue
+        thumbnail = jsonData["thumbnail"].stringValue
+        newstime = jsonData["newstime"].stringValue
+        totalImagePath = host + dir + filepath + thumbnail
+        totalVideoPath = host + dir + filepath + videofile
+    }
+}
+
 //MARK: - CH3结束
 //MARK: - CH4开始
 ///频道4model(广播)

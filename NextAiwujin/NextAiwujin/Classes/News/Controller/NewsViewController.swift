@@ -161,7 +161,7 @@ extension NewsViewController{
         
         topBar.removeFromSuperview()
         addBar(topBar, dataSource: self, at: .custom(view: barTempView, layout: nil))
-        print(barTempView.height)
+//        print(barTempView.height)
         
     }
 }

@@ -47,12 +47,16 @@ class OrderDetailViewController: BaseViewController {
                     orderState = "已完成"
                     cancelOrderButton.removeFromSuperview()
                     nextStepButton.setTitleForAllStates("再次购买")
+                    nextStepButton.removeTarget(self, action: #selector(goToPay), for: UIControl.Event.touchUpInside)
+                    nextStepButton.removeTarget(self, action: #selector(confirmGot), for: UIControl.Event.touchUpInside)
                     nextStepButton.addTarget(self, action: #selector(buyAgain), for: .touchUpInside)
 //                    bottomView.removeFromSuperview()
                 }else if order.status == 3 || order.status == 4{
                     orderState = "已取消"
                     cancelOrderButton.removeFromSuperview()
                     nextStepButton.setTitleForAllStates("再次购买")
+                    nextStepButton.removeTarget(self, action: #selector(goToPay), for: UIControl.Event.touchUpInside)
+                    nextStepButton.removeTarget(self, action: #selector(confirmGot), for: UIControl.Event.touchUpInside)
                     nextStepButton.addTarget(self, action: #selector(buyAgain), for: .touchUpInside)
 //                    bottomView.removeFromSuperview()
                 }
@@ -125,10 +129,10 @@ class OrderDetailViewController: BaseViewController {
         let action = UIAlertAction(title: "确认", style:UIAlertAction.Style.default, handler: { (action) in
             //NotificationCenter.default.post(name: CancelOrderNotificationName, object: self, userInfo: nil)
             self.centerViewModel.requestOrderStatus(order_id: self.order_id, op: "cancel") {[unowned self] in
-                print("外部已取消")
+//                print("外部已取消")
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
-                    print("异步已取消")
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
+//                    print("异步已取消")
                     self.initData()
                 })
             }
@@ -337,14 +341,15 @@ extension OrderDetailViewController {
     
     internal override func initData(){
         super.initData()
-        self.centerViewModel.requestOrderDetail(order_id: self.order_id) { orderModel in
-            self.orderModel = orderModel
-            
-        }
-        self.centerViewModel.requestOrderGoodsList(order_id: self.order_id) { (goodsList) in
-            self.goodsList = goodsList
-        }
-        
+        DispatchQueue.main.async {
+            self.centerViewModel.requestOrderDetail(order_id: self.order_id) { orderModel in
+                self.orderModel = orderModel
+                
+            }
+            self.centerViewModel.requestOrderGoodsList(order_id: self.order_id) { (goodsList) in
+                self.goodsList = goodsList
+            }
+        } 
     }
 }
 

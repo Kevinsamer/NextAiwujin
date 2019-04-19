@@ -558,10 +558,13 @@ extension RadioStationViewController:UITableViewDelegate,UITableViewDataSource{
 //            print(indexPath.row)
 //            cell?.separatorInset = UIEdgeInsets(top: 0, left: 110, bottom: 0, right: 0)
             cell!.selectionStyle = .none
-            (cell as! HotCell).goodsImageView.kf.setImage(with: URL(string: BASE_URL + hots[indexPath.row].img), placeholder: #imageLiteral(resourceName: "loading"))
-            (cell as! HotCell).goodsNameLabel.text = hots[indexPath.row].name
-            (cell as! HotCell).marketPriceLabel.attributedText = YTools.textAddMiddleLine(text: "￥\(hots[indexPath.row].market_price)")
-            (cell as! HotCell).sellPriceLabel.text = "￥\(hots[indexPath.row].sell_price)"
+            if hots.count > 0{
+                (cell as! HotCell).goodsImageView.kf.setImage(with: URL(string: BASE_URL + hots[indexPath.row].img), placeholder: #imageLiteral(resourceName: "loading"))
+                (cell as! HotCell).goodsNameLabel.text = hots[indexPath.row].name
+                (cell as! HotCell).marketPriceLabel.attributedText = YTools.textAddMiddleLine(text: "￥\(hots[indexPath.row].market_price)")
+                (cell as! HotCell).sellPriceLabel.text = "￥\(hots[indexPath.row].sell_price)"
+            }
+            
             if indexPath.row == (tableView.numberOfRows(inSection: 2) - 1) {
 //                cell?.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: (cell?.bounds.size.width)!)
 //                tableView.separatorColor = .white

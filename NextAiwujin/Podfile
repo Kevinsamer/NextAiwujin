@@ -9,7 +9,7 @@ target 'NextAiwujin' do
 pod "Alamofire"
 pod "AlamofireObjectMapper"
 pod "SwiftyJSON"
-pod "Kingfisher"
+#pod "Kingfisher"
 pod "PullToRefreshKit"
 pod "Toast-Swift"
 pod "IQKeyboardManagerSwift"
@@ -29,7 +29,11 @@ pod "CryptoSwift", "~>0.7.2"
 #zfb
 pod "AlipaySDK-iOS"
 pod 'EFNavigationBar'
+#骨架屏
 pod "SkeletonView"
+#悬浮按钮
+pod 'Floaty'
+pod 'SBCycleScrollView','~> 0.0.8'
 #pod 'KMNavigationBarTransition'
 #pod 'ETNavBarTransparent'
 

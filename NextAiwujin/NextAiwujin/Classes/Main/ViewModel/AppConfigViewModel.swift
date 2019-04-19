@@ -41,4 +41,21 @@ extension AppConfigViewModel{
             finishCallBack(items)
         }
     }
+    
+    
+    /// 请求往期栏目视频数据
+    ///
+    /// - Parameters:
+    ///   - url: 请求地址
+    ///   - finishCallBack: 回调函数
+    class func requestTVHuiKan(url:String, finishCallBack:@escaping (_ videos:[CH3ProgramVideoModel])->()){
+        NetworkTool.requestData(type: .GET, urlString: url) { (result) in
+            var videos:[CH3ProgramVideoModel] = []
+            let itemsJson = JSON(result)["item"].arrayValue
+            for itemJson in itemsJson {
+                videos.append(CH3ProgramVideoModel(jsonData: itemJson))
+            }
+            finishCallBack(videos)
+        }
+    }
 }

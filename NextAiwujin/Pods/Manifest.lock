@@ -9,16 +9,19 @@ PODS:
   - EFNavigationBar (0.1.2)
   - ESTabBarController-swift (2.6.4)
   - Eureka (4.3.1)
+  - Floaty (4.1.0)
   - FontAwesome.swift (1.4.8)
   - FSPagerView (0.8.2)
   - ImageRow (3.2.0):
     - Eureka (~> 4.3)
   - IQKeyboardManagerSwift (6.2.0)
-  - Kingfisher (5.1.0)
+  - Kingfisher (4.8.1)
   - MaterialTapTargetPrompt-iOS (1.0.0)
   - ObjectMapper (3.4.2)
   - Pageboy (3.0.1)
   - PullToRefreshKit (0.8.8)
+  - SBCycleScrollView (0.0.8):
+    - Kingfisher (~> 4.8.0)
   - SkeletonView (1.4.1)
   - SnapKit (4.2.0)
   - SQLite.swift (0.11.5):
@@ -57,13 +60,14 @@ DEPENDENCIES:
   - EFNavigationBar
   - ESTabBarController-swift
   - Eureka
+  - Floaty
   - FontAwesome.swift
   - FSPagerView
   - ImageRow
   - IQKeyboardManagerSwift
-  - Kingfisher
   - MaterialTapTargetPrompt-iOS
   - PullToRefreshKit
+  - SBCycleScrollView (~> 0.0.8)
   - SkeletonView
   - SnapKit
   - SQLite.swift
@@ -84,6 +88,7 @@ SPEC REPOS:
     - EFNavigationBar
     - ESTabBarController-swift
     - Eureka
+    - Floaty
     - FontAwesome.swift
     - FSPagerView
     - ImageRow
@@ -93,6 +98,7 @@ SPEC REPOS:
     - ObjectMapper
     - Pageboy
     - PullToRefreshKit
+    - SBCycleScrollView
     - SkeletonView
     - SnapKit
     - SQLite.swift
@@ -121,15 +127,17 @@ SPEC CHECKSUMS:
   EFNavigationBar: 77c697591e195bed267c4545fd07d1592220a3f9
   ESTabBarController-swift: 58cca4ab7de980657d99a02181c1ff310983e975
   Eureka: 28ea296f06710f6745266b71f17862048941a32d
+  Floaty: 1a4e213f3512cf3045ef9cb0c1ff456226d1f66a
   FontAwesome.swift: fb8637bffb9a588c7e8c753c084565b27b20a39d
   FSPagerView: 816a18842306973cc7cc6df8a5332272f7815c30
   ImageRow: 03681b3ef8034b5a649440325f5d5ba7b22c1b0a
   IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
-  Kingfisher: fcec238063d17404fca89bf0a850583211c4cbf6
+  Kingfisher: 868c1149679a7ab6869be118faa9b5aed154aaf0
   MaterialTapTargetPrompt-iOS: 91499f8e8118324517076ce6315a2f016764ac00
   ObjectMapper: 0d4402610f4e468903ae64629eec4784531e5c51
   Pageboy: ec0170fd880ea6fa3589219edfd64b554443ff6e
   PullToRefreshKit: 7cc53e720e69f135cffa1a57784dfb534f0222ab
+  SBCycleScrollView: 7bd5afc001dfe8579b21e98582d2b3cf58abfb9a
   SkeletonView: 60d6ce7edb0cb4c7758db33c74add50392b3c475
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SQLite.swift: 6e5356850bb1791459f8c16d6ee9195b28714a2e
@@ -140,6 +148,6 @@ SPEC CHECKSUMS:
   Toast-Swift: e42a638589a2f95036b4bb7626cfbdde7daf0393
   XLPagerTabStrip: 63166e21c9844fa30f2d95d30f335e73be5caf22
 
-PODFILE CHECKSUM: 84f550a5a3c6d2131bc542924b789fdb675f17e8
+PODFILE CHECKSUM: 51ddfbfa5312644faa7229f1057c60628f4543a7
 
 COCOAPODS: 1.6.1

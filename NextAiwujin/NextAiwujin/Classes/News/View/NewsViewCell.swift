@@ -17,6 +17,8 @@ class NewsViewCell: UITableViewCell {
         super.awakeFromNib()
         newsImageView.frame.size.width = finalScreenW / 3
         newsImageView.frame.size.height = self.frame.size.height - 50
+        newsImageView.clipsToBounds = true
+        newsImageView.layer.cornerRadius = 5
         newsTitle.frame.size.width = finalScreenW * 2 / 3 - 40
 //        self.showAnimatedSkeleton()
         self.showAnimatedSkeleton()

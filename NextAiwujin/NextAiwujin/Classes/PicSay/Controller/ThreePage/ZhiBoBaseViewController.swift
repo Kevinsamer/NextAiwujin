@@ -30,15 +30,27 @@ class ZhiBoBaseViewController: BaseViewController {
     var TVData:CH3Model = globalAppConfig.CH3
     //广播页的数据
     var GuangBoData:CH4Model = globalAppConfig.CH4
+    //banner推荐数据（CHO每个item的第一条）
+    var TuiJianData:CH0Model = globalAppConfig.CH0{
+        didSet{
+            self.topBanner.imageURLStringsGroup = []
+            self.topBanner.titlesGroup = []
+            for url in self.TuiJianData.Channel[0].Item {
+                self.topBanner.imageURLStringsGroup.append(url.titlepic)
+                self.topBanner.titlesGroup.append(url.title)
+            }
+        }
+    }
     //MARK: - 懒加载
-    
     lazy var topBanner: CycleScrollView = {
         var options = CycleOptions()
         options.scrollTimeInterval = 3.0
 //        options.pageAliment = PageControlAliment.center
 //        options.imageViewMode = .scaleToFill
-        options.pageStyle = .jaloro
-        
+//        options.pageStyle = .jalapeno
+        options.bottomOffset = options.titleLabelHeight
+        options.textAlignment = .center
+        options.showPageControl = false
         let banner = CycleScrollView.initScrollView(frame: CGRect(x: 0, y: 10, width: finalScreenW, height: bannerH), delegate: self, placehoder: #imageLiteral(resourceName: "loading"), cycleOptions: options)
         
         return banner
@@ -112,15 +124,16 @@ class ZhiBoBaseViewController: BaseViewController {
 extension ZhiBoBaseViewController{
     override func setUI() {
         super.setUI()
+        
 //        self.view.backgroundColor = #colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)
-        topBanner.imageURLStringsGroup = urls
+//        topBanner.imageURLStringsGroup = urls
 //        topBanner.imageNamesGroup = ["loading","loading","loading"]
         self.view.addSubview(mainTable)
         mainTable.configRefreshHeader(with: header, container: self) {
             self.initData()
             self.secondCollView.reloadData()
-            self.topBanner.imageURLStringsGroup = []
-            self.topBanner.imageURLStringsGroup = self.urls
+//            self.topBanner.imageURLStringsGroup = []
+//            self.topBanner.imageURLStringsGroup = self.urls
 //            self.mainTable.switchRefreshHeader(to: HeaderRefresherState.refreshing)
             
         }
@@ -140,11 +153,11 @@ extension ZhiBoBaseViewController{
     
     override func initData() {
         super.initData()
-        
         AppConfigViewModel.requestAppConfig { (appConfig) in
             self.ZhiBoData = appConfig.CH2
             self.TVData = appConfig.CH3
             self.GuangBoData = appConfig.CH4
+            self.TuiJianData = appConfig.CH0
         }
     }
 }
@@ -221,6 +234,7 @@ extension ZhiBoBaseViewController:UITableViewDataSource,UITableViewDelegate{
                 let imageV = UIImageView(frame: CGRect(x: 10, y: cell.frame.height/4, width: 5, height: cell.frame.height/2))
                 imageV.image = #imageLiteral(resourceName: "redline")
                 let label = UILabel(frame: CGRect(x: 20, y: cell.frame.height/4, width: 100, height: cell.frame.height/2))
+                
                 //                label.font = UIFont.systemFont(ofSize: 60)
                 label.adjustsFontSizeToFitWidth = true
                 label.backgroundColor = .white
@@ -257,6 +271,12 @@ extension ZhiBoBaseViewController:UITableViewDataSource,UITableViewDelegate{
                 return 40
             }
             break
+        case 3:
+            if indexPath.row == 0{
+                return 50
+            }
+            break
+            
         default:
             break
         }

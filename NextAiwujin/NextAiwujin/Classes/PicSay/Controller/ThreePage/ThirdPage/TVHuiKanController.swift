@@ -11,6 +11,7 @@ import PullToRefreshKit
 import Kingfisher
 class TVHuiKanController: BaseViewController {
     let huikanCellID:String = "huikanCellID"
+    var tvLogo:String = ""
     var requestURL:String = ""{
         didSet{
             
@@ -108,15 +109,27 @@ extension TVHuiKanController:UITableViewDelegate,UITableViewDataSource{
         cell.backgroundColor = .white
         if tvs.count > 0{
             cell.imageV.kf.setImage(with: URL.init(string: "\(tvs[indexPath.row].totalImagePath)"), placeholder: UIImage.init(named: "loading"))
-            cell.nameLabel.text = tvs[indexPath.row].title
+            cell.nameLabel.text = "\(tvs[indexPath.row].title)\n"
             cell.updateTimeLabel.text = "发布时间： \(YTools.dateToString(date: Date.init(timeIntervalSince1970: Double(tvs[indexPath.row].newstime)!)))"
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return 100
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = TVHuiKanPlayerController()
+        vc.tvs = tvs
+        vc.tvName = self.navigationItem.title!
+        vc.tvLogo = self.tvLogo
+        vc.tvInfo = tvs[indexPath.row]
+        vc.videoIsLive = false
+        vc.videoURLString = "\(tvs[indexPath.row].totalVideoPath)"
+        vc.navigationItem.title = "\(tvs[indexPath.row].title)"
+        vc.videoName = "\(tvs[indexPath.row].title)"
+        self.show(vc, sender: self)
+    }
     
 }

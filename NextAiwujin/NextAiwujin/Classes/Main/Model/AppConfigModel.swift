@@ -405,3 +405,19 @@ class PlatformModel{
     }
 }
 //MARK: - platform结束
+//MARK: - 往期直播开始
+class ZhiBoHistoryModel{
+    var title:String = ""
+    ///视频地址
+    var videofile:String = ""
+    var titlepic:String = ""
+    var time:String = ""
+    
+    init(jsonData:JSON) {
+        title = jsonData["title"].stringValue
+        videofile = jsonData["videofile"].stringValue
+        titlepic = jsonData["titlepic"].stringValue
+        time = jsonData["time"].stringValue
+    }
+}
+//MARK: - 往期直播结束

@@ -19,9 +19,9 @@
                 <rect key="frame" x="0.0" y="0.0" width="433" height="93.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" layoutMarginsFollowReadableWidth="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y85-kP-1SD">
-                        <rect key="frame" x="162.5" y="10" width="37.5" height="18"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" layoutMarginsFollowReadableWidth="YES" text="Label" lineBreakMode="clip" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y85-kP-1SD">
+                        <rect key="frame" x="162.5" y="10" width="35.5" height="41"/>
+                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -29,13 +29,13 @@
                         <rect key="frame" x="10" y="10" width="144.5" height="73.5"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kiC-xl-TtB">
-                        <rect key="frame" x="162.5" y="36" width="250.5" height="37"/>
+                        <rect key="frame" x="162.5" y="59" width="250.5" height="24.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="998" verticalCompressionResistancePriority="998" layoutMarginsFollowReadableWidth="YES" text="直播" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ATD-Ow-a2p">
-                        <rect key="frame" x="210" y="10" width="27.5" height="18"/>
+                        <rect key="frame" x="393" y="15" width="30" height="18.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -49,21 +49,23 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="ATD-Ow-a2p" firstAttribute="width" relation="greaterThanOrEqual" secondItem="y85-kP-1SD" secondAttribute="width" multiplier="1/3" priority="997" constant="15" id="1IG-di-zvs"/>
+                    <constraint firstItem="ATD-Ow-a2p" firstAttribute="width" relation="greaterThanOrEqual" secondItem="y85-kP-1SD" secondAttribute="width" multiplier="1/300" priority="996" constant="30" id="1IG-di-zvs"/>
                     <constraint firstItem="lNE-hh-dNb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="525-qb-Gfa"/>
                     <constraint firstItem="kiC-xl-TtB" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="6zX-fA-e3A"/>
-                    <constraint firstItem="ATD-Ow-a2p" firstAttribute="top" secondItem="y85-kP-1SD" secondAttribute="top" id="EDZ-dV-JnE"/>
-                    <constraint firstItem="ATD-Ow-a2p" firstAttribute="leading" secondItem="y85-kP-1SD" secondAttribute="trailing" constant="10" id="HEF-nT-Lj5"/>
+                    <constraint firstItem="y85-kP-1SD" firstAttribute="width" relation="lessThanOrEqual" secondItem="kiC-xl-TtB" secondAttribute="width" multiplier="6/7" id="8oc-pf-ddD"/>
+                    <constraint firstItem="ATD-Ow-a2p" firstAttribute="top" secondItem="lNE-hh-dNb" secondAttribute="top" constant="5" id="Btt-MN-bUi"/>
                     <constraint firstItem="kiC-xl-TtB" firstAttribute="top" secondItem="y85-kP-1SD" secondAttribute="bottom" constant="8" id="JYt-D1-aVf"/>
+                    <constraint firstItem="kiC-xl-TtB" firstAttribute="bottom" secondItem="lNE-hh-dNb" secondAttribute="bottom" id="KXu-Ns-6b4"/>
                     <constraint firstItem="hky-bl-LyM" firstAttribute="leading" secondItem="kiC-xl-TtB" secondAttribute="leading" id="QnH-o2-9gS"/>
                     <constraint firstAttribute="bottom" secondItem="hky-bl-LyM" secondAttribute="bottom" id="Qx1-Fa-zcX"/>
                     <constraint firstAttribute="bottom" secondItem="lNE-hh-dNb" secondAttribute="bottom" constant="10" id="UiL-Ph-UY7"/>
+                    <constraint firstItem="ATD-Ow-a2p" firstAttribute="trailing" secondItem="kiC-xl-TtB" secondAttribute="trailing" constant="10" id="Ur3-66-u6q"/>
                     <constraint firstAttribute="trailing" secondItem="hky-bl-LyM" secondAttribute="trailing" id="WJG-ly-uQc"/>
                     <constraint firstItem="lNE-hh-dNb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="WNQ-dX-ZF5"/>
-                    <constraint firstItem="ATD-Ow-a2p" firstAttribute="height" secondItem="y85-kP-1SD" secondAttribute="height" id="cQQ-zj-jbl"/>
                     <constraint firstItem="y85-kP-1SD" firstAttribute="leading" secondItem="lNE-hh-dNb" secondAttribute="trailing" constant="8" id="h3P-Gw-tHA"/>
+                    <constraint firstItem="ATD-Ow-a2p" firstAttribute="height" secondItem="lNE-hh-dNb" secondAttribute="height" multiplier="1/4" id="iXE-9F-ydX"/>
                     <constraint firstItem="y85-kP-1SD" firstAttribute="top" secondItem="lNE-hh-dNb" secondAttribute="top" id="kf7-ys-NKb"/>
-                    <constraint firstItem="kiC-xl-TtB" firstAttribute="height" secondItem="lNE-hh-dNb" secondAttribute="height" multiplier="1/2" id="kiQ-0G-9FI"/>
+                    <constraint firstItem="kiC-xl-TtB" firstAttribute="height" secondItem="lNE-hh-dNb" secondAttribute="height" multiplier="1/3" id="kiQ-0G-9FI"/>
                     <constraint firstItem="kiC-xl-TtB" firstAttribute="leading" secondItem="y85-kP-1SD" secondAttribute="leading" id="lJi-Bm-k6X"/>
                     <constraint firstItem="y85-kP-1SD" firstAttribute="width" relation="greaterThanOrEqual" secondItem="lNE-hh-dNb" secondAttribute="width" multiplier="1/5" priority="999" id="lqx-cT-gOe"/>
                     <constraint firstItem="lNE-hh-dNb" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="1/3" id="oLm-9y-Vis"/>

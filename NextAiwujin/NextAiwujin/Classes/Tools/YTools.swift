@@ -101,7 +101,7 @@ class YTools{
     class func dateToString(date:Date) -> String{
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        //dateFormatter.locale = Locale.init(identifier: "zh_CN")
+        dateFormatter.locale = Locale.init(identifier: "zh_CN")
         return dateFormatter.string(from: date)
     }
     //字符串转data,失败返回1970.1.1
@@ -274,4 +274,33 @@ class YTools{
         let vc = GoodDetailViewController(goodsID: id)
         navigationController?.show(vc, sender: sender)
     }
+    
+    /// 秒转换成00:00:00格式
+    ///
+    /// - Parameter secounds: 秒数
+    /// - Returns: 返回的00:00:00格式时间
+    class func getFormatPlayTime(secounds:TimeInterval)->String{
+        if secounds.isNaN{
+            return "00:00"
+        }
+        var Min = Int(secounds / 60)
+        let Sec = Int(secounds.truncatingRemainder(dividingBy: 60))
+        var Hour = 0
+        if Min>=60 {
+            Hour = Int(Min / 60)
+            Min = Min - Hour*60
+            return String(format: "%02d:%02d:%02d", Hour, Min, Sec)
+        }
+        return String(format: "00:%02d:%02d", Min, Sec)
+    }
+    
+    class func share(shareTitle title:String, shareImage image:UIImage?, shareURL url:String, currentViewController vc:UIViewController, callBack: (()->Void)?) {
+        
+        let urlShare = URL(string: "http://www.baidu.com")
+        let activityItems = [title, image, urlShare] as [Any]
+        let shareVC = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+        vc.present(shareVC, animated: true, completion: callBack)
+    }
+    
+    
 }

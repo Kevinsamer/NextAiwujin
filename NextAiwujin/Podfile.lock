@@ -10,7 +10,10 @@ PODS:
   - ESTabBarController-swift (2.6.4)
   - Eureka (4.3.1)
   - Floaty (4.1.0)
+  - fluid-slider (1.1.0):
+    - pop
   - FontAwesome.swift (1.4.8)
+  - FRadioPlayer (0.1.15)
   - FSPagerView (0.8.2)
   - ImageRow (3.2.0):
     - Eureka (~> 4.3)
@@ -19,6 +22,7 @@ PODS:
   - MaterialTapTargetPrompt-iOS (1.0.0)
   - ObjectMapper (3.4.2)
   - Pageboy (3.0.1)
+  - pop (1.0.12)
   - PullToRefreshKit (0.8.8)
   - SBCycleScrollView (0.0.8):
     - Kingfisher (~> 4.8.0)
@@ -61,7 +65,9 @@ DEPENDENCIES:
   - ESTabBarController-swift
   - Eureka
   - Floaty
+  - fluid-slider
   - FontAwesome.swift
+  - FRadioPlayer
   - FSPagerView
   - ImageRow
   - IQKeyboardManagerSwift
@@ -89,7 +95,9 @@ SPEC REPOS:
     - ESTabBarController-swift
     - Eureka
     - Floaty
+    - fluid-slider
     - FontAwesome.swift
+    - FRadioPlayer
     - FSPagerView
     - ImageRow
     - IQKeyboardManagerSwift
@@ -97,6 +105,7 @@ SPEC REPOS:
     - MaterialTapTargetPrompt-iOS
     - ObjectMapper
     - Pageboy
+    - pop
     - PullToRefreshKit
     - SBCycleScrollView
     - SkeletonView
@@ -128,7 +137,9 @@ SPEC CHECKSUMS:
   ESTabBarController-swift: 58cca4ab7de980657d99a02181c1ff310983e975
   Eureka: 28ea296f06710f6745266b71f17862048941a32d
   Floaty: 1a4e213f3512cf3045ef9cb0c1ff456226d1f66a
+  fluid-slider: 68037ac7247f16a89f3e24ff5d0167c8eea6f50b
   FontAwesome.swift: fb8637bffb9a588c7e8c753c084565b27b20a39d
+  FRadioPlayer: 0ad8b63756c3597af3c4a2672334c5dc22e026e4
   FSPagerView: 816a18842306973cc7cc6df8a5332272f7815c30
   ImageRow: 03681b3ef8034b5a649440325f5d5ba7b22c1b0a
   IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
@@ -136,6 +147,7 @@ SPEC CHECKSUMS:
   MaterialTapTargetPrompt-iOS: 91499f8e8118324517076ce6315a2f016764ac00
   ObjectMapper: 0d4402610f4e468903ae64629eec4784531e5c51
   Pageboy: ec0170fd880ea6fa3589219edfd64b554443ff6e
+  pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
   PullToRefreshKit: 7cc53e720e69f135cffa1a57784dfb534f0222ab
   SBCycleScrollView: 7bd5afc001dfe8579b21e98582d2b3cf58abfb9a
   SkeletonView: 60d6ce7edb0cb4c7758db33c74add50392b3c475
@@ -148,6 +160,6 @@ SPEC CHECKSUMS:
   Toast-Swift: e42a638589a2f95036b4bb7626cfbdde7daf0393
   XLPagerTabStrip: 63166e21c9844fa30f2d95d30f335e73be5caf22
 
-PODFILE CHECKSUM: 51ddfbfa5312644faa7229f1057c60628f4543a7
+PODFILE CHECKSUM: 0ad268cc1fd2f684455d0e6f916825c5bec3106a
 
 COCOAPODS: 1.6.1

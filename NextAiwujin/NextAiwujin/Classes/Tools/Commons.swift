@@ -46,5 +46,11 @@ public let CancelOrderNotificationName:NSNotification.Name = NSNotification.Name
 //确认收货订单通知名
 public let ConfirmOrderNotificationName:NSNotification.Name = NSNotification.Name("ConfirmOrderNotificationName")
 
+//播放器未全屏时执行pop的通知名
+public let PopVCWhenPlayerNotFullScreenNotificationName:NSNotification.Name = Notification.Name("PopVCWhenPlayerNotFullScreenNotificationName")
+
 //搜索历史记录最大数
 let maxHistory:Int = 20
+
+//播放器顶部bar的高度
+let playerTopBarH:CGFloat = 40 + finalStatusBarH

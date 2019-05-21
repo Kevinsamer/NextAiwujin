@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="210" id="KGk-i7-Jjw" customClass="ZhiBoIngCell" customModule="NextAiwujin" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="279" height="210"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="279" height="209.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loading" translatesAutoresizingMaskIntoConstraints="NO" id="yuW-hu-mpE">
+                        <rect key="frame" x="0.0" y="0.0" width="279" height="209.5"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wAj-wZ-BFS">
+                        <rect key="frame" x="0.0" y="167.5" width="279" height="42"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.4548908390410959" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="暂无直播" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DHj-0P-BIc">
+                        <rect key="frame" x="0.0" y="0.0" width="279" height="209.5"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.45489083899999999" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="DHj-0P-BIc" secondAttribute="trailing" id="RfI-KD-ams"/>
+                    <constraint firstItem="DHj-0P-BIc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Td0-qm-p7I"/>
+                    <constraint firstItem="wAj-wZ-BFS" firstAttribute="height" relation="greaterThanOrEqual" secondItem="yuW-hu-mpE" secondAttribute="height" multiplier="1/5" id="Vv8-mG-rgR"/>
+                    <constraint firstAttribute="trailing" secondItem="wAj-wZ-BFS" secondAttribute="trailing" id="dAu-NF-yMg"/>
+                    <constraint firstItem="yuW-hu-mpE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="dr1-VN-Ajy"/>
+                    <constraint firstAttribute="bottom" secondItem="wAj-wZ-BFS" secondAttribute="bottom" id="ed7-Qi-Tfu"/>
+                    <constraint firstItem="wAj-wZ-BFS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="fNb-Qa-3N6"/>
+                    <constraint firstAttribute="trailing" secondItem="yuW-hu-mpE" secondAttribute="trailing" id="hOa-gM-8s2"/>
+                    <constraint firstAttribute="bottom" secondItem="yuW-hu-mpE" secondAttribute="bottom" id="hWi-xp-vXL"/>
+                    <constraint firstItem="DHj-0P-BIc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="ogn-o7-j4J"/>
+                    <constraint firstAttribute="bottom" secondItem="DHj-0P-BIc" secondAttribute="bottom" id="sov-GQ-SCA"/>
+                    <constraint firstItem="yuW-hu-mpE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="xPx-Hp-xlZ"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="imageV" destination="yuW-hu-mpE" id="Pjl-u0-Z9n"/>
+                <outlet property="nameLabel" destination="wAj-wZ-BFS" id="BKD-KJ-Ni1"/>
+                <outlet property="noZhiBoLabel" destination="DHj-0P-BIc" id="dWR-ll-HhK"/>
+            </connections>
+            <point key="canvasLocation" x="100" y="228.48575712143929"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="loading" width="245.75999450683594" height="173.52000427246094"/>
+    </resources>
+</document>

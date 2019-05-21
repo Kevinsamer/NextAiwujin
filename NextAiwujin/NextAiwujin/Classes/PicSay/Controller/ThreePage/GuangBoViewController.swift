@@ -41,7 +41,7 @@ extension GuangBoViewController{
 //MARK: - collectionView代理
 extension GuangBoViewController{
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(GuangBoData.Radio.count)
+//        print(GuangBoData.Radio.count)
         return GuangBoData.Radio.count
     }
     
@@ -51,6 +51,32 @@ extension GuangBoViewController{
         cell.titleLabel.text = GuangBoData.Title
         cell.titleLabel.adjustsFontSizeToFitWidth = false
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = BaseAudioViewController()
+        vc.videoIsLive = true
+        vc.videoURLString = "\(GuangBoData.Radio[indexPath.row].channel_stream_ios)"
+        vc.videoName = "\(GuangBoData.Radio[indexPath.row].channel_name)"
+        vc.channelData = GuangBoData.Radio[indexPath.row]
+        var tempList:[Date] = []
+        for program in GuangBoData.Radio[indexPath.row].program {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "HH:mm"
+            dateFormatter.locale = Locale.current
+            dateFormatter.timeZone = TimeZone.init(secondsFromGMT: 0)
+//            dateFormatter.timeZone = timeZone
+            tempList.append(dateFormatter.date(from: program.start_time)!)
+        }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+        dateFormatter.locale = Locale.current
+        dateFormatter.timeZone = TimeZone.init(secondsFromGMT: 0)
+        //            dateFormatter.timeZone = timeZone
+        //节目单时间数组中多传一个10:30，代表最后一个节目的结束时间为10:30
+        tempList.append(dateFormatter.date(from: "22:30")!)
+        vc.timeList = tempList
+        self.show(vc, sender: self)
     }
 }
 //MARK: - tableView的代理
@@ -76,7 +102,7 @@ extension GuangBoViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 2 {
             if indexPath.row != 0 {
-                return 80
+                return 100
             }
         }
         

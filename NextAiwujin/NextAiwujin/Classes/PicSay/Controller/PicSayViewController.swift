@@ -19,10 +19,10 @@ private let smallPicCellID = "smallPicCellID"
 private let threePicsCellID = "threePicsCellID"
 private let bannerCellID = "bannerCellID"
 private var banners:[UIImage] = [#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back")]
-private let barTitles:[String] = ["广播","直播","电视"]
-private let secondSectionTitles:[String] = ["推荐频率","热门直播","节目回看"]
-private let thirdSectionTitles:[String] = ["节目单","正在直播",""]
-private let vcs = [GuangBoViewController(),ZhiBoViewController(),DianShiViewController()]
+private let barTitles:[String] = ["直播","电视","广播"]
+private let secondSectionTitles:[String] = ["热门直播","节目回看","武进电台"]
+private let thirdSectionTitles:[String] = ["正在直播","","节目单"]
+private let vcs = [ZhiBoViewController(),DianShiViewController(),GuangBoViewController()]
 class PicSayViewController: TabmanViewController {
     
     var appConfigModel:AppConfigModel?{

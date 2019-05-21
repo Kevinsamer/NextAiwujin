@@ -33,6 +33,11 @@ enum TitleImageStyly{
 }
 extension UIButton {
     
+    /// 设置按钮图片文字位置的方法(该方法在初始化按钮时设置frame生效，设置约束则该方法不生效)
+    ///
+    /// - Parameters:
+    ///   - padding: 图片文字间隔
+    ///   - style: 图片文字位置样式枚举
     func setButtonTitleImageStyle(padding:CGFloat, style:TitleImageStyly){
         let padding:CGFloat = padding
         if self.imageView?.image != nil && self.titleLabel?.text != nil {

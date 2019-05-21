@@ -28,8 +28,10 @@ class NewsViewCell: UITableViewCell {
         newsTitle.lastLineFillPercent = 70
         newsTitle.linesCornerRadius = 5
         videoTag.layer.borderWidth = 1
+        videoTag.clipsToBounds = true
         videoTag.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-        videoTag.layer.cornerRadius = videoTag.frame.size.height / 4
+        videoTag.layer.cornerRadius = 5
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

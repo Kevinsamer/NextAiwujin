@@ -36,6 +36,9 @@ pod 'Floaty'
 pod 'SBCycleScrollView','~> 0.0.8'
 #pod 'KMNavigationBarTransition'
 #pod 'ETNavBarTransparent'
+#音频播放器
+pod 'FRadioPlayer'
+pod 'fluid-slider'
 
   target 'NextAiwujinTests' do
     inherit! :search_paths

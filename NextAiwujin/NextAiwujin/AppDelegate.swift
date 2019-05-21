@@ -22,10 +22,26 @@ var globalAppConfig:AppConfigModel = AppConfigModel(jsonData: ""){
         
     }
 }
+var globalZhiBoHistory:[ZhiBoHistoryModel] = []
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     private var mCenterViewModel:MycenterViewModel = MycenterViewModel()
     var window: UIWindow?
+    //当前界面支持的方向（默认情况下只能竖屏，不能横屏显示）(支持横屏自己的方法)
+//    var interfaceOrientations:UIInterfaceOrientationMask = .portrait{
+//        didSet{
+//            //强制设置成竖屏
+//            if interfaceOrientations == .portrait{
+//                UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue,
+//                                          forKey: "orientation")
+//            }
+//                //强制设置成横屏
+//            else if !interfaceOrientations.contains(.portrait){
+//                UIDevice.current.setValue(UIInterfaceOrientation.landscapeLeft.rawValue,
+//                                          forKey: "orientation")
+//            }
+//        }
+//    }
     static var appUser:AppUser?{
         didSet{
             
@@ -51,6 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         //全局设置tabBarStyle
+        
         UITabBar.appearance().tintColor = UIColor.red
         UITabBar.appearance().backgroundColor = .white
         UITabBar.appearance().clipsToBounds = true
@@ -76,6 +93,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             AppConfigViewModel.requestAppConfig { (appConfig) in
                 globalAppConfig = appConfig
             }
+//            AppConfigViewModel.requestZhiBoHistory(url: API_ZhiBoHistory, finishCallBack: { (histories) in
+//                globalZhiBoHistory = histories
+//            })
         }
         
         //firstOpenUserInit
@@ -114,6 +134,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         return true
+    }
+    
+    //返回当前界面支持的旋转方向
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor
+        window: UIWindow?)-> UIInterfaceOrientationMask {
+//        return interfaceOrientations //(支持横屏自己的方法)
+        guard let num =  NicooPlayerOrietation(rawValue: orientationSupport.rawValue) else {
+            return [.portrait]
+        }
+        return num.getOrientSupports()
     }
     
     

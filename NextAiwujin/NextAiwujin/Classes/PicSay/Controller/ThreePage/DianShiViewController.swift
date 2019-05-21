@@ -57,8 +57,8 @@ extension DianShiViewController{
                 let cell = tableView.dequeueReusableCell(withIdentifier: dianshiCellID, for: indexPath) as! DianshiCell
                 if TVData.program.count > 0{
                     cell.imageV.kf.setImage(with: URL(string: "\(TVData.program[indexPath.row-1].program_logo)"), placeholder: UIImage(named: "loading"))
-                    cell.nameLabel.text = "\(TVData.program[indexPath.row-1].program_name)"
-                    cell.updateTimeLabel.text = "最后更新： \(YTools.dateToString(date: Date.init(timeIntervalSince1970: Double(TVData.program[indexPath.row-1].last_Update)!)))"
+                    cell.nameLabel.text = "\(TVData.program[indexPath.row-1].program_name)\n"
+                    cell.updateTimeLabel.text = "最后更新:\(YTools.dateToString(date: Date.init(timeIntervalSince1970: Double(TVData.program[indexPath.row-1].last_Update)!)))"
                 }
                 
                 return cell
@@ -74,7 +74,7 @@ extension DianShiViewController{
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 1 {
             if indexPath.row != 0 {
-                return 80
+                return 100
             }
         }
         return super.tableView(tableView, heightForRowAt: indexPath)
@@ -86,6 +86,7 @@ extension DianShiViewController{
             if indexPath.row != 0 {
 //                print(indexPath.row - 1)
                 let vc = TVHuiKanController()
+                vc.tvLogo = TVData.program[indexPath.row - 1].program_logo
                 vc.requestURL = TVData.program[indexPath.row - 1].indexFile
                 vc.navigationItem.title = "\(TVData.program[indexPath.row - 1].program_name)"
                 self.navigationController?.show(vc, sender: self)

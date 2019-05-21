@@ -58,4 +58,21 @@ extension AppConfigViewModel{
             finishCallBack(videos)
         }
     }
+    
+    
+    /// 请求往期直播数据
+    ///
+    /// - Parameters:
+    ///   - url: 请求地址
+    ///   - finishCallBack: 回调函数
+    class func requestZhiBoHistory(url:String, finishCallBack:@escaping (_ histories:[ZhiBoHistoryModel])->()){
+        NetworkTool.requestData(type: .GET, urlString: url) { (result) in
+            var models:[ZhiBoHistoryModel] = []
+            let itemsJson = JSON(result)["item"].arrayValue
+            for itemJson in itemsJson {
+                models.append(ZhiBoHistoryModel(jsonData: itemJson))
+            }
+            finishCallBack(models)
+        }
+    }
 }

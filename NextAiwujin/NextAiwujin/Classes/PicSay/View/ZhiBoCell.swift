@@ -9,7 +9,25 @@
 import UIKit
 
 class ZhiBoCell: UITableViewCell {
-
+    var huikan:Bool = false {
+        didSet{
+            if !oldValue {
+                if huikan{
+//                    print(titleLabel.height)
+//                    titleLabel.height *= 2
+//                    titleLabel.numberOfLines = 2
+//                    print(titleLabel.height)
+                    statusLabel.text = "回顾"
+                }
+            }else{
+                if !huikan{
+//                    titleLabel.height *= 2
+//                    titleLabel.numberOfLines = 2
+                    statusLabel.text = "直播"
+                }
+            }
+        }
+    }
     @IBOutlet var statusLabel: UILabel!
     @IBOutlet var descLabel: UILabel!
     @IBOutlet var titleLabel: UILabel!
@@ -23,6 +41,10 @@ class ZhiBoCell: UITableViewCell {
         statusLabel.textColor = .white
         titleLabel.width = 20
         titleLabel.clipsToBounds = true
+        titleLabel.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+//        titleLabel.sizeToFit()
+        descLabel.baselineAdjustment = UIBaselineAdjustment.none
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

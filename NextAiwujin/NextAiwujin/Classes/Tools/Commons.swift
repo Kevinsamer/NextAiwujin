@@ -49,6 +49,9 @@ public let ConfirmOrderNotificationName:NSNotification.Name = NSNotification.Nam
 //播放器未全屏时执行pop的通知名
 public let PopVCWhenPlayerNotFullScreenNotificationName:NSNotification.Name = Notification.Name("PopVCWhenPlayerNotFullScreenNotificationName")
 
+//音频开始播放时的通知
+public let AudioPlayingNotificationName:NSNotification.Name = Notification.Name("AudioPlayingNotificationName")
+
 //搜索历史记录最大数
 let maxHistory:Int = 20
 

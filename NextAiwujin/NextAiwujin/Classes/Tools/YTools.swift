@@ -294,12 +294,52 @@ class YTools{
         return String(format: "00:%02d:%02d", Min, Sec)
     }
     
+    
+    
     class func share(shareTitle title:String, shareImage image:UIImage?, shareURL url:String, currentViewController vc:UIViewController, callBack: (()->Void)?) {
         
         let urlShare = URL(string: "http://www.baidu.com")
         let activityItems = [title, image, urlShare] as [Any]
         let shareVC = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
         vc.present(shareVC, animated: true, completion: callBack)
+    }
+    
+    class func nowPlayAudioIndex(timeList:[Date]) -> Int {
+        let hour = Date(timeIntervalSinceNow: 0).hour
+        let minute = Date(timeIntervalSinceNow: 0).minute
+        //先将当前时间转换为和上一页面传过来的时间数组成员一样的格式
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+        dateFormatter.locale = Locale.current
+        dateFormatter.timeZone = TimeZone.init(secondsFromGMT: 0)
+        var nowtimeStr = ""
+        if hour<10{
+            //增加占位符0
+            nowtimeStr = "0\(hour)"
+        }else{
+            nowtimeStr = "\(hour)"
+        }
+        if minute<10 && minute > 0{
+            //增加占位符0
+            nowtimeStr += ":0\(minute)"
+        }else if minute % 10 == 0{
+            //处于整数分钟数时自动+1分钟，便于计算更新正在播出的节目
+            nowtimeStr += ":\(minute + 1)"
+        }else{
+            nowtimeStr += ":\(minute)"
+        }
+        //获取当前时间的Date类型
+        let nowDate = dateFormatter.date(from: nowtimeStr)!
+        for i in 0..<timeList.count {
+            if i==(timeList.count-1){
+                break
+            }
+            if nowDate.isBetween(timeList[i], timeList[i+1]){
+                //                print(timeList[i])
+                return i
+            }
+        }
+        return 0
     }
     
     

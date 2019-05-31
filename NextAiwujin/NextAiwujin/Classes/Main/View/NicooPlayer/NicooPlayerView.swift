@@ -1226,7 +1226,8 @@ extension NicooPlayerView {
                 if isVideo {
                     playerStatu = PlayerStatus.Playing // 初始状态为播放
                 }else{
-                    playerStatu = PlayerStatus.Pause // 初始状态为暂停
+                    playerStatu = PlayerStatus.Playing // 初始状态为暂停
+                    NotificationCenter.default.post(name: AudioPlayingNotificationName, object: nil)
                 }
                 
                 updateTimeLableLayout(avItem: avItem)

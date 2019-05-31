@@ -18,7 +18,7 @@ class ChildViewController: BaseViewController {
     ///当前页,共150条数据，每页10条，共15页
     var currentPage:Int = 1{
         didSet{
-            print(currentPage)
+//            print(currentPage)
         }
     }
     ///请求地址

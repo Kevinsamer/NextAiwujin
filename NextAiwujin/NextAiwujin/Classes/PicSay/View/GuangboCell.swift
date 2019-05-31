@@ -10,6 +10,8 @@ import UIKit
 
 class GuangboCell: UITableViewCell {
 
+    @IBOutlet var huiTingTagLabel: UILabel!
+    @IBOutlet var zhiBoTagLabel: UILabel!
     @IBOutlet var startTimeLabel: UILabel!
     @IBOutlet var guangboNameLabel: UILabel!
     @IBOutlet var guangboImage: UIImageView!

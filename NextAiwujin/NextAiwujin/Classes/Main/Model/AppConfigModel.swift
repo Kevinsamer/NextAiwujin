@@ -350,6 +350,14 @@ class CH4ProgramModel{
     var program_desc:String = ""
     ///开始时间
     var start_time:String = ""
+    ///节目回听数据源
+    var program_stream:String = ""
+    ///节目播放页面旋转图片
+    var program_jpg:String = ""
+    ///结束时间
+    var end_time:String = ""
+    ///节目时长（秒数）
+    var duration_time:Int = 0
     
     init(jsonData:JSON){
         program_id = jsonData["program_id"].stringValue
@@ -357,6 +365,10 @@ class CH4ProgramModel{
         program_logo = jsonData["program_logo"].stringValue
         program_desc = jsonData["program_desc"].stringValue
         start_time = jsonData["start_time"].stringValue
+        program_stream = jsonData["program_stream"].stringValue
+        program_jpg = jsonData["program_jpg"].stringValue
+        end_time = jsonData["end_time"].stringValue
+        duration_time = jsonData["duration_time"].intValue
     }
 }
 //MARK: - CH4结束
@@ -406,6 +418,7 @@ class PlatformModel{
 }
 //MARK: - platform结束
 //MARK: - 往期直播开始
+///往期直播model
 class ZhiBoHistoryModel{
     var title:String = ""
     ///视频地址
@@ -421,3 +434,25 @@ class ZhiBoHistoryModel{
     }
 }
 //MARK: - 往期直播结束
+//MARK: - 评论开始
+class CommentModel {
+    ///评论id
+    var id:String = ""
+    ///昵称
+    var nickName:String = ""
+    ///头像
+    var userLogo:String = ""
+    ///评论内容
+    var content:String = ""
+    ///评论时间
+    var createDate:String = ""
+    
+    init(jsonData:JSON) {
+        id = jsonData["id"].stringValue
+        nickName = jsonData["nickName"].stringValue
+        userLogo = jsonData["userLogo"].stringValue
+        content = jsonData["content"].stringValue
+        createDate = jsonData["createDate"].stringValue
+    }
+}
+//MARK: - 评论结束

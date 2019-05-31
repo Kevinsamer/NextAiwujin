@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyJSON
+import Alamofire
 class AppConfigViewModel{
     var appConfig:AppConfigModel?
 }
@@ -74,5 +75,35 @@ extension AppConfigViewModel{
             }
             finishCallBack(models)
         }
+    }
+    
+    
+    /// 请求评论数据
+    ///
+    /// - Parameters:
+    ///   - url: 请求地址
+    ///   - finishCallBack: 回调函数
+    class func requestComments(url:String, finishCallBack:@escaping (_ comments: [CommentModel])->()){
+        Alamofire.request(URL(string: url)!, method: HTTPMethod.get).responseString { (result) in
+            guard let resultStr = result.value else {return}
+//            print(resultStr)
+            var models:[CommentModel] = []
+            let itemsJson = JSON.init(parseJSON: resultStr)["item"].arrayValue
+            for itemJson in itemsJson {
+                models.append(CommentModel(jsonData: itemJson))
+            }
+            finishCallBack(models)
+        }
+        
+//        NetworkTool.requestData(type: .GET, urlString: url) { (result) in
+//            var models:[CommentModel] = []
+//            print(result)
+//            let itemsJson = JSON(result)["item"].arrayValue
+//            for itemJson in itemsJson {
+//                models.append(CommentModel(jsonData: itemJson))
+//            }
+//            finishCallBack(models)
+//        }
+        
     }
 }

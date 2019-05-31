@@ -6,12 +6,11 @@ PODS:
   - AlipaySDK-iOS (15.5.9)
   - AutoInsetter (1.4.1)
   - CryptoSwift (0.7.2)
+  - DrawerView (1.1.1)
   - EFNavigationBar (0.1.2)
   - ESTabBarController-swift (2.6.4)
   - Eureka (4.3.1)
   - Floaty (4.1.0)
-  - fluid-slider (1.1.0):
-    - pop
   - FontAwesome.swift (1.4.8)
   - FRadioPlayer (0.1.15)
   - FSPagerView (0.8.2)
@@ -20,9 +19,11 @@ PODS:
   - IQKeyboardManagerSwift (6.2.0)
   - Kingfisher (4.8.1)
   - MaterialTapTargetPrompt-iOS (1.0.0)
+  - NVActivityIndicatorView (4.7.0):
+    - NVActivityIndicatorView/Presenter (= 4.7.0)
+  - NVActivityIndicatorView/Presenter (4.7.0)
   - ObjectMapper (3.4.2)
   - Pageboy (3.0.1)
-  - pop (1.0.12)
   - PullToRefreshKit (0.8.8)
   - SBCycleScrollView (0.0.8):
     - Kingfisher (~> 4.8.0)
@@ -49,7 +50,10 @@ PODS:
   - SwifterSwift/SwiftStdlib (4.6.0)
   - SwifterSwift/UIKit (4.6.0)
   - SwiftEventBus (3.0.1)
+  - SwiftyComments (0.2.0):
+    - SwipeCellKit
   - SwiftyJSON (4.2.0)
+  - SwipeCellKit (2.6.0)
   - Tabman (2.1.2):
     - AutoInsetter (~> 1.4.1)
     - Pageboy (~> 3.0.1)
@@ -61,17 +65,18 @@ DEPENDENCIES:
   - AlamofireObjectMapper
   - AlipaySDK-iOS
   - CryptoSwift (~> 0.7.2)
+  - DrawerView
   - EFNavigationBar
   - ESTabBarController-swift
   - Eureka
   - Floaty
-  - fluid-slider
   - FontAwesome.swift
   - FRadioPlayer
   - FSPagerView
   - ImageRow
   - IQKeyboardManagerSwift
   - MaterialTapTargetPrompt-iOS
+  - NVActivityIndicatorView
   - PullToRefreshKit
   - SBCycleScrollView (~> 0.0.8)
   - SkeletonView
@@ -79,6 +84,7 @@ DEPENDENCIES:
   - SQLite.swift
   - SwifterSwift
   - SwiftEventBus (from `https://github.com/cesarferreira/SwiftEventBus.git`, tag `3.0.1`)
+  - SwiftyComments (from `https://github.com/tsucres/SwiftyComments.git`)
   - SwiftyJSON
   - Tabman
   - Toast-Swift
@@ -91,11 +97,11 @@ SPEC REPOS:
     - AlipaySDK-iOS
     - AutoInsetter
     - CryptoSwift
+    - DrawerView
     - EFNavigationBar
     - ESTabBarController-swift
     - Eureka
     - Floaty
-    - fluid-slider
     - FontAwesome.swift
     - FRadioPlayer
     - FSPagerView
@@ -103,9 +109,9 @@ SPEC REPOS:
     - IQKeyboardManagerSwift
     - Kingfisher
     - MaterialTapTargetPrompt-iOS
+    - NVActivityIndicatorView
     - ObjectMapper
     - Pageboy
-    - pop
     - PullToRefreshKit
     - SBCycleScrollView
     - SkeletonView
@@ -113,6 +119,7 @@ SPEC REPOS:
     - SQLite.swift
     - SwifterSwift
     - SwiftyJSON
+    - SwipeCellKit
     - Tabman
     - Toast-Swift
     - XLPagerTabStrip
@@ -121,11 +128,16 @@ EXTERNAL SOURCES:
   SwiftEventBus:
     :git: https://github.com/cesarferreira/SwiftEventBus.git
     :tag: 3.0.1
+  SwiftyComments:
+    :git: https://github.com/tsucres/SwiftyComments.git
 
 CHECKOUT OPTIONS:
   SwiftEventBus:
     :git: https://github.com/cesarferreira/SwiftEventBus.git
     :tag: 3.0.1
+  SwiftyComments:
+    :commit: 3c90b56327db9d30bbedf9b329acec4e5367c9ca
+    :git: https://github.com/tsucres/SwiftyComments.git
 
 SPEC CHECKSUMS:
   Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
@@ -133,11 +145,11 @@ SPEC CHECKSUMS:
   AlipaySDK-iOS: 1c5283b30977a24acecc0114662697f7dc78f618
   AutoInsetter: d0eafc611d686f83f925ded729084cf916a39863
   CryptoSwift: cd2158be2bf639aabc63ec804707c7137c90157c
+  DrawerView: 7872496eb534bddc9d4eac4cc882bee84402a305
   EFNavigationBar: 77c697591e195bed267c4545fd07d1592220a3f9
   ESTabBarController-swift: 58cca4ab7de980657d99a02181c1ff310983e975
   Eureka: 28ea296f06710f6745266b71f17862048941a32d
   Floaty: 1a4e213f3512cf3045ef9cb0c1ff456226d1f66a
-  fluid-slider: 68037ac7247f16a89f3e24ff5d0167c8eea6f50b
   FontAwesome.swift: fb8637bffb9a588c7e8c753c084565b27b20a39d
   FRadioPlayer: 0ad8b63756c3597af3c4a2672334c5dc22e026e4
   FSPagerView: 816a18842306973cc7cc6df8a5332272f7815c30
@@ -145,9 +157,9 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
   Kingfisher: 868c1149679a7ab6869be118faa9b5aed154aaf0
   MaterialTapTargetPrompt-iOS: 91499f8e8118324517076ce6315a2f016764ac00
+  NVActivityIndicatorView: b19ddab2576f805cbe0fb2306cba3476e09a1dea
   ObjectMapper: 0d4402610f4e468903ae64629eec4784531e5c51
   Pageboy: ec0170fd880ea6fa3589219edfd64b554443ff6e
-  pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
   PullToRefreshKit: 7cc53e720e69f135cffa1a57784dfb534f0222ab
   SBCycleScrollView: 7bd5afc001dfe8579b21e98582d2b3cf58abfb9a
   SkeletonView: 60d6ce7edb0cb4c7758db33c74add50392b3c475
@@ -155,11 +167,13 @@ SPEC CHECKSUMS:
   SQLite.swift: 6e5356850bb1791459f8c16d6ee9195b28714a2e
   SwifterSwift: 812ffec6f301922f5430e75be3f2939ea3a80024
   SwiftEventBus: 87ccaeceff91b748775e37751ae3a81ec815b3d5
+  SwiftyComments: 864260f481d4159118e1ee9c0ad2c9a95693fa94
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
+  SwipeCellKit: 935ca28c187ec6e1ffb2b578cf8ddca842bfdcbb
   Tabman: f819cc11e9f661f87b23c63dc24da7036cff1b8d
   Toast-Swift: e42a638589a2f95036b4bb7626cfbdde7daf0393
   XLPagerTabStrip: 63166e21c9844fa30f2d95d30f335e73be5caf22
 
-PODFILE CHECKSUM: 0ad268cc1fd2f684455d0e6f916825c5bec3106a
+PODFILE CHECKSUM: 20b76e4e97b517926dc998e04cbc787f84813eed
 
 COCOAPODS: 1.6.1

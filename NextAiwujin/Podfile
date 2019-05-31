@@ -38,7 +38,13 @@ pod 'SBCycleScrollView','~> 0.0.8'
 #pod 'ETNavBarTransparent'
 #音频播放器
 pod 'FRadioPlayer'
-pod 'fluid-slider'
+#pod 'fluid-slider'
+#评论视图
+pod 'SwiftyComments', :git => 'https://github.com/tsucres/SwiftyComments.git'
+#底部弹出抽屉
+pod "DrawerView"
+#loading动画集
+pod 'NVActivityIndicatorView'
 
   target 'NextAiwujinTests' do
     inherit! :search_paths

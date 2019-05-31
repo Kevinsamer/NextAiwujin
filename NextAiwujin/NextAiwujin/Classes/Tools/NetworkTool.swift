@@ -13,6 +13,8 @@ import Alamofire
 let API_ConfigFile="http://www.wjyanghu.com/API/AppConfig_v2.html"
 ///直播回看数据接口
 let API_ZhiBoHistory = "http://www.wjyanghu.com/API/backtosee.html"
+///评论数据接口
+let API_Comments = "http://tp.wjyanghu.com/wxzb/comment/result.php"
 
 ///测试服务器地址
 let BASE_URL = "http://192.168.108.223/"

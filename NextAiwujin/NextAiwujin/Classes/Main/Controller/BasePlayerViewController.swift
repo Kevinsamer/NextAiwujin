@@ -94,7 +94,9 @@ class BasePlayerViewController: BaseViewController {
     }
     
     deinit {
+        
         NotificationCenter.default.removeObserver(self)
+//        self.playerView.deinit()
 //        self.playerView.avItem?.removeObserver(self, forKeyPath: "status", context: nil)
     }
     

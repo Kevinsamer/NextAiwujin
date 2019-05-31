@@ -9,9 +9,32 @@
 import UIKit
 
 class GuangBoViewController: ZhiBoBaseViewController {
+    ///节目单播出时间数组
+    var timeList:[Date] = [] {
+        didSet{
+            
+        }
+    }
     
     override var GuangBoData: CH4Model{
         didSet{
+            timeList = []
+            for program in GuangBoData.Radio[0].program {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "HH:mm"
+                dateFormatter.locale = Locale.current
+                dateFormatter.timeZone = TimeZone.init(secondsFromGMT: 0)
+  //            dateFormatter.timeZone = timeZone
+                timeList.append(dateFormatter.date(from: program.start_time)!)
+            }
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "HH:mm"
+            dateFormatter.locale = Locale.current
+            dateFormatter.timeZone = TimeZone.init(secondsFromGMT: 0)
+            //加入最后一个节目的结束时间，便于比较
+            timeList.append(dateFormatter.date(from: GuangBoData.Radio[0].program.last!.end_time)!)
+            //打印当前播放节目的index
+//            print(GuangBoData.Radio[0].program[YTools.nowPlayAudioIndex(timeList: timeList)].program_name)
             secondCollView.reloadData()
             mainTable.reloadData{
                 self.mainTable.switchRefreshHeader(to: .normal(.success, 0.5))
@@ -30,7 +53,7 @@ class GuangBoViewController: ZhiBoBaseViewController {
 extension GuangBoViewController{
     override func setUI() {
         super.setUI()
-        self.view.backgroundColor = .random
+//        self.view.backgroundColor = .random
     }
     
     override func initData() {
@@ -59,23 +82,25 @@ extension GuangBoViewController{
         vc.videoURLString = "\(GuangBoData.Radio[indexPath.row].channel_stream_ios)"
         vc.videoName = "\(GuangBoData.Radio[indexPath.row].channel_name)"
         vc.channelData = GuangBoData.Radio[indexPath.row]
-        var tempList:[Date] = []
-        for program in GuangBoData.Radio[indexPath.row].program {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "HH:mm"
-            dateFormatter.locale = Locale.current
-            dateFormatter.timeZone = TimeZone.init(secondsFromGMT: 0)
-//            dateFormatter.timeZone = timeZone
-            tempList.append(dateFormatter.date(from: program.start_time)!)
-        }
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm"
-        dateFormatter.locale = Locale.current
-        dateFormatter.timeZone = TimeZone.init(secondsFromGMT: 0)
-        //            dateFormatter.timeZone = timeZone
-        //节目单时间数组中多传一个10:30，代表最后一个节目的结束时间为10:30
-        tempList.append(dateFormatter.date(from: "22:30")!)
-        vc.timeList = tempList
+        vc.programInfo = GuangBoData.Radio[indexPath.row].program[YTools.nowPlayAudioIndex(timeList: timeList)]
+        vc.playingIndex = YTools.nowPlayAudioIndex(timeList: timeList)
+//        var tempList:[Date] = []
+//        for program in GuangBoData.Radio[indexPath.row].program {
+//            let dateFormatter = DateFormatter()
+//            dateFormatter.dateFormat = "HH:mm"
+//            dateFormatter.locale = Locale.current
+//            dateFormatter.timeZone = TimeZone.init(secondsFromGMT: 0)
+////            dateFormatter.timeZone = timeZone
+//            tempList.append(dateFormatter.date(from: program.start_time)!)
+//        }
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "HH:mm"
+//        dateFormatter.locale = Locale.current
+//        dateFormatter.timeZone = TimeZone.init(secondsFromGMT: 0)
+//        //            dateFormatter.timeZone = timeZone
+//        //节目单时间数组中多传一个10:30，代表最后一个节目的结束时间为10:30
+//        self.timeList.append(dateFormatter.date(from: "22:30")!)
+        vc.timeList = self.timeList
         self.show(vc, sender: self)
     }
 }
@@ -88,8 +113,15 @@ extension GuangBoViewController {
                 let cell = tableView.dequeueReusableCell(withIdentifier: guangboCellID, for: indexPath) as! GuangboCell
                 if GuangBoData.Radio.count > 0 {
                     cell.guangboNameLabel.text = GuangBoData.Radio[0].program[indexPath.row - 1].program_name
-                    cell.startTimeLabel.text = GuangBoData.Radio[0].program[indexPath.row - 1].start_time
+                    cell.startTimeLabel.text = "\(GuangBoData.Radio[0].program[indexPath.row - 1].start_time)-\(GuangBoData.Radio[0].program[indexPath.row - 1].end_time)"
                     cell.guangboImage.kf.setImage(with: URL(string: "\(GuangBoData.Radio[0].program[indexPath.row - 1].program_logo)"), placeholder: UIImage(named: "loading"))
+                }
+                if (indexPath.row - 1) == YTools.nowPlayAudioIndex(timeList: timeList) {
+                    cell.zhiBoTagLabel.isHidden = false
+                    cell.huiTingTagLabel.isHidden = true
+                }else{
+                    cell.zhiBoTagLabel.isHidden = true
+                    cell.huiTingTagLabel.isHidden = false
                 }
                 cell.selectionStyle = .none
                 return cell
@@ -119,5 +151,40 @@ extension GuangBoViewController {
         }
         
         return super.tableView(tableView, numberOfRowsInSection: section)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = BaseAudioViewController()
+        if (indexPath.row-1) == YTools.nowPlayAudioIndex(timeList: self.timeList) {
+            vc.videoIsLive = true
+            vc.videoURLString = "\(GuangBoData.Radio[0].channel_stream_ios)"
+        }else {
+            vc.videoIsLive = false
+            vc.videoURLString = "\(GuangBoData.Radio[0].program[indexPath.row-1].program_stream)"
+        }
+        vc.programInfo = GuangBoData.Radio[0].program[indexPath.row-1]
+//        vc.videoIsLive = true
+//        vc.videoURLString = "\(GuangBoData.Radio[0].channel_stream_ios)"
+        vc.videoName = "\(GuangBoData.Radio[0].channel_name)"
+        vc.channelData = GuangBoData.Radio[0]
+        vc.playingIndex = indexPath.row - 1
+        //        var tempList:[Date] = []
+        //        for program in GuangBoData.Radio[indexPath.row].program {
+        //            let dateFormatter = DateFormatter()
+        //            dateFormatter.dateFormat = "HH:mm"
+        //            dateFormatter.locale = Locale.current
+        //            dateFormatter.timeZone = TimeZone.init(secondsFromGMT: 0)
+        ////            dateFormatter.timeZone = timeZone
+        //            tempList.append(dateFormatter.date(from: program.start_time)!)
+        //        }
+        //        let dateFormatter = DateFormatter()
+        //        dateFormatter.dateFormat = "HH:mm"
+        //        dateFormatter.locale = Locale.current
+        //        dateFormatter.timeZone = TimeZone.init(secondsFromGMT: 0)
+        //        //            dateFormatter.timeZone = timeZone
+        //        //节目单时间数组中多传一个10:30，代表最后一个节目的结束时间为10:30
+        //        self.timeList.append(dateFormatter.date(from: "22:30")!)
+        vc.timeList = self.timeList
+        self.show(vc, sender: self)
     }
 }

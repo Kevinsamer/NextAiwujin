@@ -179,6 +179,12 @@ extension ZhiBoPlayerViewController {
             make.top.equalTo(titleView.snp.bottom)
             make.bottom.equalToSuperview().offset(UIDevice.current.isX() ? -IphonexHomeIndicatorH : 0)
         }
+        let vc = RedditCommentsViewController()
+        self.addChild(vc)
+        self.commentFatherView.addSubview(vc.view)
+        vc.view.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
         
     }
     

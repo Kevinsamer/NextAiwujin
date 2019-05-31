@@ -293,6 +293,10 @@
 		091A9EF52271A8A8003C2002 /* BaseAudioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091A9EF42271A8A8003C2002 /* BaseAudioViewController.swift */; };
 		0952A7B5223235C30061BBFA /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0952A7B4223235C30061BBFA /* SearchViewController.swift */; };
 		0966AEDA228A9C8A0079B815 /* TVPinDaoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0966AED9228A9C8A0079B815 /* TVPinDaoViewController.swift */; };
+		096CAFD822952B4D00D78A78 /* RedditCommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096CAFD722952B4D00D78A78 /* RedditCommentsViewController.swift */; };
+		096CAFDA22952B7A00D78A78 /* RedditCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096CAFD922952B7A00D78A78 /* RedditCommentCell.swift */; };
+		096CAFDD229D186C00D78A78 /* ProgramListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096CAFDB229D186B00D78A78 /* ProgramListCell.swift */; };
+		096CAFDE229D186C00D78A78 /* ProgramListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 096CAFDC229D186B00D78A78 /* ProgramListCell.xib */; };
 		0984BDD522000D1900D80F23 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0984BDD422000D1900D80F23 /* AppDelegate.swift */; };
 		0984BDDA22000D1900D80F23 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0984BDD822000D1900D80F23 /* Main.storyboard */; };
 		0984BDDD22000D1900D80F23 /* NextAiwujin.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0984BDDB22000D1900D80F23 /* NextAiwujin.xcdatamodeld */; };
@@ -726,6 +730,10 @@
 		091A9EF42271A8A8003C2002 /* BaseAudioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAudioViewController.swift; sourceTree = "<group>"; };
 		0952A7B4223235C30061BBFA /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		0966AED9228A9C8A0079B815 /* TVPinDaoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVPinDaoViewController.swift; sourceTree = "<group>"; };
+		096CAFD722952B4D00D78A78 /* RedditCommentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditCommentsViewController.swift; sourceTree = "<group>"; };
+		096CAFD922952B7A00D78A78 /* RedditCommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditCommentCell.swift; sourceTree = "<group>"; };
+		096CAFDB229D186B00D78A78 /* ProgramListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramListCell.swift; sourceTree = "<group>"; };
+		096CAFDC229D186B00D78A78 /* ProgramListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgramListCell.xib; sourceTree = "<group>"; };
 		0984BDD122000D1900D80F23 /* NextAiwujin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NextAiwujin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0984BDD422000D1900D80F23 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0984BDD922000D1900D80F23 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -820,6 +828,8 @@
 		09053A09228D518100E5D359 /* fourthPage */ = {
 			isa = PBXGroup;
 			children = (
+				096CAFD722952B4D00D78A78 /* RedditCommentsViewController.swift */,
+				096CAFD922952B7A00D78A78 /* RedditCommentCell.swift */,
 			);
 			path = fourthPage;
 			sourceTree = "<group>";
@@ -1778,6 +1788,8 @@
 				09D5444C221A649400307713 /* ESTabBarChildController */,
 				09D543F222116E2D00307713 /* ZZWWaveView.swift */,
 				0907DA602237942000241176 /* Area.swift */,
+				096CAFDB229D186B00D78A78 /* ProgramListCell.swift */,
+				096CAFDC229D186B00D78A78 /* ProgramListCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2207,6 +2219,7 @@
 				090CF5AA223F8F3B0062CEFA /* AddressCell.xib in Resources */,
 				0907DA5A223639DE00241176 /* CollCell.xib in Resources */,
 				090CF2C2223F70320062CEFA /* FillOrderGoodsCell.xib in Resources */,
+				096CAFDE229D186C00D78A78 /* ProgramListCell.xib in Resources */,
 				091A9EC4226EADE3003C2002 /* replay_hight@3x.png in Resources */,
 				091A9EC6226EADE3003C2002 /* NicooPlayer_fullscreen@3x.png in Resources */,
 				091A9ECD226EADE3003C2002 /* replay_hight@2x.png in Resources */,
@@ -2365,6 +2378,7 @@
 				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/AutoInsetter/AutoInsetter.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/DrawerView/DrawerView.framework",
 				"${BUILT_PRODUCTS_DIR}/EFNavigationBar/EFNavigationBar.framework",
 				"${BUILT_PRODUCTS_DIR}/ESTabBarController-swift/ESTabBarController_swift.framework",
 				"${BUILT_PRODUCTS_DIR}/Eureka/Eureka.framework",
@@ -2376,6 +2390,7 @@
 				"${BUILT_PRODUCTS_DIR}/ImageRow/ImageRow.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/MaterialTapTargetPrompt-iOS/MaterialTapTargetPrompt_iOS.framework",
+				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/Pageboy/Pageboy.framework",
 				"${BUILT_PRODUCTS_DIR}/PullToRefreshKit/PullToRefreshKit.framework",
@@ -2385,12 +2400,12 @@
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftEventBus/SwiftEventBus.framework",
 				"${BUILT_PRODUCTS_DIR}/SwifterSwift/SwifterSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyComments/SwiftyComments.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/SwipeCellKit/SwipeCellKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Tabman/Tabman.framework",
 				"${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework",
 				"${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework",
-				"${BUILT_PRODUCTS_DIR}/fluid-slider/fluid_slider.framework",
-				"${BUILT_PRODUCTS_DIR}/pop/pop.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -2400,6 +2415,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AutoInsetter.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DrawerView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EFNavigationBar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ESTabBarController_swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Eureka.framework",
@@ -2411,6 +2427,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImageRow.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MaterialTapTargetPrompt_iOS.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pageboy.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PullToRefreshKit.framework",
@@ -2420,12 +2437,12 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftEventBus.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwifterSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyComments.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwipeCellKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Tabman.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast_Swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XLPagerTabStrip.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/fluid_slider.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/pop.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2529,6 +2546,7 @@
 				090CF268223F36EA0062CEFA /* ChoosTypeTableViewCell.swift in Sources */,
 				090CF5DC223F8F550062CEFA /* AddNewAddressViewController.swift in Sources */,
 				0907DA612237942000241176 /* Area.swift in Sources */,
+				096CAFD822952B4D00D78A78 /* RedditCommentsViewController.swift in Sources */,
 				090081312230E7FA00C0667A /* ChannelInfo.swift in Sources */,
 				0984BDDD22000D1900D80F23 /* NextAiwujin.xcdatamodeld in Sources */,
 				090CF5D3223F8F550062CEFA /* RegistViewController.swift in Sources */,
@@ -2572,6 +2590,7 @@
 				0907DA68223B7FE100241176 /* CenterHomeCell.swift in Sources */,
 				090900D4222CC86A003D2F3D /* HorizontallyPageableFlowLayout.swift in Sources */,
 				0907DA472236389600241176 /* ColorPickerViewController.swift in Sources */,
+				096CAFDD229D186C00D78A78 /* ProgramListCell.swift in Sources */,
 				090CF292223F6B110062CEFA /* CGRect-extension.swift in Sources */,
 				09D54458221A649400307713 /* ExampleHighlightableContentView.swift in Sources */,
 				0907DA222236389600241176 /* UIView+Extensions.swift in Sources */,
@@ -2686,6 +2705,7 @@
 				0900812D2230E73700C0667A /* BannerInfo.swift in Sources */,
 				0907DA392236389600241176 /* TwoTextFieldsViewController.swift in Sources */,
 				0907DA342236389600241176 /* LocaleInfo.swift in Sources */,
+				096CAFDA22952B7A00D78A78 /* RedditCommentCell.swift in Sources */,
 				090CF270223F37AF0062CEFA /* TypeView.swift in Sources */,
 				090CF5E0223F8F550062CEFA /* MyVouchersViewController.swift in Sources */,
 				090CF2BB223F6D4B0062CEFA /* NextShopCartViewController.swift in Sources */,

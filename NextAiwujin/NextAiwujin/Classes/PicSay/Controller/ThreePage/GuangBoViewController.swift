@@ -118,10 +118,10 @@ extension GuangBoViewController {
                 }
                 if (indexPath.row - 1) == YTools.nowPlayAudioIndex(timeList: timeList) {
                     cell.zhiBoTagLabel.isHidden = false
-                    cell.huiTingTagLabel.isHidden = true
+//                    cell.huiTingTagLabel.isHidden = true
                 }else{
                     cell.zhiBoTagLabel.isHidden = true
-                    cell.huiTingTagLabel.isHidden = false
+//                    cell.huiTingTagLabel.isHidden = true
                 }
                 cell.selectionStyle = .none
                 return cell
@@ -163,27 +163,9 @@ extension GuangBoViewController {
             vc.videoURLString = "\(GuangBoData.Radio[0].program[indexPath.row-1].program_stream)"
         }
         vc.programInfo = GuangBoData.Radio[0].program[indexPath.row-1]
-//        vc.videoIsLive = true
-//        vc.videoURLString = "\(GuangBoData.Radio[0].channel_stream_ios)"
         vc.videoName = "\(GuangBoData.Radio[0].channel_name)"
         vc.channelData = GuangBoData.Radio[0]
         vc.playingIndex = indexPath.row - 1
-        //        var tempList:[Date] = []
-        //        for program in GuangBoData.Radio[indexPath.row].program {
-        //            let dateFormatter = DateFormatter()
-        //            dateFormatter.dateFormat = "HH:mm"
-        //            dateFormatter.locale = Locale.current
-        //            dateFormatter.timeZone = TimeZone.init(secondsFromGMT: 0)
-        ////            dateFormatter.timeZone = timeZone
-        //            tempList.append(dateFormatter.date(from: program.start_time)!)
-        //        }
-        //        let dateFormatter = DateFormatter()
-        //        dateFormatter.dateFormat = "HH:mm"
-        //        dateFormatter.locale = Locale.current
-        //        dateFormatter.timeZone = TimeZone.init(secondsFromGMT: 0)
-        //        //            dateFormatter.timeZone = timeZone
-        //        //节目单时间数组中多传一个10:30，代表最后一个节目的结束时间为10:30
-        //        self.timeList.append(dateFormatter.date(from: "22:30")!)
         vc.timeList = self.timeList
         self.show(vc, sender: self)
     }

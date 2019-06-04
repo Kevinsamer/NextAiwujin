@@ -11,12 +11,7 @@ import SwiftyComments
 import SkeletonView
 import SnapKit
 class FoldableRedditCommentsViewController: RedditCommentsViewController, CommentsViewDelegate {
-    //TODO:发表评论的view
-    lazy var postCommentView: UIView = {
-        let view = UIView()
-        view.backgroundColor = #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1)
-        return view
-    }()
+    
     
     func commentCellExpanded(atIndex index: Int) {
         updateCellFoldState(false, atIndex: index)
@@ -60,6 +55,12 @@ class FoldableRedditCommentsViewController: RedditCommentsViewController, Commen
     
 }
 class RedditCommentsViewController: CommentsViewController {
+    //TODO:发表评论的view（弃用，评论视图放到父视图）
+    lazy var postCommentView: UIView = {
+        let view = UIView(frame: CGRect(x: 0, y: UIDevice.current.isX() ? finalScreenH - finalTabBarH - IphonexHomeIndicatorH - 100 - finalScreenW / 16 * 9 - 50 : finalScreenH - finalTabBarH - 100  - finalScreenW / 16 * 9 - 50, width: finalScreenW, height: 100))
+        view.backgroundColor = #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1)
+        return view
+    }()
     ///加载遮盖view
     lazy var alphaView: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: finalScreenW, height: finalScreenH - finalStatusBarH - finalNavigationBarH - finalScreenW / 16 * 9 - 50))
@@ -95,9 +96,7 @@ class RedditCommentsViewController: CommentsViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 //        self.view.addSubview(alphaView)
-        AppConfigViewModel.requestComments(url: API_Comments) { (comments) in
-            self.commentsData = comments
-        }
+        requestData()
         tableView.register(RedditCommentCell.self, forCellReuseIdentifier: commentCellId)
         
         tableView.backgroundColor = RedditConstants.backgroundColor
@@ -109,6 +108,23 @@ class RedditCommentsViewController: CommentsViewController {
         
         self.swipeToHide = true
         self.swipeActionAppearance.swipeActionColor = RedditConstants.flashyColor
+        
+        tableView.addSubview(postCommentView)
+        
+    }
+    
+//    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        super.scrollViewDidScroll(scrollView)
+//        if scrollView.isMember(of: UITableView.self){
+//            let offsetY = scrollView.contentOffset.y
+//        }
+//    }
+    
+    ///请求评论数据
+    func requestData(){
+        AppConfigViewModel.requestComments(url: API_Comments) { (comments) in
+            self.commentsData = comments
+        }
     }
     
     override open func commentsView(_ tableView: UITableView, commentCellForModel commentModel: AbstractComment, atIndexPath indexPath: IndexPath) -> CommentCell {

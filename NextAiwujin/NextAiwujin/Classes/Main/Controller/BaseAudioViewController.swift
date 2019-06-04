@@ -54,7 +54,7 @@ class BaseAudioViewController: BasePlayerViewController {
         view.contentMode = UIView.ContentMode.scaleAspectFill
         return view
     }()
-    ///动画
+    ///右上角动画
     lazy var animateView: UIImageView = {
         let barsAnim = UIImageView()
         barsAnim.image = #imageLiteral(resourceName: "NowPlayingBars-3")
@@ -192,7 +192,7 @@ class BaseAudioViewController: BasePlayerViewController {
         // 定义需要计时的时间
         var timeCount = 60000
         // 在global线程里创建一个时间源
-
+        
         // 设定这个时间源是每秒循环一次，立即开始
         timer.schedule(deadline: .now(), repeating: .seconds(5))
         // 设定时间源的触发事件
@@ -326,7 +326,8 @@ extension BaseAudioViewController{
     func setLoadingView(){
         self.view.addSubview(loadingFatherView)
         loadingFatherView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+            make.top.equalTo(navBar.snp.bottom)
+            make.left.right.bottom.equalToSuperview()
         }
         loadingFatherView.addSubview(loadingView)
         loadingView.snp.makeConstraints { (make) in
@@ -380,7 +381,7 @@ extension BaseAudioViewController{
         logoView.clipsToBounds = true
         logoView.layer.cornerRadius = finalScreenW * 0.4
         logoView.layer.add(animation, forKey: "")
-        stopAnimation()
+        stopLogoAnimation()
         
         //2.设置开始暂停按钮
         self.view.addSubview(startOrPauseButton)
@@ -502,12 +503,12 @@ extension BaseAudioViewController{
             playerView.playerStatu = PlayerStatus.Pause
             startOrPauseButton.isSelected = false
             animateView.stopAnimating()
-            stopAnimation()
+            stopLogoAnimation()
         }else{
             playerView.playerStatu = .Playing
             startOrPauseButton.isSelected = true
             animateView.startAnimating()
-            startAnimation()
+            startLogoAnimation()
         }
     }
     
@@ -521,7 +522,7 @@ extension BaseAudioViewController{
         }
     }
     
-    private func startAnimation(){
+    private func startLogoAnimation(){
         let layer = logoView.layer
         //获取暂停的时间差
         let pausedTime = layer.timeOffset
@@ -534,7 +535,7 @@ extension BaseAudioViewController{
 //
     }
     
-    private func stopAnimation(){
+    private func stopLogoAnimation(){
         let layer = logoView.layer
         //取出当前时间,转成动画暂停的时间
         let pausedTime = layer.convertTime(CACurrentMediaTime(), from: nil)
@@ -546,11 +547,20 @@ extension BaseAudioViewController{
     
     @objc func HideLoadingView(){
         loadingView.stopAnimating()
-        loadingFatherView.removeFromSuperview()
+        loadingFatherView.isHidden = true
         playerView.playerStatu = .Playing
         startOrPauseButton.isSelected = true
         animateView.startAnimating()
-        startAnimation()
+        startLogoAnimation()
+    }
+    
+    func showLoadingView(){
+        loadingView.startAnimating()
+        loadingFatherView.isHidden = false
+        playerView.playerStatu = PlayerStatus.Pause
+        startOrPauseButton.isSelected = false
+        animateView.stopAnimating()
+        stopLogoAnimation()
     }
 }
 
@@ -595,6 +605,8 @@ extension BaseAudioViewController:UITableViewDelegate,UITableViewDataSource {
         if indexPath.row == YTools.nowPlayAudioIndex(timeList: self.timeList){
             cell.liveTagLabel.isHidden = false
             
+        }else {
+            cell.liveTagLabel.isHidden = true
         }
         cell.selectionStyle = .none
         return cell
@@ -605,11 +617,20 @@ extension BaseAudioViewController:UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        showLoadingView()
+        self.programInfo = self.channelData.program[indexPath.row]
+        self.updatePlayingAudioUI()
+        self.playingIndex = indexPath.row
         //如果选中的不是直播中的节目
         if indexPath.row != YTools.nowPlayAudioIndex(timeList: self.timeList) {
-            (tableView.cellForRow(at: IndexPath(row: YTools.nowPlayAudioIndex(timeList: self.timeList), section: 0)) as! ProgramListCell).liveTagLabel.isHidden = false
+            //隐藏直播中label
+//            (tableView.cellForRow(at: IndexPath(row: YTools.nowPlayAudioIndex(timeList: self.timeList), section: 0)) as! ProgramListCell).liveTagLabel.isHidden = false
+            self.videoURLString = programInfo.program_stream
+            self.playerView.playVideo(URL(string: self.videoURLString), self.programInfo.program_name, self.fatherView)
         }else{
             //选中了直播中的节目
+            self.videoURLString = self.channelData.channel_stream_ios
+            self.playerView.playVideo(URL(string: self.videoURLString), self.programInfo.program_name, self.fatherView)
         }
     }
     

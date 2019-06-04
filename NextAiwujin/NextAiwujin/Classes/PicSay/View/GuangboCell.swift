@@ -19,6 +19,8 @@ class GuangboCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         guangboNameLabel.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        zhiBoTagLabel.layer.cornerRadius = 5
+        zhiBoTagLabel.clipsToBounds = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

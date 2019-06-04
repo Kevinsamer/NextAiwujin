@@ -35,7 +35,7 @@ class ZhiBoBaseViewController: BaseViewController {
         didSet{
             self.topBanner.imageURLStringsGroup = []
             self.topBanner.titlesGroup = []
-            for url in self.TuiJianData.Channel[0].Item {
+            for url in self.TuiJianData.Channel[3].Item {
                 self.topBanner.imageURLStringsGroup.append(url.titlepic)
                 self.topBanner.titlesGroup.append(url.title)
             }
@@ -164,7 +164,8 @@ extension ZhiBoBaseViewController{
 //MARK: - 点击事件
 extension ZhiBoBaseViewController:CycleScrollViewDelegate{
     func didSelectedCycleScrollView(_ cycleScrollView: CycleScrollView, _ Index: NSInteger) {
-        print("\(Index)")
+        //webView链接
+        let url = self.TuiJianData.Channel[3].Item[Index].titleurl
     }
 }
 

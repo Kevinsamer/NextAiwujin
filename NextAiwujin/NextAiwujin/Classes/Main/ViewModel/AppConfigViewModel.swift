@@ -94,16 +94,20 @@ extension AppConfigViewModel{
             }
             finishCallBack(models)
         }
-        
-//        NetworkTool.requestData(type: .GET, urlString: url) { (result) in
-//            var models:[CommentModel] = []
-//            print(result)
-//            let itemsJson = JSON(result)["item"].arrayValue
-//            for itemJson in itemsJson {
-//                models.append(CommentModel(jsonData: itemJson))
-//            }
-//            finishCallBack(models)
-//        }
-        
+    }
+    
+    
+    /// 发表评论
+    ///
+    /// - Parameters:
+    ///   - url: 发表评论接口
+    ///   - content: 评论内容
+    ///   - imageURL: 头像地址
+    ///   - rid: 暂时固定为8
+    ///   - finishCallBack: 回调函数
+    class func requestPostComments(url:String, content:String, imageURL:String, rid:Int, finishCallBack:()->()){
+        Alamofire.request(URL(string: url)!, method: HTTPMethod.post, parameters: ["content":"\(content)", "rid":"\(rid)", "headimgurl":"\(imageURL)"]).responseString { (result) in
+            print("\(result.value)")
+        }
     }
 }

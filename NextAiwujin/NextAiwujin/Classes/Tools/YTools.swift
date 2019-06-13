@@ -304,6 +304,11 @@ class YTools{
         vc.present(shareVC, animated: true, completion: callBack)
     }
     
+    
+    /// 正在播放的广播索引
+    ///
+    /// - Parameter timeList: 所有广播时间列表
+    /// - Returns: 返回索引
     class func nowPlayAudioIndex(timeList:[Date]) -> Int {
         let hour = Date(timeIntervalSinceNow: 0).hour
         let minute = Date(timeIntervalSinceNow: 0).minute
@@ -343,4 +348,59 @@ class YTools{
     }
     
     
+    /// 调整图片分辨率
+    ///
+    /// - Parameters:
+    ///   - sourceImage: 原图
+    ///   - maxImageLenght: 最大尺寸
+    ///   - maxSizeKB: 最大体积
+    /// - Returns: 返回图片数据
+    class func resetImgSize(sourceImage : UIImage,maxImageLenght : CGFloat,maxSizeKB : CGFloat) -> Data {
+        var maxSize = maxSizeKB
+        var maxImageSize = maxImageLenght
+        if (maxSize <= 0.0) {
+            maxSize = 1024.0;
+        }
+        if (maxImageSize <= 0.0)  {
+            maxImageSize = 1024.0;
+        }
+        //先调整分辨率
+        var newSize = CGSize.init(width: sourceImage.size.width, height: sourceImage.size.height)
+        let tempHeight = newSize.height / maxImageSize;
+        let tempWidth = newSize.width / maxImageSize;
+        if (tempWidth > 1.0 && tempWidth > tempHeight) {
+            newSize = CGSize.init(width: sourceImage.size.width / tempWidth, height: sourceImage.size.height / tempWidth)
+        }
+        else if (tempHeight > 1.0 && tempWidth < tempHeight){
+            newSize = CGSize.init(width: sourceImage.size.width / tempHeight, height: sourceImage.size.height / tempHeight)
+        }
+        UIGraphicsBeginImageContext(newSize)
+        sourceImage.draw(in: CGRect.init(x: 0, y: 0, width: newSize.width, height: newSize.height))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        var imageData = newImage!.jpegData(compressionQuality: 1.0)
+        var sizeOriginKB : CGFloat = CGFloat((imageData?.count)!) / 1024.0;
+        //调整大小
+        var resizeRate = 0.9;
+        while (sizeOriginKB > maxSize && resizeRate > 0.1) {
+            imageData = newImage!.jpegData(compressionQuality: CGFloat(resizeRate));
+            sizeOriginKB = CGFloat((imageData?.count)!) / 1024.0;
+            resizeRate -= 0.1;
+        }
+        return imageData!
+    }
+    
+    
+    /// 拼接分享页链接（分享内容为视频时使用）
+    ///
+    /// - Parameters:
+    ///   - img: 分享图片链接
+    ///   - url: 分享视频链接
+    ///   - title: 分享页title
+    ///   - body: 分享页视频顶部内容
+    /// - Returns: 返回拼接后的分享链接
+    class func jointShareUrl(img:String, url:String, title:String, body:String) -> String {
+        //将中文字符替换为百分比字符集后再返回
+        return "\(SharePageUrl)?img=\(img)&url=\(url)&title=\(title)&body=\(body)".addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
+    }
 }

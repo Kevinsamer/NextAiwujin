@@ -71,12 +71,12 @@ extension ZhiBoViewController {
             if ZhiBoData.TV[indexPath.row].is_live == "1"{
                 let vc = ZhiBoPlayerViewController()
                 vc.currentIndex = -1
-                vc.zhiboingModel = ZhiBoData.TV[indexPath.row-1]
+                vc.zhiboingModel = ZhiBoData.TV[indexPath.row]
                 vc.zhiboHistories = self.zhiBoHistories
                 vc.videoIsLive = true
-                vc.videoURLString = "\(ZhiBoData.TV[indexPath.row-1].channel_stream_ios)"
-                vc.navigationItem.title = "\(ZhiBoData.TV[indexPath.row-1].channel_name)"
-                vc.videoName = "\(ZhiBoData.TV[indexPath.row-1].channel_name)"
+                vc.videoURLString = "\(ZhiBoData.TV[indexPath.row].channel_stream_ios)"
+                vc.navigationItem.title = "\(ZhiBoData.TV[indexPath.row].channel_name)"
+                vc.videoName = "\(ZhiBoData.TV[indexPath.row].channel_name)"
                 self.show(vc, sender: self)
             }else{
                 let vc = TVPinDaoViewController()
@@ -142,7 +142,7 @@ extension ZhiBoViewController {
             }else{
                 let cell = tableView.dequeueReusableCell(withIdentifier: zhiboCellID, for: indexPath) as! ZhiBoCell
                 cell.huikan = true
-                cell.imageV.kf.setImage(with: URL(string: "\(zhiBoHistories[indexPath.row - 1].titlepic)"), options: [.backgroundDecode])
+                cell.imageV.kf.setImage(with: URL(string: "\(zhiBoHistories[indexPath.row - 1].titlepic)"), options: [.fromMemoryCacheOrRefresh])
                 cell.descLabel.text = "时间：\(zhiBoHistories[indexPath.row - 1].time)"
                 cell.titleLabel.text = "\(zhiBoHistories[indexPath.row - 1].title)\n "
                 cell.titleLabel.sizeToFit()

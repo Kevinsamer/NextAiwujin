@@ -8,10 +8,11 @@
 
 import UIKit
 import SnapKit
+import Kingfisher
 private let programCellID:String = "programCellID"
 private let cellHeight:CGFloat = 120
 class TVHuiKanPlayerController: BasePlayerViewController {
-    //正在播放的节目信息
+    //节目单信息
     var tvs:[CH3ProgramVideoModel] = []{
         didSet{
             programListTable.reloadData{[unowned self] in
@@ -24,6 +25,7 @@ class TVHuiKanPlayerController: BasePlayerViewController {
             }
         }
     }
+    ///正在播放的节目
     var tvInfo:CH3ProgramVideoModel = CH3ProgramVideoModel(jsonData: "")
     var tvLogo:String = ""
     var tvName:String = ""
@@ -233,4 +235,33 @@ extension TVHuiKanPlayerController:UITableViewDelegate,UITableViewDataSource{
         }
     }
     
+}
+
+
+//MARK: - 点击事件
+extension TVHuiKanPlayerController {
+    override func shareEvent() {
+        let kfManager = KingfisherManager.shared
+        let downloader = kfManager.downloader
+        kfManager.defaultOptions = [.downloader(downloader), .forceRefresh, .backgroundDecode]
+        let resouce = ImageResource(downloadURL: URL(string: "\(tvInfo.totalImagePath)")!)
+        DispatchQueue.main.async {
+            let _ = kfManager.retrieveImage(with: resouce, options: nil, progressBlock: nil) { (image, error, cacheType, imageUrl) in
+                if error == nil {
+                    //success
+                    let textShare = self.tvInfo.title
+                    //        let contentShare = "分享的内容。"
+                    let imageShare:UIImage = image!
+                    //                    print(imageShare.bytesSize)
+                    let urlShare = URL(string: YTools.jointShareUrl(img: self.tvInfo.totalImagePath, url: self.tvInfo.totalVideoPath, title: self.tvInfo.title, body: self.tvInfo.title))
+                    let activityItems = [textShare,imageShare,urlShare] as [Any]
+                    let toVC = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+                    
+                    self.navigationController?.present(toVC, animated: true, completion: nil)
+                }else{
+                    print("failed")
+                }
+            }
+        }
+    }
 }

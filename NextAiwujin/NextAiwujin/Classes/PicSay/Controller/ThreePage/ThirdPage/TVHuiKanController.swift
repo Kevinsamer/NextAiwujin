@@ -129,6 +129,7 @@ extension TVHuiKanController:UITableViewDelegate,UITableViewDataSource{
         vc.videoURLString = "\(tvs[indexPath.row].totalVideoPath)"
         vc.navigationItem.title = "\(tvs[indexPath.row].title)"
         vc.videoName = "\(tvs[indexPath.row].title)"
+        vc.isTVHuiKan = true
         self.show(vc, sender: self)
     }
     

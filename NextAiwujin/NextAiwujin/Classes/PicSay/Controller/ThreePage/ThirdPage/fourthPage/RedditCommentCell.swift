@@ -90,7 +90,7 @@ class RedditCommentCell: CommentCell {
         self.commentViewContent = RedditCommentView()
         self.backgroundColor = RedditConstants.backgroundColor
         self.commentMarginColor = RedditConstants.commentMarginColor
-        self.rootCommentMargin = 8
+        self.rootCommentMargin = 1
         self.rootCommentMarginColor = RedditConstants.rootCommentMarginColor
         self.indentationIndicatorColor = RedditConstants.identationColor
         self.commentMargin = 0
@@ -117,7 +117,6 @@ class RedditCommentView: UIView {
     }
     open var headIcnoStr: String! = ""{
         didSet{
-            //            print("set image")
             headIcon.kf.setImage(with: URL(string: "\(headIcnoStr!)"), placeholder: UIImage(named: "loading"))
         }
     }
@@ -313,7 +312,7 @@ class RedditCommentView: UIView {
         lbl.textColor = RedditConstants.metadataColor
         lbl.font = RedditConstants.metadataFont
         lbl.textAlignment = .left
-        lbl.font = UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.bold)
+        lbl.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.bold)
         lbl.clipsToBounds = true
         lbl.isSkeletonable = true
 //        lbl.showAnimatedGradientSkeleton()

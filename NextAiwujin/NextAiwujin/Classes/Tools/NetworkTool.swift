@@ -17,6 +17,10 @@ let API_ZhiBoHistory = "http://www.wjyanghu.com/API/backtosee.html"
 let API_Comments = "http://tp.wjyanghu.com/wxzb/comment/result.php"
 ///发表评论接口
 let API_CommitComments = "http://tp.wjyanghu.com/wxzb/comment/comment_insert.php"
+///爱武进用户头像
+let AiWuJinHeadIconUrl = "http://tp.wjyanghu.com/wxzb/getData/logo.png"
+///分享页面(传4个参数：title,body,img,url)
+let SharePageUrl = "https://videoshare.applinzi.com/share.php"
 
 ///测试服务器地址
 let BASE_URL = "http://192.168.108.223/"

@@ -14,6 +14,7 @@ PODS:
   - FontAwesome.swift (1.4.8)
   - FRadioPlayer (0.1.15)
   - FSPagerView (0.8.2)
+  - GrowingTextView (0.6.1)
   - ImageRow (3.2.0):
     - Eureka (~> 4.3)
   - IQKeyboardManagerSwift (6.2.0)
@@ -73,6 +74,7 @@ DEPENDENCIES:
   - FontAwesome.swift
   - FRadioPlayer
   - FSPagerView
+  - GrowingTextView (= 0.6.1)
   - ImageRow
   - IQKeyboardManagerSwift
   - MaterialTapTargetPrompt-iOS
@@ -105,6 +107,7 @@ SPEC REPOS:
     - FontAwesome.swift
     - FRadioPlayer
     - FSPagerView
+    - GrowingTextView
     - ImageRow
     - IQKeyboardManagerSwift
     - Kingfisher
@@ -153,6 +156,7 @@ SPEC CHECKSUMS:
   FontAwesome.swift: fb8637bffb9a588c7e8c753c084565b27b20a39d
   FRadioPlayer: 0ad8b63756c3597af3c4a2672334c5dc22e026e4
   FSPagerView: 816a18842306973cc7cc6df8a5332272f7815c30
+  GrowingTextView: 335aefa45df7df06b01edede1363414d6ee5d6bc
   ImageRow: 03681b3ef8034b5a649440325f5d5ba7b22c1b0a
   IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
   Kingfisher: 868c1149679a7ab6869be118faa9b5aed154aaf0
@@ -174,6 +178,6 @@ SPEC CHECKSUMS:
   Toast-Swift: e42a638589a2f95036b4bb7626cfbdde7daf0393
   XLPagerTabStrip: 63166e21c9844fa30f2d95d30f335e73be5caf22
 
-PODFILE CHECKSUM: 20b76e4e97b517926dc998e04cbc787f84813eed
+PODFILE CHECKSUM: 456a232b3cf801353abb162523c0755aea8a2570
 
 COCOAPODS: 1.6.1

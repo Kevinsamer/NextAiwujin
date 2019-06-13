@@ -103,11 +103,11 @@ class ZhiBoPlayerViewController: BasePlayerViewController {
     }()
     
     ///评论fatherView
-    lazy var commentFatherView: UIView = {
-        let view = UIView()
-//        view.backgroundColor = .random
-        return view
-    }()
+//    lazy var commentFatherView: UIView = {
+//        let view = UIView()
+////        view.backgroundColor = .random
+//        return view
+//    }()
     
     ///正在直播的播放器
     lazy var zhiBoIngPlayerView: NicooPlayerView = {
@@ -145,7 +145,7 @@ extension ZhiBoPlayerViewController {
         //1.添加标题view
         setTitleView()
         //2.添加评论view
-        setCommentView()
+//        setCommentView()
         //3.向评论view添加下拉表视图
         setToggleTable()
         
@@ -379,22 +379,31 @@ extension ZhiBoPlayerViewController {
     }
     
     override func shareEvent() {
+        //加载分享图片
         let kfManager = KingfisherManager.shared
         let downloader = kfManager.downloader
         kfManager.defaultOptions = [.downloader(downloader), .forceRefresh, .backgroundDecode, .downloadPriority(1.0)]
         let resouce = ((currentIndex == -1) ? ImageResource(downloadURL: URL(string: "\(zhiboingModel.channel_picture)")!) : ImageResource(downloadURL: URL(string: "\(zhiboModel.titlepic)")!))
-        let _ = kfManager.retrieveImage(with: resouce, options: nil, progressBlock: nil) { (image, error, cacheType, imageUrl) in
-            if error == nil {
-                //success
-                let textShare = ((self.currentIndex == -1) ? self.zhiboingModel.channel_desc : self.zhiboModel.title)
-                //        let contentShare = "分享的内容。"
-                let imageShare:UIImage = image!
-                let urlShare = ((self.currentIndex == -1) ?   self.zhiboingModel.channel_url:self.zhiboModel.videofile)
-                let activityItems = [textShare,imageShare,urlShare] as [Any]
-                let toVC = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
-                self.present(toVC, animated: true, completion: nil)
-            }else{
-                print("failed")
+        DispatchQueue.main.async {
+            let _ = kfManager.retrieveImage(with: resouce, options: nil, progressBlock: nil) { (image, error, cacheType, imageUrl) in
+                if error == nil {
+                    //success
+                    let textShare = ((self.currentIndex == -1) ? self.zhiboingModel.channel_desc : self.zhiboModel.title)
+                    //        let contentShare = "分享的内容。"
+                    let imageShare:UIImage = image!
+//                    let imageShare:UIImage = UIImage(data: YTools.resetImgSize(sourceImage: image!, maxImageLenght: 200, maxSizeKB: 280))!
+//                    print(imageShare.kilobytesSize)
+                    
+//                    http://1.videoshare.applinzi.com/share.php?img=http://www.wjyanghu.com/API/Logo/channel/TV_CH1.png&url=http://www.wjyanghu.com/ZbFiles/tv/wjxw/201906/wjxw_20190607_010.mp4&title=%E7%94%9F%E6%B4%BB%E8%BF%9E%E7%BA%BF20190606&body=%E7%94%9F%E6%B4%BB%E8%BF%9E%E7%BA%BF20190606
+                    let urlShare = ((self.currentIndex == -1) ? URL(string: self.zhiboingModel.channel_url) : URL(string:YTools.jointShareUrl(img: self.zhiboModel.titlepic, url: self.zhiboModel.videofile, title: self.zhiboModel.title, body: self.zhiboModel.title)))
+//                    print(YTools.jointShareUrl(img: self.zhiboModel.titlepic, url: self.zhiboModel.videofile, title: self.zhiboModel.title, body: self.zhiboModel.title))
+//                    print(urlShare)
+                    let activityItems = [textShare,imageShare,urlShare] as [Any]
+                    let toVC = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+                    self.present(toVC, animated: true, completion: nil)
+                }else{
+                    print("failed")
+                }
             }
         }
         

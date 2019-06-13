@@ -57,7 +57,7 @@ class FoldableRedditCommentsViewController: RedditCommentsViewController, Commen
 class RedditCommentsViewController: CommentsViewController {
     //TODO:发表评论的view（弃用，评论视图放到父视图）
     lazy var postCommentView: UIView = {
-        let view = UIView(frame: CGRect(x: 0, y: UIDevice.current.isX() ? finalScreenH - finalTabBarH - IphonexHomeIndicatorH - 100 - finalScreenW / 16 * 9 - 50 : finalScreenH - finalTabBarH - 100  - finalScreenW / 16 * 9 - 50, width: finalScreenW, height: 100))
+        let view = UIView(frame: CGRect(x: 0, y: UIDevice.current.isX() ? finalScreenH - finalStatusBarH - IphonexHomeIndicatorH - postCommentViewH - finalScreenW / 16 * 9 - 50 : finalScreenH - postCommentViewH  - finalScreenW / 16 * 9 - 50, width: finalScreenW, height: postCommentViewH))
         view.backgroundColor = #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1)
         return view
     }()
@@ -71,6 +71,7 @@ class RedditCommentsViewController: CommentsViewController {
         view.addSubview(loadingView)
         return view
     }()
+    let postCommentViewH:CGFloat = 50
     private let commentCellId = "redditComentCellId"
     var allComments: [RichComment] = [] // All the comments (nested, not in a linear format)
     ///评论数据
@@ -109,16 +110,16 @@ class RedditCommentsViewController: CommentsViewController {
         self.swipeToHide = true
         self.swipeActionAppearance.swipeActionColor = RedditConstants.flashyColor
         
-        tableView.addSubview(postCommentView)
-        
+//        self.view.addSubview(postCommentView)
     }
     
-//    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
 //        super.scrollViewDidScroll(scrollView)
-//        if scrollView.isMember(of: UITableView.self){
-//            let offsetY = scrollView.contentOffset.y
-//        }
-//    }
+        if scrollView.isMember(of: UITableView.self){
+            let offsetY = scrollView.contentOffset.y
+            postCommentView.frame.origin.y = offsetY + (UIDevice.current.isX() ? finalScreenH - finalStatusBarH - IphonexHomeIndicatorH - postCommentViewH - finalScreenW / 16 * 9 - 50 : finalScreenH - postCommentViewH  - finalScreenW / 16 * 9 - 50)
+        }
+    }
     
     ///请求评论数据
     func requestData(){
@@ -152,7 +153,7 @@ class RedditCommentsViewController: CommentsViewController {
             commentCell.content.showMySkeleton()
         }
         
-        
+//        commentCell.backgroundColor = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)
         return commentCell
     }
     

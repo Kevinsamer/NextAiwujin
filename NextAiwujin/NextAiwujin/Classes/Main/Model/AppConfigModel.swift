@@ -425,12 +425,14 @@ class ZhiBoHistoryModel{
     var videofile:String = ""
     var titlepic:String = ""
     var time:String = ""
+    var rid:String = ""
     
     init(jsonData:JSON) {
         title = jsonData["title"].stringValue
         videofile = jsonData["videofile"].stringValue
         titlepic = jsonData["titlepic"].stringValue
         time = jsonData["time"].stringValue
+        rid = jsonData["rid"].stringValue
     }
 }
 //MARK: - 往期直播结束

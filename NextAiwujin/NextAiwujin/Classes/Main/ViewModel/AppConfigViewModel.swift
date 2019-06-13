@@ -105,9 +105,9 @@ extension AppConfigViewModel{
     ///   - imageURL: 头像地址
     ///   - rid: 暂时固定为8
     ///   - finishCallBack: 回调函数
-    class func requestPostComments(url:String, content:String, imageURL:String, rid:Int, finishCallBack:()->()){
+    class func requestPostComments(url:String, content:String, imageURL:String, rid:Int, finishCallBack:@escaping ()->()){
         Alamofire.request(URL(string: url)!, method: HTTPMethod.post, parameters: ["content":"\(content)", "rid":"\(rid)", "headimgurl":"\(imageURL)"]).responseString { (result) in
-            print("\(result.value)")
+            finishCallBack()
         }
     }
 }

@@ -221,6 +221,7 @@ class YTools{
         loginVC.itemTag = itemTag
         loginVC.parentVC = vc
         let navi = UINavigationController.init(rootViewController: loginVC)
+        navi.navigationBar.barTintColor = .clear
         //vc.present(loginVC, animated: true, completion: nil)
         vc.present(navi, animated: true, completion: completion)
 
@@ -296,13 +297,13 @@ class YTools{
     
     
     
-    class func share(shareTitle title:String, shareImage image:UIImage?, shareURL url:String, currentViewController vc:UIViewController, callBack: (()->Void)?) {
-        
-        let urlShare = URL(string: "http://www.baidu.com")
-        let activityItems = [title, image, urlShare] as [Any]
-        let shareVC = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
-        vc.present(shareVC, animated: true, completion: callBack)
-    }
+//    class func share(shareTitle title:String, shareImage image:UIImage?, shareURL url:String, currentViewController vc:UIViewController, callBack: (()->Void)?) {
+//        
+//        let urlShare = URL(string: "http://www.baidu.com")
+//        let activityItems = [title, image, urlShare] as [Any]
+//        let shareVC = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+//        vc.present(shareVC, animated: true, completion: callBack)
+//    }
     
     
     /// 正在播放的广播索引
@@ -344,7 +345,7 @@ class YTools{
                 return i
             }
         }
-        return 0
+        return -1
     }
     
     

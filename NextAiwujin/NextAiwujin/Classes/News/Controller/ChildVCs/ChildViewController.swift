@@ -206,7 +206,10 @@ extension ChildViewController:SkeletonTableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = NewsDetailViewController()
-        vc.newsDetailURL = news?[indexPath.row].titleurl
+        vc.newsDetailURL = news![indexPath.row].titleurl
+        vc.sharePicURL = news![indexPath.row].titlepic
+        vc.textShare = news![indexPath.row].title
+//        vc.news = news?[indexPath.row]
         self.navigationController?.show(vc, sender: self)
     }
     

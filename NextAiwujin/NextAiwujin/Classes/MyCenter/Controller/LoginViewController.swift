@@ -92,13 +92,15 @@ class LoginViewController: BaseViewController {
 //        name.layer.borderColor = UIColor(named: "dark_gray")?.cgColor
 //        name.layer.borderWidth = 1
         //name.textAlignment = NSTextAlignment.center
-        name.placeholder = "请输入用户名"
+//        name.placeholder = "请输入用户名"
         name.font = UIFont.systemFont(ofSize: 20)
         name.delegate = self
-        name.layer.borderColor = UIColor.gray.lighten(by: 0.4).cgColor
-        name.layer.borderWidth = 0.5
+//        name.layer.borderColor = UIColor.gray.lighten(by: 0.4).cgColor
+//        name.layer.borderWidth = 0.5
         name.clearButtonMode = UITextField.ViewMode.always
-        //name.backgroundColor = UIColor.blue.lighten(by: 0.9)
+        name.backgroundColor = UIColor.init(r: 255, g: 255, b: 255, alpha: 0.2)
+        name.textColor =  .white
+        name.placeholder(text: "请输入用户名", color: UIColor.init(r: 255, g: 255, b: 255, alpha: 0.5))
         return name
     }()
     
@@ -107,13 +109,16 @@ class LoginViewController: BaseViewController {
 //        password.layer.borderColor = UIColor(named: "dark_gray")?.cgColor
 //        password.layer.borderWidth = 1
         //password.textAlignment = NSTextAlignment.center
-        password.placeholder = "请输入密码"
+//        password.placeholder = "请输入密码"
         password.font = UIFont.systemFont(ofSize: 20)
         password.delegate = self
-        password.layer.borderColor = UIColor.gray.lighten(by: 0.4).cgColor
-        password.layer.borderWidth = 0.5
-        //password.backgroundColor = UIColor.blue.lighten(by: 0.9)
+        password.textType = .password
+//        password.layer.borderColor = UIColor.gray.lighten(by: 0.4).cgColor
+//        password.layer.borderWidth = 0.5
+        password.backgroundColor = UIColor.init(r: 255, g: 255, b: 255, alpha: 0.2)
         password.clearButtonMode = UITextField.ViewMode.always
+        password.textColor = .white
+        password.placeholder(text: "请输入密码", color: UIColor.init(r: 255, g: 255, b: 255, alpha: 0.5))
         return password
     }()
 //    lazy var dividerLineUsername: UIView = {
@@ -132,7 +137,7 @@ class LoginViewController: BaseViewController {
         button.setTitleForAllStates("登录")
         button.titleLabel?.textAlignment = .center
         button.setTitleColorForAllStates(.white)
-        button.backgroundColor = UIColor(named: "global_orange")
+        button.backgroundColor = UIColor.init(r: 36, g: 147, b: 115, alpha: 1)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 22)
         button.addTarget(self, action: #selector(loginButtonClicked), for: UIControl.Event.touchUpInside)
         return button
@@ -225,6 +230,28 @@ class LoginViewController: BaseViewController {
             
         }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let bgImg = UIImageView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: finalScreenH))
+        bgImg.image = #imageLiteral(resourceName: "music_background")
+        self.view.addSubview(bgImg)
+        self.view.sendSubviewToBack(bgImg)
+//        self.navigationController?.navigationBar.setBackgroundImage(#imageLiteral(resourceName: "music_background"), for: UIBarPosition.topAttached, barMetrics: UIBarMetrics.default)
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(color: UIColor(r: 15, g: 15, b: 15, alpha: 1), size: (self.navigationController?.navigationBar.frame.size)!), for: UIBarPosition.topAttached, barMetrics: UIBarMetrics.default)
+        
+        self.navigationController?.navigationBar.setColors(background: .yellow, text: .white)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarPosition.topAttached, barMetrics: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+//        self.navigationController?.navigationBar.backgroundColor = .clear
+//        self.navBarTintColor = .clear
+        
+    }
     /*
     // MARK: - Navigation
 
@@ -242,12 +269,17 @@ extension LoginViewController{
     override func setUI(){
         super.setUI()
         self.view.backgroundColor = .white
+        
+//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(color: .clear, size: .zero), for: UIBarPosition.topAttached, barMetrics: UIBarMetrics.default)
+        
+//        self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+//        navBarBarTintColor = .white
         //1.设置navigationBar tabBar
         if self.navigationController != nil{
 //            if let tabbar = self.tabBarController{
 //                YTools.setNavigationBarAndTabBar(navCT: navi, tabbarCT: tabbar, titleName: "登录", navItem:self.navigationItem)
 //            }
-            navigationItem.title = "登录"
+//            navigationItem.title = "登录"
             let closeBtn = UIButton(type: UIButton.ButtonType.custom)
             closeBtn.frame = CGRect(x: 20, y:finalStatusBarH + 20, width: 30, height: 30)
             closeBtn.setImageForAllStates(#imageLiteral(resourceName: "login_close"))
@@ -266,7 +298,7 @@ extension LoginViewController{
                 
                 let closeBtn = UIButton(type: UIButton.ButtonType.custom)
                 closeBtn.frame = CGRect(x: 20, y:finalStatusBarH + 20, width: 30, height: 30)
-                closeBtn.setImageForAllStates(#imageLiteral(resourceName: "login_top_close"))
+                closeBtn.setImageForAllStates(#imageLiteral(resourceName: "hadUpvte"))
                 closeBtn.addTarget(self, action: #selector(closeSelf), for: UIControl.Event.touchUpInside)
                 self.view.addSubview(closeBtn)
             }

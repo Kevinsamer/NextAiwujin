@@ -398,7 +398,7 @@ extension ZhiBoPlayerViewController {
                     let urlShare = ((self.currentIndex == -1) ? URL(string: self.zhiboingModel.channel_url) : URL(string:YTools.jointShareUrl(img: self.zhiboModel.titlepic, url: self.zhiboModel.videofile, title: self.zhiboModel.title, body: self.zhiboModel.title)))
 //                    print(YTools.jointShareUrl(img: self.zhiboModel.titlepic, url: self.zhiboModel.videofile, title: self.zhiboModel.title, body: self.zhiboModel.title))
 //                    print(urlShare)
-                    let activityItems = [textShare,imageShare,urlShare] as [Any]
+                    let activityItems = [textShare,imageShare,urlShare!] as [Any]
                     let toVC = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
                     self.present(toVC, animated: true, completion: nil)
                 }else{

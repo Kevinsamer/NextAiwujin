@@ -42,7 +42,7 @@ class BaseTrunclentViewController: UIViewController {
         
         // 设置自定义导航栏背景图片
         navBar.barBackgroundImage = #imageLiteral(resourceName: "navi_bg")
-        
+//        navBar.barBackgroundColor = UIColor(r: 127, g: 125, b: 201, alpha: 1)
         // 设置自定义导航栏背景颜色
         //         navBar.backgroundColor = MainNavBarColor
         

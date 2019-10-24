@@ -37,9 +37,10 @@ class BaseAudioViewController: BasePlayerViewController {
     }()
     
     ///loading动画fatherView
-    lazy var loadingFatherView: UIView = {
-        let view = UIView(frame: .zero)
+    lazy var loadingFatherView: UIControl = {
+        let view = UIControl(frame: .zero)
         view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.454890839)
+        view.addTarget(self, action: #selector(loadFaildSoHideLoadingView), for: UIControl.Event.touchUpInside)
         return view
     }()
     
@@ -139,16 +140,6 @@ class BaseAudioViewController: BasePlayerViewController {
         label.textAlignment = .center
         return label
     }()
-    ///节目单选择显示控件
-    lazy var listPickerView: UIPickerView = {
-        let picker = UIPickerView()
-        picker.delegate = self
-        picker.dataSource = self
-        picker.tintColor = .white
-        picker.showsSelectionIndicator = true
-        picker.isUserInteractionEnabled = true
-        return picker
-    }()
     ///正在播放label
     lazy var nowPlayingLabel: UILabel = {
         let label = UILabel(text: "正在播放")
@@ -194,7 +185,7 @@ class BaseAudioViewController: BasePlayerViewController {
         // 在global线程里创建一个时间源
         
         // 设定这个时间源是每秒循环一次，立即开始
-        timer.schedule(deadline: .now(), repeating: .seconds(5))
+        timer.schedule(deadline: .now(), repeating: .seconds(2))
         // 设定时间源的触发事件
         timer.setEventHandler(handler: {
             // 每秒计时一次
@@ -205,7 +196,7 @@ class BaseAudioViewController: BasePlayerViewController {
             }
             // 返回主线程处理一些事件，更新UI等等
             DispatchQueue.main.async {
-                self.listPickerView.selectRow(self.timeBetweenDate(hour: Date.init(timeIntervalSinceNow: 0).hour, minute: Date.init(timeIntervalSinceNow: 0).minute), inComponent: 0, animated: true)
+//                self.listTableView.reloadData()
             }
         })
         // 启动时间源
@@ -468,7 +459,7 @@ extension BaseAudioViewController{
         view.addSubview(navBar)
         
         // 设置自定义导航栏背景图片
-//        navBar.barBackgroundImage = #imageLiteral(resourceName: "navi_bg")
+//        navBar.barBackgroundImage = #imageLiteral(resourceName: " ")
         // 设置自定义导航栏标题颜色
 //        navBar.titleLabelColor = .white
         
@@ -554,7 +545,7 @@ extension BaseAudioViewController{
         startLogoAnimation()
     }
     
-    func showLoadingView(){
+    @objc func showLoadingView(){
         loadingView.startAnimating()
         loadingFatherView.isHidden = false
         playerView.playerStatu = PlayerStatus.Pause
@@ -562,29 +553,12 @@ extension BaseAudioViewController{
         animateView.stopAnimating()
         stopLogoAnimation()
     }
+    
+    @objc func loadFaildSoHideLoadingView(){
+        
+    }
 }
 
-//MARK: - 实现节目单选择控件的代理
-extension BaseAudioViewController:UIPickerViewDelegate,UIPickerViewDataSource{
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return channelData.program.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return channelData.program[row].program_name
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        return NSAttributedString(string: "\(channelData.program[row].program_name) \(channelData.program[row].start_time)", attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
-        
-        
-    }
-    
-}
 
 //MARK: - 实现底部抽屉代理协议
 extension BaseAudioViewController:DrawerViewDelegate {

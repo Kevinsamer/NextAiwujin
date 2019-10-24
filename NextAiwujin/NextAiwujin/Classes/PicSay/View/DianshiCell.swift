@@ -104,6 +104,7 @@ class DianshiCell: UITableViewCell {
         ///在awakeFromNib方法中无法接收到tableView代理方法中传来的数据，此时可以使用属性监听器didSet监听cell中的该数据，接收到后再进行相关操作
         //添加视频时长接收通知
         NotificationCenter.default.addObserver(self, selector: #selector(getTotalTime(notification:)), name: NSNotification.Name.init(rawValue: "getNowPlayPositionTimeAndVideoDuration"), object: nil)
+        //图片加圆角
     }
     
     @objc func getTotalTime(notification:Notification){

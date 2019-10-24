@@ -44,6 +44,9 @@ class ZhiBoCell: UITableViewCell {
         titleLabel.font = UIFont.systemFont(ofSize: 15, weight: .bold)
 //        titleLabel.sizeToFit()
         descLabel.baselineAdjustment = UIBaselineAdjustment.none
+        imageV.clipsToBounds = true
+        imageV.layer.cornerRadius = 5
+//        self.layoutIfNeeded()
         
     }
 

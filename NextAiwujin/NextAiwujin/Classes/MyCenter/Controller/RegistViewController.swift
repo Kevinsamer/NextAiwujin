@@ -49,13 +49,15 @@ class RegistViewController: BaseViewController {
         //        name.layer.borderColor = UIColor(named: "dark_gray")?.cgColor
         //        name.layer.borderWidth = 1
         //old.textAlignment = NSTextAlignment.center
-        old.placeholder = "请输入用户名"
+        old.placeholder(text: "请输入用户名", color: UIColor.init(r: 255, g: 255, b: 255, alpha: 0.5))
         old.font = UIFont.systemFont(ofSize: 20)
         old.delegate = self
-        old.layer.borderColor = UIColor.gray.lighten(by: 0.4).cgColor
-        old.layer.borderWidth = 0.5
+//        old.layer.borderColor = UIColor.gray.lighten(by: 0.4).cgColor
+//        old.layer.borderWidth = 0.5
         old.clearButtonMode = UITextField.ViewMode.always
-        //old.backgroundColor = UIColor.blue.lighten(by: 0.9)
+        old.backgroundColor = UIColor.init(r: 255, g: 255, b: 255, alpha: 0.2)
+        old.textColor =  .white
+//        old.placeholder(text: "请输入用户名", color: UIColor.init(r: 255, g: 255, b: 255, alpha: 0.5))
 //        old.addTarget(self, action: #selector(nameChanged(textField:)), for: UIControlEvents.editingChanged)
         return old
     }()
@@ -65,12 +67,16 @@ class RegistViewController: BaseViewController {
         //        password.layer.borderColor = UIColor(named: "dark_gray")?.cgColor
         //        password.layer.borderWidth = 1
         //new.textAlignment = NSTextAlignment.center
-        new.placeholder = "请输入密码"
+        
         new.font = UIFont.systemFont(ofSize: 20)
         new.delegate = self
-        new.layer.borderColor = UIColor.gray.lighten(by: 0.4).cgColor
-        new.layer.borderWidth = 0.5
+        new.textType = UITextField.TextType.password
+//        new.layer.borderColor = UIColor.gray.lighten(by: 0.4).cgColor
+//        new.layer.borderWidth = 0.5
         new.clearButtonMode = UITextField.ViewMode.always
+        new.backgroundColor = UIColor.init(r: 255, g: 255, b: 255, alpha: 0.2)
+        new.textColor =  .white
+        new.placeholder(text: "请输入密码", color: UIColor.init(r: 255, g: 255, b: 255, alpha: 0.5))
         //new.backgroundColor = UIColor.blue.lighten(by: 0.9)
 //        new.addTarget(self, action: #selector(passwordChanged(textField:)), for: UIControlEvents.editingChanged)
         return new
@@ -80,12 +86,16 @@ class RegistViewController: BaseViewController {
         //        password.layer.borderColor = UIColor(named: "dark_gray")?.cgColor
         //        password.layer.borderWidth = 1
         //newAgain.textAlignment = NSTextAlignment.center
-        newAgain.placeholder = "请再次输入新密码"
+        
         newAgain.font = UIFont.systemFont(ofSize: 20)
         newAgain.delegate = self
-        newAgain.layer.borderColor = UIColor.gray.lighten(by: 0.4).cgColor
-        newAgain.layer.borderWidth = 0.5
+        newAgain.textType = UITextField.TextType.password
+//        newAgain.layer.borderColor = UIColor.gray.lighten(by: 0.4).cgColor
+//        newAgain.layer.borderWidth = 0.5
         newAgain.clearButtonMode = UITextField.ViewMode.always
+        newAgain.backgroundColor = UIColor.init(r: 255, g: 255, b: 255, alpha: 0.2)
+        newAgain.textColor =  .white
+        newAgain.placeholder(text: "请再次输入密码", color: UIColor.init(r: 255, g: 255, b: 255, alpha: 0.5))
 //        newAgain.addTarget(self, action: #selector(repasswordChanged(textField:)), for: UIControlEvents.editingChanged)
         //newAgain.backgroundColor = UIColor.blue.lighten(by: 0.9)
         return newAgain
@@ -95,12 +105,14 @@ class RegistViewController: BaseViewController {
         //        password.layer.borderColor = UIColor(named: "dark_gray")?.cgColor
         //        password.layer.borderWidth = 1
         //authCode.textAlignment = NSTextAlignment.center
-        authCode.placeholder = "请输入验证码"
+        authCode.placeholder(text: "请输入验证码", color: UIColor.init(r: 255, g: 255, b: 255, alpha: 0.5))
         authCode.font = UIFont.systemFont(ofSize: 20)
         authCode.delegate = self
-        authCode.layer.borderColor = UIColor.gray.lighten(by: 0.4).cgColor
-        authCode.layer.borderWidth = 0.5
+//        authCode.layer.borderColor = UIColor.gray.lighten(by: 0.4).cgColor
+//        authCode.layer.borderWidth = 0.5
         authCode.clearButtonMode = UITextField.ViewMode.always
+        authCode.backgroundColor = UIColor.init(r: 255, g: 255, b: 255, alpha: 0.2)
+        authCode.textColor =  .white
         //authCode.backgroundColor = UIColor.blue.lighten(by: 0.9)
 //        authCode.addTarget(self, action: #selector(captchaChanged(textField:)), for: UIControlEvents.editingChanged)
         return authCode
@@ -160,7 +172,7 @@ class RegistViewController: BaseViewController {
         button.setTitleForAllStates("立即注册")
         button.titleLabel?.textAlignment = .center
         button.setTitleColorForAllStates(.white)
-        button.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        button.backgroundColor = UIColor.init(r: 36, g: 147, b: 115, alpha: 1)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 22)
         button.addTarget(self, action: #selector(registerButtonClicked), for: UIControl.Event.touchUpInside)
         button.isEnabled = false
@@ -172,6 +184,18 @@ class RegistViewController: BaseViewController {
         // Do any additional setup after loading the view.
         //1.setUI
 //        setUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let bgImg = UIImageView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: finalScreenH))
+        bgImg.image = #imageLiteral(resourceName: "music_background")
+        self.view.addSubview(bgImg)
+        self.view.sendSubviewToBack(bgImg)
+        //        self.navigationController?.navigationBar.setBackgroundImage(#imageLiteral(resourceName: "music_background"), for: UIBarPosition.topAttached, barMetrics: UIBarMetrics.default)
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(color: UIColor(r: 15, g: 15, b: 15, alpha: 1), size: (self.navigationController?.navigationBar.frame.size)!), for: UIBarPosition.topAttached, barMetrics: UIBarMetrics.default)
+        
+        self.navigationController?.navigationBar.setColors(background: .yellow, text: .white)
     }
 
     override func didReceiveMemoryWarning() {
@@ -326,7 +350,7 @@ extension RegistViewController {
         
         let textField = notification.object as! UITextField
         if regUsername.hasText && regPassword.hasText && regPasswordAgain.hasText && authCodeInput.hasText{
-            registerButton.backgroundColor = UIColor(named: "global_orange")
+            registerButton.backgroundColor = UIColor.init(r: 36, g: 147, b: 115, alpha: 1)
             textField.returnKeyType = UIReturnKeyType.go
             registerButton.isEnabled = true
         }else {

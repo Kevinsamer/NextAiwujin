@@ -35,7 +35,14 @@ class SearchResultController: BaseViewController {
             
         }
     }
-    private var currentPage = 1//当前页
+    private var currentPage = 1{
+        didSet {
+//            if currentPage == 1 {
+//                currentPage = oldValue
+//            }
+        }
+        
+    }//当前页
     private var maxNumPerPage = 21//每页数据最多条数
     private var searchResultViewModel : SearchResultViewModel = SearchResultViewModel()
     ///导航栏的背景图片
@@ -44,7 +51,7 @@ class SearchResultController: BaseViewController {
     var shopHomeVC:RadioStationViewController?
     private var searchResults:[SearchResultModel]?{
         didSet{
-            if searchResults != nil {
+            if searchResults != nil && searchResults?.count != 0 {
                 noDataLabel.removeFromSuperview()
             }else{
                 //nil展示无数据页
@@ -110,36 +117,8 @@ class SearchResultController: BaseViewController {
         coll.delegate = self
         coll.dataSource = self
         
-        coll.configRefreshHeader(with: header, container: self, action: {[unowned self] in
-            if self.keys == "" {
-                //keys=""时，未开始搜索，需请求分类搜索数据
-                self.currentPage = 1
-                self.requestCategoryResultData(cat: self.category.id, page: self.currentPage)
-                coll.reloadData {
-                    coll.switchRefreshHeader(to: HeaderRefresherState.normal(RefreshResult.success, 0.3))
-                }
-            }else {
-                //keys有其他值时，请求搜索数据
-                self.currentPage = 1
-                self.requestSearchResultData(word: self.keys, page: self.currentPage)
-                coll.reloadData {
-                    coll.switchRefreshHeader(to: HeaderRefresherState.normal(RefreshResult.success, 0.3))
-                }
-            }
-        })
         
-        coll.configRefreshFooter(with: footer, container: self, action: {[unowned self] in
-            if self.keys == "" {
-                self.currentPage += 1
-                self.requestCategoryResultData(cat: self.category.id, page: self.currentPage)
-                coll.reloadData()
-            }else {
-                self.currentPage += 1
-                self.requestSearchResultData(word: self.keys, page: self.currentPage)
-                coll.reloadData()
-            }
-        })
-        coll.switchRefreshHeader(to: HeaderRefresherState.refreshing)
+        //coll.switchRefreshHeader(to: HeaderRefresherState.refreshing)
         
         return coll
     }()
@@ -320,6 +299,7 @@ extension SearchResultController{
     
     override func initData(){
         super.initData()
+//        self.currentPage = 1
         if keys == "" {
             //分类id初始化时赋值-111
             if category.id != -111{
@@ -336,7 +316,8 @@ extension SearchResultController{
     }
     
     private func requestSearchResultData(word:String, page:Int){
-        self.collectionView.switchRefreshHeader(to: HeaderRefresherState.refreshing)
+        YTools.myPrint(content: "\(self.currentPage)", mode: true)
+        //self.collectionView.switchRefreshHeader(to: HeaderRefresherState.refreshing)
         searchResultViewModel.requestSearchResult(word: word, page: page) {[unowned self] in
             if self.currentPage == 1 {
                 self.searchResults = self.searchResultViewModel.searchResults
@@ -406,6 +387,35 @@ extension SearchResultController{
     
     private func setCollectionView(){
         self.view.addSubview(collectionView)
+        collectionView.configRefreshHeader(with: header, container: self, action: {[unowned self] in
+            if self.keys == "" {
+                //keys=""时，未开始搜索，需请求分类搜索数据
+                self.currentPage = 1
+                self.requestCategoryResultData(cat: self.category.id, page: self.currentPage)
+                self.collectionView.reloadData {
+                    self.collectionView.switchRefreshHeader(to: HeaderRefresherState.normal(RefreshResult.success, 0.3))
+                }
+            }else {
+                //keys有其他值时，请求搜索数据
+                self.currentPage = 1
+                self.requestSearchResultData(word: self.keys, page: self.currentPage)
+                self.collectionView.reloadData {
+                    self.collectionView.switchRefreshHeader(to: HeaderRefresherState.normal(RefreshResult.success, 0.3))
+                }
+            }
+        })
+        
+        collectionView.configRefreshFooter(with: footer, container: self, action: {[unowned self] in
+            if self.keys == "" {
+                self.currentPage += 1
+                self.requestCategoryResultData(cat: self.category.id, page: self.currentPage)
+                //coll.reloadData()
+            }else {
+                self.currentPage += 1
+                self.requestSearchResultData(word: self.keys, page: self.currentPage)
+                //coll.reloadData()
+            }
+        })
     }
     
     private func setSearchBar(){
@@ -452,6 +462,7 @@ extension SearchResultController : UISearchBarDelegate {
     
 }
 
+//MARK: -
 extension SearchResultController:UICollectionViewDelegate,UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

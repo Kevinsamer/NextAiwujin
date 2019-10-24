@@ -57,6 +57,8 @@ extension DianShiViewController{
                 let cell = tableView.dequeueReusableCell(withIdentifier: dianshiCellID, for: indexPath) as! DianshiCell
                 if TVData.program.count > 0{
                     cell.imageV.kf.setImage(with: URL(string: "\(TVData.program[indexPath.row-1].program_logo)"), placeholder: UIImage(named: "loading"))
+                    cell.imageV.clipsToBounds = true
+                    cell.imageV.layer.cornerRadius = 5
                     cell.nameLabel.text = "\(TVData.program[indexPath.row-1].program_name)\n"
                     cell.updateTimeLabel.text = "最后更新:\(YTools.dateToString(date: Date.init(timeIntervalSince1970: Double(TVData.program[indexPath.row-1].last_Update)!)))"
                 }

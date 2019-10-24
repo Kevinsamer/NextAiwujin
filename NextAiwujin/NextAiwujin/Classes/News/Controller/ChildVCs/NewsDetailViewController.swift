@@ -8,12 +8,29 @@
 
 import UIKit
 import WebKit
+import Kingfisher
 class NewsDetailViewController: BaseViewController {
     
-    var newsDetailURL:String? = ""
-    
+    var newsDetailURL:String = ""
+    var sharePicURL:String = ""
+    var textShare:String = ""
+//    var news:CH1MenuItemModel?
     //MARK: - 懒加载
-    
+    ///分享按钮父视图
+    lazy var shareFatherView: UIView = {
+        let view = UIView()
+        view.frame = CGRect(origin: .zero, size: CGSize(width: 30, height: 32))
+        return view
+    }()
+    ///分享按钮
+    lazy var shareBtn: UIButton = {
+        let btn = UIButton(type: UIButton.ButtonType.custom)
+        btn.frame = shareFatherView.bounds
+        btn.setImageForAllStates(#imageLiteral(resourceName: "new_share"))
+        btn.addTarget(self, action: #selector(shareEvent), for: UIControl.Event.touchUpInside)
+        return btn
+    }()
+    ///主体webView
     lazy var wkWebView: WKWebView = {
         var config = WKWebViewConfiguration()
         config.allowsInlineMediaPlayback = true
@@ -54,6 +71,7 @@ class NewsDetailViewController: BaseViewController {
         //wkwebview全屏播放视频时会添加一个UIWindows，然后在这个UIWindows上添加播放器播放视频，此时状态栏会隐藏，需要监听这个UIWindows的出现和消失，在他消失的时候将状态栏复原
         NotificationCenter.default.addObserver(self, selector: #selector(beginFullScreen), name: UIWindow.didBecomeVisibleNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(endFullScreen), name: UIWindow.didBecomeHiddenNotification, object: nil)
+        print("it's me!")
     }
     
     deinit {
@@ -89,6 +107,7 @@ class NewsDetailViewController: BaseViewController {
 
 }
 
+//MARK: - 设置UI
 extension NewsDetailViewController{
     override func setUI() {
         super.setUI()
@@ -97,12 +116,16 @@ extension NewsDetailViewController{
 //        wkWebView.addSubview(webProgressView)
         //        self.view.addSubview(webView)
         self.title = "资讯详情"
+        //设置分享按钮
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: shareFatherView)
+        shareFatherView.addSubview(shareBtn)
         self.view.addSubview(wkWebView)
         wkWebView.addObserver(self, forKeyPath: "estimatedProgress", options: NSKeyValueObservingOptions.new, context: nil)
         //此处有显示图文详情的链接则直接使用，若没有提供链接，则使用注释的request来加载手机端商品详情页面，通过js隐藏不需要的元素来展示图文详情
         //let request = URLRequest(url: URL(string: BASE_URL + "site/products/id/\((self.goodsInfo?.goods_id) ?? 0)")!)
-        let request = URLRequest(url: URL(string: newsDetailURL ?? "www.wjyanghu.com")!)
+        let request = URLRequest(url: URL(string: self.newsDetailURL )!)
         self.wkWebView.load(request)
+        
     }
     
     override func initData() {
@@ -112,6 +135,33 @@ extension NewsDetailViewController{
     
 }
 
+//MARK: - 点击事件
+extension NewsDetailViewController {
+    //分享事件
+    @objc func shareEvent(){
+        let kfManager = KingfisherManager.shared
+        let downloader = kfManager.downloader
+        kfManager.defaultOptions = [.downloader(downloader), .forceRefresh, .backgroundDecode]
+        let resouce = ImageResource(downloadURL: URL(string: "\(self.sharePicURL )")!)
+        DispatchQueue.main.async {
+            let _ = kfManager.retrieveImage(with: resouce, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, url) in
+                if error == nil {
+                    //图片下载成功
+                    let textShare = self.textShare
+                    let imageShare = image!
+                    let urlShare = URL(string: "\(self.newsDetailURL)")
+                    let activityItems = [textShare, imageShare, urlShare] as [Any]
+                    let toVC = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+                    self.navigationController?.present(toVC, animated: true, completion: nil)
+                }else{
+                    print((error?.localizedFailureReason)!)
+                }
+            })
+        }
+    }
+}
+
+//MARK: - 实现webView的代理协议
 extension NewsDetailViewController:WKUIDelegate,WKNavigationDelegate{
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         self.activity.isHidden = false

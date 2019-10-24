@@ -211,12 +211,12 @@ extension TVPinDaoViewController{
                     let imageShare:UIImage = image!
 //                    print(imageShare.bytesSize)
                     let urlShare = URL(string: self.TVInfo.channel_url)
-                    let activityItems = [textShare,imageShare,urlShare] as [Any]
+                    let activityItems = [textShare,imageShare,urlShare!] as [Any]
                     let toVC = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
                     
                     self.navigationController?.present(toVC, animated: true, completion: nil)
                 }else{
-                    print("failed")
+                    print((error?.localizedFailureReason)!)
                 }
             }
         }

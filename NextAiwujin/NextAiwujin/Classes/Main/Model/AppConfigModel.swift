@@ -114,6 +114,7 @@ class CH1MenuModel{
     }
 }
 
+///单条新闻model
 class CH1MenuItemModel{
     var classid:String = ""
     var id:String = ""

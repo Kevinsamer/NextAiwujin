@@ -168,6 +168,8 @@ extension ZhiBoBaseViewController:CycleScrollViewDelegate{
         let url = self.TuiJianData.Channel[3].Item[Index].titleurl
         let vc = NewsDetailViewController()
         vc.newsDetailURL = url
+        vc.sharePicURL = self.TuiJianData.Channel[3].Item[Index].titlepic
+        vc.textShare = self.TuiJianData.Channel[3].Item[Index].title
         self.navigationController?.show(vc, sender: self)
     }
 }

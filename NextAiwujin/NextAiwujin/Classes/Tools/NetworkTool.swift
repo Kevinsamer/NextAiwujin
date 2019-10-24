@@ -23,9 +23,9 @@ let AiWuJinHeadIconUrl = "http://tp.wjyanghu.com/wxzb/getData/logo.png"
 let SharePageUrl = "https://videoshare.applinzi.com/share.php"
 
 ///测试服务器地址
-let BASE_URL = "http://192.168.108.223/"
+//let BASE_URL = "http://192.168.108.223/"
 ///发布服务器地址
-//let BASE_URL = "https://shop.wjyanghu.com/"
+let BASE_URL = "https://shop.wjyanghu.com/"
 
 //-----以下接口分为测试版和正式版
 //-----测试版

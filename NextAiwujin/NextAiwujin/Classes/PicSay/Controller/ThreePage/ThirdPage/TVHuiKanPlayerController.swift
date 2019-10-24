@@ -250,11 +250,11 @@ extension TVHuiKanPlayerController {
                 if error == nil {
                     //success
                     let textShare = self.tvInfo.title
-                    //        let contentShare = "分享的内容。"
+                    //let contentShare = "分享的内容。"
                     let imageShare:UIImage = image!
                     //                    print(imageShare.bytesSize)
                     let urlShare = URL(string: YTools.jointShareUrl(img: self.tvInfo.totalImagePath, url: self.tvInfo.totalVideoPath, title: self.tvInfo.title, body: self.tvInfo.title))
-                    let activityItems = [textShare,imageShare,urlShare] as [Any]
+                    let activityItems = [textShare,imageShare,urlShare!] as [Any]
                     let toVC = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
                     
                     self.navigationController?.present(toVC, animated: true, completion: nil)

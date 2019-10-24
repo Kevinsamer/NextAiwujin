@@ -110,7 +110,7 @@ extension ZhiBoViewController {
 //                    cell.guangboImage.kf.setImage(with: URL(string: "\(GuangBoData.Radio[0].program[indexPath.row - 1].program_logo)"), placeholder: UIImage(named: "loading"))
 //                    cell.imageV.kf
 //                    , placeholder: UIImage(named: "loading")
-                    cell.imageV.kf.setImage(with: URL(string: "\(ZhiBoData.TV[indexPath.row-1].channel_picture)"),options: [.forceRefresh])
+                    cell.imageV.kf.setImage(with: URL(string: "\(ZhiBoData.TV[indexPath.row-1].channel_picture)"),options: [.forceRefresh, .transition(.fade(0.5))])
                     cell.descLabel.text = "\(ZhiBoData.TV[indexPath.row-1].channel_desc)"
                     cell.titleLabel.text = "\(ZhiBoData.TV[indexPath.row-1].channel_name)\n "
                     cell.titleLabel.sizeToFit()
@@ -142,7 +142,7 @@ extension ZhiBoViewController {
             }else{
                 let cell = tableView.dequeueReusableCell(withIdentifier: zhiboCellID, for: indexPath) as! ZhiBoCell
                 cell.huikan = true
-                cell.imageV.kf.setImage(with: URL(string: "\(zhiBoHistories[indexPath.row - 1].titlepic)"), options: [.fromMemoryCacheOrRefresh])
+                cell.imageV.kf.setImage(with: URL(string: "\(zhiBoHistories[indexPath.row - 1].titlepic)"), options: [.fromMemoryCacheOrRefresh, .transition(.fade(1))])
                 cell.descLabel.text = "时间：\(zhiBoHistories[indexPath.row - 1].time)"
                 cell.titleLabel.text = "\(zhiBoHistories[indexPath.row - 1].title)\n "
                 cell.titleLabel.sizeToFit()

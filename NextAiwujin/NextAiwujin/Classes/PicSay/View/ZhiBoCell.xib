@@ -35,7 +35,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="998" verticalCompressionResistancePriority="998" layoutMarginsFollowReadableWidth="YES" text="直播" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ATD-Ow-a2p">
-                        <rect key="frame" x="393" y="15" width="30" height="18.5"/>
+                        <rect key="frame" x="388" y="15" width="30" height="18.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -59,7 +59,7 @@
                     <constraint firstItem="hky-bl-LyM" firstAttribute="leading" secondItem="kiC-xl-TtB" secondAttribute="leading" id="QnH-o2-9gS"/>
                     <constraint firstAttribute="bottom" secondItem="hky-bl-LyM" secondAttribute="bottom" id="Qx1-Fa-zcX"/>
                     <constraint firstAttribute="bottom" secondItem="lNE-hh-dNb" secondAttribute="bottom" constant="10" id="UiL-Ph-UY7"/>
-                    <constraint firstItem="ATD-Ow-a2p" firstAttribute="trailing" secondItem="kiC-xl-TtB" secondAttribute="trailing" constant="10" id="Ur3-66-u6q"/>
+                    <constraint firstItem="ATD-Ow-a2p" firstAttribute="trailing" secondItem="kiC-xl-TtB" secondAttribute="trailing" constant="5" id="Ur3-66-u6q"/>
                     <constraint firstAttribute="trailing" secondItem="hky-bl-LyM" secondAttribute="trailing" id="WJG-ly-uQc"/>
                     <constraint firstItem="lNE-hh-dNb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="WNQ-dX-ZF5"/>
                     <constraint firstItem="y85-kP-1SD" firstAttribute="leading" secondItem="lNE-hh-dNb" secondAttribute="trailing" constant="8" id="h3P-Gw-tHA"/>

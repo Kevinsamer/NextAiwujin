@@ -1,7 +1,7 @@
 //
 //  MyCenterViewController.swift
 //  NextAiwujin
-//
+//  个人中心
 //  Created by DEV2018 on 2019/2/1.
 //  Copyright © 2019 DEV2018. All rights reserved.
 //
@@ -99,6 +99,7 @@ class MyCenterViewController: BaseTrunclentViewController {
     deinit {
         mainTableView.removeObserver(self, forKeyPath: "contentOffset")
     }
+    
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "contentOffset"{
@@ -233,10 +234,13 @@ extension MyCenterViewController{
 extension MyCenterViewController:UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 4 {
+            return 500
+        }
         return finalContentViewHaveTabbarH / 3 * 2 / 7
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 14
+        return 5
         
     }
     

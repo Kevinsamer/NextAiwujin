@@ -33,6 +33,7 @@ extension BaseViewController{
         //1.设置背景色
         self.view.backgroundColor = .white
         self.navigationController?.navigationBar.setBackgroundImage(#imageLiteral(resourceName: "navi_bg"), for: UIBarPosition.topAttached, barMetrics: UIBarMetrics.default)
+//        self.navigationController?.navigationBar.barTintColor = UIColor.init(r: 127, g: 125, b: 201, alpha: 1)
         navBarTintColor = .white
         navBarTitleColor = .white
 //        navigationController?.navigationBar.tintColor = .yellow

@@ -13,6 +13,7 @@ import Toast_Swift
 import WebKit
 import SwiftEventBus
 import Kingfisher
+import SwiftyJSON
 private let maxContentOfSetY: CGFloat = 40
 private let screenWidth = UIScreen.main.bounds.width
 private let tableCellID = "tableCellID"
@@ -21,7 +22,7 @@ private let topCellSpacing : CGFloat = 10
 //goodsInfo
 public var goodsNewPrice:Float = 329
 public var goodsOldPrice:Float = 699
-public var goodsName:String = "许多应用程序和云服务引用基础 Windows 操作系统以获取夏令时 (DST) 和时区 (TZ) 信息。为了确保 Windows 具有最新和最精确的时间数据"
+public var goodsName:String = "商品名称"
 
 //-------
 //顶部广告栏
@@ -53,8 +54,8 @@ class GoodViewController: GoodDetailBaseViewController {
     override var goodsInfo: GoodInfo? {
         didSet{
             self.goodNameLabel.text = goodsInfo?.name
-            bannerImages = goodsInfo?.photos
-            goodBannerPageControll.numberOfPages = (goodsInfo?.photos.count)!
+            bannerImages = goodsInfo?.photo
+            goodBannerPageControll.numberOfPages = (goodsInfo?.photo.count)!
             goodBanner.reloadData()
             if sellPriceArray != nil && sellPriceArray?.first == sellPriceArray?.last{
                 priceLabel.attributedText = goodPriceString((goodsInfo?.sell_price) ?? "\(0.00)", (goodsInfo?.market_price) ?? "\(0.00)")
@@ -372,7 +373,8 @@ extension GoodViewController {
     }
     private func initData(){
         initModel()
-        bannerImages = [GoodsPhoto(dict: ["String" : "1" as NSObject])]
+//        bannerImages = [GoodsPhoto(dict: ["String" : "1" as NSObject])]
+        bannerImages = [GoodsPhoto(jsonData: JSON("{\"string\":\"1\"}"))]
         bannerNumbers = (bannerImages?.count)!
     }
     

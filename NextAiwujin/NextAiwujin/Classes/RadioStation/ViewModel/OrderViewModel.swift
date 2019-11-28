@@ -158,7 +158,8 @@ extension OrderViewModel{
         //        NetworkTools.requestData(type: .POST, urlString: ZFBPAYSTRING_URL, parameters: ["body":"\(body)" as NSString, "subject":"\(subject)" as NSString, "out_trade_no":"\(out_order_no)" as NSString, "total_amount":"\(total_amount)" as NSString]) { (result) in
         //            print(result)
         //        }
-        Alamofire.request(ZFBPAYSTRING_URL, method: .post, parameters: ["body":"\(body)" as NSString, "subject":"\(subject)" as NSString, "out_trade_no":"\(out_order_no)" as NSString, "total_amount":"\(total_amount)" as NSString]).responseString { (result) in
+        
+        AF.request(ZFBPAYSTRING_URL, method: .post, parameters: ["body":"\(body)" as NSString, "subject":"\(subject)" as NSString, "out_trade_no":"\(out_order_no)" as NSString, "total_amount":"\(total_amount)" as NSString]).responseString { (result) in
             if let result = result.value{
                 finishCallback(result)
             }

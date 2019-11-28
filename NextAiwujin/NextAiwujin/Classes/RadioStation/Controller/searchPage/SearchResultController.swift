@@ -11,6 +11,7 @@ import SwiftEventBus
 import Kingfisher
 import PullToRefreshKit
 import SnapKit
+import SwiftyJSON
 
 private var collectionItemW = ( finalScreenW - 3 ) / 2
 private var collectionItemH:CGFloat = 230
@@ -30,7 +31,7 @@ class SearchResultController: BaseViewController {
         }
     }
     ///分类类别id
-    var category:ChannelInfo = ChannelInfo(){
+    var category:ChannelInfo = ChannelInfo(jsonData: JSON()){
         didSet{
             
         }
@@ -136,15 +137,17 @@ class SearchResultController: BaseViewController {
         let bar = UISearchBar(frame: CGRect(x: 0, y: 0, width: finalScreenW - 100, height: 36))
 //        bar.translatesAutoresizingMaskIntoConstraints = false
         bar.setImage(#imageLiteral(resourceName: "fdj_icon"), for: UISearchBar.Icon.search, state: UIControl.State.normal)
-        bar.placeholder = "请输入商品名称，优惠内容"
+//        bar.placeholder = "请输入商品名称，优惠内容"
         bar.delegate = self
         bar.showsCancelButton = false
-        let searchField = bar.value(forKey: "searchField") as! UITextField
-        let placeHolderLabel = searchField.value(forKey: "placeholderLabel") as! UILabel
+        let searchField = bar.getSearchTextField()
+        searchField.attributedPlaceholder = NSMutableAttributedString.init(string: "请输入商品名称，优惠内容", attributes: [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 16)])
+//        let placeHolderLabel = searchField.value(forKey: "placeholderLabel") as! UILabel
         searchField.layer.cornerRadius = 20
         searchField.layer.masksToBounds = true
-        searchField.tintColor = .black
-        placeHolderLabel.font = UIFont.systemFont(ofSize: 16)
+        searchField.tintColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+        searchField.backgroundColor = .white
+//        placeHolderLabel.font = UIFont.systemFont(ofSize: 16)
         return bar
     }()
     ///顶部刷新提示信息view
@@ -240,7 +243,7 @@ class SearchResultController: BaseViewController {
         //navigationController?.setNavigationBarHidden(false, animated: false)
         SwiftEventBus.unregister(self)
 //        self.searchBar.removeFromSuperview()
-        
+        self.navigationController?.navigationBar.isTranslucent = false
 //        barImageView?.alpha = 0.0
         //离开本页面开启侧滑返回
 //        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
@@ -264,6 +267,7 @@ class SearchResultController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.navigationBar.alpha = 1
 //        barImageView?.alpha = 1.0
 //        for view in (self.navigationController?.navigationBar.subviews)! {

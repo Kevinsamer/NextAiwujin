@@ -7,10 +7,11 @@
 //
 
 import Foundation
+import UIKit
 
 public extension UIViewController {
 
-    public func addDrawerView(withViewController viewController: UIViewController, parentView: UIView? = nil) -> DrawerView {
+    func addDrawerView(withViewController viewController: UIViewController, parentView: UIView? = nil) -> DrawerView {
         #if swift(>=4.2)
         self.addChild(viewController)
         #else

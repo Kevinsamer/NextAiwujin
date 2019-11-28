@@ -266,7 +266,8 @@ extension ZhiBoPlayerViewController:UITableViewDelegate, UITableViewDataSource {
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: zhiboIngCellID, for: indexPath) as! ZhiBoIngCell
             if self.currentHaveLive == isLive.yes.rawValue {
-                cell.imageV.kf.setImage(with: URL.init(string: "\(zhiboingModel.channel_picture)"),options: [.forceRefresh])
+                //播放界面正在播放的节目的截图刷新方式
+                cell.imageV.kf.setImage(with: URL.init(string: "\(zhiboingModel.channel_picture)"),options: [.forceRefresh, .transition(.fade(0.3))])
                 cell.nameLabel.text = "\(zhiboingModel.channel_name)"
             }else {
                 cell.imageV.removeFromSuperview()

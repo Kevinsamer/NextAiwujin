@@ -3,7 +3,7 @@
 //  Tabman
 //
 //  Created by Merrick Sapsford on 05/07/2018.
-//  Copyright © 2018 UI At Six. All rights reserved.
+//  Copyright © 2019 UI At Six. All rights reserved.
 //
 
 import Foundation
@@ -40,7 +40,7 @@ internal final class TMBarButtonInteractionController: TMBarButtonController {
     // MARK: Actions
     
     @objc private func barButtonPressed(_ sender: TMBarButton) {
-        guard let index = barButtons.index(where: { $0.object === sender }) else {
+        guard let index = barButtons.firstIndex(where: { $0.object === sender }) else {
             return
         }
         handler?.barButtonInteraction(controller: self,

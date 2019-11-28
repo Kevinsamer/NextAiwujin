@@ -75,8 +75,8 @@ class MyOrdersViewController: ButtonBarPagerTabStripViewController {
 extension MyOrdersViewController {
     private func setUI(){
         //1.设置navagationBar
-        self.navBarTintColor = .white
-        self.navBarTitleColor = .white
+//        self.navBarTintColor = .white
+//        self.navBarTitleColor = .white
         self.navigationController?.navigationBar.setBackgroundImage(#imageLiteral(resourceName: "navi_bg"), for: UIBarPosition.topAttached, barMetrics: UIBarMetrics.default)
 //        navigationController?.navigationBar.setTitleFont(UIFont.systemFont(ofSize: 18), color: .white)
         navigationItem.title = "我的订单"

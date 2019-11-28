@@ -3,7 +3,7 @@
 //  Tabman
 //
 //  Created by Merrick Sapsford on 01/08/2018.
-//  Copyright © 2018 UI At Six. All rights reserved.
+//  Copyright © 2019 UI At Six. All rights reserved.
 //
 
 import UIKit
@@ -13,12 +13,13 @@ import Pageboy
 
 private struct TMBarViewDefaults {
     static let animationDuration: TimeInterval = 0.25
+    static let spacing: CGFloat = 8.0
 }
 
 /// `TMBarView` is the default Tabman implementation of `TMBar`. A `UIView` that contains a `TMBarLayout` which displays
 /// a collection of `TMBarButton`, and also a `TMBarIndicator`. The types of these three components are defined by constraints
 /// in the `TMBarView` type definition.
-open class TMBarView<Layout: TMBarLayout, Button: TMBarButton, Indicator: TMBarIndicator>: UIView, TMTransitionStyleable {
+open class TMBarView<Layout: TMBarLayout, Button: TMBarButton, Indicator: TMBarIndicator>: UIView, TMTransitionStyleable, TMBarLayoutParent {
     
     // MARK: Types
     
@@ -63,14 +64,14 @@ open class TMBarView<Layout: TMBarLayout, Button: TMBarButton, Indicator: TMBarI
     public let backgroundView = TMBarBackgroundView(style: .blur(style: .extraLight))
     
     /// Items that are displayed in the bar.
-    public private(set) var items: [TMBarItemable]?
+    open private(set) var items: [TMBarItemable]?
     
     /// Object that acts as a data source to the BarView.
-    public weak var dataSource: TMBarDataSource?
+    open weak var dataSource: TMBarDataSource?
     /// Object that acts as a delegate to the BarView.
     ///
     /// By default this is set to the `TabmanViewController` the bar is added to.
-    public weak var delegate: TMBarDelegate?
+    open weak var delegate: TMBarDelegate?
     
     // MARK: Accessory Views
     
@@ -119,7 +120,7 @@ open class TMBarView<Layout: TMBarLayout, Button: TMBarButton, Indicator: TMBarI
     /// - `.interactive`: The bar contents can be scrolled interactively.
     /// - `.swipe`: The bar contents can be scrolled through with swipe gestures.
     /// - `.none`: The bar contents can't be scrolled at all.
-    public var scrollMode: ScrollMode {
+    open var scrollMode: ScrollMode {
         set {
             scrollView.scrollMode = GestureScrollView.ScrollMode(rawValue: newValue.rawValue)!
         } get {
@@ -127,12 +128,43 @@ open class TMBarView<Layout: TMBarLayout, Button: TMBarButton, Indicator: TMBarI
         }
     }
     /// Whether to fade the leading and trailing edges of the bar content to an alpha of 0.
-    public var fadesContentEdges: Bool {
+    open var fadesContentEdges: Bool {
         set {
             scrollViewContainer.showFade = newValue
         } get {
             return scrollViewContainer.showFade
         }
+    }
+    /// Spacing between components in the bar, such as between the layout and accessory views.
+    ///
+    /// Defaults to `8.0`.
+    open var spacing: CGFloat {
+        set {
+            layoutGrid.horizontalSpacing = newValue
+        } get {
+            return layoutGrid.horizontalSpacing
+        }
+    }
+    
+    // MARK: TMBarLayoutParent
+    
+    var contentInset: UIEdgeInsets = .zero {
+        didSet {
+            updateScrollViewContentInset()
+        }
+    }
+    
+    var alignment: TMBarLayout.Alignment = .leading {
+        didSet {
+            updateScrollViewContentInset()
+        }
+    }
+    
+    func layout(needsReload layout: TMBarLayout) {
+        guard let items = self.items else {
+            return
+        }
+        reloadData(at: 0 ... items.count, context: .full)
     }
     
     // MARK: Init
@@ -144,14 +176,26 @@ open class TMBarView<Layout: TMBarLayout, Button: TMBarButton, Indicator: TMBarI
         buttons.interactionHandler = self
         scrollHandler.delegate = self
         scrollView.gestureDelegate = self
+        if #available(iOS 10.0, *) {
+            #if swift(>=4.2)
+            accessibilityTraits = [.tabBar]
+            #else
+            accessibilityTraits = UIAccessibilityTraitTabBar
+            #endif
+        }
         layout(in: self)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(itemNeedsUpdate(_:)),
+                                               name: TMBarItemableNeedsUpdateNotification,
+                                               object: nil)
     }
     
     public required init?(coder aDecoder: NSCoder) {
         fatalError("BarView does not support Interface Builder")
     }
     
-    // MARK: Lifecycle
+    // MARK: Layout
     
     open override func layoutSubviews() {
         super.layoutSubviews()
@@ -179,6 +223,7 @@ open class TMBarView<Layout: TMBarLayout, Button: TMBarButton, Indicator: TMBarI
         
         // Set up grid - stack views that content views are added to.
         self.layoutGrid = TMBarViewLayoutGrid(with: layout.view)
+        layoutGrid.horizontalSpacing = TMBarViewDefaults.spacing
         scrollView.addSubview(layoutGrid)
         layoutGrid.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -210,8 +255,8 @@ open class TMBarView<Layout: TMBarLayout, Button: TMBarButton, Indicator: TMBarI
         rootContentStack.translatesAutoresizingMaskIntoConstraints = false
         if #available(iOS 11, *) {
             constraints.append(contentsOf: [
-                rootContentStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-                rootContentStack.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+                rootContentStack.leadingAnchor.constraint(equalTo: view.safeAreaLeadingAnchor),
+                rootContentStack.trailingAnchor.constraint(equalTo: view.safeAreaTrailingAnchor)
                 ])
         } else {
             constraints.append(contentsOf: [
@@ -224,6 +269,83 @@ open class TMBarView<Layout: TMBarLayout, Button: TMBarButton, Indicator: TMBarI
         constraints.append(contentsOf: [rootContainerTop, rootContainerBottom])
         
         NSLayoutConstraint.activate(constraints)
+    }
+
+    private func updateScrollViewContentInset() {
+        let leftAlignmentInset: CGFloat
+        let rightAlignmentInset: CGFloat
+        
+        switch alignment {
+        case .leading:
+            leftAlignmentInset = 0.0
+            rightAlignmentInset = 0.0
+        case .center:
+            // Left Side Inset
+            let leftButtonWidth = (buttons.all.first?.bounds.size.width ?? 0.0) / 2.0
+            var width = bounds.size.width / 2
+            width -= contentInset.left
+            if #available(iOS 11, *) {
+                width -= safeAreaInsets.left
+            }
+            leftAlignmentInset = width - leftButtonWidth
+            
+            // Right Side Inset
+            let rightButtonWidth = (buttons.all.last?.bounds.size.width ?? 0.0) / 2.0
+            width = bounds.size.width / 2
+            width -= contentInset.right
+            if #available(iOS 11, *) {
+                width -= safeAreaInsets.right
+            }
+            rightAlignmentInset = width - rightButtonWidth
+        case .trailing:
+            let buttonWidth = (buttons.all.first?.bounds.size.width ?? 0.0)
+            var width = bounds.size.width
+            if #available(iOS 11, *) {
+                width -= safeAreaInsets.left
+            }
+            leftAlignmentInset = width - buttonWidth
+            rightAlignmentInset = 0.0
+        }
+        
+        let sanitizedContentInset = UIEdgeInsets(top: 0.0, left: leftAlignmentInset + contentInset.left, bottom: 0.0, right: rightAlignmentInset + contentInset.right)
+        scrollView.contentInset = sanitizedContentInset
+        scrollView.contentOffset.x -= sanitizedContentInset.left
+        
+        rootContainerTop.constant = contentInset.top
+        rootContainerBottom.constant = contentInset.bottom
+    }
+    
+    // MARK: Notifications
+    
+    @objc private func itemNeedsUpdate(_ notification: Notification) {
+        guard let item = notification.object as? TMBarItemable else {
+            return
+        }
+        guard let button = buttons.all.filter({ $0.item === item }).first else {
+            return
+        }
+        
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseIn, animations: {
+            button.populate(for: item)
+            self.reloadIndicatorPosition()
+        }, completion: nil)
+    }
+
+    // MARK: UIAccessibilityContainer
+
+    override open func accessibilityElementCount() -> Int {
+        return buttons.all.count
+    }
+
+    override open func accessibilityElement(at index: Int) -> Any? {
+        return buttons.all[index]
+    }
+
+    open override func index(ofAccessibilityElement element: Any) -> Int {
+        guard let item = element as? Button else {
+            return 0
+        }
+        return buttons.all.firstIndex(of: item) ?? 0
     }
 }
 
@@ -251,7 +373,7 @@ extension TMBarView: TMBar {
                 let item = dataSource.barItem(for: self, at: index)
                 items.insert(item, at: index)
                 
-                let button = Button(for: item)
+                let button = Button(for: item, intrinsicSuperview: self)
                 button.populate(for: item)
                 button.update(for: .unselected)
                 newButtons.append(button)
@@ -267,11 +389,14 @@ extension TMBarView: TMBar {
                 buttonsToRemove.append(button)
                 items.remove(at: index)
             }
+            buttons.all.removeAll(where: { buttonsToRemove.contains($0) })
             layout.remove(buttons: buttonsToRemove)
         }
         
         self.items = items
         UIView.performWithoutAnimation {
+            layoutIfNeeded()
+            updateScrollViewContentInset()
             reloadIndicatorPosition()
         }
     }
@@ -282,7 +407,7 @@ extension TMBarView: TMBar {
                        animation: TMAnimation) {
         self.indicatedPosition = position
         layoutIfNeeded()
-
+        
         let handler = TMBarViewUpdateHandler(for: self,
                                              at: position,
                                              capacity: capacity,
@@ -305,13 +430,32 @@ extension TMBarView: TMBar {
         // Update bar view
         handler.update(component: self) { (context) in
             
-            let centeredFocusFrame = (self.bounds.size.width / 2) - (context.focusRect.size.width / 2) // focus frame centered in view
             let pinnedAccessoryWidth = (self.accessoryView(at: .leadingPinned)?.bounds.size.width ?? 0.0) + (self.accessoryView(at: .trailingPinned)?.bounds.size.width ?? 0.0)
-            let maxOffsetX = (self.scrollView.contentSize.width - (self.bounds.size.width - pinnedAccessoryWidth)) + self.contentInset.right // maximum possible x offset
-            let minOffsetX = -self.contentInset.left
-            var contentOffset = CGPoint(x: (-centeredFocusFrame) + context.focusRect.origin.x, y: 0.0)
+            var maxOffsetX = (self.scrollView.contentSize.width - (self.bounds.size.width - pinnedAccessoryWidth)) + self.scrollView.contentInset.right // maximum possible x offset
+            let minOffsetX = -self.scrollView.contentInset.left
             
+            if #available(iOS 11, *) {
+                maxOffsetX += self.safeAreaInsets.right
+            }
+            
+            // Aim to use a focus origin that centers the button in the bar.
+            // If the minimum viable x offset is greater than the center of the bar however, use that.
+            let focusRectCenterX = context.focusRect.origin.x + (context.focusRect.size.width / 2)
+            let barCenterX = (self.bounds.size.width / 2) - focusRectCenterX
+            let centeredFocusOrigin = CGPoint(x: -barCenterX, y: 0.0)
+            
+            // Create offset and sanitize for bounds.
+            var contentOffset = centeredFocusOrigin
             contentOffset.x = max(minOffsetX, min(contentOffset.x, maxOffsetX))
+            
+            // Calculate how far the scroll view leading content inset is actually off 'center' as a delta.
+            // As the target for this update is to center the focusRect in the bar, we have to append
+            // this delta to the offset otherwise the inset could be ignored.
+            let actualCenterX = ((self.bounds.size.width - (self.buttons.all.first?.bounds.size.width ?? 0.0 )) / 2)
+            let offCenterDelta = self.scrollView.contentInset.left - actualCenterX
+            if offCenterDelta > 0.0 {
+                contentOffset.x -= offCenterDelta
+            }
             
             self.scrollView.contentOffset = contentOffset
         }
@@ -333,26 +477,6 @@ extension TMBarView: TMBar {
         
         scrollViewContainer.leadingFade = leadingOffsetRatio
         scrollViewContainer.trailingFade = trailingOffsetRatio
-    }
-}
-
-extension TMBarView: TMBarLayoutParent {
-    
-    var contentInset: UIEdgeInsets {
-        set {
-            let sanitizedContentInset = UIEdgeInsets(top: 0.0, left: newValue.left, bottom: 0.0, right: newValue.right)
-            scrollView.contentInset = sanitizedContentInset
-            scrollView.contentOffset.x -= sanitizedContentInset.left
-            
-            layoutGrid.horizontalSpacing = max(contentInset.left, contentInset.right)
-            rootContainerTop.constant = newValue.top
-            rootContainerBottom.constant = newValue.bottom
-        } get {
-            return UIEdgeInsets(top: rootContainerTop.constant,
-                                left: scrollView.contentInset.left,
-                                bottom: rootContainerBottom.constant,
-                                right: scrollView.contentInset.right)
-        }
     }
 }
 
@@ -398,12 +522,25 @@ extension TMBarView {
 }
 
 // MARK: - Interaction
-extension TMBarView: TMBarButtonInteractionHandler {
+extension TMBarView: TMBarButtonInteractionHandler, GestureScrollViewGestureDelegate {
     
     func barButtonInteraction(controller: TMBarButtonInteractionController,
                               didHandlePressOf button: TMBarButton,
                               at index: Int) {
         delegate?.bar(self, didRequestScrollTo: index)
+    }
+    
+    func scrollView(_ scrollView: GestureScrollView,
+                    didReceiveSwipeTo direction: UISwipeGestureRecognizer.Direction) {
+        let index = Int(indicatedPosition ?? 0)
+        switch direction {
+        case .right, .down:
+            delegate?.bar(self, didRequestScrollTo: max(0, index - 1))
+        case .left, .up:
+            delegate?.bar(self, didRequestScrollTo: min(buttons.all.count - 1, index + 1))
+        default:
+            fatalError()
+        }
     }
 }
 
@@ -461,20 +598,5 @@ extension TMBarView: TMBarViewScrollHandlerDelegate {
                               from scrollView: UIScrollView) {
         
         updateEdgeFades(for: scrollView)
-    }
-}
-
-extension TMBarView: GestureScrollViewGestureDelegate {
-    
-    func scrollView(_ scrollView: GestureScrollView, didReceiveSwipeTo direction: UISwipeGestureRecognizer.Direction) {
-        let index = Int(indicatedPosition ?? 0)
-        switch direction {
-        case .right, .down:
-            delegate?.bar(self, didRequestScrollTo: max(0, index - 1))
-        case .left, .up:
-            delegate?.bar(self, didRequestScrollTo: min(buttons.all.count - 1, index + 1))
-        default:
-            fatalError()
-        }
     }
 }

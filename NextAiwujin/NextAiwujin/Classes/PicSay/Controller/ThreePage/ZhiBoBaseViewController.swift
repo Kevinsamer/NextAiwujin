@@ -124,7 +124,7 @@ class ZhiBoBaseViewController: BaseViewController {
 extension ZhiBoBaseViewController{
     override func setUI() {
         super.setUI()
-        
+        self.navigationController?.navigationBar.isTranslucent = false
 //        self.view.backgroundColor = #colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)
 //        topBanner.imageURLStringsGroup = urls
 //        topBanner.imageNamesGroup = ["loading","loading","loading"]

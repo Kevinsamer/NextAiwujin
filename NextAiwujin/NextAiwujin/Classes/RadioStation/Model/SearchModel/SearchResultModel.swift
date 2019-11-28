@@ -7,8 +7,9 @@
 //
 
 import Foundation
-
-class SearchResultModel:BaseModel {
+import SwiftyJSON
+//BaseModel
+class SearchResultModel {
     @objc var id:Int = 0//商品id
     @objc var name:String = ""//商品名
     @objc var sell_price:Double = 0.00//销售价
@@ -19,4 +20,18 @@ class SearchResultModel:BaseModel {
     @objc var grade:Int = 0//评分总数
     @objc var comments:Int = 0//评价数
     @objc var favorite:Int = 0//收藏数
+    
+    init(jsonData:JSON){
+        id = jsonData["id"].intValue
+        name = jsonData["name"].stringValue
+        sell_price = jsonData["sell_price"].doubleValue
+        market_price = jsonData["market_price"].doubleValue
+        store_nums = jsonData["store_nums"].intValue
+        img = jsonData["img"].stringValue
+        sale = jsonData["sale"].intValue
+        grade = jsonData["grade"].intValue
+        comments = jsonData["comments"].intValue
+        favorite = jsonData["favorite"].intValue
+    }
+    
 }

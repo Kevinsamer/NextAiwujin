@@ -18,9 +18,16 @@
 //}
 
 import Foundation
-
-class BannerInfo:BaseModel {
+import SwiftyJSON
+//BaseModel
+class BannerInfo {
     @objc var name:String = "" //banner name
     @objc var url:String = ""//banner指向的商品url
     @objc var img:String = ""//图片路径
+    
+    init(jsonData:JSON) {
+        name = jsonData["name"].stringValue
+        url = jsonData["url"].stringValue
+        img = jsonData["img"].stringValue
+    }
 }

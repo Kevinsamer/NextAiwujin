@@ -75,6 +75,7 @@ class TVHuiKanController: BaseViewController {
 extension TVHuiKanController{
     override func setUI() {
         super.setUI()
+        self.navigationController?.navigationBar.isTranslucent = false
 //        self.navigationItem.title = "节目回看"
         self.view.addSubview(mainTable)
         mainTable.configRefreshHeader(with: header, container: self) {

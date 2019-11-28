@@ -57,3 +57,6 @@ let maxHistory:Int = 20
 
 //播放器顶部bar的高度
 let playerTopBarH:CGFloat = 40 + finalStatusBarH
+
+//强制横屏变量
+public var blockRotation = Bool()

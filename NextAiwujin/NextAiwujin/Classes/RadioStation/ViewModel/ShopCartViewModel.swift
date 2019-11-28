@@ -35,7 +35,7 @@ extension ShopCartViewModel{
     /// - parameter finishedCallback:回调函数，请求结束后调用
     func requestJoinCart(id goods_id:Int, num goods_num:Int, type:JoinCartType, finishedCallback:@escaping ()->()){
         
-        Alamofire.request(JOINCART_URL, method: .post, parameters: ["goods_id":"\(goods_id)" as NSString, "goods_num":"\(goods_num)" as NSString, "type":type.rawValue as NSString]).responseString { (result) in
+        AF.request(JOINCART_URL, method: .post, parameters: ["goods_id":"\(goods_id)" as NSString, "goods_num":"\(goods_num)" as NSString, "type":type.rawValue as NSString]).responseString { (result) in
             if let error = result.error {
                 print(error.localizedDescription)
             }else {

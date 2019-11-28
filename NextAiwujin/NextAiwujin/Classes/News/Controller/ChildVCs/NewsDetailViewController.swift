@@ -71,7 +71,7 @@ class NewsDetailViewController: BaseViewController {
         //wkwebview全屏播放视频时会添加一个UIWindows，然后在这个UIWindows上添加播放器播放视频，此时状态栏会隐藏，需要监听这个UIWindows的出现和消失，在他消失的时候将状态栏复原
         NotificationCenter.default.addObserver(self, selector: #selector(beginFullScreen), name: UIWindow.didBecomeVisibleNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(endFullScreen), name: UIWindow.didBecomeHiddenNotification, object: nil)
-        print("it's me!")
+//        print("it's me!")
     }
     
     deinit {
@@ -111,6 +111,7 @@ class NewsDetailViewController: BaseViewController {
 extension NewsDetailViewController{
     override func setUI() {
         super.setUI()
+        self.navigationController?.navigationBar.isTranslucent = false
 //        wkWebView.addSubview(activity)
 //        wkWebView.addSubview(webAlphaView)
 //        wkWebView.addSubview(webProgressView)

@@ -8,12 +8,19 @@
 
 import UIKit
 import CoreData
+import SnapKit
+import SwifterSwift
 private let historyCellID:String = "historyCellID"
 class SearchViewController:BaseViewController{
     ///导航栏的背景图片
     private var barImageView:UIView?
     ///搜索框存在标志位
-    private var isSearchBarHere:Bool = false
+    private var isSearchBarHere:Bool = false {
+        didSet{
+            print(isSearchBarHere)
+            print(oldValue)
+        }
+    }
     
     
     //MARK: - 懒加载
@@ -39,18 +46,21 @@ class SearchViewController:BaseViewController{
         return table
     }()
     
-    lazy var searchBar: UISearchBar = {
+     lazy var searchBar: UISearchBar = {
         let bar = UISearchBar()
-        bar.translatesAutoresizingMaskIntoConstraints = false
+//        bar.translatesAutoresizingMaskIntoConstraints = false
         bar.setImage(#imageLiteral(resourceName: "fdj_icon"), for: UISearchBar.Icon.search, state: UIControl.State.normal)
-        bar.placeholder = "请输入商品名称，优惠内容"
+        //bar.placeholder = "请输入商品名称，优惠内容"
         bar.delegate = self
-        let searchField = bar.value(forKey: "searchField") as! UITextField
-        let placeHolderLabel = searchField.value(forKey: "placeholderLabel") as! UILabel
+        let searchField = bar.getSearchTextField()
+        searchField.attributedPlaceholder = NSMutableAttributedString.init(string: "请输入商品名称，优惠内容", attributes: [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 16)])
+        //let placeHolderLabel = searchField.value(forKey: "placeholderLabel") as! UILabel
         searchField.layer.cornerRadius = 18
         searchField.layer.masksToBounds = true
-        searchField.tintColor = .blue
-        placeHolderLabel.font = UIFont.systemFont(ofSize: 16)
+        searchField.tintColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+
+        searchField.backgroundColor = .white
+        //placeHolderLabel.font = UIFont.systemFont(ofSize: 16)
         //添加单击手势识别
 //        bar.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(clickSearchBar)))
         return bar
@@ -63,15 +73,18 @@ class SearchViewController:BaseViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //2.设置搜索框
-        setSearchBar()
+        self.navigationController?.navigationBar.isTranslucent = true
+        //2.设置搜索框(返回后死机bug点，改用snapkit试试)
+        
         setCancelButton()
         searchHistoryTable.reloadData()
     }
+    
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -84,8 +97,13 @@ class SearchViewController:BaseViewController{
         
     }
     
+    
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        setSearchBar()
+        
+        
 //        let searchField = searchBar.value(forKey: "searchField") as! UITextField
 //        let placeHolderLabel = searchField.value(forKey: "placeholderLabel") as! UILabel
 //        searchField.layer.cornerRadius = searchField.frame.height / 2
@@ -102,6 +120,7 @@ class SearchViewController:BaseViewController{
 //        }
         //添加图层动画，先将其宽度缩小为0.8，然后通过CGAffineTransform.identity变回原值
         if !isSearchBarHere {
+            
             UIView.animate(withDuration: 0.01, animations: {[unowned self] in
                 self.searchBar.transform = CGAffineTransform(scaleX: 0.8, y: 1)
             }) {[unowned self] (finished) in
@@ -134,10 +153,10 @@ extension SearchViewController{
         super.setUI()
         //1.设置导航栏
         setNavigationBar()
-        //2.设置搜索框
-        setSearchBar()
+        //2.设置搜索框(无法fullscreen弹出的bug点)
+//        setSearchBar()
         //3.设置取消按钮
-        setCancelButton()
+//        setCancelButton()
         //4.设置tableView
         setTableView()
     }
@@ -155,11 +174,17 @@ extension SearchViewController{
     private func setSearchBar(){
         //设置搜索框的约束
         navigationController?.navigationBar.addSubview(searchBar)
-        let leftCon = NSLayoutConstraint(item: searchBar, attribute: .left, relatedBy: .equal, toItem: navigationController?.navigationBar, attribute: .left, multiplier: 1.0, constant: 20)
-        let rightCon = NSLayoutConstraint(item: searchBar, attribute: .right, relatedBy: .equal, toItem: navigationController?.navigationBar, attribute: .right, multiplier: 1.0, constant: -65)
-        let topCon = NSLayoutConstraint(item: searchBar, attribute: .top, relatedBy: .equal, toItem: navigationController?.navigationBar, attribute: .top, multiplier: 1.0, constant: 5)
-        let bottomCon = NSLayoutConstraint(item: searchBar, attribute: .bottom, relatedBy: .equal, toItem: navigationController?.navigationBar, attribute: .bottom, multiplier: 1.0, constant: -10)
-        self.navigationController?.navigationBar.addConstraints([leftCon, rightCon, topCon, bottomCon])
+        searchBar.snp.makeConstraints { (make) in
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-65)
+            make.top.equalToSuperview().offset(5)
+            make.bottom.equalToSuperview().offset(-10)
+        }
+//        let leftCon = NSLayoutConstraint(item: searchBar, attribute: .left, relatedBy: .equal, toItem: navigationController?.navigationBar, attribute: .left, multiplier: 1.0, constant: 20)
+//        let rightCon = NSLayoutConstraint(item: searchBar, attribute: .right, relatedBy: .equal, toItem: navigationController?.navigationBar, attribute: .right, multiplier: 1.0, constant: -65)
+//        let topCon = NSLayoutConstraint(item: searchBar, attribute: .top, relatedBy: .equal, toItem: navigationController?.navigationBar, attribute: .top, multiplier: 1.0, constant: 5)
+//        let bottomCon = NSLayoutConstraint(item: searchBar, attribute: .bottom, relatedBy: .equal, toItem: navigationController?.navigationBar, attribute: .bottom, multiplier: 1.0, constant: -10)
+//        self.navigationController?.navigationBar.addConstraints([leftCon, rightCon, topCon, bottomCon])
 //        searchBar.alpha = 0.8
     }
     

@@ -12,8 +12,8 @@ class ZhiBoViewController: ZhiBoBaseViewController {
     
     var zhiBoHistories:[ZhiBoHistoryModel] = [] {
         didSet{
-            print(oldValue.count)
-            print(zhiBoHistories.count)
+//            print(oldValue.count)
+//            print(zhiBoHistories.count)
 //            mainTable.reloadData{
 //                self.mainTable.switchRefreshHeader(to: .normal(.success, 0.5))
 //            }

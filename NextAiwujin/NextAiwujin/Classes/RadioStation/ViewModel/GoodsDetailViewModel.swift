@@ -25,11 +25,13 @@ extension GoodsDetailViewModel {
     func requestGoodsDetail(goodsID id : Int, finishCallback : @escaping () -> ()) {
         NetworkTool.requestData(type: .GET, urlString: GOODINFO_URL, parameters: ["id" : "\(id)" as NSString]) { (result) in
             //            print(result)
-            guard let resultDict = result as? [String : NSObject] else { return }
-            guard let resultCode = resultDict["code"] as? Int else { return }
+            let jsonData = JSON(result)["result"]
+            let resultCode = JSON(result)["code"]
+//            guard let resultDict = result as? [String : NSObject] else { return }
+//            guard let resultCode = resultDict["code"] as? Int else { return }
             if resultCode == 200 {
-                guard let goodsData = resultDict["result"] as? [String : NSObject] else { return }
-                self.goodsInfo = GoodInfo(dict: goodsData)
+//                guard let goodsData = resultDict["result"] as? [String : NSObject] else { return }
+                self.goodsInfo = GoodInfo(jsonData: jsonData)
                 finishCallback()
             }
         }
@@ -39,16 +41,21 @@ extension GoodsDetailViewModel {
     /// - parameter finishCallback:回调函数
     func requestGoodsProducts(goodsID id : Int, finishCallback : @escaping () -> ()){
         NetworkTool.requestData(type: .GET, urlString: GOODPRODUCT_URL, parameters: ["id" : "\(id)" as NSString]) { (result) in
-            guard let resultDict = result as? [String : NSObject] else { return }
-            guard let resultCode = resultDict["code"] as? Int else { return }
+            let jsonData = JSON(result)["result"]
+            let resultCode = JSON(result)["code"]
+//            guard let resultDict = result as? [String : NSObject] else { return }
+//            guard let resultCode = resultDict["code"] as? Int else { return }
             if resultCode == 200 {
                 //有规格数据
-                guard let productData = resultDict["result"] as? [[String : NSObject]] else { return }
+//                guard let productData = resultDict["result"] as? [[String : NSObject]] else { return }
                 self.goodsProducts = [GoodsProduct]()
                 self.productSpecs = [[ProductSpec]]()
-                for product in productData {
-                    self.goodsProducts?.append(GoodsProduct(dict: product))
+                for json in jsonData.arrayValue {
+                    self.goodsProducts?.append(GoodsProduct(jsonData: json))
                 }
+//                for product in productData {
+//                    self.goodsProducts?.append(GoodsProduct(dict: product))
+//                }
                 for product in self.goodsProducts! {
                     self.productSpecs?.append(product.productSpecs)
                 }

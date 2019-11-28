@@ -3,12 +3,12 @@
 //  Tabman
 //
 //  Created by Merrick Sapsford on 28/09/2018.
-//  Copyright © 2018 UI At Six. All rights reserved.
+//  Copyright © 2019 UI At Six. All rights reserved.
 //
 
 import UIKit
 
-public extension TMBarLayout {
+extension TMBarLayout {
     
     /// Layout that won't display any visible bar buttons.
     ///
@@ -17,6 +17,7 @@ public extension TMBarLayout {
         
         // MARK: Properties
         
+        //swiftlint:disable unused_setter_value
         @available(*, unavailable)
         public override var contentMode: TMBarLayout.ContentMode {
             set {

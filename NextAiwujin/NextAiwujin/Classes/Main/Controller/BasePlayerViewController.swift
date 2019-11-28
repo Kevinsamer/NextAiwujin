@@ -148,6 +148,7 @@ class BasePlayerViewController: BaseViewController {
 extension BasePlayerViewController{
     override func setUI() {
         super.setUI()
+        self.navigationController?.navigationBar.isTranslucent = false
         self.view.backgroundColor = .white
         self.view.addSubview(fatherView)
         if UIDevice.current.isX(){

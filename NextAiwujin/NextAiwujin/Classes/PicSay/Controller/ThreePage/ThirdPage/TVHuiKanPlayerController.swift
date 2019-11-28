@@ -113,6 +113,7 @@ class TVHuiKanPlayerController: BasePlayerViewController {
 extension TVHuiKanPlayerController{
     override func setUI() {
         super.setUI()
+        
         self.view.backgroundColor = #colorLiteral(red: 0.09803921569, green: 0.09803921569, blue: 0.09803921569, alpha: 1)
         //1.设置标题view
         setTitleView()

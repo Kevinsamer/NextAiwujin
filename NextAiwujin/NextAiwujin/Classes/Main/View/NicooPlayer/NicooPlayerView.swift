@@ -114,14 +114,30 @@ open class NicooPlayerView: UIView {
             playControllViewEmbed.closeButton.isSelected = isFullScreen!
             playControllViewEmbed.fullScreenBtn.isSelected = isFullScreen!
             playControllViewEmbed.fullScreen = isFullScreen!
-            if let view = UIApplication.shared.value(forKey: "statusBar") as? UIView {  // 状态栏变化
-                if !isFullScreen! {
-                    view.alpha = 1.0
-                } else {  // 全频
+            if #available(iOS 13.0, *) {
+                let statusBar =  UIView()
+                statusBar.frame = UIApplication.shared.statusBarFrame
+                if !isFullScreen!{
+                    statusBar.alpha = 1.0
+                }else{
                     if playControllViewEmbed.barIsHidden! { // 状态栏
-                        view.alpha = 0
+                        statusBar.alpha = 0
                     } else {
+                        statusBar.alpha = 1.0
+                    }
+                }
+                UIApplication.shared.keyWindow?.addSubview(statusBar)
+                
+            }else{
+                if let view = UIApplication.shared.value(forKey: "statusBar") as? UIView {  // 状态栏变化
+                    if !isFullScreen! {
                         view.alpha = 1.0
+                    } else {  // 全频
+                        if playControllViewEmbed.barIsHidden! { // 状态栏
+                            view.alpha = 0
+                        } else {
+                            view.alpha = 1.0
+                        }
                     }
                 }
             }
@@ -445,8 +461,12 @@ extension NicooPlayerView {
     /// - Parameter orientation: 通过KVC直接设置屏幕旋转方向
     open func interfaceOrientation(_ orientation: UIInterfaceOrientation) {
         if orientation == UIInterfaceOrientation.landscapeRight || orientation == UIInterfaceOrientation.landscapeLeft {
+            blockRotation = true
+//            DeviceTool.interfaceOrientation(.landscapeRight)
             UIDevice.current.setValue(NSNumber(integerLiteral: UIInterfaceOrientation.landscapeRight.rawValue), forKey: "orientation")
         }else if orientation == UIInterfaceOrientation.portrait {
+            blockRotation = false
+//            DeviceTool.interfaceOrientation(.portrait)
             UIDevice.current.setValue(NSNumber(integerLiteral: UIInterfaceOrientation.portrait.rawValue), forKey: "orientation")
         }
     }

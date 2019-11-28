@@ -69,7 +69,7 @@ extension AppConfigViewModel{
     class func requestZhiBoHistory(url:String, finishCallBack:@escaping (_ histories:[ZhiBoHistoryModel])->()){
         NetworkTool.requestData(type: .GET, urlString: url) { (result) in
             var models:[ZhiBoHistoryModel] = []
-            let itemsJson = JSON(result)["item"].arrayValue
+            let itemsJson = JSON(result).arrayValue
             for itemJson in itemsJson {
                 models.append(ZhiBoHistoryModel(jsonData: itemJson))
             }
@@ -84,16 +84,33 @@ extension AppConfigViewModel{
     ///   - url: 请求地址
     ///   - finishCallBack: 回调函数
     class func requestComments(url:String, finishCallBack:@escaping (_ comments: [CommentModel])->()){
-        Alamofire.request(URL(string: url)!, method: HTTPMethod.get).responseString { (result) in
-            guard let resultStr = result.value else {return}
-//            print(resultStr)
+        NetworkTool.requestData(type: .GET, urlString: url) { (result) in
+            let itemsJson = JSON(result).arrayValue
+//            print(itemsJson)
             var models:[CommentModel] = []
-            let itemsJson = JSON.init(parseJSON: resultStr)["item"].arrayValue
             for itemJson in itemsJson {
                 models.append(CommentModel(jsonData: itemJson))
             }
+
             finishCallBack(models)
         }
+//        AF.request(URL(string: url)!, method: HTTPMethod.get).responseJSON(queue: DispatchQueue.main) { (result) in
+//            print(result.value)
+//        }
+        
+//        AF.request(URL(string: url)!, method: HTTPMethod.get).responseString{ (result) in
+//            guard let resultStr = result.value else {return}
+//
+//            let itemsJson = JSON(resultStr).arrayValue
+//
+//            print(itemsJson)
+//            var models:[CommentModel] = []
+//            for itemJson in itemsJson {
+//                models.append(CommentModel(jsonData: itemJson))
+//            }
+//
+//            finishCallBack(models)
+//        }
     }
     
     
@@ -106,7 +123,7 @@ extension AppConfigViewModel{
     ///   - rid: 暂时固定为8
     ///   - finishCallBack: 回调函数
     class func requestPostComments(url:String, content:String, imageURL:String, rid:Int, finishCallBack:@escaping ()->()){
-        Alamofire.request(URL(string: url)!, method: HTTPMethod.post, parameters: ["content":"\(content)", "rid":"\(rid)", "headimgurl":"\(imageURL)"]).responseString { (result) in
+        AF.request(URL(string: url)!, method: HTTPMethod.post, parameters: ["content":"\(content)", "rid":"\(rid)", "headimgurl":"\(imageURL)"]).responseString { (result) in
             finishCallBack()
         }
     }

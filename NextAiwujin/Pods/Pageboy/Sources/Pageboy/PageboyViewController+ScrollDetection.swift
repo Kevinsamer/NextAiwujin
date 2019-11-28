@@ -30,7 +30,9 @@ extension PageboyViewController: UIPageViewControllerDelegate {
         guard pageViewControllerIsActual(pageViewController) else {
             return
         }
-        guard let viewController = pendingViewControllers.first, let index = viewControllerMap[viewController] else {
+        
+        guard let viewController = pendingViewControllers.first,
+            let index = viewControllerIndexMap.index(for: viewController) else {
                 return
         }
 
@@ -46,16 +48,29 @@ extension PageboyViewController: UIPageViewControllerDelegate {
                                    didFinishAnimating finished: Bool,
                                    previousViewControllers: [UIViewController],
                                    transitionCompleted completed: Bool) {
-        guard pageViewControllerIsActual(pageViewController), completed else {
+        guard pageViewControllerIsActual(pageViewController) else {
+            return }
+                
+        guard completed else {
+            guard let expectedIndex = expectedTransitionIndex else {
+                return }
+            
+            guard let viewController = previousViewControllers.first,
+                let previousIndex = viewControllerIndexMap.index(for: viewController) else {
+                    return
+            }
+            
+            delegate?.pageboyViewController(self,
+                                            didCancelScrollToPageAt: expectedIndex,
+                                            returnToPageAt: previousIndex)
             return }
         
-        if let viewController = pageViewController.viewControllers?.first, let index = viewControllerMap[viewController] {
-            guard index == expectedTransitionIndex else {
-                return
-            }
+        guard let viewController = pageViewController.viewControllers?.first,
+            let index = viewControllerIndexMap.index(for: viewController),
+            index == expectedTransitionIndex else {
+            return }
 
-            updateCurrentPageIndexIfNeeded(index)
-        }
+        updateCurrentPageIndexIfNeeded(index)
     }
 }
 

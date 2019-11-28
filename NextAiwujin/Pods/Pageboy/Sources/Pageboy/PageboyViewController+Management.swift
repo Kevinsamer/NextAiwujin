@@ -9,7 +9,7 @@
 import UIKit
 
 // MARK: - VC Reloading
-public extension PageboyViewController {
+extension PageboyViewController {
     
     /// Reload the view controllers in the page view controller.
     /// This reloads the dataSource entirely, calling viewControllers(forPageboyViewController:)
@@ -24,7 +24,7 @@ public extension PageboyViewController {
     internal func reloadData(reloadViewControllers: Bool) {
 
         if reloadViewControllers {
-            viewControllerMap.removeAll()
+            viewControllerIndexMap.removeAll()
         }
 
         let newViewControllerCount = dataSource?.numberOfViewControllers(in: self) ?? 0
@@ -38,13 +38,17 @@ public extension PageboyViewController {
                 return
         }
         
-        updateViewControllers(to: [viewController], animated: false, async: false, force: false) { [weak self] _ in
-            self?.currentIndex = defaultIndex
-            if let self = self {
-                self.delegate?.pageboyViewController(self,
-                                                     didReloadWith: viewController,
-                                                     currentPageIndex: defaultIndex)
+        updateViewControllers(to: [viewController], animated: false, async: false, force: false) { [weak self, defaultIndex, viewController] _ in
+
+            guard let hasSelf = self else {
+                /// Self DNE
+                return
             }
+
+            hasSelf.currentIndex = defaultIndex
+            hasSelf.delegate?.pageboyViewController(hasSelf,
+                                                    didReloadWith: viewController,
+                                                    currentPageIndex: defaultIndex)
         }
     }
     
@@ -67,7 +71,7 @@ public extension PageboyViewController {
 
 // MARK: - VC Updating
 internal extension PageboyViewController {
-    
+
     func updateViewControllers(to viewControllers: [UIViewController],
                                from fromIndex: PageIndex = 0,
                                to toIndex: PageIndex = 0,
@@ -76,6 +80,28 @@ internal extension PageboyViewController {
                                async: Bool,
                                force: Bool,
                                completion: TransitionOperation.Completion?) {
+
+        DispatchQueue.executeInMainThread {
+            self._updateViewControllers(to: viewControllers,
+                                        from: fromIndex,
+                                        to: toIndex,
+                                        direction: direction,
+                                        animated: animated,
+                                        async: async,
+                                        force: force,
+                                        completion: completion)
+        }
+    }
+    
+    private func _updateViewControllers(to viewControllers: [UIViewController],
+                                        from fromIndex: PageIndex = 0,
+                                        to toIndex: PageIndex = 0,
+                                        direction: NavigationDirection = .forward,
+                                        animated: Bool,
+                                        async: Bool,
+                                        force: Bool,
+                                        completion: TransitionOperation.Completion?) {
+
         guard let pageViewController = pageViewController else {
             return
         }
@@ -98,21 +124,25 @@ internal extension PageboyViewController {
         
         // if not using a custom transition then animate using UIPageViewController mechanism
         let animateUpdate = animated ? !isUsingCustomTransition : false
-        let updateBlock = { [weak self] in
-            guard let self = self else {
+
+        let updateBlock = { [weak self, direction, animateUpdate, viewControllers, animated, isUsingCustomTransition] in
+            guard let hasSelf = self else {
                 return
             }
             pageViewController.setViewControllers(viewControllers,
-                                                  direction: direction.layoutNormalized(isRtL: self.view.layoutIsRightToLeft).rawValue,
+                                                  direction: direction.layoutNormalized(isRtL: hasSelf.view.layoutIsRightToLeft).rawValue,
                                                   animated: animateUpdate,
-                                                  completion:
-                { (finished) in
-                    self.isUpdatingViewControllers = false
-                    
-                    if !animated || !isUsingCustomTransition {
-                        completion?(finished)
-                    }
-            })
+                                                  completion: { [weak self, animated, isUsingCustomTransition, completion] (finished) in
+
+                                                        guard let hasSelf = self else {
+                                                            return
+                                                        }
+                                                        hasSelf.isUpdatingViewControllers = false
+
+                                                        if !animated || !isUsingCustomTransition {
+                                                            completion?(finished)
+                                                        }
+                                                  })
         }
         
         // Attempt to fix issue where fast scrolling causes crash.
@@ -128,16 +158,16 @@ internal extension PageboyViewController {
 }
 
 // MARK: - Data Source interaction
-internal extension PageboyViewController {
+extension PageboyViewController {
     
     /// Load view controller from the data source.
     ///
     /// - Parameter index: Index of the view controller to load.
     /// - Returns: View controller if it exists.
-    func fetchViewController(at index: PageIndex) -> UIViewController? {
+    internal func fetchViewController(at index: PageIndex) -> UIViewController? {
         let viewController = dataSource?.viewController(for: self, at: index)
         if let viewController = viewController {
-            viewControllerMap[viewController] = index
+            viewControllerIndexMap.set(index, for: viewController)
         }
         return viewController
     }
@@ -151,16 +181,16 @@ internal extension PageboyViewController {
     /// Set up inner UIPageViewController ready for displaying pages.
     ///
     /// - Parameter reloadViewControllers: Reload the view controllers data source for the PageboyViewController.
-    internal func setUpPageViewController(reloadViewControllers: Bool = true) {
+    func setUpPageViewController(reloadViewControllers: Bool = true) {
         let existingZIndex: Int?
         if let pageViewController = self.pageViewController { // destroy existing page VC
-            existingZIndex = view.subviews.index(of: pageViewController.view)
+            existingZIndex = view.subviews.firstIndex(of: pageViewController.view)
             destroyCurrentPageViewController()
         } else {
             existingZIndex = nil
         }
         
-        let pageViewController = UIPageViewController(transitionStyle: .scroll,
+        let pageViewController = PatchedPageViewController(transitionStyle: .scroll,
                                                       navigationOrientation: navigationOrientation,
                                                       options: pageViewControllerOptions)
         pageViewController.delegate = self
@@ -209,7 +239,7 @@ internal extension PageboyViewController {
     }
     
     /// Re-initialize the internal UIPageViewController instance without reloading data source if it currently exists.
-    internal func reconfigurePageViewController() {
+    func reconfigurePageViewController() {
         guard pageViewController != nil else {
             return
         }
@@ -218,28 +248,28 @@ internal extension PageboyViewController {
     
     #if swift(>=4.2)
     /// The options to be passed to a UIPageViewController instance.
-    internal var pageViewControllerOptions: [UIPageViewController.OptionsKey: Any]? {
+    var pageViewControllerOptions: [UIPageViewController.OptionsKey: Any]? {
         var options = [UIPageViewController.OptionsKey: Any]()
         
         if interPageSpacing > 0.0 {
             options[.interPageSpacing] = interPageSpacing
         }
         
-        guard options.count > 0 else {
+        guard !options.isEmpty else {
             return nil
         }
         return options
     }
     #else
     /// The options to be passed to a UIPageViewController instance.
-    internal var pageViewControllerOptions: [String: Any]? {
+    var pageViewControllerOptions: [String: Any]? {
         var options = [String: Any]()
         
         if interPageSpacing > 0.0 {
             options[UIPageViewControllerOptionInterPageSpacingKey] = interPageSpacing
         }
         
-        guard options.count > 0 else {
+        guard !options.isEmpty else {
             return nil
         }
         return options

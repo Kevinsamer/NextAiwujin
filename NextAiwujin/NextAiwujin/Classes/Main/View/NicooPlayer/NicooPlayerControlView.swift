@@ -205,9 +205,19 @@ class NicooPlayerControlView: UIView {
                 if self.fullScreen! && !self.screenIsLock! {
                     screenLockButton.isHidden = barIsHiden
                 }
-                if let view = UIApplication.shared.value(forKey: "statusBar") as? UIView {  //根据 barIsHiden 改变状态栏的透明度
+                if #available(iOS 13.0, *) {
+                    let statusBar =  UIView()
+                    statusBar.frame = UIApplication.shared.statusBarFrame
                     if fullScreen! {
-                        view.alpha = barIsHiden ? 0 : 1.0
+                        statusBar.alpha = barIsHiden ? 0 : 1.0
+                    }
+                    UIApplication.shared.keyWindow?.addSubview(statusBar)
+                    
+                }else{
+                    if let view = UIApplication.shared.value(forKey: "statusBar") as? UIView {  //根据 barIsHiden 改变状态栏的透明度
+                        if fullScreen! {
+                            view.alpha = barIsHiden ? 0 : 1.0
+                        }
                     }
                 }
             }

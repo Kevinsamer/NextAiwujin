@@ -16,14 +16,13 @@ class MainViewController: UITabBarController {
         self.delegate = self
 //        self.tabBar.shadowImage = UIImage(named: "transparent")
 //        self.tabBar.backgroundImage = UIImage(named: "background_dark")
-
+        self.modalPresentationStyle = .fullScreen
         addChildrenController("PicSay")
         addChildrenController("News")
-//        addChildrenController("Forum")
+        addChildrenController("Forum")
         addChildrenController("RadioStation")
         addChildrenController("MyCenter")
         // Do any additional setup after loading the view.
-        
 //        let picSayVC = UIViewController()
 //        let newsVC = UIViewController()
 //        let forumVC = UIViewController()

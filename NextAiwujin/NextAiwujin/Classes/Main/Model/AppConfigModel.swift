@@ -428,11 +428,19 @@ class ZhiBoHistoryModel{
     var time:String = ""
     var rid:String = ""
     
+//    init(jsonData:JSON) {
+//        title = jsonData["title"].stringValue
+//        videofile = jsonData["videofile"].stringValue
+//        titlepic = jsonData["titlepic"].stringValue
+//        time = jsonData["time"].stringValue
+//        rid = jsonData["rid"].stringValue
+//    }
+    
     init(jsonData:JSON) {
         title = jsonData["title"].stringValue
-        videofile = jsonData["videofile"].stringValue
-        titlepic = jsonData["titlepic"].stringValue
-        time = jsonData["time"].stringValue
+        videofile = jsonData["host"].stringValue + jsonData["dir"].stringValue + jsonData["filedate"].stringValue + jsonData["videofile"].stringValue
+        titlepic = jsonData["host"].stringValue + jsonData["dir"].stringValue + jsonData["filedate"].stringValue + jsonData["thumbnail"].stringValue
+        time = jsonData["newspath"].stringValue
         rid = jsonData["rid"].stringValue
     }
 }

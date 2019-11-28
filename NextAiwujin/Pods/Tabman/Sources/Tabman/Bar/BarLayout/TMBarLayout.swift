@@ -3,7 +3,7 @@
 //  Tabman
 //
 //  Created by Merrick Sapsford on 30/05/2018.
-//  Copyright © 2018 UI At Six. All rights reserved.
+//  Copyright © 2019 UI At Six. All rights reserved.
 //
 
 import UIKit
@@ -15,9 +15,24 @@ open class TMBarLayout: TMBarViewFocusProvider, TMTransitionStyleable {
     
     // MARK: Types
     
+    /// How to display the contents of the layout.
+    ///
+    /// - intrinsic: The layout and contents will be intrinsically sized, taking up as much space as required.
+    /// - fit: The layout and it's contents will be restricted to fitting within the bounds of the bar.
     public enum ContentMode {
         case intrinsic
         case fit
+    }
+    
+    /// How to align the layout in the parent.
+    ///
+    /// - .leading: The layout will be aligned from the leading edge of the parent.
+    /// - .center: The layout will be aligned from the center of the parent.
+    /// - .trailing: The layout will be aligned from the trailing edge of the parent.
+    public enum Alignment {
+        case leading
+        case center
+        case trailing
     }
     
     // MARK: Properties
@@ -54,7 +69,7 @@ open class TMBarLayout: TMBarViewFocusProvider, TMTransitionStyleable {
         }
     }
     /// Inset to apply to the outside of the layout.
-    public var contentInset: UIEdgeInsets {
+    open var contentInset: UIEdgeInsets {
         set {
             insetGuides.insets = newValue
             parent.contentInset = newValue
@@ -70,7 +85,21 @@ open class TMBarLayout: TMBarViewFocusProvider, TMTransitionStyleable {
             return parent.transitionStyle
         }
     }
-    
+    /**
+     How to align the layout in the bar.
+     
+     Options:
+     - `.leading`: The layout will be aligned from the leading edge of the parent.
+     - `.center`: The layout will be aligned from the center of the parent.
+     - `.trailing`: The layout will be aligned from the trailing edge of the parent.
+     */
+    public var alignment: Alignment {
+        set {
+            parent.alignment = newValue
+        } get {
+            return parent.alignment
+        }
+    }
     // MARK: Init
     
     public required init() {}
@@ -115,6 +144,15 @@ open class TMBarLayout: TMBarViewFocusProvider, TMTransitionStyleable {
     /// - Returns: Calculated focus rect.
     open func focusArea(for position: CGFloat, capacity: Int) -> CGRect {
         return .zero
+    }
+    
+    /// Inform that the layout requires a reload of its contents.
+    ///
+    /// - Note: This will only be applied if the layout has previously
+    /// had content provided.
+    ///
+    open func setNeedsReload() {
+        parent.layout(needsReload: self)
     }
 }
 

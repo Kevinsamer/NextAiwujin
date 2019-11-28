@@ -14,6 +14,7 @@ class MyNavigationController: UINavigationController, UINavigationControllerDele
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.modalPresentationStyle = .fullScreen
         setUI()
     }
     
@@ -36,6 +37,8 @@ class MyNavigationController: UINavigationController, UINavigationControllerDele
 extension MyNavigationController{
     func setUI(){
         //1.设置导航栏基本属性
+        navigationController?.navigationBar.setColors(background: .white, text: .white)
+//        navigationController?.navigationBar.barTintColor = .white
 //        navBarTitleColor = .white
 //        navBarTintColor = .white
         navigationController?.view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)

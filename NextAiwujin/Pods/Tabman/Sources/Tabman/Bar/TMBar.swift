@@ -3,7 +3,7 @@
 //  Tabman
 //
 //  Created by Merrick Sapsford on 28/05/2018.
-//  Copyright © 2018 UI At Six. All rights reserved.
+//  Copyright © 2019 UI At Six. All rights reserved.
 //
 
 import UIKit
@@ -55,6 +55,7 @@ public enum TMBarUpdateDirection {
 }
 
 /// `BaseTMBar` is a base protocol of AnyObject to avoid Swift compiler error
+/// :nodoc:
 public protocol BaseTMBar: AnyObject { }
 
 /// `TMBar` is a protocol that is constrained to `UIView` types. Conforming view types can be added to

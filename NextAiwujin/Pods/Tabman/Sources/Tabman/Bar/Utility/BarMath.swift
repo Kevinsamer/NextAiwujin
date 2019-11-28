@@ -3,10 +3,10 @@
 //  Tabman
 //
 //  Created by Merrick Sapsford on 07/06/2018.
-//  Copyright © 2018 UI At Six. All rights reserved.
+//  Copyright © 2019 UI At Six. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class BarMath {
     

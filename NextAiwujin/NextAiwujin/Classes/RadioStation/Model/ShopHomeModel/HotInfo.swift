@@ -66,11 +66,20 @@
 //]
 
 import Foundation
-
-class HotInfo:BaseModel {
+import SwiftyJSON
+//BaseModel
+class HotInfo {
     @objc var img:String = ""//图片路径
     @objc var sell_price:String = ""//销售价格
     @objc var name:String = ""//商品名
     @objc var id:Int = 0//商品id
     @objc var market_price:String = ""//原价
+    
+    init(jsonData:JSON){
+        img = jsonData["img"].stringValue
+        sell_price = jsonData["sell_price"].stringValue
+        name = jsonData["name"].stringValue
+        id = jsonData["id"].intValue
+        market_price = jsonData["market_price"].stringValue
+    }
 }

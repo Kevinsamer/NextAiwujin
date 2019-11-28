@@ -80,6 +80,7 @@ class MyCenterViewController: BaseTrunclentViewController {
 //        navBarBackgroundAlpha = 0
         // Do any additional setup after loading the view.
 //        setUI()
+        
     }
     
     

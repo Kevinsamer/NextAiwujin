@@ -3,7 +3,7 @@
 //  Tabman
 //
 //  Created by Merrick Sapsford on 06/06/2018.
-//  Copyright © 2018 UI At Six. All rights reserved.
+//  Copyright © 2019 UI At Six. All rights reserved.
 //
 
 import UIKit
@@ -19,6 +19,7 @@ open class TMLabelBarButton: TMBarButton {
         static let contentInset = UIEdgeInsets(top: 12.0, left: 0.0, bottom: 12.0, right: 0.0)
         static let font = UIFont.systemFont(ofSize: 17.0, weight: .semibold)
         static let text = "Item"
+        static let badgeLeadingInset: CGFloat = 8.0
     }
     
     // MARK: Properties
@@ -32,6 +33,9 @@ open class TMLabelBarButton: TMBarButton {
     private var fontIntrinsicContentSize: CGSize?
     
     private let label = AnimateableLabel()
+    private let badgeContainer = UIView()
+    private var badgeContainerLeading: NSLayoutConstraint?
+    private var badgeContainerWidth: NSLayoutConstraint?
     
     open override var contentInset: UIEdgeInsets {
         set {
@@ -92,24 +96,70 @@ open class TMLabelBarButton: TMBarButton {
         super.layout(in: view)
         
         view.addSubview(label)
+        view.addSubview(badgeContainer)
         label.translatesAutoresizingMaskIntoConstraints = false
+        badgeContainer.translatesAutoresizingMaskIntoConstraints = false
+        let badgeContainerLeading = badgeContainer.leadingAnchor.constraint(equalTo: label.trailingAnchor)
+        let badgeContainerWidth = badgeContainer.widthAnchor.constraint(equalToConstant: 0.0)
         let constraints = [
-            view.leadingAnchor.constraint(equalTo: label.leadingAnchor),
-            view.topAnchor.constraint(equalTo: label.topAnchor),
-            view.trailingAnchor.constraint(equalTo: label.trailingAnchor),
-            view.bottomAnchor.constraint(equalTo: label.bottomAnchor)
+            label.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            label.topAnchor.constraint(greaterThanOrEqualTo: view.topAnchor),
+            view.bottomAnchor.constraint(greaterThanOrEqualTo: label.bottomAnchor),
+            label.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            badgeContainerLeading,
+            badgeContainer.topAnchor.constraint(equalTo: view.topAnchor),
+            view.trailingAnchor.constraint(equalTo: badgeContainer.trailingAnchor),
+            view.bottomAnchor.constraint(equalTo: badgeContainer.bottomAnchor),
+            badgeContainerWidth
         ]
+        self.badgeContainerLeading = badgeContainerLeading
+        self.badgeContainerWidth = badgeContainerWidth
+        
         NSLayoutConstraint.activate(constraints)
         
         label.textAlignment = .center
+        label.setContentCompressionResistancePriority(.required, for: .vertical)
         
+        adjustsAlphaOnSelection = false
         label.text = Defaults.text
         label.font = self.font
-        selectedTintColor = tintColor
-        tintColor = .black
-        self.contentInset = Defaults.contentInset
+        if #available(iOS 13, *) {
+            tintColor = .label
+        } else {
+            tintColor = .black
+        }
+        selectedTintColor = .systemBlue
+        contentInset = Defaults.contentInset
         
         calculateFontIntrinsicContentSize(for: label.text)
+    }
+    
+    open override func layoutBadge(_ badge: TMBadgeView, in view: UIView) {
+        super.layoutBadge(badge, in: view)
+        
+        badgeContainer.addSubview(badge)
+        badge.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            badge.leadingAnchor.constraint(equalTo: badgeContainer.leadingAnchor),
+            badge.topAnchor.constraint(greaterThanOrEqualTo: badgeContainer.topAnchor),
+            badgeContainer.bottomAnchor.constraint(greaterThanOrEqualTo: badge.bottomAnchor),
+            badge.centerYAnchor.constraint(equalTo: badgeContainer.centerYAnchor)
+            ])
+    }
+    
+    open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        UIView.performWithoutAnimation {
+            update(for: selectionState)
+        }
+    }
+    
+    open override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        badge.layoutIfNeeded()
+        updateBadgeConstraints()
     }
     
     open override func populate(for item: TMBarItemable) {
@@ -117,9 +167,12 @@ open class TMLabelBarButton: TMBarButton {
         
         label.text = item.title
         calculateFontIntrinsicContentSize(for: item.title)
+    
+        updateBadgeConstraints()
     }
     
     open override func update(for selectionState: TMBarButton.SelectionState) {
+        super.update(for: selectionState)
         
         let transitionColor = tintColor.interpolate(with: selectedTintColor,
                                                     percent: selectionState.rawValue)
@@ -139,6 +192,14 @@ open class TMLabelBarButton: TMBarButton {
                 }, completion: nil)
             }
         }
+    }
+    
+    // MARK: Layout
+    
+    private func updateBadgeConstraints() {
+        let isBadgeVisible = badge.value != nil
+        badgeContainerWidth?.constant =  isBadgeVisible ? badge.bounds.size.width : 0.0
+        badgeContainerLeading?.constant = isBadgeVisible ? Defaults.badgeLeadingInset : 0.0
     }
 }
 

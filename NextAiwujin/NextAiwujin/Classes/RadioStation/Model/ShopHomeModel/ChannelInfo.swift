@@ -122,8 +122,9 @@ import Foundation
 //)
 
 import Foundation
-
-class ChannelInfo:BaseModel {
+import SwiftyJSON
+//BaseModel
+class ChannelInfo {
     @objc var descript:String = ""
     @objc var id:Int = -111
     @objc var keywords:String = ""
@@ -135,4 +136,16 @@ class ChannelInfo:BaseModel {
     @objc var visibility:Int = 0
 //    @objc var img:String = ""//Channel img 路径
 //    @objc var gride:Int = 0
+    
+    init(jsonData:JSON) {
+        descript = jsonData["descript"].stringValue
+        id = jsonData["id"].intValue
+        keywords = jsonData["keywords"].stringValue
+        name = jsonData["name"].stringValue
+        parent_id = jsonData["parent_id"].intValue
+        seller_id = jsonData["seller_id"].intValue
+        sort = jsonData["sort"].intValue
+        title = jsonData["title"].stringValue
+        visibility = jsonData["visibility"].intValue
+    }
 }

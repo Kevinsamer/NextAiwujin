@@ -9,24 +9,23 @@
 import UIKit
 
 extension UICollectionView: CollectionSkeleton {
-    
     var estimatedNumberOfRows: Int {
         guard let flowlayout = collectionViewLayout as? UICollectionViewFlowLayout else { return 0 }
         return Int(ceil(frame.height/flowlayout.itemSize.height))
     }
     
     var skeletonDataSource: SkeletonCollectionDataSource? {
-        get { return objc_getAssociatedObject(self, &CollectionAssociatedKeys.dummyDataSource) as? SkeletonCollectionDataSource }
+        get { return ao_get(pkey: &CollectionAssociatedKeys.dummyDataSource) as? SkeletonCollectionDataSource }
         set {
-            objc_setAssociatedObject(self, &CollectionAssociatedKeys.dummyDataSource, newValue, AssociationPolicy.retain.objc)
+            ao_setOptional(newValue, pkey: &CollectionAssociatedKeys.dummyDataSource)
             self.dataSource = newValue
         }
     }
     
     var skeletonDelegate: SkeletonCollectionDelegate? {
-        get { return objc_getAssociatedObject(self, &CollectionAssociatedKeys.dummyDelegate) as? SkeletonCollectionDelegate }
+        get { return ao_get(pkey: &CollectionAssociatedKeys.dummyDelegate) as? SkeletonCollectionDelegate }
         set {
-            objc_setAssociatedObject(self, &CollectionAssociatedKeys.dummyDelegate, newValue, AssociationPolicy.retain.objc)
+            ao_setOptional(newValue, pkey: &CollectionAssociatedKeys.dummyDelegate)
             self.delegate = newValue
         }
     }
@@ -39,6 +38,14 @@ extension UICollectionView: CollectionSkeleton {
         let dataSource = SkeletonCollectionDataSource(collectionViewDataSource: originalDataSource)
         self.skeletonDataSource = dataSource
         reloadData()
+    }
+    
+    func updateDummyDataSource() {
+        if (dataSource as? SkeletonCollectionDataSource) != nil {
+            reloadData()
+        } else {
+            addDummyDataSource()
+        }
     }
     
     func removeDummyDataSource(reloadAfter: Bool) {

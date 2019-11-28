@@ -13,7 +13,7 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
-        
+        self.modalPresentationStyle = .fullScreen
         // Do any additional setup after loading the view.
     }
     
@@ -34,8 +34,13 @@ extension BaseViewController{
         self.view.backgroundColor = .white
         self.navigationController?.navigationBar.setBackgroundImage(#imageLiteral(resourceName: "navi_bg"), for: UIBarPosition.topAttached, barMetrics: UIBarMetrics.default)
 //        self.navigationController?.navigationBar.barTintColor = UIColor.init(r: 127, g: 125, b: 201, alpha: 1)
-        navBarTintColor = .white
-        navBarTitleColor = .white
+//        EFNavigationBar.defaultNavBarTitleColor = .white
+//        EFNavigationBar.defaultNavBarTitleColor = .white
+        self.navigationController?.navigationBar.setColors(background: .white, text: .white)
+        self.navigationController?.navigationBar.isTranslucent = true
+//        self.navigationController?.navigationBar.tintColor = .white
+//        navBarTintColor = .white
+//        navBarTitleColor = .white
 //        navigationController?.navigationBar.tintColor = .yellow
         //2.初始化数据
         initData()

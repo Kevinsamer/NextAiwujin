@@ -3,7 +3,11 @@ import UIKit
 extension UISearchBar {
     
     var textField: UITextField? {
-        return value(forKey: "searchField") as? UITextField
+        if #available(iOS 13.0, *){
+            return self.searchTextField
+        }else{
+            return value(forKey: "searchField") as? UITextField
+        }
     }
     
     func setSearchIcon(image: UIImage) {

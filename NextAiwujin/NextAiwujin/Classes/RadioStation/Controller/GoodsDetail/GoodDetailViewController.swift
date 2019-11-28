@@ -278,8 +278,8 @@ extension GoodDetailViewController{
     }
     
     private func setNavigationBar(){
-        self.navBarTintColor = .white
-        self.navBarTitleColor = .white
+//        self.navBarTintColor = .white
+//        self.navBarTitleColor = .white
         self.navigationController?.navigationBar.setBackgroundImage(#imageLiteral(resourceName: "navi_bg"), for: UIBarPosition.topAttached, barMetrics: UIBarMetrics.default)
     }
     

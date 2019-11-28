@@ -113,6 +113,11 @@ class NewsViewController: TabmanViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isTranslucent = false
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         
     }
 
@@ -120,8 +125,8 @@ class NewsViewController: TabmanViewController {
 //MARK: - 设置UI
 extension NewsViewController{
      private func setUI() {
-        navBarTintColor = .white
-        navBarTitleColor = .white
+//        navBarTintColor = .black
+//        navBarTitleColor = .blue
         //0.初始化数据
 //        DispatchQueue.main.async {
 //            self.initData()
@@ -131,7 +136,7 @@ extension NewsViewController{
         self.navigationController?.navigationBar.setBackgroundImage(#imageLiteral(resourceName: "navi_bg"), for: UIBarPosition.topAttached, barMetrics: UIBarMetrics.default)
         
         
-        
+//        self.navigationController?.navigationBar.isTranslucent = false
         self.navigationItem.title = "新闻资讯"
         //2.设置顶部滑动换页控件
         setTMButtonBar()

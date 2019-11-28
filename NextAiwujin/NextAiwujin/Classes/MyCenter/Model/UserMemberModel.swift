@@ -9,7 +9,9 @@
 import Foundation
 import SwiftyJSON
 
-class UserMemberModel:BaseModel {
+class UserMemberModel {
+//    var time:String = ""//时间戳
+    var result:JSON = JSON()
     @objc var id:Int = 0//用户id
     @objc var username:String = ""//用户名
     @objc var password:String = ""//密码
@@ -37,4 +39,32 @@ class UserMemberModel:BaseModel {
     @objc var email:String = ""//邮箱
     var local_pd:String = ""
     
+    init(jsonData: JSON){
+        result = jsonData
+        id = result["id"].intValue
+        username = result["username"].stringValue
+        password = result["password"].stringValue
+        head_ico = result["head_ico"].stringValue
+        user_id = result["user_id"].intValue
+        true_name = result["true_name"].stringValue
+        telephone = result["telephone"].stringValue
+        mobile = result["mobile"].stringValue
+        area = result["area"].stringValue
+        contact_addr = result["contact_addr"].stringValue
+        qq = result["qq"].stringValue
+        sex = result["sex"].intValue
+        birthday = result["birthday"].stringValue
+        group_id = result["group_id"].intValue
+        exp = result["exp"].intValue
+        point = result["point"].intValue
+        message_ids = result["message_ids"].stringValue
+        time = result["time"].stringValue
+        zip = result["zip"].stringValue
+        status = result["status"].intValue
+        prop = result["prop"].stringValue
+        balance = result["balance"].floatValue
+        last_login = result["last_login"].stringValue
+        custom = result["custom"].stringValue
+        email = result["email"].stringValue
+    }
 }

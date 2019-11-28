@@ -68,7 +68,7 @@ open class CommentsViewController: UITableViewController, SwipeTableViewCellDele
         super.viewDidLoad()
         
         // Tableview style
-        tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
 
         if #available(iOS 11.0, *) {
             tableView.estimatedRowHeight = 0
@@ -151,7 +151,7 @@ open class CommentsViewController: UITableViewController, SwipeTableViewCellDele
                 tableView.insertRows(at: indexPaths, with: .bottom)
                 
                 if makeExpandedCellsVisible {
-                    tableView.scrollToRow(at: IndexPath(row: selectedIndex+1, section: indexPath.section), at: UITableViewScrollPosition.middle, animated: false)
+                    tableView.scrollToRow(at: IndexPath(row: selectedIndex+1, section: indexPath.section), at: UITableView.ScrollPosition.middle, animated: false)
                 }
                 delegate?.commentCellExpanded(atIndex: selectedIndex)
             }

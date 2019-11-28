@@ -7,6 +7,12 @@
 //
 
 import Foundation
-class GoodsPhoto:BaseModel {
+import SwiftyJSON
+//BaseModel
+class GoodsPhoto {
     @objc var img:String = ""//详情页轮播图片
+    
+    init(jsonData:JSON){
+        img = jsonData["img"].stringValue
+    }
 }

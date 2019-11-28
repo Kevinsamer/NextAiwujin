@@ -12,7 +12,8 @@ import Alamofire
 ///新闻数据接口
 let API_ConfigFile="http://www.wjyanghu.com/API/AppConfig_v2.html"
 ///直播回看数据接口
-let API_ZhiBoHistory = "http://www.wjyanghu.com/API/backtosee.html"
+//let API_ZhiBoHistory = "http://www.wjyanghu.com/API/backtosee.html"
+let API_ZhiBoHistory = "http://tp.wjyanghu.com/zbhk/json.php"
 ///评论数据接口
 let API_Comments = "http://tp.wjyanghu.com/wxzb/comment/result.php"
 ///发表评论接口
@@ -29,70 +30,70 @@ let BASE_URL = "https://shop.wjyanghu.com/"
 
 //-----以下接口分为测试版和正式版
 //-----测试版
-let HOMEDATA_URL = BASE_URL + "app/home"//首页数据接口
-let GOODINFO_URL = BASE_URL + "app/goodinfo"//商品详情数据库接口,传商品id
-let GOODPRODUCT_URL = BASE_URL + "app/getSpecification"//规格接口,传商品id
-let SEARCH_URL = BASE_URL + "app/getSearch"//搜索接口 传搜索内容和分页数,价格上下限(min_price/max_pirce:Int)
-let CATEGORYLIST_URL = BASE_URL + "app/getGoodslist"//分类搜索结果  传分类id和分页数
-let CATEGORYS_URL = BASE_URL + "app/typeleft"//分类数据接口  可选参数父分类id
-let LOGIN_URL = BASE_URL + "app/login_act"//登录接口
-let REGISTER_URL = BASE_URL + "app/reg_act"//注册接口
-let CARTINFO_URL = BASE_URL + "app/cart"//购物车数据接口
-let GETADDRESS_URL = BASE_URL + "app/getaddress"//得到用户所有地址，传id(user_id)
-let ISDEFAULTADDRESS_URL = BASE_URL + "app/getDefaultaddress"//获得用户默认地址接口,传递用户id
-///预览订单数据接口(购物车整体结算传值为is_phone=true,商品单个结算时传值增加id:商品id或者货品id,type:goods或者product,num:购买数量)
-let PREVIEWORDER_URL = BASE_URL + "simple/cart2"
-//let PREVIEWORDER_URL = BASE_URL + "iosapp/cart2"//正式版接口地址
-///提交订单数据接口
-let POSTORDER_URL = BASE_URL + "simple/cart3"
-//let POSTORDER_URL = BASE_URL + "iosapp/cart3"//正式版接口地址
-///我的订单数据接口(传用户id 分页数)
-let MYORDERLIST_URL = BASE_URL + "app/getOrderList"
-///订单商品列表接口(传订单id,is_send 0未发货  1已发货)
-let ORDERGOODS_URL = BASE_URL + "app/iosgetordergoods"
-///订单详情接口(传订单id，is_phone)
-let ORDERDETAIL_URL = BASE_URL + "ucenter/order_detail"
-///修改订单状态接口，(传订单id和status)
-let UPDATEORDER_URL = BASE_URL + "app/updateOrder"
-///修改密码接口(传原密码、新密码、重复新密码)
-let PASSWORDEDIT_URL = BASE_URL + "app/password_edit"
-///修改资料接口
-let INFOEDITACT_URL = BASE_URL + "app/info_edit_act"
-///用户资料接口
-let MYINFO_URL = BASE_URL + "app/my_info"
-
-//-----正式版
-//let HOMEDATA_URL = BASE_URL + "iosapp/home"//首页数据接口
-//let GOODINFO_URL = BASE_URL + "iosapp/goodinfo"//商品详情数据库接口,传商品id
-//let GOODPRODUCT_URL = BASE_URL + "iosapp/getSpecification"//规格接口,传商品id
-//let SEARCH_URL = BASE_URL + "iosapp/getSearch"//搜索接口 传搜索内容和分页数,价格上下限(min_price/max_pirce:Int)
-//let CATEGORYLIST_URL = BASE_URL + "iosapp/getGoodslist"//分类搜索结果  传分类id和分页数
-//let CATEGORYS_URL = BASE_URL + "iosapp/typeleft"//分类数据接口  可选参数父分类id
-//let LOGIN_URL = BASE_URL + "iosapp/login_act"//登录接口
-//let REGISTER_URL = BASE_URL + "iosapp/reg_act"//注册接口
-//let CARTINFO_URL = BASE_URL + "iosapp/cart"//购物车数据接口
-//let GETADDRESS_URL = BASE_URL + "iosapp/getaddress"//得到用户所有地址，传id(user_id)
-//let ISDEFAULTADDRESS_URL = BASE_URL + "iosapp/getDefaultaddress"//获得用户默认地址接口,传递用户id
+//let HOMEDATA_URL = BASE_URL + "app/home"//首页数据接口
+//let GOODINFO_URL = BASE_URL + "app/goodinfo"//商品详情数据库接口,传商品id
+//let GOODPRODUCT_URL = BASE_URL + "app/getSpecification"//规格接口,传商品id
+//let SEARCH_URL = BASE_URL + "app/getSearch"//搜索接口 传搜索内容和分页数,价格上下限(min_price/max_pirce:Int)
+//let CATEGORYLIST_URL = BASE_URL + "app/getGoodslist"//分类搜索结果  传分类id和分页数
+//let CATEGORYS_URL = BASE_URL + "app/typeleft"//分类数据接口  可选参数父分类id
+//let LOGIN_URL = BASE_URL + "app/login_act"//登录接口
+//let REGISTER_URL = BASE_URL + "app/reg_act"//注册接口
+//let CARTINFO_URL = BASE_URL + "app/cart"//购物车数据接口
+//let GETADDRESS_URL = BASE_URL + "app/getaddress"//得到用户所有地址，传id(user_id)
+//let ISDEFAULTADDRESS_URL = BASE_URL + "app/getDefaultaddress"//获得用户默认地址接口,传递用户id
 /////预览订单数据接口(购物车整体结算传值为is_phone=true,商品单个结算时传值增加id:商品id或者货品id,type:goods或者product,num:购买数量)
-//let PREVIEWORDER_URL = BASE_URL + "iosapp/cart2"
+//let PREVIEWORDER_URL = BASE_URL + "simple/cart2"
 ////let PREVIEWORDER_URL = BASE_URL + "iosapp/cart2"//正式版接口地址
 /////提交订单数据接口
-//let POSTORDER_URL = BASE_URL + "iosapp/cart3"
+//let POSTORDER_URL = BASE_URL + "simple/cart3"
 ////let POSTORDER_URL = BASE_URL + "iosapp/cart3"//正式版接口地址
 /////我的订单数据接口(传用户id 分页数)
-//let MYORDERLIST_URL = BASE_URL + "iosapp/getOrderList"
+//let MYORDERLIST_URL = BASE_URL + "app/getOrderList"
 /////订单商品列表接口(传订单id,is_send 0未发货  1已发货)
-//let ORDERGOODS_URL = BASE_URL + "iosapp/iosgetordergoods"
+//let ORDERGOODS_URL = BASE_URL + "app/iosgetordergoods"
 /////订单详情接口(传订单id，is_phone)
-//let ORDERDETAIL_URL = BASE_URL + "iosapp/order_detail"
+//let ORDERDETAIL_URL = BASE_URL + "ucenter/order_detail"
 /////修改订单状态接口，(传订单id和status)
-//let UPDATEORDER_URL = BASE_URL + "iosapp/updateOrder"
+//let UPDATEORDER_URL = BASE_URL + "app/updateOrder"
 /////修改密码接口(传原密码、新密码、重复新密码)
-//let PASSWORDEDIT_URL = BASE_URL + "iosapp/password_edit"
+//let PASSWORDEDIT_URL = BASE_URL + "app/password_edit"
 /////修改资料接口
-//let INFOEDITACT_URL = BASE_URL + "iosapp/info_edit_act"
+//let INFOEDITACT_URL = BASE_URL + "app/info_edit_act"
 /////用户资料接口
-//let MYINFO_URL = BASE_URL + "iosapp/my_info"
+//let MYINFO_URL = BASE_URL + "app/my_info"
+
+//-----正式版
+let HOMEDATA_URL = BASE_URL + "app/home"//首页数据接口
+let GOODINFO_URL = BASE_URL + "iosapp/goodinfo"//商品详情数据库接口,传商品id
+let GOODPRODUCT_URL = BASE_URL + "iosapp/getSpecification"//规格接口,传商品id
+let SEARCH_URL = BASE_URL + "iosapp/getSearch"//搜索接口 传搜索内容和分页数,价格上下限(min_price/max_pirce:Int)
+let CATEGORYLIST_URL = BASE_URL + "iosapp/getGoodslist"//分类搜索结果  传分类id和分页数
+let CATEGORYS_URL = BASE_URL + "iosapp/typeleft"//分类数据接口  可选参数父分类id
+let LOGIN_URL = BASE_URL + "iosapp/login_act"//登录接口
+let REGISTER_URL = BASE_URL + "iosapp/reg_act"//注册接口
+let CARTINFO_URL = BASE_URL + "iosapp/cart"//购物车数据接口
+let GETADDRESS_URL = BASE_URL + "iosapp/getaddress"//得到用户所有地址，传id(user_id)
+let ISDEFAULTADDRESS_URL = BASE_URL + "iosapp/getDefaultaddress"//获得用户默认地址接口,传递用户id
+///预览订单数据接口(购物车整体结算传值为is_phone=true,商品单个结算时传值增加id:商品id或者货品id,type:goods或者product,num:购买数量)
+let PREVIEWORDER_URL = BASE_URL + "iosapp/cart2"
+//let PREVIEWORDER_URL = BASE_URL + "iosapp/cart2"//正式版接口地址
+///提交订单数据接口
+let POSTORDER_URL = BASE_URL + "iosapp/cart3"
+//let POSTORDER_URL = BASE_URL + "iosapp/cart3"//正式版接口地址
+///我的订单数据接口(传用户id 分页数)
+let MYORDERLIST_URL = BASE_URL + "iosapp/getOrderList"
+///订单商品列表接口(传订单id,is_send 0未发货  1已发货)
+let ORDERGOODS_URL = BASE_URL + "iosapp/iosgetordergoods"
+///订单详情接口(传订单id，is_phone)
+let ORDERDETAIL_URL = BASE_URL + "iosapp/order_detail"
+///修改订单状态接口，(传订单id和status)
+let UPDATEORDER_URL = BASE_URL + "iosapp/updateOrder"
+///修改密码接口(传原密码、新密码、重复新密码)
+let PASSWORDEDIT_URL = BASE_URL + "iosapp/password_edit"
+///修改资料接口
+let INFOEDITACT_URL = BASE_URL + "iosapp/info_edit_act"
+///用户资料接口
+let MYINFO_URL = BASE_URL + "iosapp/my_info"
 
 //------以下调用原生或添加对应服务器代码即可
 let GOODWEBDETAIL_URL = BASE_URL + "siteapp/productsapp/id/"//图文详情接口，直接拼接商品id
@@ -126,20 +127,35 @@ class NetworkTool{
         //1.判断请求方法
         let method = type == .GET ? Alamofire.HTTPMethod.get : Alamofire.HTTPMethod.post
         //2.发送请求
-        Alamofire.request(urlString, method: method, parameters: parameters).responseJSON { (response) in
-            if response.result.isSuccess {
-                guard let result = response.result.value else {
-                    //3.错误处理
-                    print("error:\(response.result.error ?? "出现错误" as! Error )")
+        AF.request(urlString, method: method, parameters: parameters).responseJSON(queue: DispatchQueue.main, options: JSONSerialization.ReadingOptions.allowFragments) { (response) in
+            switch response.result {
+            case .success:
+                guard let result = response.data else {
+                    print("成功，但是封装后网络数据解析出现错误error:\(String(describing: response.data))")
                     return
                 }
-                //4.结果返回
                 finishCallback(result as Any)
-            }else{
-                print("error:\(response.result.error ?? "出现错误" as! Error )")
+                break
+                
+            case .failure:
+                print("失败且封装后网络数据解析出现错误error:\(String(describing: response.data?.string(encoding: String.Encoding.utf8)))")
+                break
             }
-            
         }
+//        AF.request(urlString, method: method, parameters: parameters).responseJSON { (response) in
+//            if response.result.isSuccess {
+//                guard let result = response.result.value else {
+//                    //3.错误处理
+//                    print("error:\(response.result.error ?? "出现错误" as! Error )")
+//                    return
+//                }
+//                //4.结果返回
+//                finishCallback(result as Any)
+//            }else{
+//                print("error:\(response.result.error ?? "出现错误" as! Error )")
+//            }
+//            
+//        }
     }
 }
 

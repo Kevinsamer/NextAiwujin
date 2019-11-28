@@ -3,10 +3,10 @@
 //  Tabman
 //
 //  Created by Merrick Sapsford on 03/07/2018.
-//  Copyright © 2018 UI At Six. All rights reserved.
+//  Copyright © 2019 UI At Six. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 /// A bar button controller that is responsible for handling the control state of buttons.
 internal final class TMBarButtonStateController: TMBarButtonController {

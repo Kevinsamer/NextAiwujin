@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import SwiftyJSON
 class SearchResultViewModel {
     ///搜索结果数据
     var searchResults:[SearchResultModel]?
@@ -22,15 +22,20 @@ extension SearchResultViewModel{
     /// - parameter finishCallBack:回调函数
     func requestSearchResult(word:String, page:Int, finishCallBack : @escaping () -> ()){
         NetworkTool.requestData(type: .GET, urlString: SEARCH_URL, parameters: ["word":word as NSString, "page": "\(page)" as NSString]) { (result) in
-            guard let resultDict = result as? [String: NSObject] else { return }
-            guard let resultCode = resultDict["code"] as? Int else { return }
+            let resultCode = JSON(result)["code"].intValue
+            let resultJson = JSON(result)["result"].arrayValue
+//            guard let resultDict = result as? [String: NSObject] else { return }
+//            guard let resultCode = resultDict["code"] as? Int else { return }
             if resultCode == 200 {
                 //搜索有结果
-                guard let resultData = resultDict["result"] as? [[String:NSObject]]  else { return }
+//                guard let resultData = resultDict["result"] as? [[String:NSObject]]  else { return }
                 self.searchResults = [SearchResultModel]()
-                for result in resultData {
-                    self.searchResults?.append(SearchResultModel(dict: result))
+                for json in resultJson {
+                    self.searchResults?.append(SearchResultModel(jsonData: json))
                 }
+//                for result in resultData {
+//                    self.searchResults?.append(SearchResultModel(dict: result))
+//                }
             }else if resultCode == 201 {
                 //搜索无结果
                 self.searchResults = nil
@@ -44,14 +49,14 @@ extension SearchResultViewModel{
     /// - parameter finishCallBack:回调函数
     func requestCategoryResult(cat:Int, page:Int, finishCallBack : @escaping () -> ()){
         NetworkTool.requestData(type: .GET, urlString: CATEGORYLIST_URL, parameters: ["cat" : "\(cat)" as NSString, "page" : "\(page)" as NSString]) { (result) in
-            guard let resultDict = result as? [String: NSObject] else { return }
-            guard let resultCode = resultDict["code"] as? Int else { return }
+            let resultCode = JSON(result)["code"].intValue
+            let resultJson = JSON(result)["result"].arrayValue
             if resultCode == 200 {
                 //搜索有结果
-                guard let resultData = resultDict["result"] as? [[String:NSObject]]  else { return }
+                
                 self.categoryResults = [SearchResultModel]()
-                for result in resultData {
-                    self.categoryResults?.append(SearchResultModel(dict: result))
+                for json in resultJson {
+                    self.categoryResults?.append(SearchResultModel(jsonData: json))
                 }
             }else if resultCode == 201 {
                 //搜索无结果

@@ -46,8 +46,9 @@
 //}
 
 import Foundation
-
-class GoodInfo:BaseModel {
+import SwiftyJSON
+//BaseModel
+class GoodInfo {
     @objc var name:String = ""//商品名
     @objc var goods_id:Int = 0//商品id
     @objc var img:String = ""//商品图片路径
@@ -61,15 +62,24 @@ class GoodInfo:BaseModel {
     @objc var product_id:String = ""//货号（查询规格）
     @objc var seller_id:String = ""//卖家id
     @objc var is_delivery_fee:Int = 0//是否免运费  0收费 1免费
-    @objc var photo:[[String:NSObject]]?
-        {
-        didSet{
-            guard let photoLists = photo else { return }
-            for dict in photoLists {
-                photos.append(GoodsPhoto(dict: dict))
-            }
+    var photo:[GoodsPhoto] = [GoodsPhoto]()
+    
+    init(jsonData:JSON){
+        name = jsonData["name"].stringValue
+        goods_id = jsonData["goods_id"].intValue
+        img = jsonData["img"].stringValue
+        sell_price = jsonData["sell_price"].stringValue
+        market_price = jsonData["market_price"].stringValue
+        point = jsonData["point"].intValue
+        weight = jsonData["weight"].stringValue
+        store_nums = jsonData["store_nums"].stringValue
+        exp = jsonData["exp"].intValue
+        goods_no = jsonData["goods_no"].stringValue
+        product_id = jsonData["product_id"].stringValue
+        seller_id = jsonData["seller_id"].stringValue
+        is_delivery_fee = jsonData["is_delivery_fee"].intValue
+        for json in jsonData["photo"].arrayValue {
+            photo.append(GoodsPhoto(jsonData: json))
         }
     }
-    
-    lazy var photos:[GoodsPhoto] = [GoodsPhoto]()
 }

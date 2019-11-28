@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SwiftyJSON
 class ShopViewModel {
     ///首页数据集合
     var homeDataGroup : HomeData?
@@ -15,20 +15,33 @@ class ShopViewModel {
 
 //商城数据请求
 extension ShopViewModel{
+    //简易首页json数据
+    //{
+    //    "code":200,
+    //    "result":{
+    //        "banner_info":Array[2],
+    //        "channel_info":Array[4],
+    //        "recommend_info":Array[6],
+    //        "hot_info":Array[8]
+    //    },
+    //    "time":1534904225
+    //}
     
     ///请求首页数据
     /// - parameter finishCallback:回调接口
     func requestHomeData(finishCallback : @escaping () -> ()){
         NetworkTool.requestData(type: .GET, urlString: HOMEDATA_URL) { (result) in
+            let jsonData = JSON(result)["result"]
+            let code = JSON(result)["code"].intValue
 //            print(result)
-            guard let resultDict = result as? [String : NSObject] else { return }
-            guard let resultCode = resultDict["code"] as? Int else { return }
-            if resultCode == 200 {
-                guard let homeDatas = resultDict["result"] as? [String:NSObject] else { return }
+            //guard let resultDict = result as? [String : NSObject] else { return }
+            //guard let resultCode = resultDict["code"] as? Int else { return }
+            if code == 200 {
+//                guard let homeDatas = resultDict["result"] as? [String:NSObject] else { return }
                 //print(homeDatas.count)
-                self.homeDataGroup = HomeData(dict: homeDatas)
+                self.homeDataGroup = HomeData(jsonData: jsonData)
                 finishCallback()
-            }else if resultCode == 201 {
+            }else if code == 201 {
                 
             }
         }

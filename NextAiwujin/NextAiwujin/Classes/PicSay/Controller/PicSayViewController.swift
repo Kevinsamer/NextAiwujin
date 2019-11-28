@@ -19,7 +19,7 @@ private let smallPicCellID = "smallPicCellID"
 private let threePicsCellID = "threePicsCellID"
 private let bannerCellID = "bannerCellID"
 private var banners:[UIImage] = [#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back"),#imageLiteral(resourceName: "individual_header_back")]
-private let barTitles:[String] = ["直播","电视","广播"]
+private let barTitles:[String] = ["直播","电视","FM886"]
 private let secondSectionTitles:[String] = ["热门直播","节目回看","武进电台"]
 private let thirdSectionTitles:[String] = ["正在直播","","节目单"]
 private let vcs = [ZhiBoViewController(),DianShiViewController(),GuangBoViewController()]
@@ -94,12 +94,15 @@ extension PicSayViewController{
     private func setUI() {
         //1.设置导航栏
         self.view.backgroundColor = .white
-        self.navigationController?.navigationBar.setBackgroundImage(#imageLiteral(resourceName: "navi_bg"), for: UIBarPosition.topAttached, barMetrics: UIBarMetrics.default)
+        
 //        self.navigationController?.navigationBar.setBackgroundImage(UIImage(color: UIColor(r: 127, g: 125, b: 201, alpha: 1), size: (self.navigationController?.navigationBar.frame.size)!), for: UIBarPosition.topAttached, barMetrics: UIBarMetrics.default)
-
-        navBarTintColor = .white
-        navBarTitleColor = .white
+        
+        self.navigationController?.navigationBar.setBackgroundImage(#imageLiteral(resourceName: "navi_bg"), for: UIBarPosition.topAttached, barMetrics: UIBarMetrics.default)
+        
+//        navBarTintColor = .white
+//        navBarTitleColor = .white
         navigationItem.title = "直播武进"
+        self.navigationController?.navigationBar.setColors(background: .white, text: .white)
 //        navigationController?.navigationBar.tintColor = .yellow
         //2.设置页卡
         addTMBar()

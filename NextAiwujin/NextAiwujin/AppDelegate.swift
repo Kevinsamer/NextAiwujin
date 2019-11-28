@@ -80,7 +80,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().setBackgroundImage(UIImage.init(color: UIColor.white, size: CGSize(width: finalScreenW, height: finalNavigationBarH)), for: UIBarMetrics.default)
         //        UINavigationBar.appearance().topItem?.title = ""
         UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffset(horizontal: -200, vertical: 0), for:UIBarMetrics.default)//设置偏移量来隐藏返回按钮文字,TODO：修改为基类中设置navigationController?.navigationBar.topItem?.title = ""
-        EFNavigationBar.defaultTransition = EFTransitionMethod.linear
+
+//        EFNavigationBar.defaultTransition = EFTransitionMethod.linear
+        // 导航栏转场过渡
+        
+        // 设置导航栏标题默认颜色
+        EFNavigationBar.defaultNavBarTitleColor = .white
+        // 统一设置状态栏样式
+        EFNavigationBar.defaultStatusBarStyle = .lightContent
         
 //        设置状态栏style
 //        UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
@@ -110,7 +117,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             //print(AppDelegate.appUser?.local_pd)
             if YTools.calculateDifferenceBetweenTwoTimes(dateOne: YTools.stringToDate(str: (AppDelegate.appUser?.last_login)!), dateTwo: Date.now()) > 48 {
                 //如果时间差大于48h，再次登录
-                //1.benD记录了pass，自动再次登录
+                //1.本地记录了pass，自动再次登录
                 if let name = AppDelegate.appUser?.username{
                     if let pass = AppDelegate.appUser?.local_pd{
                         self.mCenterViewModel.requestLoginData(username: name, password: pass, finishCallback: {
@@ -139,11 +146,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //返回当前界面支持的旋转方向
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor
         window: UIWindow?)-> UIInterfaceOrientationMask {
-//        return interfaceOrientations //(支持横屏自己的方法)
+        
         guard let num =  NicooPlayerOrietation(rawValue: orientationSupport.rawValue) else {
             return [.portrait]
         }
         return num.getOrientSupports()
+        //上面是原方法，下面替换为支持ios13的方法
+//        if blockRotation {
+//            return .landscapeLeft
+//        }
+//        return .portrait
     }
     
     

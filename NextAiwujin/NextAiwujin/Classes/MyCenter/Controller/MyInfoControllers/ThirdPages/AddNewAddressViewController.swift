@@ -53,8 +53,8 @@ extension AddNewAddressViewController {
         //1.设置navigationBar tabBar
         YTools.setNavigationBarAndTabBar(navCT: self.navigationController!, tabbarCT: self.tabBarController!, titleName: "添加新地址", navItem:self.navigationItem)
         self.view.backgroundColor = .white
-        navBarTitleColor = .white
-        navBarTintColor = .white
+//        navBarTitleColor = .white
+//        navBarTintColor = .white
         //2.设置bodyContent
         setupBodyContent()
     }

@@ -42,18 +42,23 @@ extension MycenterViewModel {
     /// - parameter finishCallback:回调函数
     func requestLoginData(username login_info:String, password:String, finishCallback: @escaping ()->()){
         NetworkTool.requestData(type: MethodType.POST, urlString: LOGIN_URL, parameters: ["login_info":login_info as NSString, "password":password as NSString]) { (result) in
+//            print(JSON(result))
+            let jsonData = JSON(result)["result"]
+//            print(jsonData)
             self.userMember = nil
             self.errorInfo = nil
-            guard let resultDict = result as? [String: NSObject] else {return}
+//            guard let resultDict = result as? [String: NSObject] else {return}
             //            print(result)
             //            print(resultDict)
-            guard let resultCode = resultDict["code"] as? Int else {return}
-            guard let resultData = resultDict["result"] as? [String:NSObject] else {return}
+            let resultCode = JSON(result)["code"].intValue
+            
+            print(resultCode)
             if resultCode == 200 {
-                self.userMember = UserMemberModel(dict: resultData)
+                self.userMember = UserMemberModel(jsonData: jsonData)
+                
                 self.userMember?.local_pd = password
             }else if resultCode == 201{
-                guard let errorInfo = resultData["scalar"] as? String else {return}
+                let errorInfo = jsonData["result"]["scalar"].stringValue
                 self.errorInfo = errorInfo
             }
             finishCallback()
@@ -70,14 +75,13 @@ extension MycenterViewModel {
         NetworkTool.requestData(type: .POST, urlString: REGISTER_URL, parameters: ["username":name as NSString, "password":pass as NSString, "repassword":repass as NSString, "captcha":captcha as NSString]) { (result) in
             self.userMember = nil
             self.errorInfo = nil
-            guard let resultDict = result as? [String: NSObject] else {return}
-            guard let resultCode = resultDict["code"] as? Int else {return}
-            guard let resultData = resultDict["result"] as? [String:NSObject] else {return}
-            if resultCode == 200 {
-                //print(resultData)
-                self.userMember = UserMemberModel(dict: resultData)
+            let jsonData = JSON(result)["result"]
+            let resultCode = JSON(result)["code"].intValue
+            //            print(resultCode)
+                if resultCode == 200 {
+                            self.userMember = UserMemberModel(jsonData: jsonData)
             }else if resultCode == 201{
-                guard let errorInfo = resultData["scalar"] as? String else {return}
+                let errorInfo = jsonData["result"]["scalar"].stringValue
                 self.errorInfo = errorInfo
             }
             finishCallback()
@@ -87,14 +91,14 @@ extension MycenterViewModel {
     ///请求验证码图片数据
     /// - parameter result:服务器返回的验证码图片数据流
     func requestCaptchaData(finishCallback:@escaping (_ result:Data?)->()){
-        Alamofire.request(AUTHCODE_URL, method: HTTPMethod.get).responseString { (response) in
+        AF.request(AUTHCODE_URL, method: HTTPMethod.get).responseString { (response) in
             finishCallback(response.data)
         }
     }
     
     ///请求退出登录
     func requestLoginOut(){
-        Alamofire.request(LOGINOUT_URL, method: .get)
+        AF.request(LOGINOUT_URL, method: .get)
     }
     ///请求用户收货地址信息
     /// - parameter id:用户id
@@ -122,7 +126,7 @@ extension MycenterViewModel {
         //        NetworkTools.requestData(type: .POST, urlString: DEFAULTADDRESS_URL, parameters: ["id":"\(id)" as NSString, "is_default":"\(is_default.rawValue)" as NSString]) { (result) in
         //            //接口无返回数据，直接重定向至网站的地址管理页面
         //        }
-        Alamofire.request(DEFAULTADDRESS_URL, method: HTTPMethod.post, parameters: ["id":"\(id)" as NSString, "is_default":"\(is_default.rawValue)" as NSString]).responseData { (result) in
+        AF.request(DEFAULTADDRESS_URL, method: HTTPMethod.post, parameters: ["id":"\(id)" as NSString, "is_default":"\(is_default.rawValue)" as NSString]).responseData { (result) in
             finishCallback()
         }
     }
@@ -130,7 +134,7 @@ extension MycenterViewModel {
     /// - parameter id:地址id，请求地址信息时获得
     /// - parameter finishCallback:回调
     func requestDelUserAddress(id:Int, finishCallback:@escaping ()->()){
-        Alamofire.request(DELADDRESS_URL, method: HTTPMethod.post, parameters: ["id":"\(id)" as NSString]).responseData { (result) in
+        AF.request(DELADDRESS_URL, method: HTTPMethod.post, parameters: ["id":"\(id)" as NSString]).responseData { (result) in
             finishCallback()
         }
     }
@@ -253,7 +257,7 @@ extension MycenterViewModel {
     /// - parameter id:订单id
     /// - parameter op:操作类型，cancel为取消订单，confirm为确认订单
     func requestOrderStatus(order_id id:Int, op:String, finishCallback:@escaping ()->()){
-        Alamofire.request(ORDERSTATUS_URL, method: .post, parameters: ["order_id":"\(id)" as NSString, "op":"\(op)" as NSString])
+        AF.request(ORDERSTATUS_URL, method: .post, parameters: ["order_id":"\(id)" as NSString, "op":"\(op)" as NSString])
         finishCallback()
     }
     ///请求修改密码,服务器返回值对应关系如下：
@@ -322,9 +326,9 @@ extension MycenterViewModel {
     /// - parameter member:个人资料model
     func requestMyInfo(finishCallback:@escaping (_ member:UserMemberModel)->()){
         NetworkTool.requestData(type: MethodType.POST, urlString: MYINFO_URL) { (result) in
-            guard let resultDict = result as? [String : NSObject] else {return}
+            
             //print(resultDict)
-            finishCallback(UserMemberModel(dict: resultDict))
+            finishCallback(UserMemberModel(jsonData: JSON(result)))
         }
     }
 }

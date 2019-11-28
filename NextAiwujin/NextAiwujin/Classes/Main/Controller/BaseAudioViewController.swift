@@ -27,8 +27,8 @@ class BaseAudioViewController: BasePlayerViewController {
     
     let timer = DispatchSource.makeTimerSource(queue: DispatchQueue.global())
     //MARK: - 懒加载
-    ///自定义的导航栏
-    lazy var navBar = EFCustomNavigationBar.CustomNavigationBar()
+    ///自定义的导航栏        EFNavigationBar.CustomNavigationBar()
+    lazy var navBar = EFNavigationBar.CustomNavigationBar()
     
     ///loading动画view
     lazy var loadingView: NVActivityIndicatorView = {
@@ -466,9 +466,8 @@ extension BaseAudioViewController{
         // 设置自定义导航栏左右按钮字体颜色
         navBar.setTintColor(color: .white)
         navBar.setBottomLineHidden(hidden: true)
-        
-        navBarTintColor = .white
-        navBarTitleColor = .white
+//        navBarTintColor = .white
+//        navBarTitleColor = .white
 //        navBar.leftButton = backButton
         navBar.leftButton.isHidden = false
         navBar.rightButton.isHidden = false

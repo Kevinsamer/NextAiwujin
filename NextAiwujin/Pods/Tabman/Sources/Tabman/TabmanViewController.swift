@@ -3,7 +3,7 @@
 //  Tabman
 //
 //  Created by Merrick Sapsford on 17/02/2017.
-//  Copyright © 2018 UI At Six. All rights reserved.
+//  Copyright © 2019 UI At Six. All rights reserved.
 //
 
 import UIKit
@@ -21,12 +21,14 @@ open class TabmanViewController: PageboyViewController, PageboyViewControllerDel
     ///
     /// - top: Pin to the top of the safe area.
     /// - bottom: Pin to the bottom of the safe area.
+    /// - navigationItem: Set as a `UINavigationItem.titleView`.
     /// - custom: Add the view to a custom view and provide custom layout.
     ///           If no layout is provided, all edge anchors will be constrained
     ///           to the superview.
     public enum BarLocation {
         case top
         case bottom
+        case navigationItem(item: UINavigationItem)
         case custom(view: UIView, layout: ((UIView) -> Void)?)
     }
     
@@ -47,6 +49,10 @@ open class TabmanViewController: PageboyViewController, PageboyViewControllerDel
     /// This must be set before `viewDidLoad`, setting it after this point will result in no change.
     /// Default is `true`.
     public var automaticallyAdjustsChildInsets: Bool = true
+    @available(*, unavailable)
+    open override var automaticallyAdjustsScrollViewInsets: Bool {
+        didSet {}
+    }
     /// The insets that are required to safely layout content between the bars
     /// that have been added.
     ///
@@ -86,7 +92,10 @@ open class TabmanViewController: PageboyViewController, PageboyViewControllerDel
     
     open override func viewDidLoad() {
         super.viewDidLoad()
-        autoInsetter.isEnabled = automaticallyAdjustsChildInsets
+        
+        if automaticallyAdjustsChildInsets {
+            autoInsetter.enable(for: self)
+        }
         
         configureBarLayoutGuide(barLayoutGuide)
         layoutContainers(in: view)
@@ -96,6 +105,17 @@ open class TabmanViewController: PageboyViewController, PageboyViewControllerDel
         super.viewDidLayoutSubviews()
         
         setNeedsInsetsUpdate()
+    }
+    
+    /// A method for calculating insets that are required to layout content between the bars
+    /// that have been added.
+    ///
+    /// One can override this method with their own implementation for custom bar inset calculation, to
+    /// take advantage of automatic insets updates for all Tabman's pages during its lifecycle.
+    ///
+    /// - Returns: information about required insets for current state.
+    open func calculateRequiredInsets() -> Insets {
+        return Insets.for(tabmanViewController: self)
     }
     
     // MARK: Pageboy
@@ -153,6 +173,12 @@ open class TabmanViewController: PageboyViewController, PageboyViewControllerDel
     
     /// :nodoc:
     open func pageboyViewController(_ pageboyViewController: PageboyViewController,
+                                    didCancelScrollToPageAt index: PageboyViewController.PageIndex,
+                                    returnToPageAt previousIndex: PageboyViewController.PageIndex) {
+    }
+    
+    /// :nodoc:
+    open func pageboyViewController(_ pageboyViewController: PageboyViewController,
                                     didReloadWith currentViewController: UIViewController,
                                     currentPageIndex: PageIndex) {
         setNeedsInsetsUpdate(to: currentViewController)
@@ -173,7 +199,7 @@ open class TabmanViewController: PageboyViewController, PageboyViewControllerDel
 }
 
 // MARK: - Bar Layout
-public extension TabmanViewController {
+extension TabmanViewController {
     
     /// Add a new `TMBar` to the view controller.
     ///
@@ -184,17 +210,20 @@ public extension TabmanViewController {
     public func addBar(_ bar: TMBar,
                        dataSource: TMBarDataSource,
                        at location: BarLocation) {
+        #if swift(>=5.0)
+        let barView = bar
+        #else
         guard let barView = bar as? UIView else {
             fatalError("Bar is expected to inherit from UIView")
         }
-        guard barView.superview == nil else {
-            fatalError("Bar has already been added to view hierarchy.")
-        }
+        #endif
         
         bar.dataSource = dataSource
         bar.delegate = self
         
-        bars.append(bar)
+        if bars.contains(where: { $0 === bar }) == false {
+            bars.append(bar)
+        }
         layoutView(barView, at: location)
         
         updateBar(bar, to: relativeCurrentPosition, animated: false)
@@ -208,12 +237,16 @@ public extension TabmanViewController {
     ///
     /// - Parameter bar: Bar to remove.
     public func removeBar(_ bar: TMBar) {
-        guard let index = bars.index(where: { $0 === bar }) else {
+        guard let index = bars.firstIndex(where: { $0 === bar }) else {
             return
         }
         
         bars.remove(at: index)
+        #if swift(>=5.0)
+        bar.removeFromSuperview()
+        #else
         (bar as? UIView)?.removeFromSuperview()
+        #endif
     }
     
     private func layoutContainers(in view: UIView) {
@@ -227,7 +260,7 @@ public extension TabmanViewController {
             topBarContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ]
         if #available(iOS 11, *) {
-            topConstraints.append(topBarContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor))
+            topConstraints.append(topBarContainer.topAnchor.constraint(equalTo: view.safeAreaTopAnchor))
         } else {
             topConstraints.append(topBarContainer.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor))
         }
@@ -242,7 +275,7 @@ public extension TabmanViewController {
             bottomBarContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ]
         if #available(iOS 11, *) {
-            bottomConstraints.append(bottomBarContainer.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor))
+            bottomConstraints.append(bottomBarContainer.bottomAnchor.constraint(equalTo: view.safeAreaBottomAnchor))
         } else {
             bottomConstraints.append(bottomBarContainer.bottomAnchor.constraint(equalTo: bottomLayoutGuide.topAnchor))
         }
@@ -251,6 +284,8 @@ public extension TabmanViewController {
     
     private func layoutView(_ view: UIView,
                             at location: BarLocation) {
+        view.removeFromSuperview()
+        
         switch location {
         case .top:
             topBarContainer.addArrangedSubview(view)
@@ -269,6 +304,13 @@ public extension TabmanViewController {
                     view.bottomAnchor.constraint(equalTo: superview.bottomAnchor)
                     ])
             }
+        case .navigationItem(let item):
+            let container = ViewTitleViewContainer(for: view)
+            
+            container.frame = CGRect(x: 0.0, y: 0.0, width: 300, height: 50)
+            container.layoutIfNeeded()
+            
+            item.titleView = container
         }
     }
     
@@ -337,7 +379,7 @@ internal extension TabmanViewController {
     }
     
     func setNeedsInsetsUpdate(to viewController: UIViewController?) {
-        let insets = Insets.for(tabmanViewController: self)
+        let insets = calculateRequiredInsets()
         self.requiredInsets = insets
         
         barLayoutGuideTop?.constant = insets.spec.allRequiredInsets.top

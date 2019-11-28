@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Toast_Swift
+import SwifterSwift
 class YTools{
     class func setNavigationBarAndTabBar(navCT:UINavigationController, tabbarCT:UITabBarController? = nil, color:UIColor = UIColor.white, fontSize:CGFloat = 18, titleName:String? = nil, navItem:UINavigationItem){
         //1.隐藏tabbar
@@ -115,7 +116,8 @@ class YTools{
     }
     //颜色数组中随机返回一个颜色
     class func randomColorIn(colors colorArray:[UIColor]) -> UIColor{
-        return colorArray[Int.random(between: 0, and: colorArray.count - 1)].withAlphaComponent(0.3)
+        
+        return colorArray[Int.random(in: 0..<colorArray.count)].withAlphaComponent(0.3)
     }
     
     //将商品规格中的售价放入数组并由大到小排序后返回
@@ -165,6 +167,8 @@ class YTools{
     
     //传入一个货品信息，返回该货品的详细规格
     class func getGoodsProductSpecs(product: GoodsProduct) -> String{
+//        print(product.productSpecs[0].value)
+//        print(product.productSpecs[0].tip)
         var strs:String = ""
         for spec in product.productSpecs {
             if spec.type == 1 {
@@ -223,6 +227,7 @@ class YTools{
         let navi = UINavigationController.init(rootViewController: loginVC)
         navi.navigationBar.barTintColor = .clear
         //vc.present(loginVC, animated: true, completion: nil)
+        navi.modalPresentationStyle = .fullScreen
         vc.present(navi, animated: true, completion: completion)
 
 

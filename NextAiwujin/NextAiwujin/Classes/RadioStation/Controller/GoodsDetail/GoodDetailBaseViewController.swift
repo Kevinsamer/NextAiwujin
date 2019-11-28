@@ -28,6 +28,7 @@ class GoodDetailBaseViewController: UIViewController ,IndicatorInfoProvider{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.isTranslucent = true
         //        view.backgroundColor = UIColor.random.lighten()
         // Do any additional setup after loading the view.
         

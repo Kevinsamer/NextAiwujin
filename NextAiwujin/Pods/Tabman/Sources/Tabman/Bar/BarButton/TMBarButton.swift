@@ -3,13 +3,19 @@
 //  Tabman
 //
 //  Created by Merrick Sapsford on 06/06/2018.
-//  Copyright © 2018 UI At Six. All rights reserved.
+//  Copyright © 2019 UI At Six. All rights reserved.
 //
 
 import UIKit
 
 /// A button that appears in a bar and provides the interaction for initiating a page index update.
 open class TMBarButton: UIControl {
+    
+    // MARK: Defaults
+    
+    private struct Defaults {
+        static let contentInset = UIEdgeInsets.zero
+    }
     
     // MARK: Types
     
@@ -24,6 +30,7 @@ open class TMBarButton: UIControl {
     /// Bar Item that is associated with the button.
     public let item: TMBarItemable
     
+    private weak var intrinsicSuperview: UIView?
     private let contentView = UIView()
     private var contentViewLeading: NSLayoutConstraint!
     private var contentViewTop: NSLayoutConstraint!
@@ -38,14 +45,25 @@ open class TMBarButton: UIControl {
     // MARK: Customization
     
     /// Content inset of the button contents.
-    public var contentInset: UIEdgeInsets = .zero {
+    open var contentInset: UIEdgeInsets = Defaults.contentInset {
         didSet {
             contentViewLeading.constant = contentInset.left
             contentViewTop.constant = contentInset.top
             contentViewTrailing.constant = contentInset.right
             contentViewBottom.constant = contentInset.bottom
+            
+            intrinsicSuperview?.setNeedsLayout()
         }
     }
+    
+    /// Badge View
+    public let badge = TMBadgeView()
+    
+    /// Whether the button should fade its alpha value when it is unselected.
+    ///
+    /// If enabled the button will interpolate between a minumum alpha of 0.5 and 1.0
+    /// depending on the current `selectionState`.
+    open var adjustsAlphaOnSelection: Bool = true
     
     // MARK: State
     
@@ -63,8 +81,14 @@ open class TMBarButton: UIControl {
     
     // MARK: Init
     
-    public required init(for item: TMBarItemable) {
+    /// Initialize a bar button.
+    ///
+    /// - Parameters:
+    ///   - item: Item to create the bar button for.
+    ///   - intrinsicSuperview: View that can be notified whenever any intrinsic layout changes occur.
+    public required init(for item: TMBarItemable, intrinsicSuperview: UIView?) {
         self.item = item
+        self.intrinsicSuperview = intrinsicSuperview
         super.init(frame: .zero)
         initialize()
     }
@@ -75,6 +99,26 @@ open class TMBarButton: UIControl {
     
     private func initialize() {
         
+        layoutBackgroundView()
+        layoutContentView()
+        
+        layout(in: contentView)
+        layoutBadge(badge, in: contentView)
+
+        accessibilityLabel = item.accessibilityLabel ?? item.title
+        accessibilityHint = item.accessibilityHint
+        #if swift(>=4.2)
+        accessibilityTraits = [.button]
+        #else
+        accessibilityTraits = UIAccessibilityTraitButton
+        #endif
+        isAccessibilityElement = true
+    }
+    
+    // MARK: Layout
+    
+    private func layoutBackgroundView() {
+        
         addSubview(backgroundView)
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -83,6 +127,9 @@ open class TMBarButton: UIControl {
             backgroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
             backgroundView.bottomAnchor.constraint(equalTo: bottomAnchor)
             ])
+    }
+    
+    private func layoutContentView() {
         
         contentView.isUserInteractionEnabled = false
         addSubview(contentView)
@@ -92,24 +139,65 @@ open class TMBarButton: UIControl {
         contentViewTop = contentView.topAnchor.constraint(equalTo: topAnchor)
         contentViewTrailing = trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         contentViewBottom = bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
-        NSLayoutConstraint.activate([contentViewLeading, contentViewTop, contentViewTrailing, contentViewBottom])
+        let contentViewCenterY = contentView.centerYAnchor.constraint(equalTo: centerYAnchor)
         
-        layout(in: contentView)
+        contentViewTop.priority = .defaultHigh
+        contentViewBottom.priority = .defaultHigh
+        
+        NSLayoutConstraint.activate([contentViewLeading, contentViewTop, contentViewTrailing, contentViewBottom, contentViewCenterY])
     }
     
     // MARK: Lifecycle
     
+    /// Layout the Bar Button.
+    ///
+    /// - Parameter view: The view to use as the root of the button.
     open func layout(in view: UIView) {
     }
     
-    open func populate(for item: TMBarItemable) {
+    /// Layout the badge view for the button.
+    ///
+    /// - Parameters:
+    ///   - badge: Badge view.
+    ///   - view: View to use for layout.
+    open func layoutBadge(_ badge: TMBadgeView, in view: UIView) {
     }
     
+    /// Populate the button with a bar item.
+    ///
+    /// - Parameter item: Item to populate.
+    open func populate(for item: TMBarItemable) {
+        badge.value = item.badgeValue
+    }
+    
+    /// Update the button for a new selection state.
+    ///
+    /// - Parameter selectionState: Selection state.
     open func update(for selectionState: SelectionState) {
-        let minimumAlpha: CGFloat = 0.5
-        let alpha = minimumAlpha + (selectionState.rawValue * minimumAlpha)
         
-        self.alpha = alpha
+        // Perform alpha update if enabled.
+        if adjustsAlphaOnSelection {
+            let minimumAlpha: CGFloat = 0.5
+            let alpha = minimumAlpha + (selectionState.rawValue * minimumAlpha)
+            self.alpha = alpha
+        }
+
+        switch selectionState {
+        case .selected:
+            #if swift(>=4.2)
+            accessibilityTraits.insert(.selected)
+            #else
+            accessibilityTraits = UIAccessibilityTraitButton | UIAccessibilityTraitSelected
+            #endif
+        case .unselected:
+            #if swift(>=4.2)
+            accessibilityTraits.remove(.selected)
+            #else
+            accessibilityTraits = UIAccessibilityTraitButton
+            #endif
+        default:
+            break
+        }
     }
 }
 

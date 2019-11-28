@@ -25,15 +25,19 @@ pod 'SnapKit'
 pod "Eureka"
 pod "ImageRow"
 pod "MaterialTapTargetPrompt-iOS"
-pod "CryptoSwift", "~>0.7.2"
+#pod "CryptoSwift", "~>0.7.2"
+pod "CryptoSwift"
 #zfb
-pod "AlipaySDK-iOS"
+pod "AlipaySDK-iOS", "~>15.5.9"
+#自定义导航栏
 pod 'EFNavigationBar'
+#pod 'EFNavigationBar', "~>0.1.2"
 #骨架屏
 pod "SkeletonView"
 #悬浮按钮
 pod 'Floaty'
-pod 'SBCycleScrollView','~> 0.0.8'
+#pod 'SBCycleScrollView','~> 0.0.8'
+pod 'SBCycleScrollView'
 #pod 'KMNavigationBarTransition'
 #pod 'ETNavBarTransparent'
 #音频播放器
@@ -45,8 +49,8 @@ pod 'SwiftyComments', :git => 'https://github.com/tsucres/SwiftyComments.git'
 pod "DrawerView"
 #loading动画集
 pod 'NVActivityIndicatorView'
-pod 'GrowingTextView', '0.6.1'
-
+#pod 'GrowingTextView', '0.6.1'
+pod 'GrowingTextView'
   target 'NextAiwujinTests' do
     inherit! :search_paths
     # Pods for testing

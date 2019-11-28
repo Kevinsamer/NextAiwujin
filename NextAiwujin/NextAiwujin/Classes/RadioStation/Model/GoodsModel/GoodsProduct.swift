@@ -10,26 +10,27 @@
 //    "code":200,
 //    "result":[
 //    {
-//    "id":"187",
-//    "goods_id":"162",
-//    "products_no":"SD150994759218-1",
-//    "spec_array":"[{"id":"88","type":"1","value":"普通箱装（十斤）","name":"苹果规格","tip":"1"}]",
-//    "store_nums":"9915",
-//    "market_price":"55.00",
-//    "sell_price":"40.00",
-//    "cost_price":"35.00",
-//    "weight":"5000.00"
+//          "id":"187",
+//          "goods_id":"162",
+//          "products_no":"SD150994759218-1",
+//             "spec_array":"[{"id":"88","type":"1","value":"普通箱装（十斤）","name":"苹果规格","tip":"1"}]",
+//          "store_nums":"9915",
+//          "market_price":"55.00",
+//          "sell_price":"40.00",
+//          "cost_price":"35.00",
+//          "weight":"5000.00"
 //    },
+
 //    {
-//    "id":"188",
-//    "goods_id":"162",
-//    "products_no":"SD150994759218-2",
+//          "id":"188",
+//          "goods_id":"162",
+//          "products_no":"SD150994759218-2",
 //    "spec_array":"[{"id":"88","type":"1","value":"红色礼盒（十斤，苹果个头更大）","name":"苹果规格","tip":"2"}]",
-//    "store_nums":"9996",
-//    "market_price":"60.00",
-//    "sell_price":"50.00",
-//    "cost_price":"35.00",
-//    "weight":"5000.00"
+//          "store_nums":"9996",
+//          "market_price":"60.00",
+//          "sell_price":"50.00",
+//          "cost_price":"35.00",
+//          "weight":"5000.00"
 //    }
 //    ],
 //    "time":1535437669
@@ -37,7 +38,8 @@
 
 import Foundation
 import SwiftyJSON
-class GoodsProduct: BaseModel {
+//BaseModel
+class GoodsProduct {
     
     @objc var id:Int = 0//货品id
     @objc var goods_id:Int = 0//商品id
@@ -62,4 +64,21 @@ class GoodsProduct: BaseModel {
         }
     }
     var productSpecs:[ProductSpec] = [ProductSpec]()
+    
+    init(jsonData:JSON){
+        id = jsonData["id"].intValue
+        goods_id = jsonData["goods_id"].intValue
+        products_no = jsonData["products_no"].stringValue
+        store_nums = jsonData["store_nums"].intValue
+        market_price = jsonData["market_price"].stringValue
+        sell_price = jsonData["sell_price"].stringValue
+        cost_price = jsonData["cost_price"].stringValue
+        weight = jsonData["weight"].floatValue
+        spec_array = jsonData["spec_array"].stringValue
+        productSpecsJSON = JSON(parseJSON: spec_array)
+        guard let jsons = productSpecsJSON else {return}
+        for i in 0..<jsons.count {
+            productSpecs.append(ProductSpec(jsonData: jsons[i]))
+        }
+    }
 }

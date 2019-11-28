@@ -3,12 +3,12 @@
 //  Tabman
 //
 //  Created by Merrick Sapsford on 28/09/2018.
-//  Copyright © 2018 UI At Six. All rights reserved.
+//  Copyright © 2019 UI At Six. All rights reserved.
 //
 
 import UIKit
 
-public extension TMBarButton {
+extension TMBarButton {
     
     /// Button that is zero height and hidden.
     ///
@@ -17,6 +17,7 @@ public extension TMBarButton {
         
         // MARK: Properties
         
+        //swiftlint:disable unused_setter_value
         public override var isHidden: Bool {
             set {
                 super.isHidden = true

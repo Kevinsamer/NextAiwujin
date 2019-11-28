@@ -9,7 +9,7 @@
 import UIKit
 
 // MARK: - PageboyViewController transition configuration.
-public extension PageboyViewController {
+extension PageboyViewController {
     
     /// Transition for a page scroll.
     public final class Transition {
@@ -85,20 +85,27 @@ internal extension PageboyViewController {
     ///   - direction: The direction of travel.
     ///   - animated: Whether to animate the transition.
     ///   - completion: Action on the completion of the transition.
-    internal func performTransition(from startIndex: Int,
-                                    to endIndex: Int,
-                                    with direction: NavigationDirection,
-                                    animated: Bool,
-                                    completion: @escaping TransitionOperation.Completion) {
+    func performTransition(from startIndex: Int,
+                           to endIndex: Int,
+                           with direction: NavigationDirection,
+                           animated: Bool,
+                           completion: @escaping TransitionOperation.Completion) {
+
         guard let transition = transition, animated == true, activeTransitionOperation == nil else {
                 completion(false)
                 return
         }
         guard let scrollView = pageViewController?.scrollView else {
+            #if DEBUG
             fatalError("Can't find UIPageViewController scroll view")
+            #else
+            return
+            #endif
         }
 
         prepareForTransition()
+
+        let navigationOrientation = self.navigationOrientation
 
         /// Calculate semantic direction for RtL languages
         var semanticDirection = direction
@@ -156,14 +163,14 @@ extension PageboyViewController: TransitionOperationDelegate {
     }
 }
 
-internal extension PageboyViewController.Transition {
+internal extension CATransition {
     
-    func configure(transition: inout CATransition) {
-        transition.duration = duration
+    func configure(from: PageboyViewController.Transition) {
+        duration = from.duration
         #if swift(>=4.2)
-        transition.type = CATransitionType(rawValue: style.rawValue)
+        type = CATransitionType(rawValue: from.style.rawValue)
         #else
-        transition.type = style.rawValue
+        type = from.style.rawValue
         #endif
     }
 }

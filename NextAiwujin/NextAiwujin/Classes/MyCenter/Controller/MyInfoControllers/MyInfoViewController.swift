@@ -89,8 +89,8 @@ extension MyInfoViewController {
         //1.设置navigationBar
         navigationItem.title = "个人资料"
         self.navigationController?.navigationBar.setBackgroundImage(#imageLiteral(resourceName: "navi_bg"), for: UIBarPosition.topAttached, barMetrics: UIBarMetrics.default)
-        navBarTitleColor = .white
-        navBarTintColor = .white
+//        navBarTitleColor = .white
+//        navBarTintColor = .white
         //0.初始化数据
         disGroup.enter()
             mQueue.async(group: disGroup, qos: .default, flags: []) {

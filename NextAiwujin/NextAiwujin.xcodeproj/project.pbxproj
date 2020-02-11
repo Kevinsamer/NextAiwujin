@@ -230,6 +230,8 @@
 		090CF5F02241E5A80062CEFA /* UIImageView-extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090CF5EF2241E5A80062CEFA /* UIImageView-extension.swift */; };
 		09111F842289574F00E4C392 /* ZhiBoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09111F832289574F00E4C392 /* ZhiBoPlayerViewController.swift */; };
 		09193514238E5051009871DF /* MyBaoLiaoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09193513238E5051009871DF /* MyBaoLiaoViewController.swift */; };
+		09193516238FAC75009871DF /* BaoLiaoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09193515238FAC75009871DF /* BaoLiaoModel.swift */; };
+		09193518238FAC85009871DF /* BaoLiaoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09193517238FAC85009871DF /* BaoLiaoViewModel.swift */; };
 		091A9E5B2266F219003C2002 /* SecondSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091A9E592266F219003C2002 /* SecondSectionCell.swift */; };
 		091A9E5C2266F219003C2002 /* SecondSectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 091A9E5A2266F219003C2002 /* SecondSectionCell.xib */; };
 		091A9E5F226714DD003C2002 /* GuangboCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091A9E5D226714DD003C2002 /* GuangboCell.swift */; };
@@ -293,6 +295,8 @@
 		091A9ED5226EB04C003C2002 /* BasePlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091A9ED4226EB04C003C2002 /* BasePlayerViewController.swift */; };
 		091A9EF52271A8A8003C2002 /* BaseAudioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091A9EF42271A8A8003C2002 /* BaseAudioViewController.swift */; };
 		091F8BD2238D114200A28CE0 /* BaoLiaoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091F8BD1238D114200A28CE0 /* BaoLiaoViewController.swift */; };
+		0922D74323C7163000C85DE1 /* BaoLiaoTableCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922D74123C7163000C85DE1 /* BaoLiaoTableCellTableViewCell.swift */; };
+		0922D74423C7163000C85DE1 /* BaoLiaoTableCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0922D74223C7163000C85DE1 /* BaoLiaoTableCellTableViewCell.xib */; };
 		0952A7B5223235C30061BBFA /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0952A7B4223235C30061BBFA /* SearchViewController.swift */; };
 		0966AEDA228A9C8A0079B815 /* TVPinDaoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0966AED9228A9C8A0079B815 /* TVPinDaoViewController.swift */; };
 		096CAFD822952B4D00D78A78 /* RedditCommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096CAFD722952B4D00D78A78 /* RedditCommentsViewController.swift */; };
@@ -671,6 +675,8 @@
 		090CF5EF2241E5A80062CEFA /* UIImageView-extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView-extension.swift"; sourceTree = "<group>"; };
 		09111F832289574F00E4C392 /* ZhiBoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZhiBoPlayerViewController.swift; sourceTree = "<group>"; };
 		09193513238E5051009871DF /* MyBaoLiaoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBaoLiaoViewController.swift; sourceTree = "<group>"; };
+		09193515238FAC75009871DF /* BaoLiaoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaoLiaoModel.swift; sourceTree = "<group>"; };
+		09193517238FAC85009871DF /* BaoLiaoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaoLiaoViewModel.swift; sourceTree = "<group>"; };
 		091A9E592266F219003C2002 /* SecondSectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondSectionCell.swift; sourceTree = "<group>"; };
 		091A9E5A2266F219003C2002 /* SecondSectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecondSectionCell.xib; sourceTree = "<group>"; };
 		091A9E5D226714DD003C2002 /* GuangboCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuangboCell.swift; sourceTree = "<group>"; };
@@ -734,6 +740,8 @@
 		091A9ED4226EB04C003C2002 /* BasePlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePlayerViewController.swift; sourceTree = "<group>"; };
 		091A9EF42271A8A8003C2002 /* BaseAudioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAudioViewController.swift; sourceTree = "<group>"; };
 		091F8BD1238D114200A28CE0 /* BaoLiaoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaoLiaoViewController.swift; sourceTree = "<group>"; };
+		0922D74123C7163000C85DE1 /* BaoLiaoTableCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaoLiaoTableCellTableViewCell.swift; sourceTree = "<group>"; };
+		0922D74223C7163000C85DE1 /* BaoLiaoTableCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BaoLiaoTableCellTableViewCell.xib; sourceTree = "<group>"; };
 		0952A7B4223235C30061BBFA /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		0966AED9228A9C8A0079B815 /* TVPinDaoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVPinDaoViewController.swift; sourceTree = "<group>"; };
 		096CAFD722952B4D00D78A78 /* RedditCommentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditCommentsViewController.swift; sourceTree = "<group>"; };
@@ -1931,6 +1939,7 @@
 		09D543E52211469500307713 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				09193517238FAC85009871DF /* BaoLiaoViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1938,6 +1947,8 @@
 		09D543E6221146A800307713 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0922D74123C7163000C85DE1 /* BaoLiaoTableCellTableViewCell.swift */,
+				0922D74223C7163000C85DE1 /* BaoLiaoTableCellTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1945,6 +1956,7 @@
 		09D543E7221146B100307713 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				09193515238FAC75009871DF /* BaoLiaoModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2215,6 +2227,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0922D74423C7163000C85DE1 /* BaoLiaoTableCellTableViewCell.xib in Resources */,
 				091A9EB4226EADE3003C2002 /* pause@3x.png in Resources */,
 				091A9EAE226EADE3003C2002 /* back@3x.png in Resources */,
 				091A9EC7226EADE3003C2002 /* player_close@2x.png in Resources */,
@@ -2458,6 +2471,7 @@
 				0907DA362236389600241176 /* PhoneCodeCell.swift in Sources */,
 				0907DA2E2236389600241176 /* UITextField+Extensions.swift in Sources */,
 				09D543D52203E93400307713 /* NetworkTool.swift in Sources */,
+				09193518238FAC85009871DF /* BaoLiaoViewModel.swift in Sources */,
 				0907DA332236389600241176 /* LocaleStore.swift in Sources */,
 				090CF27F223F69280062CEFA /* ShopCartViewModel.swift in Sources */,
 				090081372230EA6F00C0667A /* HomeData.swift in Sources */,
@@ -2534,6 +2548,7 @@
 				090CF24A223F33510062CEFA /* GoodsPriceModel.swift in Sources */,
 				0907DA402236389600241176 /* Location.swift in Sources */,
 				0907DA4D2236389600241176 /* ItemWithPhoto.swift in Sources */,
+				0922D74323C7163000C85DE1 /* BaoLiaoTableCellTableViewCell.swift in Sources */,
 				090726FE225B191900439B5A /* NewsDetailViewController.swift in Sources */,
 				090CF5E6223F8F550062CEFA /* MyRefundApplicationViewController.swift in Sources */,
 				090CF282223F69670062CEFA /* JoinCartModel.swift in Sources */,
@@ -2565,6 +2580,7 @@
 				090CF5F02241E5A80062CEFA /* UIImageView-extension.swift in Sources */,
 				090CF582223F8A800062CEFA /* AuthCodeView.swift in Sources */,
 				0907DA3C2236389600241176 /* PhotoLibraryPickerViewController.swift in Sources */,
+				09193516238FAC75009871DF /* BaoLiaoModel.swift in Sources */,
 				0907DA4C2236389600241176 /* TelegramPickerViewController.swift in Sources */,
 				09065162229277D800F951B0 /* ZhiBoIngCell.swift in Sources */,
 				090CF5EB223F8F550062CEFA /* MyMessageViewController.swift in Sources */,
@@ -2892,6 +2908,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M5KK8AVZVV;
 				INFOPLIST_FILE = NextAiwujin/Info.plist;
@@ -2906,6 +2923,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wjyh.Xib.NextAiwujin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/dev2018/Desktop/project/NextAiwujin/NextAiwujin/NextAiwujin/Classes/Tools/AliPay/Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -2918,6 +2936,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M5KK8AVZVV;
 				INFOPLIST_FILE = NextAiwujin/Info.plist;
@@ -2932,6 +2951,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wjyh.Xib.NextAiwujin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/dev2018/Desktop/project/NextAiwujin/NextAiwujin/NextAiwujin/Classes/Tools/AliPay/Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;

@@ -8,6 +8,8 @@
 
 import Foundation
 import Alamofire
+import SwiftyJSON
+import UIKit
 
 ///新闻数据接口
 let API_ConfigFile="http://www.wjyanghu.com/API/AppConfig_v2.html"
@@ -15,13 +17,53 @@ let API_ConfigFile="http://www.wjyanghu.com/API/AppConfig_v2.html"
 //let API_ZhiBoHistory = "http://www.wjyanghu.com/API/backtosee.html"
 let API_ZhiBoHistory = "http://tp.wjyanghu.com/zbhk/json.php"
 ///评论数据接口
-let API_Comments = "http://tp.wjyanghu.com/wxzb/comment/result.php"
-///发表评论接口
-let API_CommitComments = "http://tp.wjyanghu.com/wxzb/comment/comment_insert.php"
+let API_Comments = "http://tp.wjyanghu.com/zbhk/comments/comments.php"
+///发表评论接口{content="评论内容",nickname="用户名",headimg="头像链接"}
+let API_CommitComments = "https://tp.wjyanghu.com/zbhk/comments/commit_comments.php"
 ///爱武进用户头像
-let AiWuJinHeadIconUrl = "http://tp.wjyanghu.com/wxzb/getData/logo.png"
+let AiWuJinHeadIconUrl = "http://tp.wjyanghu.com/zbhk/images/logo.png"
 ///分享页面(传4个参数：title,body,img,url)
 let SharePageUrl = "https://videoshare.applinzi.com/share.php"
+
+///报料测试服务器地址
+let BAOLIAO_URL = "http://192.168.208.105:5555/"
+
+///编辑爆料
+//参数名       必选     类型       说明
+//id          是      int       新闻id
+//address     否      string    地址
+//file_ids    否      string    文件id
+//content     否      string    新闻内容
+let EDIT_REPORT_NEWS_URL = BAOLIAO_URL + "home/account/api?act=editReportNews"
+
+///提交爆料
+//参数名    必选    类型    说明
+//id       是      int    爆料id
+let EDIT_NEWS_STATES_URL = BAOLIAO_URL + "home/account/api?act=editNewsState"
+
+///爆料详情
+//参数名    类型    说明      是否必填
+//id       int    爆料id    是
+let REPORT_NEWS_DETAIL_URL = BAOLIAO_URL + "home/account/api?act=reportNewsDetail"
+
+///新增爆料
+//参数名        必选    类型       说明
+//content      是      string    爆料内容
+//address      是      string    地址
+//file_ids     否      string    文件id（多个文件用,隔开 如””0834c17095,68f569059a”）
+let ADD_REPORT_NEWS_URL = BAOLIAO_URL + "home/account/api?act=addReportNews"
+
+///上传文件
+let UPLOAD_FILES_URL = BAOLIAO_URL + "home/account/api?act=uploadFiles"
+
+///删除爆料
+//参数名    必选    类型    说明
+//id       是      int    新闻id
+let DEL_REPORT_NEWS_URL = BAOLIAO_URL + "home/account/api?act=delReportNews"
+
+///爆料列表
+let REPORT_NEWS_LIST_URL = BAOLIAO_URL + "home/account/api?act=reportNewsList"
+
 
 ///测试服务器地址
 //let BASE_URL = "http://192.168.108.223/"
@@ -131,31 +173,93 @@ class NetworkTool{
             switch response.result {
             case .success:
                 guard let result = response.data else {
-                    print("成功，但是封装后网络数据解析出现错误error:\(String(describing: response.data))")
+                    print("成功，但是封装后网络数据解析出现错误error:\(String(describing: response.data))\(urlString)")
                     return
                 }
                 finishCallback(result as Any)
                 break
                 
             case .failure:
-                print("失败且封装后网络数据解析出现错误error:\(String(describing: response.data?.string(encoding: String.Encoding.utf8)))")
+                print("失败且封装后网络数据解析出现错误error:\(String(describing: response.data?.string(encoding: String.Encoding.utf8)))\(urlString)")
                 break
             }
         }
-//        AF.request(urlString, method: method, parameters: parameters).responseJSON { (response) in
-//            if response.result.isSuccess {
-//                guard let result = response.result.value else {
-//                    //3.错误处理
-//                    print("error:\(response.result.error ?? "出现错误" as! Error )")
+    }
+    
+    /// 发送基于json数据的网络请求
+    /// - Parameters:
+    ///   - type: .post    .get
+    ///   - urlString: 请求链接
+    ///   - parameters: let para : [String:String]= ["id":"1","content":"111"]
+    ///   - finishCallback: 回调函数
+    class func requestDataByJSON<Parameters: Encodable>(type : MethodType, urlString : String, parameters : Parameters? = nil, finishCallback : @escaping (_ result : Any) -> ()){
+        //1.判断请求方法
+        let method = type == .GET ? Alamofire.HTTPMethod.get : Alamofire.HTTPMethod.post
+        //2.发送请求
+        AF.request(urlString, method: method, parameters: parameters, encoder: JSONParameterEncoder.default).responseJSON(queue: DispatchQueue.main, options: JSONSerialization.ReadingOptions.allowFragments) { (response) in
+            switch response.result {
+            case .success:
+                guard let result = response.data else {
+                    print("成功，但是封装后网络数据解析出现错误error:\(String(describing: response.data))\(urlString)")
+                    return
+                }
+                finishCallback(result as Any)
+                break
+                
+            case .failure:
+                print("失败且封装后网络数据解析出现错误error:\(String(describing: response.data?.string(encoding: String.Encoding.utf8)))\(urlString)")
+                break
+            }
+        }
+        
+        
+//        AF.request(urlString, method: method, parameters: parameters).responseJSON(queue: DispatchQueue.main, options: JSONSerialization.ReadingOptions.allowFragments) { (response) in
+//            switch response.result {
+//            case .success:
+//                guard let result = response.data else {
+//                    print("成功，但是封装后网络数据解析出现错误error:\(String(describing: response.data))")
 //                    return
 //                }
-//                //4.结果返回
 //                finishCallback(result as Any)
-//            }else{
-//                print("error:\(response.result.error ?? "出现错误" as! Error )")
+//                break
+//
+//            case .failure:
+//                print("失败且封装后网络数据解析出现错误error:\(String(describing: response.data?.string(encoding: String.Encoding.utf8)))")
+//                break
 //            }
-//            
 //        }
+    }
+    
+    
+    /// 上传文件
+    /// - Parameters:
+    ///   - fileUrl: 文件url，URL
+    ///   - toUrl: 服务器url，String
+    ///   - finishCallback: 回调函数
+    class func uploadFiles(fileUrl: URL, toUrl: String, finishCallback: @escaping (_ result: Any)->()){
+        AF.upload(multipartFormData: { (multipartFormData) in
+            multipartFormData.append(fileUrl, withName: "filename")
+        }, to: toUrl)
+            .uploadProgress(closure: { (progress) in
+                //上传进度
+//                print("Upload Progress: \(progress.fractionCompleted)")
+            })
+            .responseJSON { (response) in
+            switch response.result {
+            case .success:
+                guard let result = response.data else {
+                    print("成功，但是封装后网络数据解析出现错误error:\(String(describing: response.data))\(toUrl)")
+                    return
+                }
+//                print("上传成功")
+                finishCallback(result as Any)
+                break
+                
+            case .failure:
+                print("失败且封装后网络数据解析出现错误error:\(String(describing: response.data?.string(encoding: String.Encoding.utf8)))\(toUrl)")
+                break
+            }
+        }
     }
 }
 

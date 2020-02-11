@@ -11,6 +11,9 @@ import SBCycleScrollView
 import Kingfisher
 import PullToRefreshKit
 class ZhiBoBaseViewController: BaseViewController {
+    
+    /// banner在推荐data中的索引
+    var bannerIndex:Int = 0
     let bannerH:CGFloat = 150
     let tableCellID:String = "tableCellID"
     let collCellID:String = "collCellID"
@@ -35,10 +38,19 @@ class ZhiBoBaseViewController: BaseViewController {
         didSet{
             self.topBanner.imageURLStringsGroup = []
             self.topBanner.titlesGroup = []
-            for url in self.TuiJianData.Channel[3].Item {
-                self.topBanner.imageURLStringsGroup.append(url.titlepic)
-                self.topBanner.titlesGroup.append(url.title)
+            for (index,channel) in self.TuiJianData.Channel.enumerated() {
+                if channel.CH_Title == "精彩活动" {
+                    self.bannerIndex = index
+                    for url in channel.Item {
+                        self.topBanner.imageURLStringsGroup.append(url.titlepic)
+                        self.topBanner.titlesGroup.append(url.title)
+                    }
+                }
             }
+//            for url in self.TuiJianData.Channel[4].Item {
+//                self.topBanner.imageURLStringsGroup.append(url.titlepic)
+//                self.topBanner.titlesGroup.append(url.title)
+//            }
         }
     }
     //MARK: - 懒加载
@@ -165,11 +177,11 @@ extension ZhiBoBaseViewController{
 extension ZhiBoBaseViewController:CycleScrollViewDelegate{
     func didSelectedCycleScrollView(_ cycleScrollView: CycleScrollView, _ Index: NSInteger) {
         //webView链接
-        let url = self.TuiJianData.Channel[3].Item[Index].titleurl
+        let url = self.TuiJianData.Channel[bannerIndex].Item[Index].titleurl
         let vc = NewsDetailViewController()
         vc.newsDetailURL = url
-        vc.sharePicURL = self.TuiJianData.Channel[3].Item[Index].titlepic
-        vc.textShare = self.TuiJianData.Channel[3].Item[Index].title
+        vc.sharePicURL = self.TuiJianData.Channel[bannerIndex].Item[Index].titlepic
+        vc.textShare = self.TuiJianData.Channel[bannerIndex].Item[Index].title
         self.navigationController?.show(vc, sender: self)
     }
 }

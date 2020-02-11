@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import IQKeyboardManagerSwift
 import EFNavigationBar
+import AVKit
 var Areas:[Area] = [Area]()
 var globalAppConfig:AppConfigModel = AppConfigModel(jsonData: ""){
     didSet{
@@ -103,6 +104,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            AppConfigViewModel.requestZhiBoHistory(url: API_ZhiBoHistory, finishCallBack: { (histories) in
 //                globalZhiBoHistory = histories
 //            })
+        }
+        
+        //静音播放
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
+            try AVAudioSession.sharedInstance().setActive(true)
+
+        } catch let error as NSError {
+            print("error: \(error.localizedDescription)")
         }
         
         //firstOpenUserInit

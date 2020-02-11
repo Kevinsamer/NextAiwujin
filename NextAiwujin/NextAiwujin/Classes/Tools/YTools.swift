@@ -33,10 +33,10 @@ class YTools{
     }
     
     //显示toast
-    class func showMyToast(rootView: UIView, message:String, duration:TimeInterval = 3.0, position:ToastPosition = .center){
+    class func showMyToast(rootView: UIView, message:String, duration:TimeInterval = 3.0, position:ToastPosition = .center, completion: ((_ didTap: Bool) -> Void)? = nil){
         var myStyle = ToastStyle()
         myStyle.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)
-        rootView.makeToast(message, duration: duration, position: position, style: myStyle)
+        rootView.makeToast(message, duration: duration, position: position, title: nil, image: nil, style: myStyle, completion: completion)
     }
     
     class func getCategoryLine(categoryNum : CGFloat,num : Int) -> Int{
@@ -408,5 +408,44 @@ class YTools{
     class func jointShareUrl(img:String, url:String, title:String, body:String) -> String {
         //将中文字符替换为百分比字符集后再返回
         return "\(SharePageUrl)?img=\(img)&url=\(url)&title=\(title)&body=\(body)".addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
+    }
+    
+    
+    // MARK: - 跳转系统设置界面
+    class func settingOpenURL(_ type: HWpermissionsType? = nil) {
+        let title = "访问受限"
+        var message = "请点击“前往”，允许访问权限"
+        let appName: String = (Bundle.main.infoDictionary!["CFBundleDisplayName"] ?? "") as! String //App 名称
+        if type == .camera { // 相机
+            message = "请在iPhone的\"设置-隐私-相机\"选项中，允许\"\(appName)\"访问你的相机"
+        } else if type == .photo { // 相册
+            message = "请在iPhone的\"设置-隐私-照片\"选项中，允许\"\(appName)\"访问您的相册"
+        } else if type == .location { // 位置
+            message = "请在iPhone的\"设置-隐私-定位服务\"选项中，允许\"\(appName)\"访问您的位置，获得更多商品信息"
+        } else if type == .network { // 网络
+            message = "请在iPhone的\"设置-蜂窝移动网络\"选项中，允许\"\(appName)\"访问您的移动网络"
+        } else if type == .microphone { // 麦克风
+            message = "请在iPhone的\"设置-隐私-麦克风\"选项中，允许\"\(appName)\"访问您的麦克风"
+        } else if type == .media { // 媒体库
+            message = "请在iPhone的\"设置-隐私-媒体与Apple Music\"选项中，允许\"\(appName)\"访问您的媒体库"
+        }
+        let url = URL(string: UIApplication.openSettingsURLString)
+        let alertController = UIAlertController(title: title,
+                                                message: message,
+                                                preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler:nil)
+        let settingsAction = UIAlertAction(title:"前往", style: .default, handler: {
+            (action) -> Void in
+            if  UIApplication.shared.canOpenURL(url!) {
+                if #available(iOS 10, *) {
+                    UIApplication.shared.open(url!, options: [:],completionHandler: {(success) in})
+                } else {
+                    UIApplication.shared.openURL(url!)
+                }
+            }
+        })
+        alertController.addAction(cancelAction)
+        alertController.addAction(settingsAction)
+        UIApplication.shared.keyWindow?.rootViewController?.present(alertController, animated: true, completion: nil)
     }
 }

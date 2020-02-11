@@ -120,11 +120,17 @@ extension AppConfigViewModel{
     ///   - url: 发表评论接口
     ///   - content: 评论内容
     ///   - imageURL: 头像地址
-    ///   - rid: 暂时固定为8
     ///   - finishCallBack: 回调函数
-    class func requestPostComments(url:String, content:String, imageURL:String, rid:Int, finishCallBack:@escaping ()->()){
-        AF.request(URL(string: url)!, method: HTTPMethod.post, parameters: ["content":"\(content)", "rid":"\(rid)", "headimgurl":"\(imageURL)"]).responseString { (result) in
+    class func requestPostComments(url:String, content:String,imageURL:String, nickname:String,  finishCallBack:@escaping ()->()){
+        AF.request(URL(string: url)!, method: HTTPMethod.post, parameters: ["content":"\(content)","headimg":"\(imageURL)","nickname":"\(nickname)"]).responseString { (result) in
+            print(result)
             finishCallBack()
         }
     }
+    
+//    class func requestPostComments(url:String, content:String, imageURL:String, rid:Int, finishCallBack:@escaping ()->()){
+//        AF.request(URL(string: url)!, method: HTTPMethod.post, parameters: ["content":"\(content)", "rid":"\(rid)", "headimgurl":"\(imageURL)"]).responseString { (result) in
+//            finishCallBack()
+//        }
+//    }
 }

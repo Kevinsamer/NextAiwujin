@@ -323,7 +323,7 @@ extension BasePlayerViewController: GrowingTextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if textView.isMember(of: GrowingTextView.self) {
             if text == "\n" {
-                AppConfigViewModel.requestPostComments(url: API_CommitComments, content: self.textView.text, imageURL: AiWuJinHeadIconUrl, rid: 8) {
+                AppConfigViewModel.requestPostComments(url: API_CommitComments, content: self.textView.text, imageURL: AiWuJinHeadIconUrl, nickname: "爱武进用户") {
                     self.commentVC.requestData()
                 }
                 textView.text = ""

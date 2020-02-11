@@ -91,7 +91,7 @@ class RedditCommentsViewController: CommentsViewController {
                 allComments.append(com)
                 currentlyDisplayed = allComments
             }
-            print(commentsData.count)
+//            print(commentsData.count)
             self.tableView.reloadData()
         }
     }

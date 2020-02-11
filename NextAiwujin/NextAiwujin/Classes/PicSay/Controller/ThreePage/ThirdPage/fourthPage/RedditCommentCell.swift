@@ -117,7 +117,7 @@ class RedditCommentView: UIView {
     }
     open var headIcnoStr: String! = ""{
         didSet{
-            headIcon.kf.setImage(with: URL(string: "\(headIcnoStr!)"), placeholder: UIImage(named: "loading"))
+            headIcon.kf.setImage(with: URL(string: "\(headIcnoStr!)"), placeholder: UIImage(named: "aiwujin_icon"))
         }
     }
     open var date: String! = "" {

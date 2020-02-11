@@ -60,3 +60,26 @@ let playerTopBarH:CGFloat = 40 + finalStatusBarH
 
 //强制横屏变量
 public var blockRotation = Bool()
+
+///颜色常量
+enum myColors{
+    /// 微信绿色
+    static let wxGreen: UIColor = #colorLiteral(red: 0.02745098039, green: 0.7568627451, blue: 0.3764705882, alpha: 1)
+}
+
+
+/// 权限类型
+enum HWpermissionsType{
+    /// 相机
+    case camera
+    /// 相册
+    case photo
+    /// 位置
+    case location
+    /// 网络
+    case network
+    /// 麦克风
+    case microphone
+    /// 媒体库
+    case media
+}

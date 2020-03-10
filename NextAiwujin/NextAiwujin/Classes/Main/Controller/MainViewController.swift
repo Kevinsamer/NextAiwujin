@@ -19,7 +19,7 @@ class MainViewController: UITabBarController {
         self.modalPresentationStyle = .fullScreen
         addChildrenController("PicSay")
         addChildrenController("News")
-        addChildrenController("Forum")
+        //addChildrenController("Forum")
         addChildrenController("RadioStation")
         addChildrenController("MyCenter")
         // Do any additional setup after loading the view.
@@ -86,7 +86,7 @@ extension MainViewController:UITabBarControllerDelegate{
         }else if viewController.tabBarItem.tag == 222{
 //            print("新闻")
         }else if viewController.tabBarItem.tag == 333{
-//            print("论坛")
+//            print("报料")
         }else if viewController.tabBarItem.tag == 444{
 //            print("商城")
         }else if viewController.tabBarItem.tag == 555{

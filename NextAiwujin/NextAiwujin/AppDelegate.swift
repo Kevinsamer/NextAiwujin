@@ -25,7 +25,7 @@ var globalAppConfig:AppConfigModel = AppConfigModel(jsonData: ""){
 }
 var globalZhiBoHistory:[ZhiBoHistoryModel] = []
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, WXApiDelegate {
     private var mCenterViewModel:MycenterViewModel = MycenterViewModel()
     var window: UIWindow?
     //当前界面支持的方向（默认情况下只能竖屏，不能横屏显示）(支持横屏自己的方法)
@@ -63,10 +63,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         return true
     }
+    
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        //向微信注册
+        WXApi.registerApp("wx5721879f15e18a5a", universalLink: "https://tp.wjyanghu.com/")
         //全局设置tabBarStyle
         
         UITabBar.appearance().tintColor = UIColor.red
@@ -194,6 +197,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.saveContext()
     }
     
+    func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
+        return  WXApi.handleOpen(url, delegate: self)
+    }
+    
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         if url.host == "safepay"{
             AlipaySDK.defaultService().processOrder(withPaymentResult: url, standbyCallback: { (resultDic) in
@@ -203,7 +210,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 NotificationCenter.default.post(name: ALiPayResultNotificationName, object: self, userInfo: resultDic)
             })
         }
+        
+        let urlKey: String = options[UIApplication.OpenURLOptionsKey.sourceApplication] as! String
+        
+        if urlKey == "com.tencent.xin" {
+            // 微信 的回调
+            return  WXApi.handleOpen(url, delegate: self)
+        }
         return true
+    }
+    
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        return WXApi.handleOpenUniversalLink(userActivity, delegate: self)
+    }
+    
+    func onReq(_ req: BaseReq) {
+        
+    }
+    
+    func onResp(_ resp: BaseResp) {
+        print(resp.errStr)
+        print(resp.errCode)
+        print(resp.type)
     }
 
     // MARK: - Core Data stack

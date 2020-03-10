@@ -295,6 +295,8 @@
 		091A9ED5226EB04C003C2002 /* BasePlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091A9ED4226EB04C003C2002 /* BasePlayerViewController.swift */; };
 		091A9EF52271A8A8003C2002 /* BaseAudioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091A9EF42271A8A8003C2002 /* BaseAudioViewController.swift */; };
 		091F8BD2238D114200A28CE0 /* BaoLiaoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091F8BD1238D114200A28CE0 /* BaoLiaoViewController.swift */; };
+		0921199223F541AD008C3351 /* UILabel-extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0921199123F541AC008C3351 /* UILabel-extension.swift */; };
+		0921199423FA8E1C008C3351 /* WXShareTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0921199323FA8E1C008C3351 /* WXShareTools.swift */; };
 		0922D74323C7163000C85DE1 /* BaoLiaoTableCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922D74123C7163000C85DE1 /* BaoLiaoTableCellTableViewCell.swift */; };
 		0922D74423C7163000C85DE1 /* BaoLiaoTableCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0922D74223C7163000C85DE1 /* BaoLiaoTableCellTableViewCell.xib */; };
 		0952A7B5223235C30061BBFA /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0952A7B4223235C30061BBFA /* SearchViewController.swift */; };
@@ -740,6 +742,9 @@
 		091A9ED4226EB04C003C2002 /* BasePlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePlayerViewController.swift; sourceTree = "<group>"; };
 		091A9EF42271A8A8003C2002 /* BaseAudioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAudioViewController.swift; sourceTree = "<group>"; };
 		091F8BD1238D114200A28CE0 /* BaoLiaoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaoLiaoViewController.swift; sourceTree = "<group>"; };
+		0921199023F3CE5E008C3351 /* NextAiwujin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NextAiwujin.entitlements; sourceTree = "<group>"; };
+		0921199123F541AC008C3351 /* UILabel-extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel-extension.swift"; sourceTree = "<group>"; };
+		0921199323FA8E1C008C3351 /* WXShareTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WXShareTools.swift; sourceTree = "<group>"; };
 		0922D74123C7163000C85DE1 /* BaoLiaoTableCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaoLiaoTableCellTableViewCell.swift; sourceTree = "<group>"; };
 		0922D74223C7163000C85DE1 /* BaoLiaoTableCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BaoLiaoTableCellTableViewCell.xib; sourceTree = "<group>"; };
 		0952A7B4223235C30061BBFA /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -748,7 +753,7 @@
 		096CAFD922952B7A00D78A78 /* RedditCommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditCommentCell.swift; sourceTree = "<group>"; };
 		096CAFDB229D186B00D78A78 /* ProgramListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramListCell.swift; sourceTree = "<group>"; };
 		096CAFDC229D186B00D78A78 /* ProgramListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgramListCell.xib; sourceTree = "<group>"; };
-		0984BDD122000D1900D80F23 /* NextAiwujin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NextAiwujin.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0984BDD122000D1900D80F23 /* 爱武进.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "爱武进.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0984BDD422000D1900D80F23 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0984BDD922000D1900D80F23 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0984BDDC22000D1900D80F23 /* NextAiwujin.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NextAiwujin.xcdatamodel; sourceTree = "<group>"; };
@@ -1637,7 +1642,7 @@
 		0984BDD222000D1900D80F23 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0984BDD122000D1900D80F23 /* NextAiwujin.app */,
+				0984BDD122000D1900D80F23 /* 爱武进.app */,
 				0984BDE822000D1A00D80F23 /* NextAiwujinTests.xctest */,
 				0984BDF322000D1A00D80F23 /* NextAiwujinUITests.xctest */,
 			);
@@ -1647,6 +1652,7 @@
 		0984BDD322000D1900D80F23 /* NextAiwujin */ = {
 			isa = PBXGroup;
 			children = (
+				0921199023F3CE5E008C3351 /* NextAiwujin.entitlements */,
 				0984BE0B220172B900D80F23 /* Classes */,
 				0984BDD422000D1900D80F23 /* AppDelegate.swift */,
 				0984BDDE22000D1A00D80F23 /* Assets.xcassets */,
@@ -1777,6 +1783,7 @@
 				0907DA64223B332500241176 /* SendDataProtocol.swift */,
 				090CF289223F6A580062CEFA /* CommunicationTools.swift */,
 				090CF297223F6B690062CEFA /* MyRegex.swift */,
+				0921199323FA8E1C008C3351 /* WXShareTools.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -1796,6 +1803,7 @@
 				090CF295223F6B3C0062CEFA /* UIAlertController-extension.swift */,
 				090CF5EF2241E5A80062CEFA /* UIImageView-extension.swift */,
 				09C93AEE236AB38A00BB676D /* UISearchBar-extension.swift */,
+				0921199123F541AC008C3351 /* UILabel-extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2138,7 +2146,7 @@
 			);
 			name = NextAiwujin;
 			productName = NextAiwujin;
-			productReference = 0984BDD122000D1900D80F23 /* NextAiwujin.app */;
+			productReference = 0984BDD122000D1900D80F23 /* 爱武进.app */;
 			productType = "com.apple.product-type.application";
 		};
 		0984BDE722000D1A00D80F23 /* NextAiwujinTests */ = {
@@ -2459,6 +2467,7 @@
 				0907DA312236389600241176 /* TextViewController.swift in Sources */,
 				090CF5DB223F8F550062CEFA /* TiXianViewController.swift in Sources */,
 				090CF2AD223F6C600062CEFA /* LZCartTableViewCell.swift in Sources */,
+				0921199223F541AD008C3351 /* UILabel-extension.swift in Sources */,
 				090CF2BD223F6EF70062CEFA /* OrderViewModel.swift in Sources */,
 				090CF2C1223F70320062CEFA /* FillOrderGoodsCell.swift in Sources */,
 				090CF58C223F8CBC0062CEFA /* MyCollectionModel.swift in Sources */,
@@ -2644,6 +2653,7 @@
 				090081332230E84500C0667A /* RecommendInfo.swift in Sources */,
 				090081352230E9C000C0667A /* HotInfo.swift in Sources */,
 				09D543D32203E6B800307713 /* UIDevice-extension.swift in Sources */,
+				0921199423FA8E1C008C3351 /* WXShareTools.swift in Sources */,
 				0907DA2A2236389600241176 /* UIAlertController+Extensions.swift in Sources */,
 				091F8BD2238D114200A28CE0 /* BaoLiaoViewController.swift in Sources */,
 				090CF32F223F75570062CEFA /* APOrderInfo.m in Sources */,
@@ -2908,6 +2918,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = NextAiwujin/NextAiwujin.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M5KK8AVZVV;
@@ -2921,8 +2932,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.wjyh.Xib.NextAiwujin;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "Wujin-Television-Station.MicroUI";
+				PRODUCT_NAME = "爱武进";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/dev2018/Desktop/project/NextAiwujin/NextAiwujin/NextAiwujin/Classes/Tools/AliPay/Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
@@ -2936,6 +2947,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = NextAiwujin/NextAiwujin.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M5KK8AVZVV;
@@ -2949,8 +2961,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.wjyh.Xib.NextAiwujin;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "Wujin-Television-Station.MicroUI";
+				PRODUCT_NAME = "爱武进";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/dev2018/Desktop/project/NextAiwujin/NextAiwujin/NextAiwujin/Classes/Tools/AliPay/Bridging-Header.h";
 				SWIFT_VERSION = 4.2;

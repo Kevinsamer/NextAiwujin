@@ -15,3 +15,4 @@
 //#import ""
 #import "/Users/dev2018/Desktop/project/NextAiwujin/NextAiwujin/NextAiwujin/Classes/Main/View/NicooPlayer/DeviceTool.h"
 #endif /* Bridging_Header_h */
+#import "WXApi.h"

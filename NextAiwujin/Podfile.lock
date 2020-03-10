@@ -69,6 +69,7 @@ PODS:
     - AutoInsetter (~> 1.8.0)
     - Pageboy (~> 3.5.0)
   - Toast-Swift (5.0.0)
+  - WechatOpenSDK (1.8.6)
   - XLPagerTabStrip (9.0.0)
 
 DEPENDENCIES:
@@ -77,7 +78,7 @@ DEPENDENCIES:
   - AlipaySDK-iOS (~> 15.5.9)
   - CryptoSwift
   - DrawerView
-  - EFNavigationBar (~> 5.1.4)
+  - EFNavigationBar
   - ESTabBarController-swift
   - Eureka
   - Floaty
@@ -100,6 +101,7 @@ DEPENDENCIES:
   - SwiftyJSON
   - Tabman
   - Toast-Swift
+  - WechatOpenSDK
   - XLPagerTabStrip
 
 SPEC REPOS:
@@ -137,6 +139,7 @@ SPEC REPOS:
     - SwipeCellKit
     - Tabman
     - Toast-Swift
+    - WechatOpenSDK
     - XLPagerTabStrip
 
 EXTERNAL SOURCES:
@@ -190,8 +193,9 @@ SPEC CHECKSUMS:
   SwipeCellKit: 935ca28c187ec6e1ffb2b578cf8ddca842bfdcbb
   Tabman: 63eae331ae7a9388ae389b1808f1939269fcdece
   Toast-Swift: 36f4720243c8582c2be243a60a51e193c761f541
+  WechatOpenSDK: 368ae03b72ee3ea1328c4f11326fbb5d2721d118
   XLPagerTabStrip: 61c57fd61f611ee5f01ff1495ad6fbee8bf496c5
 
-PODFILE CHECKSUM: 8176ccf0396782422b243f24c184165e6d9f24e3
+PODFILE CHECKSUM: b15a2f379d0f17f3e860850743017530f075436e
 
 COCOAPODS: 1.8.4

@@ -832,6 +832,11 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
+## WechatOpenSDK
+
+Copyright 2019 tencent.com. All rights reserved.
+
+
 ## XLPagerTabStrip
 
 The MIT License (MIT)

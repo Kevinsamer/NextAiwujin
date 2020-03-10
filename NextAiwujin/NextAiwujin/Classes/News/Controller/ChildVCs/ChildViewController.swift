@@ -191,7 +191,7 @@ extension ChildViewController:SkeletonTableViewDataSource, UITableViewDelegate{
 //        print(cell.isSkeletonActive)
         if self.news?.count > 0 {
             cell.hideSkeleton()
-            cell.newsImageView.kf.setImage(with: URL(string: self.news?[indexPath.row].titlepic ?? ""))
+            cell.newsImageView.kf.setImage(with: URL(string: self.news?[indexPath.row].titlepic ?? ""),options: [.transition(.fade(0.5))])
             //                    cell.newsImageView.kf.setImage(with: URL(string: self.news?[indexPath.row].titlepic ?? ""), placeholder: #imageLiteral(resourceName: "loading"))
             cell.newsTitle.text = "\(self.news?[indexPath.row].title ?? "")"
             cell.videoTag.isHidden = news?[indexPath.row].isVideo == "1" ? false : true

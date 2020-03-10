@@ -50,6 +50,8 @@ pod "DrawerView"
 #loading动画集
 pod 'NVActivityIndicatorView'
 #pod 'GrowingTextView', '0.6.1'
+#微信分享
+pod 'WechatOpenSDK'
 pod 'GrowingTextView'
   target 'NextAiwujinTests' do
     inherit! :search_paths

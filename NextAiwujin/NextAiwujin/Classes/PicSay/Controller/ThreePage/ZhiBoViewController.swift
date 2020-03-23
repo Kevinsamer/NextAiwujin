@@ -143,7 +143,7 @@ extension ZhiBoViewController {
                 let cell = tableView.dequeueReusableCell(withIdentifier: zhiboCellID, for: indexPath) as! ZhiBoCell
                 cell.huikan = true
                 cell.imageV.kf.setImage(with: URL(string: "\(zhiBoHistories[indexPath.row - 1].titlepic)"), options: [.fromMemoryCacheOrRefresh, .transition(.fade(1))])
-                cell.descLabel.text = "时间：\(zhiBoHistories[indexPath.row - 1].time)"
+                cell.descLabel.text = "\(zhiBoHistories[indexPath.row - 1].time)"
                 cell.titleLabel.text = "\(zhiBoHistories[indexPath.row - 1].title)\n "
                 cell.titleLabel.sizeToFit()
                 cell.selectionStyle = .none

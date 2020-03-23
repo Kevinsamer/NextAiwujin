@@ -65,7 +65,7 @@ class NewsDetailViewController: BaseViewController {
         
         btn.setButtonTitleImageStyle(padding: 10, style: TitleImageStyly.ButtonImageTitleStyleTop)
 //        btn.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        
+        btn.addTarget(self, action: #selector(copyLink), for: .touchUpInside)
         return btn
     }()
     
@@ -226,6 +226,12 @@ extension NewsDetailViewController{
 
 //MARK: - 点击事件
 extension NewsDetailViewController {
+    
+    @objc func copyLink(){
+        let paste = UIPasteboard.general
+        paste.string = self.newsDetailURL
+        YTools.showMyToast(rootView: self.view, message: "链接复制成功")
+    }
     
     @objc func popShareView(){
 //        print(drawerView.position)

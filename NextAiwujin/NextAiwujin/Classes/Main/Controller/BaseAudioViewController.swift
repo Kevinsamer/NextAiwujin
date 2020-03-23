@@ -365,7 +365,7 @@ extension BaseAudioViewController{
         //1.设置logo
         self.view.addSubview(logoView)
         logoView.snp.makeConstraints { (make) in
-            make.top.equalTo(navBar.snp.bottom).offset(100)
+            make.top.equalTo(navBar.snp.bottom).offset(finalScreenH / 8)
             make.centerX.equalToSuperview()
             make.height.width.equalTo(self.view.snp.width).multipliedBy(0.8)
         }
@@ -421,7 +421,7 @@ extension BaseAudioViewController{
         
         self.view.addSubview(descLabel)
         descLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(logoView.snp.bottom).offset(10)
+            make.top.equalTo(logoView.snp.bottom).offset(UIDevice.current.isX() ? 10 + IphonexHomeIndicatorH : 10)
             make.width.equalToSuperview().multipliedBy(0.7)
             make.centerX.equalToSuperview()
             make.height.equalTo(20)

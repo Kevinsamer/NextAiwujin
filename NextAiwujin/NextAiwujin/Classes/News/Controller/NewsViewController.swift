@@ -136,7 +136,7 @@ extension NewsViewController{
         self.navigationController?.navigationBar.setBackgroundImage(#imageLiteral(resourceName: "navi_bg"), for: UIBarPosition.topAttached, barMetrics: UIBarMetrics.default)
         
         
-//        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.navigationBar.isTranslucent = false
         self.navigationItem.title = "新闻资讯"
         //2.设置顶部滑动换页控件
         setTMButtonBar()

@@ -112,7 +112,8 @@ class ChildViewController: BaseViewController {
 extension ChildViewController{
     internal override func setUI(){
         super.setUI()
-        self.view.backgroundColor = .random
+        self.view.backgroundColor = .white
+        self.navigationController?.navigationBar.isTranslucent = false
         setTableView()
 
     }

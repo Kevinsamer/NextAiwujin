@@ -108,7 +108,7 @@ extension GuangBoViewController{
 //        for program in GuangBoData.Radio[indexPath.row].program {
 //            let dateFormatter = DateFormatter()
 //            dateFormatter.dateFormat = "HH:mm"
-//            dateFormatter.locale = Locale.current
+//            dateFormatter.locale = Locale.FMcurrent
 //            dateFormatter.timeZone = TimeZone.init(secondsFromGMT: 0)
 ////            dateFormatter.timeZone = timeZone
 //            tempList.append(dateFormatter.date(from: program.start_time)!)

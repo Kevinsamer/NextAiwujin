@@ -83,3 +83,12 @@ enum HWpermissionsType{
     /// 媒体库
     case media
 }
+
+///tabbar索引
+enum tabIndex: Int {
+    case 视听 = 0
+    case 新闻 = 1
+//    case 报料 = 2
+    case 商城 = 2
+    case 我的 = 3
+}

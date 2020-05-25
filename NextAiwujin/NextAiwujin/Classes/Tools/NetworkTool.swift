@@ -11,8 +11,21 @@ import Alamofire
 import SwiftyJSON
 import UIKit
 
+//全站搜索接口
+/*1.先传搜索关键词，拿到搜索结果id
+  2.通过搜索结果id查找搜索结果
+*/
+///搜索id接口
+/// - Parameters:
+///   - keyboard:String  搜索关键词
+///   - page:String  分页数
+///   - show:String  网页展示内容
+///   - tempid:String
+///   - classid:String
+let API_SearchID = "https://click.wjyanghu.com/e/search/i.php"
+
 ///新闻数据接口
-let API_ConfigFile="http://www.wjyanghu.com/API/AppConfig_v2.html"
+let API_ConfigFile = "http://www.wjyanghu.com/API/AppConfig_v2.html"
 ///直播回看数据接口
 //let API_ZhiBoHistory = "http://www.wjyanghu.com/API/backtosee.html"
 let API_ZhiBoHistory = "http://tp.wjyanghu.com/zbhk/json.php"

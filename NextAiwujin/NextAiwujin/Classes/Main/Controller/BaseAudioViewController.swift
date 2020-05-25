@@ -168,11 +168,18 @@ class BaseAudioViewController: BasePlayerViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 //        startTimer()
+        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
 //        timer.cancel()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        //playerView.disableDeviceOrientationChange()
+        orientationSupport = NicooPlayerOrietation.orientationPortrait
     }
     
     deinit {
@@ -291,6 +298,7 @@ extension BaseAudioViewController{
         //进入页面后自动开始播放，隐藏
         self.playerView.isHidden = true
         playerView.isVideo = false
+        
         //1.设置背景view
         setBGView()
         //2.设置自定义导航栏
@@ -311,7 +319,7 @@ extension BaseAudioViewController{
     
     override func initData() {
         super.initData()
-        
+        playerView.isVideo = false
     }
     
     func setLoadingView(){
@@ -506,7 +514,12 @@ extension BaseAudioViewController{
         if drawerView.position == DrawerPosition.closed {
             drawerView.setPosition(DrawerPosition.open, animated: true)
             listTableView.reloadData()
-            listTableView.selectRow(at: IndexPath(row: self.playingIndex, section: 0), animated: true, scrollPosition: UITableView.ScrollPosition.middle)
+            if self.playingIndex != -1 {
+                listTableView.selectRow(at: IndexPath(row: self.playingIndex, section: 0), animated: true, scrollPosition: UITableView.ScrollPosition.middle)
+            }else{
+                //listTableView.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: UITableView.ScrollPosition.middle)
+            }
+            
         }else{
             drawerView.setPosition(DrawerPosition.closed, animated: true)
         }

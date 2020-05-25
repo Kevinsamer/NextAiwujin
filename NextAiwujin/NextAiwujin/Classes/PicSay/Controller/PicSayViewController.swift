@@ -32,6 +32,27 @@ class PicSayViewController: TabmanViewController {
     }
     
     //MARK: - 懒加载
+    lazy var searchBar: UISearchBar = {
+            let bar = UISearchBar()
+    //        bar.backgroundColor = .clear
+            bar.setBackgroundImage(UIImage(), for: UIBarPosition.any, barMetrics: UIBarMetrics.default)
+            bar.translatesAutoresizingMaskIntoConstraints = false
+            bar.setImage(#imageLiteral(resourceName: "fdj_icon"), for: UISearchBar.Icon.search, state: UIControl.State.normal)
+            // bar.placeholder = "请输入商品名称，优惠内容"
+            bar.delegate = self
+            
+            let searchField = bar.getSearchTextField()
+            searchField.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(clickSearchBar)))
+            //let placeHolderLabel = searchField.value(forKey: "placeholderLabel") as! UILabel
+            searchField.layer.cornerRadius = 18
+            searchField.layer.masksToBounds = true
+            searchField.backgroundColor = .white
+            searchField.attributedPlaceholder = NSMutableAttributedString.init(string: "请输入商品名称，优惠内容", attributes: [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 13)])
+            //placeHolderLabel.font = UIFont.systemFont(ofSize: 13)
+            //添加单击手势识别
+            bar.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(clickSearchBar)))
+            return bar
+        }()
     
     ///顶部滑动换页控件
     lazy var topBar: TMBar.ButtonBar = {
@@ -106,8 +127,29 @@ extension PicSayViewController{
 //        navigationController?.navigationBar.tintColor = .yellow
         //2.设置页卡
         addTMBar()
-        
+        setSearchBar()
     }
+    
+    private func setSearchBar(){
+        let navBar = self.navigationController!.navigationBar
+            //设置搜索框的约束
+            navBar.addSubview(searchBar)
+            let leftCon = NSLayoutConstraint(item: searchBar, attribute: .left, relatedBy: .equal, toItem: navBar, attribute: .left, multiplier: 1.0, constant: 20)
+            let rightCon = NSLayoutConstraint(item: searchBar, attribute: .right, relatedBy: .equal, toItem: navBar, attribute: .right, multiplier: 1.0, constant: -20)
+    //        let topCon = NSLayoutConstraint(item: searchBar, attribute: .top, relatedBy: .equal, toItem: navBar, attribute: .top, multiplier: 1.0, constant: 5)
+            let bottomCon = NSLayoutConstraint(item: searchBar, attribute: .bottom, relatedBy: .equal, toItem: navBar, attribute: .bottom, multiplier: 1.0, constant: 2)
+            navBar.addConstraints([leftCon, rightCon, bottomCon])
+    //        searchBar.alpha = 0.8
+            
+            
+            for view in searchBar.subviews{
+                if view.isKind(of: UIView.self) && view.subviews.count > 0{
+                    view.backgroundColor = .clear
+                    //MARK: - 这段代码导致闪退,用于去除searchBar的背景，现改为将searchBar的背景设置为空图片
+    //                view.subviews.item(at: 0)?.removeFromSuperview()
+                }
+            }
+        }
     
     private func addTMBar(){
         self.dataSource = self
@@ -133,7 +175,22 @@ extension PicSayViewController{
 
 //MARK: - 点击事件绑定
 extension PicSayViewController{
+    @objc private func clickSearchBar(){
+    //        print("searchBar")
+    //        self.isBackFresh = false
+            let searchVC = SearchViewController()
+    //        searchVC.modalPresentationStyle = .fullScreen
+            let navi = MyNavigationController(rootViewController: searchVC)
+    //        navi.modalPresentationStyle = .fullScreen
+            self.present(navi, animated: false, completion: nil)
+        }
+}
 
+//MARK: - 实现搜索框的代理协议
+extension PicSayViewController:UISearchBarDelegate{
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        return false
+    }
 }
 
 //MARK: - 实现TMBar的代理

@@ -26,7 +26,7 @@ class ZhiBoBaseViewController: BaseViewController {
     //第三段的标题
     var thirdSectionTitle:String = ""
     //顶部页卡的高度
-    var topBarH:CGFloat = 0
+    var topBarH:CGFloat = 51
     //直播页的数据
     var ZhiBoData:CH2Model = globalAppConfig.CH2
     //电视页的数据
@@ -34,10 +34,11 @@ class ZhiBoBaseViewController: BaseViewController {
     //广播页的数据
     var GuangBoData:CH4Model = globalAppConfig.CH4
     //banner推荐数据（CHO每个item的第一条）
-    var TuiJianData:CH0Model = globalAppConfig.CH0{
+    var TuiJianData:CH0Model = CH0Model(jsonData: ""){
         didSet{
-            self.topBanner.imageURLStringsGroup = []
-            self.topBanner.titlesGroup = []
+//            print(TuiJianData)
+//            self.topBanner.imageURLStringsGroup = []
+//            self.topBanner.titlesGroup = []
             for (index,channel) in self.TuiJianData.Channel.enumerated() {
                 if channel.CH_Title == "精彩活动" {
                     self.bannerIndex = index
@@ -63,23 +64,24 @@ class ZhiBoBaseViewController: BaseViewController {
         options.bottomOffset = options.titleLabelHeight
         options.textAlignment = .center
         options.showPageControl = false
-        let banner = CycleScrollView.initScrollView(frame: CGRect(x: 0, y: 10, width: finalScreenW, height: bannerH), delegate: self, placehoder: #imageLiteral(resourceName: "loading"), cycleOptions: options)
-        
+        let banner = CycleScrollView.initScrollView(frame: CGRect(x: 0, y: 10, width: finalScreenW, height: bannerH), delegate: self, placehoder: UIImage(color: .white, size: .zero), cycleOptions: options)
+        banner.backgroundColor = .white
         return banner
     }()
     
     ///主体tableView
     lazy var mainTable: UITableView = {
-        let table = UITableView(frame: CGRect(x: 0, y: 51, width: finalScreenW, height: finalContentViewHaveTabbarH - topBarH), style: UITableView.Style.plain)
+        let table = UITableView(frame: CGRect(x: 0, y: topBarH, width: finalScreenW, height: finalContentViewHaveTabbarH - topBarH), style: UITableView.Style.plain)
         table.delegate = self
         table.dataSource = self
         table.register(UITableViewCell.self, forCellReuseIdentifier: tableCellID)
         table.register(UINib(nibName: "GuangboCell", bundle: nil), forCellReuseIdentifier: guangboCellID)
         table.register(UINib(nibName: "ZhiBoCell", bundle: nil), forCellReuseIdentifier: zhiboCellID)
         table.register(UINib(nibName: "DianshiCell", bundle: nil), forCellReuseIdentifier: dianshiCellID)
-        table.contentInsetAdjustmentBehavior = .never
+//        table.contentInsetAdjustmentBehavior = .never
         table.separatorStyle = .none
         table.backgroundColor = #colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)
+//        let table = UITableView()
         return table
     }()
     
@@ -129,7 +131,7 @@ class ZhiBoBaseViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
     }
 }
 //MARK: - 设置ui
@@ -144,7 +146,11 @@ extension ZhiBoBaseViewController{
         mainTable.configRefreshHeader(with: header, container: self) {
             self.initData()
             self.secondCollView.reloadData()
-//            self.topBanner.imageURLStringsGroup = []
+            //将banner数据清零强制刷新
+            self.topBanner.imageURLStringsGroup = []
+            self.topBanner.titlesGroup = []
+            print(finalContentViewHaveTabbarH)
+//            self.topBanner.reloadData()
 //            self.topBanner.imageURLStringsGroup = self.urls
 //            self.mainTable.switchRefreshHeader(to: HeaderRefresherState.refreshing)
             
@@ -152,7 +158,9 @@ extension ZhiBoBaseViewController{
         mainTable.configRefreshFooter(with: footer, container: self) {
             self.mainTable.switchRefreshFooter(to: FooterRefresherState.noMoreData)
         }
+        //进入时触发下拉刷新动作
         mainTable.switchRefreshHeader(to: HeaderRefresherState.refreshing)
+        
 //        self.view.addSubview(topBanner)
 //        self.view.addSubview(topBannerControl)
 //        topBanner.snp.makeConstraints { (make) in

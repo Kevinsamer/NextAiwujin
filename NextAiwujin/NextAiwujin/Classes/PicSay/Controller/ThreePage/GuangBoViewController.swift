@@ -46,7 +46,6 @@ class GuangBoViewController: ZhiBoBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     deinit {
@@ -90,8 +89,10 @@ extension GuangBoViewController{
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as! SecondSectionCell
+        //新图片为圆形且有白色背景，不需要边框，所以在展示图片时做此适配
+        cell.imageV.layer.borderWidth = 0
         cell.imageV.kf.setImage(with: URL.init(string: GuangBoData.Radio[indexPath.row].channel_logo), placeholder: UIImage(named: "loading"))
-        cell.titleLabel.text = GuangBoData.Title
+        cell.titleLabel.text = GuangBoData.Title.substring(to: 5)
         cell.titleLabel.adjustsFontSizeToFitWidth = false
         return cell
     }
@@ -102,7 +103,16 @@ extension GuangBoViewController{
         vc.videoURLString = "\(GuangBoData.Radio[indexPath.row].channel_stream_ios)"
         vc.videoName = "\(GuangBoData.Radio[indexPath.row].channel_name)"
         vc.channelData = GuangBoData.Radio[indexPath.row]
-        vc.programInfo = GuangBoData.Radio[indexPath.row].program[YTools.nowPlayAudioIndex(timeList: timeList)]
+        
+        if YTools.nowPlayAudioIndex(timeList: timeList) == -1 {
+            //TODO:处理当前播放节目索引为-1时的情况
+            vc.programInfo =  CH4ProgramModel(program_id: "-1", program_name: GuangBoData.Radio[indexPath.row].channel_name, program_logo: GuangBoData.Radio[indexPath.row].channel_logo, program_desc: GuangBoData.Radio[indexPath.row].channel_desc, start_time: "00:00", program_stream: GuangBoData.Radio[indexPath.row].channel_stream_ios, program_jpg: GuangBoData.Radio[indexPath.row].channel_logo, end_time: "24:00", duration_time: 86400)
+            //vc.playingIndex = YTools.nowPlayAudioIndex(timeList: timeList)
+        }else{
+            vc.programInfo =  GuangBoData.Radio[indexPath.row].program[YTools.nowPlayAudioIndex(timeList: timeList)]
+            //vc.playingIndex = YTools.nowPlayAudioIndex(timeList: timeList)
+        }
+        
         vc.playingIndex = YTools.nowPlayAudioIndex(timeList: timeList)
 //        var tempList:[Date] = []
 //        for program in GuangBoData.Radio[indexPath.row].program {
@@ -134,7 +144,7 @@ extension GuangBoViewController {
                 if GuangBoData.Radio.count > 0 {
                     cell.guangboNameLabel.text = GuangBoData.Radio[0].program[indexPath.row - 1].program_name
                     cell.startTimeLabel.text = "\(GuangBoData.Radio[0].program[indexPath.row - 1].start_time)-\(GuangBoData.Radio[0].program[indexPath.row - 1].end_time)"
-                    cell.guangboImage.kf.setImage(with: URL(string: "\(GuangBoData.Radio[0].program[indexPath.row - 1].program_logo)"), placeholder: UIImage(named: "loading"))
+                    cell.guangboImage.kf.setImage(with: URL(string: "\(GuangBoData.Radio[0].program[indexPath.row - 1].program_logo)"), placeholder: UIImage(named: "loading"), options: [.fromMemoryCacheOrRefresh, .transition(.fade(1))])
                 }
                 if (indexPath.row - 1) == YTools.nowPlayAudioIndex(timeList: timeList) {
                     cell.zhiBoTagLabel.isHidden = false
@@ -199,7 +209,7 @@ extension GuangBoViewController {
         // 在global线程里创建一个时间源
         
         // 设定这个时间源是每秒循环一次，立即开始
-        timer.schedule(deadline: .now(), repeating: .seconds(2))
+        timer.schedule(deadline: .now(), repeating: .seconds(5))
         // 设定时间源的触发事件
         timer.setEventHandler(handler: {
             // 每秒计时一次
@@ -210,7 +220,10 @@ extension GuangBoViewController {
             }
             // 返回主线程处理一些事件，更新UI等等
             DispatchQueue.main.async {
-                self.mainTable.reloadData()
+                if !self.mainTable.isDragging {
+                    self.mainTable.reloadData()
+                }
+                
             }
         })
         // 启动时间源

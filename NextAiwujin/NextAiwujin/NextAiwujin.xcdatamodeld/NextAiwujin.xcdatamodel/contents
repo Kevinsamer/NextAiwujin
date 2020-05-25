@@ -1,39 +1,43 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18C54" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19E287" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="AppUser" representedClassName="AppUser" syncable="YES" codeGenerationType="class">
-        <attribute name="area" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="balance" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="birthday" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="contact_addr" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="custom" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="exp" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="group_id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="head_ico" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="isFirstOpen" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="last_login" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="local_pd" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="message_ids" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="mobile" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="point" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="prop" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="qq" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="sex" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="status" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="telephone" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="time" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="true_name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="user_id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="zip" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="area" optional="YES" attributeType="String"/>
+        <attribute name="balance" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="birthday" optional="YES" attributeType="String"/>
+        <attribute name="contact_addr" optional="YES" attributeType="String"/>
+        <attribute name="custom" optional="YES" attributeType="String"/>
+        <attribute name="email" optional="YES" attributeType="String"/>
+        <attribute name="exp" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="group_id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="head_ico" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="isFirstOpen" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="last_login" optional="YES" attributeType="String"/>
+        <attribute name="local_pd" optional="YES" attributeType="String"/>
+        <attribute name="message_ids" optional="YES" attributeType="String"/>
+        <attribute name="mobile" optional="YES" attributeType="String"/>
+        <attribute name="password" optional="YES" attributeType="String"/>
+        <attribute name="point" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="prop" optional="YES" attributeType="String"/>
+        <attribute name="qq" optional="YES" attributeType="String"/>
+        <attribute name="sex" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="status" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="telephone" optional="YES" attributeType="String"/>
+        <attribute name="time" optional="YES" attributeType="String"/>
+        <attribute name="true_name" optional="YES" attributeType="String"/>
+        <attribute name="user_id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="username" optional="YES" attributeType="String"/>
+        <attribute name="zip" optional="YES" attributeType="String"/>
     </entity>
     <entity name="SearchHistory" representedClassName="SearchHistory" syncable="YES" codeGenerationType="class">
-        <attribute name="history" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="history" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="WebSearchHistory" representedClassName="WebSearchHistory" syncable="YES" codeGenerationType="class">
+        <attribute name="webhistory" optional="YES" attributeType="String"/>
     </entity>
     <elements>
         <element name="AppUser" positionX="-63" positionY="-18" width="128" height="450"/>
-        <element name="SearchHistory" positionX="-54" positionY="144" width="128" height="60"/>
+        <element name="SearchHistory" positionX="-426.0859375" positionY="171.5234375" width="128" height="58"/>
+        <element name="WebSearchHistory" positionX="-225" positionY="207" width="128" height="58"/>
     </elements>
 </model>

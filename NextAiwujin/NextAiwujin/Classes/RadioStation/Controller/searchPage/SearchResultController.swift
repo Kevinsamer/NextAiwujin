@@ -243,7 +243,7 @@ class SearchResultController: BaseViewController {
         //navigationController?.setNavigationBarHidden(false, animated: false)
         SwiftEventBus.unregister(self)
 //        self.searchBar.removeFromSuperview()
-        self.navigationController?.navigationBar.isTranslucent = false
+//        self.navigationController?.navigationBar.isTranslucent = false
 //        barImageView?.alpha = 0.0
         //离开本页面开启侧滑返回
 //        navigationController?.interactivePopGestureRecognizer?.isEnabled = true

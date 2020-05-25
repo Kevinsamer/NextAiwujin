@@ -10,6 +10,12 @@ import UIKit
 import SwifterSwift
 import EFNavigationBar
 class BaseViewController: UIViewController {
+    
+//    lazy var naviBg: UIImage = {
+//        let image = #imageLiteral(resourceName: "navi_bg")
+//        return image.resizableImage(withCapInsets: .zero, resizingMode: UIImage.ResizingMode.stretch)
+//    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
@@ -32,7 +38,7 @@ extension BaseViewController{
     @objc func setUI(){
         //1.设置背景色
         self.view.backgroundColor = .white
-        self.navigationController?.navigationBar.setBackgroundImage(#imageLiteral(resourceName: "navi_bg"), for: UIBarPosition.topAttached, barMetrics: UIBarMetrics.default)
+        self.navigationController?.navigationBar.setBackgroundImage(#imageLiteral(resourceName: "navi_bg").resizableImage(withCapInsets: .zero, resizingMode: .stretch), for: UIBarPosition.topAttached, barMetrics: UIBarMetrics.default)
 //        self.navigationController?.navigationBar.barTintColor = UIColor.init(r: 127, g: 125, b: 201, alpha: 1)
 //        EFNavigationBar.defaultNavBarTitleColor = .white
 //        EFNavigationBar.defaultNavBarTitleColor = .white

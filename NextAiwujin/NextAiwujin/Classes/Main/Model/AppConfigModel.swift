@@ -123,6 +123,7 @@ class CH1MenuItemModel{
     var titleurl:String = ""
     var titlepic:String = ""
     var isVideo:String = ""
+    var date:String = ""
     
     init(jsonData:JSON) {
         classid = jsonData["classid"].stringValue
@@ -132,6 +133,7 @@ class CH1MenuItemModel{
         titleurl = jsonData["titleurl"].stringValue
         titlepic = jsonData["titlepic"].stringValue
         isVideo = jsonData["isVideo"].stringValue
+        date = jsonData["date"].stringValue
     }
 }
 //MARK: - CH1结束
@@ -370,6 +372,18 @@ class CH4ProgramModel{
         program_jpg = jsonData["program_jpg"].stringValue
         end_time = jsonData["end_time"].stringValue
         duration_time = jsonData["duration_time"].intValue
+    }
+    ///针对非广播节目单时段，构建一个虚拟节目信息用于展示
+    init(program_id:String, program_name:String, program_logo:String, program_desc:String, start_time:String, program_stream:String, program_jpg:String, end_time:String, duration_time:Int) {
+        self.program_id = program_id
+        self.program_name = program_name
+        self.program_logo = program_logo
+        self.program_desc = program_desc
+        self.start_time = start_time
+        self.program_stream = program_stream
+        self.program_jpg = program_jpg
+        self.end_time = end_time
+        self.duration_time = duration_time
     }
 }
 //MARK: - CH4结束

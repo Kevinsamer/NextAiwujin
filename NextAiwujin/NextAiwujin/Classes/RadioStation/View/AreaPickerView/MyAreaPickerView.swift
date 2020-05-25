@@ -66,8 +66,9 @@ class MyAreaPickerView: UIControl {
     }()
     
     init(selectCityHandle: SelectCityHandle) {
-        super.init(frame: UIScreen.main.bounds)
+        
         self.selectCityHandle = selectCityHandle
+        super.init(frame: UIScreen.main.bounds)
         backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1).withAlphaComponent(0.5)
         addTarget(self, action: #selector(cancelBtnClick), for: .touchUpInside)
         initData()

@@ -60,7 +60,7 @@ class NewsViewController: TabmanViewController {
     lazy var barTempView: UIView = {
         let view = UIView()
         view.size = CGSize(width: topBar.width, height: topBar.height)
-        view.backgroundColor = .black
+//        view.backgroundColor = .black
         return view
     }()
     
@@ -161,12 +161,17 @@ extension NewsViewController{
             make.left.right.equalToSuperview()
             make.width.equalTo(topBar.snp.width)
             make.height.equalTo(topBar.snp.height)
-            make.top.equalTo(topBar.snp.top)
+            make.top.equalTo(self.view.snp.top)
+            
         }
-        
+
         topBar.removeFromSuperview()
-        addBar(topBar, dataSource: self, at: .custom(view: barTempView, layout: nil))
-//        print(barTempView.height)
+        addBar(topBar, dataSource: self, at: .custom(view: barTempView, layout: { (view) in
+            view.snp.makeConstraints { (make) in
+                make.edges.equalTo(self.barTempView)
+            }
+        }))
+        print(barTempView.height)
         
     }
 }

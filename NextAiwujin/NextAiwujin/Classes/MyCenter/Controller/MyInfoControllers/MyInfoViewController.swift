@@ -23,11 +23,11 @@ class MyInfoViewController: FormViewController {
         
         let okAction = UIAlertAction(title: "确定", style: UIAlertAction.Style.destructive, handler: { (action) in
             if AppDelegate.appUser?.id != -1 {
-                //App退出登录
+                //App退出登录并返回首页
                 AppUserCoreDataHelper.AppUserHelper.delAppUser {
                     //self.navigationController?.popViewController(animated: true)
                     //self.navigationController?.popViewController(animated: true)?.tabBarController?.selectedIndex = 0
-                    self.tabBarController?.selectedIndex = 0
+                    self.tabBarController?.selectedIndex = tabIndex.视听.rawValue
                     self.navigationController?.popToRootViewController(animated: true)
                 }
                 //发出退出登录的http请求

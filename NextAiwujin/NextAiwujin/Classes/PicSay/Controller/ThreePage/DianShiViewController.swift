@@ -60,7 +60,7 @@ extension DianShiViewController{
                     cell.imageV.clipsToBounds = true
                     cell.imageV.layer.cornerRadius = 5
                     cell.nameLabel.text = "\(TVData.program[indexPath.row-1].program_name)\n"
-                    cell.updateTimeLabel.text = "最后更新:\(YTools.dateToString(date: Date.init(timeIntervalSince1970: Double(TVData.program[indexPath.row-1].last_Update)!)))"
+                    cell.updateTimeLabel.text = "更新:\(YTools.dateToString(date: Date.init(timeIntervalSince1970: Double(TVData.program[indexPath.row-1].last_Update)!)))"
                 }
                 
                 return cell

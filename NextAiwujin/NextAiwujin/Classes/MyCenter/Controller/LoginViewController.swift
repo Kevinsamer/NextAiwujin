@@ -65,7 +65,7 @@ class LoginViewController: BaseViewController {
                         YTools.showMyToast(rootView: (self.parentVC?.view)!, message: "登录成功")
                         //self.mainVC?.selectedIndex = 3
                         //跳转至首页我的
-                        (self.parentVC as? UITabBarController)?.selectedIndex = 4
+                        (self.parentVC as? UITabBarController)?.selectedIndex = tabIndex.我的.rawValue
                     }else if self.itemTag == 666{
                         //商品详情页跳转至购物车
                         YTools.showMyToast(rootView: (self.parentVC?.view)!, message: "登录成功")

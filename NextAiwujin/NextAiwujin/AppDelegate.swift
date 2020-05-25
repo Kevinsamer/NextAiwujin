@@ -104,9 +104,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WXApiDelegate {
             AppConfigViewModel.requestAppConfig { (appConfig) in
                 globalAppConfig = appConfig
             }
-//            AppConfigViewModel.requestZhiBoHistory(url: API_ZhiBoHistory, finishCallBack: { (histories) in
-//                globalZhiBoHistory = histories
-//            })
+  //            AppConfigViewModel.requestZhiBoHistory(url: API_ZhiBoHistory, finishCallBack: { (histories) in
+  //                globalZhiBoHistory = histories
+  //            })
         }
         
         //静音播放

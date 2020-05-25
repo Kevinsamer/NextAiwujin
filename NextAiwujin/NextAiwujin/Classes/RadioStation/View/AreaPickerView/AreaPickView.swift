@@ -29,10 +29,11 @@ final class AreaPickView: UIControl {
     private var pickerView = UIPickerView()
     
     init(level: Int,defaultAddress: (String?,String?,String?)?, selectCityHandle: SelectCityHandle) {
-        super.init(frame: UIScreen.main.bounds)
+        
         self.cityDataLevel = level
         self.defaultAddress = defaultAddress
         self.selectCityHandle = selectCityHandle
+        super.init(frame: UIScreen.main.bounds)
         self.addTarget(self, action: #selector(cancelBtnClick), for: .touchUpInside)
         backgroundColor = UIColor.black.withAlphaComponent(0.5)
         

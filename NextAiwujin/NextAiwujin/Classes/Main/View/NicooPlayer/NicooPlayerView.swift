@@ -891,7 +891,7 @@ private extension NicooPlayerView {
             case .changed:
                 switch strongSelf.panDirection! {
                 case .PanDirectionHorizontal:
-                    print(strongSelf.isLive)
+                    //print(strongSelf.isLive)
                     if strongSelf.isLive {
                         //如果是直播流则不开启左右滑动
                         let _ = strongSelf.horizontalMoved(0)
@@ -902,7 +902,7 @@ private extension NicooPlayerView {
                     
                     
                 case .PanDirectionVertical:
-                    if locationPoint.x > strongSelf.playControllViewEmbed.bounds.size.width/2 && locationPoint.y < strongSelf.playControllViewEmbed.bounds.size.height - 40 {
+                    if locationPoint.x > strongSelf.playControllViewEmbed.bounds.size.width/2 && locationPoint.y <  strongSelf.playControllViewEmbed.bounds.size.height - 40 {
                         strongSelf.veloctyMoved(veloctyPoint.y, true)
                     }else if locationPoint.x < strongSelf.playControllViewEmbed.bounds.size.width/2 && locationPoint.y < strongSelf.playControllViewEmbed.bounds.size.height - 40 {
                         strongSelf.veloctyMoved(veloctyPoint.y, false)

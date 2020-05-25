@@ -197,6 +197,7 @@ extension ChildViewController:SkeletonTableViewDataSource, UITableViewDelegate{
             cell.newsTitle.text = "\(self.news?[indexPath.row].title ?? "")"
             cell.videoTag.isHidden = news?[indexPath.row].isVideo == "1" ? false : true
             cell.videoTag.layer.cornerRadius = 5
+            //print(news?[indexPath.row].date)
         }
         
         
